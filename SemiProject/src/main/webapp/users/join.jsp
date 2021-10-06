@@ -19,7 +19,7 @@
 	<header>
 		<div class="header_container">
 			<div class="logo_container">
-				<a href="../index.jsp">BLOG</a>
+				<a href="../index.jsp">HOME</a>
 			</div>
 			<div class="nav_container" id="nav_menu">
 				
@@ -61,7 +61,7 @@
 				남자 <input type="radio" name="userGender" value="F" title="성별">
 				여자
 			</div>
-			<input type="submit" class="bt_join" value="회원가입">
+			<input type="submit" class="btn_join" value="회원가입">
 		</form>
 	</div>
 	<footer>

@@ -19,7 +19,7 @@
 	<header>
 		<div class="header_container">
 			<div class="logo_container">
-				<a href="../index.jsp">BLOG</a>
+				<a href="../index.jsp">HOME</a>
 			</div>
 			<div class="nav_container" id="nav_menu">
 				
@@ -46,7 +46,7 @@
 				<input type="password" class="input" placeholder="비밀번호"
 					name="userPassword" maxlength="20">
 			</div>
-			<input type="submit" class="bt_login" value="로그인">
+			<input type="submit" class="btn_login" value="로그인">
 		</form>
 	</div>
 	<footer>
