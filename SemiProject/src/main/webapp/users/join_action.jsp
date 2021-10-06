@@ -9,7 +9,7 @@ request.setCharacterEncoding("UTF-8");
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Jo's</title>
+<title>join action</title>
 </head>
 <body>
 	<%
