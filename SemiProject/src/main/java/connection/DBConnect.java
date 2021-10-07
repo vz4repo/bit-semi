@@ -30,22 +30,22 @@ public class DBConnect {
   }
 
   public DBConnect() {
-    if (ORA_DRIVER != null) {
-      try {
-        Class.forName(ORA_DRIVER);
-        System.out.println("Driver load success >>" + Thread.currentThread().getName());
-      } catch (ClassNotFoundException e) {
-        System.out.println("Driver load failed ");
-        e.getLocalizedMessage();
-      }
+    //    if (ORA_DRIVER != null) {
+    //      try {
+    //        Class.forName(ORA_DRIVER);
+    //        System.out.println("Driver load success >>" + Thread.currentThread().getName());
+    //      } catch (ClassNotFoundException e) {
+    //        System.out.println("Driver load failed ");
+    //        e.getLocalizedMessage();
+    //      }
 
-      //    if (MARIA_DRIVER != null) {
-      //      try {
-      //        Class.forName(MARIA_DRIVER);
-      //        System.out.println("MARIA Driver load success >>" + Thread.currentThread().getName());
-      //      } catch (ClassNotFoundException e) {
-      //        System.out.println("Driver load failed " + e.getLocalizedMessage());
-      //      }
+    if (MARIA_DRIVER != null) {
+      try {
+        Class.forName(MARIA_DRIVER);
+        System.out.println("MARIA Driver load >>" + Thread.currentThread().getName());
+      } catch (ClassNotFoundException e) {
+        System.out.println("Driver load failed " + e.getLocalizedMessage());
+      }
 
       // driver 값, name 확인
       //      Enumeration<Driver> driverList = DriverManager.getDrivers();
@@ -60,8 +60,9 @@ public class DBConnect {
   public Connection getConnectionCloud() {
     Connection conn = null;
     try {
-      conn = DriverManager.getConnection(ORA_URL, ORA_USER, ORA_PWD);
-      //      conn = DriverManager.getConnection(MARIA_URL, MARIA_USER, MARIA_PWD);
+      //      conn = DriverManager.getConnection(ORA_URL, ORA_USER, ORA_PWD);
+      conn = DriverManager.getConnection(MARIA_URL, MARIA_USER, MARIA_PWD);
+      System.out.println("AWS:mariaDB getConnection");
 
     } catch (SQLException e) {
       System.out.println("connection error" + e.getLocalizedMessage());
