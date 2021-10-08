@@ -5,7 +5,7 @@ public class UserDTO {
   private String userID;
   private String userPassword;
   private String userName;
-  private int userPhone;
+  private String userPhone;
   private String userMail;
   private String userAddr;
   private String userGender;
@@ -35,11 +35,11 @@ public class UserDTO {
     this.userName = userName;
   }
 
-  public int getUserPhone() {
+  public String getUserPhone() {
     return userPhone;
   }
 
-  public void setUserPhone(int userPhone) {
+  public void setUserPhone(String userPhone) {
     this.userPhone = userPhone;
   }
 
