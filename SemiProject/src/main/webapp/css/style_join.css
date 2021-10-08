@@ -19,7 +19,7 @@
 	font-size: 25px;
 }
 
-.joinID, .joinPassword, .joinName, .joinDate, .joinGender {
+.joinValue {
 	margin-top: 20px;
 	margin-bottom: 30px;
 }
