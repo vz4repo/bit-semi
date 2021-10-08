@@ -16,6 +16,9 @@ request.setCharacterEncoding("UTF-8");
   String userID = request.getParameter("userID");
   String userPassword = request.getParameter("userPassword");
   String userName = request.getParameter("userName");
+  String userPhone = request.getParameter("userPhone");
+  String userMail = request.getParameter("userMail");
+  String userAddr = request.getParameter("userAddr");
   String userGender = request.getParameter("userGender");
   String userDate = request.getParameter("userDate");
   // -1: 서버 오류 / 0: 이미존재하는 아이디 / 1: 성공
@@ -28,12 +31,18 @@ request.setCharacterEncoding("UTF-8");
     script.println("</script>");
   } else {
     UserDAO userDAO = new UserDAO();
+    
     userDAO.setUserID(userID);
     userDAO.setUserPassword(userPassword);
     userDAO.setUserName(userName);
+    userDAO.setUserName(userPhone);
+    userDAO.setUserName(userMail);
+    userDAO.setUserName(userAddr);
     userDAO.setUserGender(userGender);
     userDAO.setUserDate(userDate);
+    
     int result = userDAO.join(userDAO);
+    
     if (result == -1) {
       PrintWriter script = response.getWriter();
       script.println("<script>");
