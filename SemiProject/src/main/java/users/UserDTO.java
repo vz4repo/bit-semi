@@ -5,6 +5,9 @@ public class UserDTO {
   private String userID;
   private String userPassword;
   private String userName;
+  private String userPhone;
+  private String userMail;
+  private String userAddr;
   private String userGender;
   private String userDate;
 
@@ -32,6 +35,30 @@ public class UserDTO {
     this.userName = userName;
   }
 
+  public String getUserPhone() {
+    return userPhone;
+  }
+
+  public void setUserPhone(String userPhone) {
+    this.userPhone = userPhone;
+  }
+
+  public String getUserMail() {
+    return userMail;
+  }
+
+  public void setUserMail(String userMail) {
+    this.userMail = userMail;
+  }
+
+  public String getUserAddr() {
+    return userAddr;
+  }
+
+  public void setUserAddr(String userAddr) {
+    this.userAddr = userAddr;
+  }
+
   public String getUserGender() {
     return userGender;
   }
@@ -47,5 +74,6 @@ public class UserDTO {
   public void setUserDate(String userDate) {
     this.userDate = userDate;
   }
+
 
 }

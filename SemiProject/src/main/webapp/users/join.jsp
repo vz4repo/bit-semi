@@ -38,7 +38,7 @@
   </header>
   <div class="join_container">
     <h2>회원 가입</h2>
-    <form method="post" action="./join_Action.jsp">
+    <form method="post" action="./join_action.jsp">
       <h3>아이디</h3>
       <div class="joinID joinValue">
         <input type="text" class="joinInput" style="ime-mode: disabled;"

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ page import="users.UserDAO"%>
+<%@ page import="users.UserDTO"%>
 <%@ page import="java.io.PrintWriter"%>
 <%
 request.setCharacterEncoding("UTF-8");
@@ -19,7 +20,7 @@ request.setCharacterEncoding("UTF-8");
   UserDAO userDAO = new UserDAO();
   
   
-  int result = userDAO.login(userID, userPassword);
+  int result = userDAO.login(new UserDTO());
   if (result == 1) {
     session.setAttribute("userID", userID);
     PrintWriter script = response.getWriter();
