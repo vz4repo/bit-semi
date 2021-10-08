@@ -1,5 +1,5 @@
-# 가제:여행길
-
+# GOING!
+[세미프로젝트_2조_스토리보드](https://drive.google.com/file/d/1gjLDd5hJyfC7lvO3QdCdJLAWL4dmDsKQ/view?usp=sharing)
 ### 개발환경
 ```
 IDE: 이클립스(21-06)
