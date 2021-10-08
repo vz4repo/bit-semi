@@ -26,8 +26,8 @@
 			</nav>
 			
 			<div id="member">
-				<button type="button" id="login" >Login</button>
-				<button type="button" id="join">Join</button>
+				<button onclick="location='users/login.jsp'">Login</button>
+				<button onclick="location='users/join.jsp'">Join</button>
 			</div>
 		</div>
 	</header>
