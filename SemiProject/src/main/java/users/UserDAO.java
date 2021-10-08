@@ -3,6 +3,7 @@ package users;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 import connection.DBConnect;
@@ -10,24 +11,16 @@ import connection.DBConnect;
 public class UserDAO {
   private DBConnect dbConnect = new DBConnect();
 
-  // private String userID;
-  // private String userPassword;
-  // private String userName;
-  // private int userPhone;
-  // private String userMail;
-  // private String userAddr;
-  // private String userGender;
-  // private String userDate;
   private Connection con;
   private ResultSet rs;
 
 
 
-  // 로그인
-  // -2:아이디없음 -1:서버오류 0:비밀번호 틀림 1:성공
+  // TODO refactoring:-2:아이디없음 -1:서버오류 0:비밀번호 틀림 1:성공
   public int login(UserDTO dto) {
     try {
-      PreparedStatement pstmt = con.prepareStatement("SELECT userPassword FROM user WHERE userID = ?");
+      PreparedStatement pstmt =
+          con.prepareStatement("SELECT userPassword FROM user WHERE userID = ?");
       pstmt.setString(1, dto.getUserID());
       rs = pstmt.executeQuery();
       if (rs.next()) {
@@ -42,45 +35,64 @@ public class UserDAO {
   }
 
 
-  // 중복여부 확인
-  public boolean ID_Check(String userID) {
+  // 중복여부 확인:ID_Check:다른 방법 찾아보기
+  public boolean hasID(String userID) {
+    boolean hasID = false;
+    Connection conn = dbConnect.getConnectionCloud();
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    String sql = "SELECT * FROM maria_study.tuser WHERE userID = ?";
     try {
-      PreparedStatement pstmt = con.prepareStatement("SELECT * FROM user WHERE userID = ?");
+      pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, userID);
       rs = pstmt.executeQuery();
       if (rs.next()) {
-        return false;
-      } else {
         return true;
       }
     } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      dbConnect.resourceClose(rs, pstmt, conn);
     }
-    return false;
+    return hasID;
   }
 
 
-  // 회원가입 -1:서버오류 0:이미 존재하는 아이디 1:성공
-  public int join(UserDTO dto) {
-    if (!ID_Check(dto.getUserID()))
-      return 0;
-    try {
-      PreparedStatement pstmt = con.prepareStatement("INSERT INTO user VALUES (?,?,?,?,?)");
-      pstmt.setString(1, dto.getUserID());
-      pstmt.setString(2, dto.getUserPassword());
-      pstmt.setString(3, dto.getUserName());
-      pstmt.setString(4, dto.getUserGender());
-      pstmt.setString(5, dto.getUserDate());
-      return pstmt.executeUpdate();
-    } catch (Exception e) {
-      e.printStackTrace();
-      return -1;
+  // 회원가입
+  public void join(UserDTO dto) {
+    // 회원가입여부 체크
+    if (!hasID(dto.getUserID())) {
+      Connection conn = dbConnect.getConnectionCloud();
+      PreparedStatement pstmt = null;
+      String sql =
+          "insert into maria_study.tuser (userID,userPassword,userName,userPhone,userMail,userAddr,userGender,userDate) values (?,?,?,?,?,?,?,?)";
+
+      try {
+        pstmt = conn.prepareStatement(sql);
+
+        pstmt.setString(1, dto.getUserID());
+        pstmt.setString(2, dto.getUserPassword());
+        pstmt.setString(3, dto.getUserName());
+        pstmt.setString(4, dto.getUserPhone());
+        pstmt.setString(5, dto.getUserMail());
+        pstmt.setString(6, dto.getUserAddr());
+        pstmt.setString(7, dto.getUserGender());
+        pstmt.setString(8, dto.getUserDate());
+
+        pstmt.execute();
+        System.out.println("user inserted");
+      } catch (SQLException e) {
+        e.printStackTrace();
+        System.out.println(dto.getUserName() + ": FAIL");
+      } finally {
+        dbConnect.resourceClose(pstmt, conn);
+      }
+      // TODO 가입 실패 경우도 체크
     }
   }
 
 
-
-  // 유저 데이터 가져오기
+  // TODO refactoring: 유저 데이터 가져오기
   public UserDAO getUser(String userID) {
     try {
       PreparedStatement pstmt = con.prepareStatement("SELECT * FROM user WHERE userID = ?");
