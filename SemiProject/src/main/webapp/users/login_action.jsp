@@ -15,7 +15,10 @@ request.setCharacterEncoding("UTF-8");
   <%
   String userID = request.getParameter("userID");
   String userPassword = request.getParameter("userPassword");
+  // String isSaved = request.getParameter("isSaved");
   UserDAO userDAO = new UserDAO();
+  
+  
   int result = userDAO.login(userID, userPassword);
   if (result == 1) {
     session.setAttribute("userID", userID);
