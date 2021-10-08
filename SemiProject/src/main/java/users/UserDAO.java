@@ -56,7 +56,7 @@ public class UserDAO {
 
 
 
-  // 회원가입 /* * -1: 서버오류 * 0: 이미 존재하는 아이디 * 1: 성공 */ 
+  // 회원가입 /* * -1: 서버오류 * 0: 이미 존재하는 아이디 * 1: 성공 */
   public int join(UserDAO userDAO) {
     if (!ID_Check(userDAO.getUserID()))
       return 0;
@@ -76,7 +76,7 @@ public class UserDAO {
 
 
 
-  // 유저 데이터 가져오기 
+  // 유저 데이터 가져오기
   public UserDAO getUser(String userID) {
     try {
       PreparedStatement pst = con.prepareStatement("SELECT * FROM user WHERE userID = ?");

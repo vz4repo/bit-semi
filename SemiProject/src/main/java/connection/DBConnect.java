@@ -8,15 +8,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBConnect {
-  //ORA_CLOUD
+  // ORA_CLOUD
   private static final String ORA_DRIVER = "oracle.jdbc.driver.OracleDriver";
   private static final String ORA_URL =
       "jdbc:oracle:thin:@oradb_high?TNS_ADMIN=D:/java/Wallet_oradb";
-  //      "jdbc:oracle:thin:@oradb_high?TNS_ADMIN=/Users/rk/Documents/java/Wallet_oradb";
+  // "jdbc:oracle:thin:@oradb_high?TNS_ADMIN=/Users/rk/Documents/java/Wallet_oradb";
   private static final String ORA_USER = "admin";
   private static final String ORA_PWD = "1234qwer";
 
-  //MARIA_BIT
+  // MARIA_BIT
   private static final String MARIA_DRIVER = "org.mariadb.jdbc.Driver";
   private static final String MARIA_URL =
       "jdbc:mariadb://maria-bit.cy2ifmxzl5mi.ap-northeast-2.rds.amazonaws.com:3306";
@@ -24,20 +24,20 @@ public class DBConnect {
   private static final String MARIA_PWD = "1234qwer";
 
   // get method name
-  //    public static final String mName = new Object() {}.getClass().getEnclosingMethod().getName();
+  // public static final String mName = new Object() {}.getClass().getEnclosingMethod().getName();
   public static void main(String[] args) {
     new DBConnect();
   }
 
   public DBConnect() {
-    //    if (ORA_DRIVER != null) {
-    //      try {
-    //        Class.forName(ORA_DRIVER);
-    //        System.out.println("Driver load success >>" + Thread.currentThread().getName());
-    //      } catch (ClassNotFoundException e) {
-    //        System.out.println("Driver load failed ");
-    //        e.getLocalizedMessage();
-    //      }
+    // if (ORA_DRIVER != null) {
+    // try {
+    // Class.forName(ORA_DRIVER);
+    // System.out.println("Driver load success >>" + Thread.currentThread().getName());
+    // } catch (ClassNotFoundException e) {
+    // System.out.println("Driver load failed ");
+    // e.getLocalizedMessage();
+    // }
 
     if (MARIA_DRIVER != null) {
       try {
@@ -48,11 +48,11 @@ public class DBConnect {
       }
 
       // driver 값, name 확인
-      //      Enumeration<Driver> driverList = DriverManager.getDrivers();
-      //      while (driverList.hasMoreElements()) {
-      //        Driver driver = (Driver) driverList.nextElement();
-      //        System.out.println(driver.getClass().getName());
-      //      }
+      // Enumeration<Driver> driverList = DriverManager.getDrivers();
+      // while (driverList.hasMoreElements()) {
+      // Driver driver = (Driver) driverList.nextElement();
+      // System.out.println(driver.getClass().getName());
+      // }
     }
   }
 
@@ -60,7 +60,7 @@ public class DBConnect {
   public Connection getConnectionCloud() {
     Connection conn = null;
     try {
-      //      conn = DriverManager.getConnection(ORA_URL, ORA_USER, ORA_PWD);
+      // conn = DriverManager.getConnection(ORA_URL, ORA_USER, ORA_PWD);
       conn = DriverManager.getConnection(MARIA_URL, MARIA_USER, MARIA_PWD);
       System.out.println("AWS:mariaDB getConnection");
 

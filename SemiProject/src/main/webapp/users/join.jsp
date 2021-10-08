@@ -60,8 +60,7 @@
       <h3>성별</h3>
       <div class="joinGender">
         <input type="radio" name="userGender" value="M" title="성별">
-        남자 
-        <input type="radio" name="userGender" value="F" title="성별">
+        남자 <input type="radio" name="userGender" value="F" title="성별">
         여자
       </div>
       <input type="submit" class="btn_join" value="회원가입">
