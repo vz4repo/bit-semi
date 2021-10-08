@@ -13,13 +13,13 @@
 	<header>
 		<div id="wrapper">
 			<div id="logo">
-				<a href="#"><%-- <img src="<%=root%>/image/s10.JPG"> --%>LOGO</a>
+				<a href="index.jsp"><%-- <img src="<%=root%>/image/s10.JPG"> --%>LOGO</a>
 			</div>
 			
 			<nav class="clearfix">
 			<ul class="clearfix">
-				<li><a href="#">All Plan</a></li>
-				<li><a href="#">New Plan</a></li>
+				<li><a href="index.jsp?main=plan/allplanlist.jsp">All Plan</a></li>
+				<li><a href="index.jsp?main=plan/newplanform.jsp">New Plan</a></li>
 				<li><a href="#">Review</a></li>
 				<li><a href="#">Notice</a></li>
 			</ul>
