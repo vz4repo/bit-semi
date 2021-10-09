@@ -22,11 +22,6 @@
 	String root=request.getContextPath();
 %>
 <body>
-	<!-- Login,Join만 header 다시 추가 -->
-	<div>
-		<jsp:include page="../layout/header.jsp"/>
-	</div> 
-	
 	<div class="container">
 	<!-- sub -->
 	<div class="margin_wrap">
