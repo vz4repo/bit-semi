@@ -150,13 +150,13 @@ footer{width:100%; height:60px; background-color:black; margin-top:50px; text-al
 /* join form */
 .join_container{margin:220px 230px 0px 230px; text-align:left;}
 #join_text{text-align:center; color:#000; position:relative; top:160px; font-size:35px; font-weight:500;}
-#join_info{font-size:23px; color:#333; font-weight:500; margin-bottom:20px; border-bottom:2px solid black; padding-bottom:15px;}
-#id_form_title{margin-top:22px;font-size:15px; color:black; font-weight:500;}
+#join_info{font-size:23px; color:#000; font-weight:500; margin-bottom:20px; border-bottom:2px solid black; padding-bottom:15px;}
+#id_form_title{margin-top:22px;font-size:15px; color:#333333; font-weight:500;}
 #id_form:nth-child(1){margin-top:-20px;}
 #id_form{margin:0px 20px 0px 20px;}
 #id_form:nth-child(1){margin-top:40px;}
 .joinInput{width:580px; height:40px; margin-top:10px; border:none; border-bottom:1px solid black; 
-		   border-bottom-color:#d5d5d5; font-size:15px; color:#666666;}
+		   border-bottom-color:#d5d5d5; font-size:15px; color:#777777;}
 .joinValue{position:relative; padding-left:120px; min-height:40px;}
 .joinValue > label{position:absolute; top:0; left:0;}
 #default_address{width:460px;}
