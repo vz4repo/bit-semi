@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>세미프로젝트</title>
+<title>GOING</title>
 <link rel="stylesheet" href="css/style.css">
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>

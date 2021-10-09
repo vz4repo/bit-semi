@@ -17,6 +17,27 @@
 	} 
 	
 	$(function(){
+		//추천을 클릭했을 때의 이벤트
+		$("span.v_likes").click(function(){
+			var num=$(this).attr("num");
+			var tag=$(this);
+			console.log(num); //확인됨
+			$.ajax({
+				type:"get",
+				dataType:"json",
+				url:"guest/ajaxlikechu.jsp",
+				data:{"num":num},
+				success:function(data){
+					tag.next().text(data.chu);
+					tag.next().next().animate({"font-size":"30px"},1000,function(){
+						//애니메이션이 끝난 후 다시 글꼴 크기를 0px로 변경
+						$(this).css("font-size","0px");
+					});
+				}
+			});
+		});
+		
+		//댓글 폼에 텍스트 관련 이벤트
 		$("#com_box").click(function(){
 			$(this).text("");
 		});
@@ -47,6 +68,7 @@
 			<div class="v_func">
 				<p>홍길동<button type="button">팔로우</button>|</p>
 				<p>136 Views</p>
+				<span class="v_likes">찜하기</span>
 			</div>
 		</div>
 		<!-- 상단 -->
@@ -56,16 +78,19 @@
 			<div id="map_div"></div>
 			<table class="planinfo">
 				<tr>
+					<th>일자</th>
 					<th>시간</th>
 					<th>여행지</th>
 					<th>비고</th>
 				</tr>
 				<tr>
+					<td>2021.10.09</td>
 					<td>10:00~12:00</td>
 					<td>해운대</td>
 					<td>부산역에 도착하자마자<br>간단하게 브런치 사들고 바다보면서 먹기!</td>
 				</tr>
 				<tr>
+					<td>2021.10.09</td>
 					<td>12:00~14:00</td>
 					<td>본전 돼지국밥 / 스타벅스</td>
 					<td>돼지국밥 점심으로 먹고 스벅가서 커피 마시기</td>
@@ -88,12 +113,17 @@
 		<!-- 댓글폼 -->
 		<div class="v_comment">
 			<table class="com_all">
+				<!-- <tr>
+					<td>
+						<input type="text" id="v_com_name" placeholder="이름을 입력해주세요.">
+					</td>
+				</tr> -->
 				<tr>
 					<td>
-						<textarea id="com_box" name="content" required="required">댓글을 입력해주세요.</textarea>
+						<textarea id="com_box" name="content" required="required" placeholder="댓글을 입력해주세요."></textarea>
 					</td>
 					<td>
-						<button type="submit" id="com_check">확인</button>
+						<button type="submit" id="v_com_check">확인</button>
 					</td>
 				</tr>
 			</table>
@@ -101,18 +131,29 @@
 		<!-- 댓글폼 -->
 		
 		<!-- 댓글 리스트 -->
+		<div class="v_comment_list_num">
+			<span class="v_comment_num">총 댓글<b>0</b></span>
+		</div>
 		<div class="v_comment_list">
 			<ul class="com_list_all">
 				<li>
-					<span class="list_1">
-						<p>홍길동</p>
-						<p>저도 이 여행 계획을 참고해봐야겠어요!</p>
+					<span class="com_list_1">
+						<p class="com_list_1_name">홍길동</p>
+						<p class="com_list_1_contents">저도 이 여행 계획을 참고해봐야겠어요!</p>
+						<p class="com_list_1_day">2021.10.07</p>
+						<button type="button" id="v_com_btn_1">댓글</button>
+						<button type="button" id="v_com_btn_1">수정</button>
+						<button type="button" id="v_com_btn_1">삭제</button>
 					</span>
 				</li>
 				<li>
-					<span class="list_1">
-						<p>홍길동</p>
-						<p>저도 이 여행 계획을 참고해봐야겠어요!</p>
+					<span class="com_list_1">
+						<p class="com_list_1_name">홍길동</p>
+						<p class="com_list_1_contents">저도 이 여행 계획을 참고해봐야겠어요!</p>
+						<p class="com_list_1_day">2021.10.07</p>
+						<button type="button" id="v_com_btn_1">댓글</button>
+						<button type="button" id="v_com_btn_1">수정</button>
+						<button type="button" id="v_com_btn_1">삭제</button>
 					</span>
 				</li>
 			</ul>

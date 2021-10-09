@@ -10,16 +10,18 @@ import java.sql.Statement;
 public class DBConnect {
   // ORA_CLOUD
   private static final String ORA_DRIVER = "oracle.jdbc.driver.OracleDriver";
-  private static final String ORA_URL = "jdbc:oracle:thin:@oradb_high?TNS_ADMIN=D:/java/Wallet_oradb";
+  private static final String ORA_URL =
+      "jdbc:oracle:thin:@oradb_high?TNS_ADMIN=D:/java/Wallet_oradb";
   // "jdbc:oracle:thin:@oradb_high?TNS_ADMIN=/Users/rk/Documents/java/Wallet_oradb";
   private static final String ORA_USER = "admin";
   private static final String ORA_PWD = "1234qwer";
 
   // MARIA_BIT
-  private static final String MARIA_DRIVER = "org.mariadb.jdbc.Driver";
-  private static final String MARIA_URL = "jdbc:mariadb://maria-bit.cy2ifmxzl5mi.ap-northeast-2.rds.amazonaws.com:3306";
-  private static final String MARIA_USER = "guest";
-  private static final String MARIA_PWD = "1234qwer";
+  private static final String MARIA_DRIVER = "com.mysql.jdbc.Driver";
+  private static final String MARIA_URL =
+      "jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul";
+  private static final String MARIA_USER = "root";
+  private static final String MARIA_PWD = "1234";
 
   // DBConnect test
   public static void main(String[] args) {
