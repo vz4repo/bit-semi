@@ -150,14 +150,12 @@ footer{width:100%; height:60px; background-color:black; margin-top:50px; text-al
 /* join form */
 .join_container{margin:220px 230px 0px 230px; text-align:left;}
 #join_text{text-align:center; color:#000; position:relative; top:160px; font-size:35px; font-weight:500;}
-#join_info{font-size:23px; color:#333; font-weight:500; margin-bottom:20px; border-bottom:2px solid black; padding-bottom:15px;}
-#id_form_title{margin-top:22px;font-size:15px; color:black; font-weight:500;}
-#id_form:nth-child(1){margin-top:-20px;}
-#id_form{margin:0px 20px 0px 20px;}
-#id_form:nth-child(1){margin-top:40px;}
+#join_info{font-size:23px; color:#000; font-weight:500; margin-bottom:20px; border-bottom:2px solid black; padding-bottom:15px;}
+.id_form_title{margin-top:22px;font-size:15px; color:#333333; font-weight:500;}
 .joinInput{width:580px; height:40px; margin-top:10px; border:none; border-bottom:1px solid black; 
-		   border-bottom-color:#d5d5d5; font-size:15px; color:#666666;}
-.joinValue{position:relative; padding-left:120px; min-height:40px;}
+		   border-bottom-color:#d5d5d5; font-size:15px; color:#777777;}
+.joinValue{position:relative; padding-left:120px; min-height:40px; margin:0px 20px 0px 20px;}
+.joinValue:nth-child(1){margin-top:40px;}
 .joinValue > label{position:absolute; top:0; left:0;}
 #default_address{width:460px;}
 .joinInput_addr{border:1px solid black; background-color:white; color:black; width:115px; height:35px; border-radius:100px; cursor:pointer;}
@@ -166,5 +164,9 @@ footer{width:100%; height:60px; background-color:black; margin-top:50px; text-al
 .join_bottom{margin-top:80px; border-bottom:1px solid #b5b5b5;}
 .btn_join{width:170px; height:45px; margin:60px 0px 30px 300px; background-color:black; border:1px solid black; 
 		  color:white; font-family:"Noto Sans KR"; font-weight:400; font-size:15px; border-radius:100px; cursor:pointer;}
-#point{color:red; margin-right:10px;}
+.point{color:red; margin-right:10px;}
 /* join form */
+
+/* login form */
+.login_containers{margin:220px 230px 0px 230px; text-align:left;}
+/* login form */
