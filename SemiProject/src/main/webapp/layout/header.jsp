@@ -13,21 +13,21 @@
 	<header>
 		<div id="wrapper">
 			<div id="logo">
-				<a href="#"><%-- <img src="<%=root%>/image/s10.JPG"> --%>LOGO</a>
+				<a href="index.jsp"><%-- <img src="<%=root%>/image/s10.JPG"> --%>LOGO</a>
 			</div>
 			
 			<nav class="clearfix">
-			<ul class="clearfix">
-				<li><a href="#">All Plan</a></li>
-				<li><a href="#" onclick="location.href='newPlan/NewPlanMain.jsp'">New Plan</a></li>
-				<li><a href="#">Review</a></li>
-				<li><a href="#">Notice</a></li>
-			</ul>
+				<ul class="clearfix">
+					<li><a href="index.jsp?main=allplan/allplanview.jsp">All Plan</a></li>
+					<li><a href="#">New Plan</a></li>
+					<li><a href="#">Review</a></li>
+					<li><a href="#">Notice</a></li>
+				</ul>
 			</nav>
 			
 			<div id="member">
-				<button>Login</button>
-				<button>Join</button>
+				<button onclick="location='index.jsp?main=users/login.jsp'">Login</button>
+				<button onclick="location='index.jsp?main=users/join.jsp'">Join</button>
 			</div>
 		</div>
 	</header>
