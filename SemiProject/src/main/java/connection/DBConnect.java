@@ -8,18 +8,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBConnect {
-  // ORA_CLOUD
-  private static final String ORA_DRIVER = "oracle.jdbc.driver.OracleDriver";
-  private static final String ORA_URL = "jdbc:oracle:thin:@oradb_high?TNS_ADMIN=D:/java/Wallet_oradb";
-  // "jdbc:oracle:thin:@oradb_high?TNS_ADMIN=/Users/rk/Documents/java/Wallet_oradb";
-  private static final String ORA_USER = "admin";
-  private static final String ORA_PWD = "1234qwer";
+  // ORA_CLOUD: 클라우드에서 쓰일 설정
+  //  private static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
+  //  private static final String DB_URL = "jdbc:oracle:thin:@oradb_high?TNS_ADMIN=D:/java/Wallet_oradb";
+  //  // "jdbc:oracle:thin:@oradb_high?TNS_ADMIN=/Users/rk/Documents/java/Wallet_oradb";
+  //  private static final String DB_USER = "admin";
+  //  private static final String DB_PWD = "1234qwer";
 
-  // MARIA_BIT
-  private static final String MARIA_DRIVER = "org.mariadb.jdbc.Driver";
-  private static final String MARIA_URL = "jdbc:mariadb://maria-bit.cy2ifmxzl5mi.ap-northeast-2.rds.amazonaws.com:3306";
-  private static final String MARIA_USER = "guest";
-  private static final String MARIA_PWD = "1234qwer";
+  // MARIA_BIT_AWS: 클라우드에서 쓰일 설정
+  private static final String DB_DRIVER = "org.mariadb.jdbc.Driver";
+  private static final String DB_URL =
+      "jdbc:mariadb://maria-bit.cy2ifmxzl5mi.ap-northeast-2.rds.amazonaws.com:3306";
+  private static final String DB_USER = "guest";
+  private static final String DB_PWD = "1234qwer";
+
+  // MYSQL_LOCAL: 로컬에서 쓰일 설정
+  //  private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
+  //  private static final String DB_URL = "jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul";
+  //  private static final String DB_USER = "root";
+  //  private static final String DB_PWD = "1234";
 
   // DBConnect test
   public static void main(String[] args) {
@@ -28,19 +35,10 @@ public class DBConnect {
   }
 
   public DBConnect() {
-    // if (ORA_DRIVER != null) {
-    // try {
-    // Class.forName(ORA_DRIVER);
-    // System.out.println("Driver load success >>" + Thread.currentThread().getName());
-    // } catch (ClassNotFoundException e) {
-    // System.out.println("Driver load failed ");
-    // e.getLocalizedMessage();
-    // }
-
-    if (MARIA_DRIVER != null) {
+    if (DB_DRIVER != null) {
       try {
-        Class.forName(MARIA_DRIVER);
-        System.out.println("MARIA Driver load >>" + Thread.currentThread().getName());
+        Class.forName(DB_DRIVER);
+        System.out.println("Driver load success>>" + Thread.currentThread().getName());
       } catch (ClassNotFoundException e) {
         System.out.println("Driver load failed " + e.getLocalizedMessage());
       }
@@ -54,14 +52,11 @@ public class DBConnect {
     }
   }
 
-
   public Connection getConnectionCloud() {
     Connection conn = null;
     try {
-      // conn = DriverManager.getConnection(ORA_URL, ORA_USER, ORA_PWD);
-      conn = DriverManager.getConnection(MARIA_URL, MARIA_USER, MARIA_PWD);
+      conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
       System.out.println("AWS:mariaDB getConnection");
-
     } catch (SQLException e) {
       System.out.println("connection error" + e.getLocalizedMessage());
     }
@@ -70,7 +65,7 @@ public class DBConnect {
   }
 
 
-  // 3개 close, 각각+디폴트>오버로딩 4개
+  // 3개 close(), 각각+디폴트>오버로딩 4개
   public void resourceClose(ResultSet rs, Statement stmt, Connection conn) {
     try {
       if (rs != null)
