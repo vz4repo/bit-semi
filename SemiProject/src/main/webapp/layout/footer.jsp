@@ -8,7 +8,7 @@
 </head>
 <body>
 	<!--footer-->
-	<footer>Copyright(c)2021 semi_project_2조 All rights reserved.</footer>
+	<footer>Copyright(c)2021 GOING All rights reserved.</footer>
 	<!--footer-->
 </body>
 </html>

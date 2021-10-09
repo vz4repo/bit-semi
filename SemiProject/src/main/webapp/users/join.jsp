@@ -64,7 +64,7 @@
 	         <input type="text" id="default_address" class="joinInput" placeholder="주소를 입력해주세요."
 	          name="userAddr" title="주소" maxlength="120" readonly>
 	          <input type="button" onclick="addr_execDaumPostcode()" class="joinInput_addr" value="주소 검색">
-	         <!--  <div id="kakao_map" style="width:300px;height:300px;margin-top:10px;display:none"></div> -->
+	         <div id="kakao_map" style="width:300px;height:300px;margin-top:10px;display:none"></div>
 	      </div>
 	      <div class="joinGender joinValue">
 	      	<label class="id_form_title"><b class="point">*</b>성별</label>
@@ -83,6 +83,5 @@
 	    </form>
 	  </div>
 	</div>
->>>>>>> 00d41208e606be3de483b644b5e4da90e36b0118
 </body>
 </html>

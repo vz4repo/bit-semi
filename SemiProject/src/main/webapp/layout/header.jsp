@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -27,11 +26,9 @@
 			</nav>
 			
 			<div id="member">
-				<button onclick="location='#'">Login</button>
+				<button onclick="location='index.jsp?main=users/login.jsp'">Login</button>
 				<button onclick="location='index.jsp?main=users/join.jsp'">Join</button>
 			</div>
-				
-				<!-- location='users/login.jsp' -->
 		</div>
 	</header>
 </body>

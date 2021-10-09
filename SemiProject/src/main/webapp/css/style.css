@@ -51,8 +51,8 @@ nav li a {color:white;}
 /* content_1 */
 #content_1{margin:80px 40px 40px; background-position:center;}
 #title_1{font-size:40px; text-align:center; color:black;	}
-#title_2{margin-top:30px; font-size:15px; text-align:center; color:black;}
-.con_1_box{display:block; float:left; margin:30px 10px 10px 10px; width:300px; height:130px;
+#title_2{margin-top:30px; margin-bottom:30px; font-size:15px; text-align:center; color:black;}
+.con_1_box{display:block; float:left; margin:10px 10px 10px 12px; width:300px; height:130px;
 		   box-shadow:2px 2px 13px 3px rgba(0,0,0,0.2); padding:50px 25px 25px 25px;}
 .con_1_box h3{font-size:25px; font-weight:400; line-height:30px; color:#000;}
 .con_1_box p{font-size:15px; font-weight:400; color:#456824; margin-top:30px;}
@@ -67,8 +67,8 @@ nav li a {color:white;}
 /* content_3 */
 #content_3{margin:80px 40px 40px;}
 #title_3{font-size:40px; text-align:center; color:black;	}
-#title_4{margin-top:30px; font-size:15px; text-align:center; color:black;}
-#content_3 li{width:250px; height:330px; float:left; margin:30px 10px 10px 10px;
+#title_4{margin-top:30px; margin-bottom:30px; font-size:15px; text-align:center; color:black;}
+#content_3 li{width:250px; height:330px; float:left; margin:0px 10px 0px 15px;
 			  border:1px solid rgba(0,0,0,0.1); overflow: hidden;}
 #content_3 img{top: 0; left: 0; width: 100%; height: auto; object-fit: cover;}
 .con_3_box{display:block; padding:15px 15px 15px 15px;}
@@ -77,7 +77,7 @@ nav li a {color:white;}
 /* content_3 */
 
 /* footer */
-footer{width:100%; height:60px; background-color:black; margin-top:50px; text-align:center; 
+footer{width:100%; height:60px; background-color:black; text-align:center; margin-top:90px;
 	   font-size:12px; color:white; line-height:60px;}
 /* footer */
 /* main */
@@ -168,5 +168,18 @@ footer{width:100%; height:60px; background-color:black; margin-top:50px; text-al
 /* join form */
 
 /* login form */
-.login_containers{margin:220px 230px 0px 230px; text-align:left;}
+#login_text{text-align:center; color:#000; position:relative; top:160px; font-size:35px; font-weight:500;}
+#login_text p:nth-child(2){text-align:center; margin-top:30px; font-size:15px; font-weight:400;}
+.login_containers{margin:220px 355px 0px 355px;}
+.loginValue{width:370px; height:40px; margin-top:25px; border:none; border-bottom:1px solid black; 
+		    border-bottom-color:#d5d5d5; font-size:15px; color:#777777; position:relative; padding-left:120px; 
+		    min-height:40px;}
+.loginValue > label{position:absolute; top:0; left:0; margin-top:10px;}
+.loginInput{width:400px; height:40px; border:none; font-size:15px; color:#777777;}
+.btn_login{width:500px; height:45px; margin-top:40px; background-color:black; border:1px solid black;
+		   color:white; font-family:"Noto Sans KR"; font-weight:400; font-size:15px; border-radius:100px; cursor:pointer;}
+.login_form_title{font-size:15px; color:#333333; font-weight:500;}
+.login_form_text{text-align:center; }
+.login_form_text > p{margin:20px 0px 5px 0px; font-size:14px; color:#777777;}
+.login_form_text > a{font-size:12px; color:black; margin-top:20px;}
 /* login form */
