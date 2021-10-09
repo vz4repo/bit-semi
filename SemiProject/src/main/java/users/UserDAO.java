@@ -41,7 +41,7 @@ public class UserDAO {
     Connection conn = dbConnect.getConnectionCloud();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "SELECT * FROM maria_study.tuser WHERE userID = ?";
+    String sql = "SELECT * FROM tuser WHERE userID = ?";
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, userID);
@@ -65,7 +65,7 @@ public class UserDAO {
       Connection conn = dbConnect.getConnectionCloud();
       PreparedStatement pstmt = null;
       String sql =
-          "insert into maria_study.tuser (userID,userPassword,userName,userPhone,userMail,userAddr,userGender,userDate) values (?,?,?,?,?,?,?,?)";
+          "insert into tuser (userID,userPassword,userName,userPhone,userMail,userAddr,userGender,userDate) values (?,?,?,?,?,?,?,?)";
 
       try {
         pstmt = conn.prepareStatement(sql);
