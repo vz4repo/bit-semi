@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -18,20 +17,18 @@
 			</div>
 			
 			<nav class="clearfix">
-				<ul class="clearfix">
-					<li><a href="index.jsp?main=allplan/allplanview.jsp">All Plan</a></li>
-					<li><a href="#">New Plan</a></li>
-					<li><a href="#">Review</a></li>
-					<li><a href="#">Notice</a></li>
-				</ul>
+			<ul class="clearfix">
+				<li><a href="#">All Plan</a></li>
+				<li><a href="#">New Plan</a></li>
+				<li><a href="index.jsp?main=review/reviewlist.jsp">Review</a></li>
+				<li><a href="#">Notice</a></li>
+			</ul>
 			</nav>
 			
 			<div id="member">
-				<button onclick="location='#'">Login</button>
-				<button onclick="location='index.jsp?main=users/join.jsp'">Join</button>
+				<button onclick="location='users/login.jsp'">Login</button>
+				<button onclick="location='users/join.jsp'">Join</button>
 			</div>
-				
-				<!-- location='users/login.jsp' -->
 		</div>
 	</header>
 </body>
