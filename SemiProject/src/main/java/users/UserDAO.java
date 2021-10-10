@@ -10,7 +10,7 @@ import connection.DBConnect;
 
 public class UserDAO {
 
-  private DBConnect dbConnect = new DBConnect();
+  DBConnect dbConnect = new DBConnect();
 
   private Connection con;
   private ResultSet rs;
@@ -43,7 +43,7 @@ public class UserDAO {
     ResultSet rs = null;
     String sql = "SELECT * FROM tuser WHERE userID = ?";
     // For aws cloud db
-//    String sql = "SELECT * FROM maria_study.tuser WHERE userID = ?";
+    // String sql = "SELECT * FROM maria_study.tuser WHERE userID = ?";
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, userID);
@@ -64,14 +64,16 @@ public class UserDAO {
   public void join(UserDTO dto) {
     // 회원가입여부 체크
     if (!hasID(dto.getUserID())) {
-      Connection conn = dbConnect.getConnectionCloud();
+      con = dbConnect.getConnectionCloud();
       PreparedStatement pstmt = null;
       String sql =
           "insert into tuser (userID,userPassword,userName,userPhone,userMail,userAddr,userGender,userDate) values (?,?,?,?,?,?,?,?)";
       // For aws cloud DB
-//          "insert into maria_study.tuser (userID,userPassword,userName,userPhone,userMail,userAddr,userGender,userDate) values (?,?,?,?,?,?,?,?)";
+      // "insert into maria_study.tuser
+      // (userID,userPassword,userName,userPhone,userMail,userAddr,userGender,userDate) values
+      // (?,?,?,?,?,?,?,?)";
       try {
-        pstmt = conn.prepareStatement(sql);
+        pstmt = con.prepareStatement(sql);
 
         pstmt.setString(1, dto.getUserID());
         pstmt.setString(2, dto.getUserPassword());
@@ -88,11 +90,39 @@ public class UserDAO {
         e.printStackTrace();
         System.out.println(dto.getUserName() + ": FAIL");
       } finally {
-        dbConnect.resourceClose(pstmt, conn);
+        dbConnect.resourceClose(pstmt, con);
       }
       // TODO 가입 실패 경우도 체크
     }
   }
+
+  // 아이디와 비번 체크
+  public boolean isIdPass(String userID, String userPassword) {
+    boolean b = false;
+    Connection conn = dbConnect.getConnectionCloud();
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+
+    String sql = "select * from tuser where userID=? and userPassword=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, userID);
+      pstmt.setString(2, userPassword);
+      rs = pstmt.executeQuery();
+
+      if (rs.next()) {
+        b = true;
+      }
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      dbConnect.resourceClose(rs, pstmt, con);
+    }
+    return b;
+  }
+
 
 
   // TODO refactoring: 유저 데이터 가져오기

@@ -28,7 +28,7 @@
 	
 	  <!-- get session attr-->
 	  <div class="login_containers">
-	    <form method="post" action="./login_Action.jsp">
+	    <form method="post" action="users/loginaction.jsp">
 	  	  <div class="loginID loginValue">
 	  	  	 <label class="login_form_title">아이디</label>
 	         <input type="text" class="loginInput" placeholder="아이디를 입력해주세요." name="userID"

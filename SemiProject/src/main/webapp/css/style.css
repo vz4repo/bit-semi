@@ -183,3 +183,18 @@ footer{width:100%; height:60px; background-color:black; text-align:center; margi
 .login_form_text > p{margin:20px 0px 5px 0px; font-size:14px; color:#777777;}
 .login_form_text > a{font-size:12px; color:black; margin-top:20px;}
 /* login form */
+
+/* newplan form */
+.cal_container{margin-top:80px;}
+#cal_title{font-size:32px; color:black; text-align:center;}
+#cal_title b{margin-right:20px;}
+.content_title{width:400px; height:40px; margin:70px 0px 0px 400px; border:none; border-bottom:1px solid black; 
+		   	   border-bottom-color:#d5d5d5; font-size:15px; color:#777777; position:relative; 
+		   	   min-height:40px; text-align:center;}
+.cal_name_day{margin:50px 0px 0px 180px; font-size:20px; color:black;}
+.cal_day_check{display: inline-block; font-weight:300; width:230px; height:30px; color:black;
+			   border-radius:100px; padding:5px; text-align:center; line-height:30px; border:1px solid black;}
+.cal_name_day p:nth-child(2){margin-left:350px;}
+.btn_next_1{width:170px; height:45px; margin:-20px 0px 0px 1015px; background-color:black; border:1px solid black; 
+		    color:white; font-family:"Noto Sans KR"; font-weight:400; font-size:15px; border-radius:100px; cursor:pointer;}
+/* newplan form */

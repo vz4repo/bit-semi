@@ -19,7 +19,7 @@
 			<nav class="clearfix">
 				<ul class="clearfix">
 					<li><a href="index.jsp?main=allplan/allplanview.jsp">All Plan</a></li>
-					<li><a href="#">New Plan</a></li>
+					<li><a href="index.jsp?main=newPlan/NewPlanMain.jsp">New Plan</a></li>
 					<li><a href="#">Review</a></li>
 					<li><a href="#">Notice</a></li>
 				</ul>
