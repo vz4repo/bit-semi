@@ -56,7 +56,10 @@ public class DBConnect {
     Connection conn = null;
     try {
       conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
-      System.out.println("AWS:mariaDB getConnection");
+      if (DB_DRIVER == "org.mariadb.jdbc.Driver")
+        System.out.println("AWS:mariaDB getConnection");
+      else
+        System.out.println("DB getConnection");
     } catch (SQLException e) {
       System.out.println("connection error" + e.getLocalizedMessage());
     }

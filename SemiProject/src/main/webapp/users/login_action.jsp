@@ -13,6 +13,7 @@
 </head>
 <body>
   <%
+  System.out.println("REDIRECT:login_action.jsp");
   String userID = request.getParameter("userID");
   String userPassword = request.getParameter("userPassword");
   // String isSaved = request.getParameter("isSaved");
