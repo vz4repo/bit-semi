@@ -3,7 +3,7 @@ package users;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import connection.DBConnect;
+import connection.DBConnectAWS;
 
 public class UserDAO {
   private String userID;
@@ -13,7 +13,7 @@ public class UserDAO {
   private String userDate;
   private Connection con;
   private ResultSet rs;
-  private DBConnect conn;
+  private DBConnectAWS conn;
 
 
 
