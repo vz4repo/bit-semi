@@ -17,15 +17,15 @@
 <body>
 	<!-- 헤더 (로고,메뉴들까지 불러옴) -->
 	<div>
-		<jsp:include page="layout/header.jsp"/>
+		<%@ include file="layout/header.jsp"%>
 	</div>
 	<!-- 메인 레이아웃 불러옴 -->
-	<div class="layout main">
+	<div class="layout main">		
 		<jsp:include page="<%=mainpage %>"/>
 	</div>
 	<!-- 푸터 -->
 	<div>
-		<jsp:include page="layout/footer.jsp"/>
+		<%@ include file="layout/footer.jsp"%>
 	</div>
 </body>
 </html>

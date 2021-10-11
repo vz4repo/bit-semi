@@ -22,6 +22,8 @@ request.setCharacterEncoding("UTF-8");
 	String userAddr = request.getParameter("userAddr");
 	String userGender = request.getParameter("userGender");
 	String userDate = request.getParameter("userDate");
+	
+	System.out.println(userID +":"+ userPassword +":"+ userName +":"+ userPhone +":"+ userMail +":"+ userAddr +":"+ userGender +":"+ userDate);
 	// -1: 서버 오류 / 0: 이미존재하는 아이디 / 1: 성공
 	if (userID == null || userPassword == null || userName == null || userGender == null
 	    || userDate == null) {
