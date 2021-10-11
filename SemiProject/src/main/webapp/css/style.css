@@ -184,7 +184,7 @@ footer{width:100%; height:60px; background-color:black; text-align:center; margi
 .login_form_text > a{font-size:12px; color:black; margin-top:20px;}
 /* login form */
 
-/* newplan form */
+/* newplancal form */
 .cal_container{margin-top:80px;}
 #cal_title{font-size:32px; color:black; text-align:center;}
 #cal_title b{margin-right:20px;}
@@ -195,6 +195,28 @@ footer{width:100%; height:60px; background-color:black; text-align:center; margi
 .cal_day_check{display: inline-block; font-weight:300; width:230px; height:30px; color:black;
 			   border-radius:100px; padding:5px; text-align:center; line-height:30px; border:1px solid black;}
 .cal_name_day p:nth-child(2){margin-left:340px;}
-.btn_next_1{width:170px; height:45px; margin:-20px 0px 0px 1015px; background-color:black; border:1px solid black; 
+.btn_next_1{width:170px; height:45px; margin:40px 0px 0px 1015px; background-color:black; border:1px solid black; 
 		    color:white; font-family:"Noto Sans KR"; font-weight:400; font-size:15px; border-radius:100px; cursor:pointer;}
-/* newplan form */
+/* newplancal form */
+
+/* newplanmap form */
+.map_wrap{margin-top:-40px; margin-bottom:-50px;} /* 지도 위, 아래 값 조정 */
+.cal_map_container{margin-top:80px;}
+.cal_day_top{text-align:center;margin-top:80px;}
+.btn_cal_1{background-color:white; color:black; border:1px solid #dbdbdb; border-radius:100px; width:100px; 
+		   height:40px; font-size:15px; cursor:pointer;}
+#day_check{color:black; font-size:20px; font-weight:400; margin:0px 30px 0px 30px;}
+.plan_time{border:none; width:200px; height:35px; text-align:center; color:#777777;}
+.plan_content{border:none; width:550px; height:35px; text-align:center; color:#777777; margin-left:10px;}
+.plan_del{margin-left:10px; border:1px solid #dbdbdb; background-color:white; width:70px; height:40px;
+		  cursor:pointer; font-size:15px;}
+.plan_add{border:none; background-color:white; cursor:pointer; width:1150px; font-size:15px;
+		  font-weight:500;}
+.cal_open_text{text-align:center; margin-top:50px; font-size:15px; color:black;}
+.cal_open_text > p{font-weight:500; font-size:20px; margin-bottom:15px;}
+.cal_open_check{text-align:center; margin-top:20px; font-size:15px; color:black;}
+.btn_move_1{width:170px; height:45px; margin:40px 850px 0px 0px; background-color:black; border:1px solid black; display:inline-block;
+		    color:white; font-family:"Noto Sans KR"; font-weight:400; font-size:15px; border-radius:100px; cursor:pointer;}
+.btn_next_2{width:170px; height:45px; background-color:black; border:1px solid black; color:white;
+			font-family:"Noto Sans KR"; font-weight:400; font-size:15px; border-radius:100px; cursor:pointer;}
+/* newplanmap form */

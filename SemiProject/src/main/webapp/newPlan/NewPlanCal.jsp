@@ -29,15 +29,13 @@
 				<input type="text" class="content_title" placeholder="여행 계획 제목을 입력해주세요.">
 			</div>
 				
-			<div class="cal_name_day">
-				<p class="cal_day_check">가는날</p>
-				<p class="cal_day_check">오는날</p>
-			</div>
+			<!-- 가는날, 오는날 텍스트는 calendar.html에 입력후 air-datepicker.css로 줌(희수) -->
 			
 			<div class="cal_alldays">
 				<iframe src="feat_calendar/calendar.html" style="width:1200px; height:400px; border:none;"></iframe>
 			</div>
 		</div>
+		
 		<!-- 다음 버튼 -->
 		<button type="button" class="btn_next_1" onclick="location.href='index.jsp?main=newPlan/NewPlanMap.jsp'">다음</button>
 		<!-- 다음 버튼 -->

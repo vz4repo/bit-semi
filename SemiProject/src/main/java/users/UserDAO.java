@@ -96,35 +96,6 @@ public class UserDAO {
     }
   }
 
-  // 아이디와 비번 체크
-  public boolean isIdPass(String userID, String userPassword) {
-    boolean b = false;
-    Connection conn = dbConnect.getConnectionCloud();
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-
-    String sql = "select * from tuser where userID=? and userPassword=?";
-
-    try {
-      pstmt = conn.prepareStatement(sql);
-      pstmt.setString(1, userID);
-      pstmt.setString(2, userPassword);
-      rs = pstmt.executeQuery();
-
-      if (rs.next()) {
-        b = true;
-      }
-
-    } catch (SQLException e) {
-      e.printStackTrace();
-    } finally {
-      dbConnect.resourceClose(rs, pstmt, con);
-    }
-    return b;
-  }
-
-
-
   // TODO refactoring: 유저 데이터 가져오기
   public UserDAO getUser(String userID) {
     try {
