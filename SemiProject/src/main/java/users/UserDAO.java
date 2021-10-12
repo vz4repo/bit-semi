@@ -16,6 +16,12 @@ public class UserDAO {
   private PreparedStatement pstmt;
   private ResultSet rs;
 
+  public static void main(String []args){
+    UserDAO dao = new UserDAO();
+
+//    System.out.println(dao.login("test01", "1234"));
+    System.out.println(dao.hasID("test02"));
+  }
 
   // 1:성공 0:비밀번호 틀림 1:ID없음 -2:서버 오류 -
   public int login(String userID, String userPassword) {
@@ -24,7 +30,7 @@ public class UserDAO {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, userID);
       rs = pstmt.executeQuery();
-
+      System.out.println(sql);
       if (rs.next()) { // rs 로 받은 id가 있으면 true
         if (rs.getString(1).equals(userPassword)) {
           return 1; // 1:성공

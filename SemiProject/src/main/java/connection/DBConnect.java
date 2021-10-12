@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class DBConnect {
+public class  DBConnect {
   // ORA_CLOUD: 클라우드에서 쓰일 설정
   //  private static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
   //  private static final String DB_URL = "jdbc:oracle:thin:@oradb_high?TNS_ADMIN=D:/java/Wallet_oradb";
