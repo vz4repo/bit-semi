@@ -18,18 +18,19 @@
 			
 			<nav class="clearfix">
 			<ul class="clearfix">
-				<li><a href="index.jsp?main=plan/allplanlist.jsp">All Plan</a></li>
-				<li><a href="index.jsp?main=plan/newplanform.jsp">New Plan</a></li>
+				<li><a href="index.jsp?main=allplan/allplanlist.jsp">All Plan</a></li>
+				<li><a href="index.jsp?main=allplan/newplanform.jsp">New Plan</a></li>
 				<li><a href="#">Review</a></li>
 				<li><a href="#">Notice</a></li>
 			</ul>
 			</nav>
 			
 			<div id="member">
-				<button onclick="location='users/login.jsp'">Login</button>
-				<button onclick="location='users/join.jsp'">Join</button>
+				<button onclick="location='index.jsp?main=users/login.jsp'">Login</button>
+				<button onclick="location='index.jsp?main=users/join.jsp'">Join</button>
 			</div>
 		</div>
 	</header>
 </body>
+
 </html>

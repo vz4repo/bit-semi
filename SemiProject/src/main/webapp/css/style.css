@@ -1,249 +1,222 @@
 @charset "utf-8";
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 
 @-ms-viewport{width:device-width;}
 @-o-viewport{width:device-width;}
 @viewport{width:device-width;}
 
-body { background:#fff;font-family:"gulim", sans-serif;font-size:12px;color:#5b5b5b;line-height:100%;font-weight:normal;padding:0px;margin:0px;letter-spacing:-0px; }
+body { background:#fff;font-family:"Roboto","Noto Sans KR", sans-serif;font-size:12px;color:#5b5b5b;line-height:100%;font-weight:normal;padding:0px;margin:0px;letter-spacing:-0px; }
 html, body { width:100%;height:100%;letter-spacing:0px; }
 div, p, ul, li, table, th, td, textarea, input, span, form, h1, h2, h3, h4, h5, h6, dt, dl, dd, em, sup {padding:0px;margin:0px;}
 ul, ol, dl, dd, dt, li { list-style-type:none;margin:0;padding:0px;line-height:100%;font-size:12px;color:#5b5b5b;letter-spacing:0px; }
 form, fieldset, p {margin:0;padding:0;border:0;}
 img {border:0;vertical-align:middle;outline:none;}
 
-a,a:link,a:visited,a:active{color:white;letter-spacing:normal;text-decoration:none;letter-spacing:-0.8px;}
+a,a:link,a:visited,a:active{/* color:black;  */letter-spacing:normal;text-decoration:none;letter-spacing:-0.8px;}
 a:hover{color:orange;text-decoration:none;}
 
+*{line-height:20px;}
+
 .clearfix::after{content:""; display:block; clear:both;}
-.margin_wrap{width:1260px; margin:0 auto;}
-
-*{font-family:"Roboto"}
+.container{width:1200px; margin: 0 auto;}
+input[type="radio"] {margin-right:10px;}
 
 /* header */
-header{
-	width:100%;
-	height:75px;
-	background-color:black;
-	position:fixed;
-	top:0;
-	left:0;
-	z-index:1;
-}
-
-#logo{
-	float:left;
-	font-size:20px;
-	line-height:75px;
-}
-
-nav{
-	position:absolute;	
-	left:50%;
-	transform: translateX(-50%);
-}
-
-nav li{
-	font-size:17px;
-	line-height:75px;
-	display: inline-block;
-	padding:0 15px;
-}
-
-#member{
-	float:right;
-	line-height:75px;
-}
-
-#wrapper{
-	width:1200px;
-	margin:0 auto;
-	position:relative;
-	justify-content: space-between;
-}
-
-#member button{
-	margin-top:20px;
-	width:100px;
-	height:35px;
-	border-radius:100px;
-	outline:none;
-	cursor:pointer;
-	font-size:15px;
-	background:transparent;
-	border:1px solid white;
-	transition:0.5s;
-	color:white;
-	margin-left:10px;
-}
-
-#member button:hover{
-	background-color:white;
-	color:black;
-}
-
+header{width:100%; height:75px; background-color:black; position:fixed; top:0; left:0; z-index:1;}
+#logo{float:left; font-size:20px; line-height:75px;}
+#logo a{color:white;}
+nav{position:absolute; left:50%; transform: translateX(-50%);}
+nav li{font-size:17px; line-height:75px; display: inline-block; padding:0 15px;}
+nav li a {color:white;}
+#member{float:right; line-height:75px;}
+#wrapper{width:1200px; margin:0 auto; position:relative;justify-content: space-between;}
+#member button{margin-top:20px; width:100px; height:35px; border-radius:100px;outline:none; cursor:pointer; font-size:15px;
+			   background:transparent; border:1px solid white; transition:0.5s; color:white; margin-left:10px;
+			   font-family:"Roboto";}
+#member button:hover{background-color:white; color:black;}
 /* header */
 
 /* main */
-#main_wrap{
-	width:100%;
-	height:600px;
-	background:url("../image/main.jpg") fixed center;
-}
-
-#main_text{
-	text-align:center;
-	color:#000;
- 	position:relative;
-	top:250px;
-}
-
-#main_text p{
-	font-size:40px;
-	line-height:60px;
-}
-
+/* main image*/
+#main_wrap{width:100%; height:600px; background:url("../image/main.jpg") fixed center;}
+#main_text{text-align:center; color:#000; position:relative; top:250px;}
+#main_text p{font-size:40px; line-height:60px;}
 #main_text p:nth-child(2){font-weight:bold;}
-
-#main_text button{
-	margin-top:70px;
-	width:300px;
-	height:50px;
-	outline:none;
-	cursor:pointer;
-	font-size:15px;
-	background:transparent;
-	border:1px solid #000;
-	transition:0.5s;
-	border-radius:100px;
-}
-		
-#main_text button:hover{
-	background-color:#000;
-	color:#fff;
-}
-/* main */
+#main_text button{margin-top:70px; width:300px; height:50px; outline:none; cursor:pointer; font-size:15px;
+				  background:transparent; border:1px solid #000; transition:0.5s; border-radius:100px;}
+#main_text button:hover{background-color:#000; color:#fff;}
+/* main image*/
 
 /* content_1 */
-#content_1{
-	margin:80px 40px 40px;
-	background-position:center;
-}
-
-#title_1{
-	font-size:40px;
-	text-align:center;
-	color:black;	
-}
-
-#title_2{
-	margin-top:30px;
-	font-size:15px;
-	text-align:center;
-	color:black;
-}
-
-.con_1_box{
-	display:block;
-	margin-top:30px;
-	float:left;
-	margin-left:55px;
-	width:300px;
-	height:130px;
-	box-shadow:2px 2px 13px 3px rgba(0,0,0,0.2);
-	padding:50px 25px 25px 25px;
-}
-
-.con_1_box h3{
-	font-size:25px;
-	line-height:30px;
-	color:#000;
-}
-
-.con_1_box p{
-	font-size:15px;
-	color:#456824;
-	margin-top:30px;
-}
-
+#content_1{margin:80px 40px 40px; background-position:center;}
+#title_1{font-size:40px; text-align:center; color:black;	}
+#title_2{margin-top:30px; margin-bottom:30px; font-size:15px; text-align:center; color:black;}
+.con_1_box{display:block; float:left; margin:10px 10px 10px 12px; width:300px; height:130px;
+		   box-shadow:2px 2px 13px 3px rgba(0,0,0,0.2); padding:50px 25px 25px 25px;}
+.con_1_box h3{font-size:25px; font-weight:400; line-height:30px; color:#000;}
+.con_1_box p{font-size:15px; font-weight:400; color:#456824; margin-top:30px;}
 .con_1_box p:nth-child(3){margin-top:15px;}
 /* content_1 */
 
 /* content_2 */
-#content_2{
-	width:100%;
-	height:200px;
-	background:url("../image/main.jpg") fixed center;
-}
-
-#content_2{
-	margin-top:80px;
-}
+#content_2{width:100%; height:200px; background:url("../image/main.jpg") fixed center;}
+#content_2{margin-top:80px;}
 /* content_2 */
 
 /* content_3 */
-#content_3{
-	margin:80px 40px 40px;
-}
-
-#title_3{
-	font-size:40px;
-	text-align:center;
-	color:black;	
-}
-
-#title_4{
-	margin-top:30px;
-	font-size:15px;
-	text-align:center;
-	color:black;
-}
-
-#content_3 li{
-	width:250px;
-	height:330px;
-	float:left;
-	margin-left:52px;
-	margin-top:30px;
-	border:1px solid rgba(0,0,0,0.1);
-	overflow: hidden;
-}
-
-#content_3 img{
-  	top: 0;
- 	left: 0;
-    width: 100%;
- 	height: auto;
- 	object-fit: cover;
-}
-
-.con_3_box{
-	display:block;
-	padding:15px 15px 15px 15px;
-}
-
-.con_3_box h3{
-	font-size:15px;
-	line-height:30px;
-	color:#000;
-}
-
-.con_3_box p{
-	font-size:12px;
-	color:#456824;
-	margin-top:5px;
-}
+#content_3{margin:80px 40px 40px;}
+#title_3{font-size:40px; text-align:center; color:black;	}
+#title_4{margin-top:30px; margin-bottom:30px; font-size:15px; text-align:center; color:black;}
+#content_3 li{width:250px; height:330px; float:left; margin:0px 10px 0px 15px;
+			  border:1px solid rgba(0,0,0,0.1); overflow: hidden;}
+#content_3 img{top: 0; left: 0; width: 100%; height: auto; object-fit: cover;}
+.con_3_box{display:block; padding:15px 15px 15px 15px;}
+.con_3_box h3{font-size:15px; font-weight:400; line-height:30px; color:#000;}
+.con_3_box p{font-size:12px; color:#456824; margin-top:5px;}
 /* content_3 */
 
 /* footer */
-footer{
-	width:100%;
-	height:60px;
-	background-color:black;
-	margin-top:50px;
-	text-align:center;
-	font-size:12px;
-	color:white;
-	line-height:60px;
-}
+footer{width:100%; height:60px; background-color:black; text-align:center; margin-top:90px;
+	   font-size:12px; color:white; line-height:60px;}
 /* footer */
+/* main */
+
+/* allplanview */
+/* sub image */
+#sub_image{width:100%; height:250px; background:url("../image/main.jpg") fixed center;}
+#sub_text{text-align:center; color:#000; position:relative; top:160px; font-size:35px;}
+/* sub image */
+
+/* 상단 */
+.view_top{text-align:center; border-bottom:2px solid black; padding-bottom:50px;
+		  max-width:1200px; margin:0 auto; box-sizing:border-box; margin-bottom:30px;}
+.v_title{margin-top:80px; font-size:32px; color:black; font-weight:700;}
+.v_day{margin-top:30px; font-size:18px; font-weight:400;}
+.v_func p, .v_func span{margin-top:20px; position:relative; display:inline-block; font-weight:300;
+		  letter-spacing:-0.03em; font-size:16px;}
+.v_func p:nth-child(1){padding-right:15px;}
+.v_func button{background-color:black; border:1px solid black; color:white; font-size:7px; width:60px; 
+			   cursor:pointer; height:25px; margin:0px 15px 0px 7px; border-radius:100px;}
+.v_likes{margin-left:15px; cursor:pointer;}
+/* 상단 */
+
+/* 컨텐츠 */
+#map_div{margin:80px 0px 100px 0px;}
+.planinfo{border:1px solid black; border-collapse:collapse; width:1200px; margin-top:50px;}
+.planinfo th{border:1px solid white; background-color:black; color:white; height:35px; 
+			 font-weight:400; font-size:17px; padding:5px}	  
+.planinfo th:nth-child(1){width:200px;}
+.planinfo th:nth-child(2){width:200px;}
+.planinfo th:nth-child(3){width:350px;}
+.planinfo th:nth-child(4){width:450px;}
+.planinfo td{border:1px solid black; border-collapse:collapse;
+			 text-align:center; font-size:15px; padding:10px}
+/* 컨텐츠 */
+
+/* 별점, 목록 버튼 */
+.btn{text-align:center; margin-top:60px; margin-bottom:60px;}
+.v_btn{text-align:center; border:1px solid black; width:200px; height:50px; 
+	   font-size:20px; border-radius:100px; line-height:50px; display:inline-block; cursor:pointer;}
+.v_btn a{color:black;}
+.btn div:nth-child(1){margin-right:20px;}
+/* 별점, 목록 버튼 */
+
+/* 댓글 폼 */
+.v_comment{margin-bottom:50px;}
+#com_box{width:1050px; height:100px; border:1px solid #5b5b5b; padding:10px;}
+#v_com_name{width:200px; height:25px; margin-bottom:10px; padding:10px; color:black; border:1px solid black;}
+#v_com_check{width:115px; height:120px; border:1px solid black; background-color:black; color:white;
+		   text-align:center; font-size:18px; cursor:pointer; margin-left:10px; font-family:"Noto Sans KR"; 
+		   font-weight:400; border-radius:5px;}
+.com_all td:nth-child(2){margin-left:20px;}
+/* 댓글 폼 */
+
+/* 댓글 리스트 */
+.v_comment_list_num{margin-bottom:10px; font-size:15px; color:black;}
+.v_comment_list_num b{margin-left:5px; color:red;}
+.v_comment_list{padding:0px 20px 0px 20px; background:#f8f8f8; margin-bottom:100px;}
+.v_comment_list ul li{padding:25px 0 25px 0; border-top:1px solid #dbdbdb;}
+.v_comment_list ul li:first-child{border-top:1px solid #dbdbdb;}
+.com_list_1_name{font-size:15px; color:black;}
+.com_list_1_contents{font-size:14px; color:#666666; margin:25px 0px 10px 0px;}
+.com_list_1_day{font-size:12px; color:#666666; margin-bottom:10px;}
+#v_com_btn_1{border:1px solid #dbdbdb; border-radius:100px; width:50px; height:25px; background-color:white; cursor:pointer;
+			 text-align:center; font-family:"Noto Sans KR"; font-weight:400; margin-left:5px;}
+#v_com_btn_1:nth-child(1){margin-left:-5px;}
+/* 댓글 리스트 */
+/* allplanview */
+
+/* join form */
+.join_container{margin:220px 230px 0px 230px; text-align:left;}
+#join_text{text-align:center; color:#000; position:relative; top:160px; font-size:35px; font-weight:500;}
+#join_info{font-size:23px; color:#000; font-weight:500; margin-bottom:20px; border-bottom:2px solid black; padding-bottom:15px;}
+.id_form_title{margin-top:22px;font-size:15px; color:#333333; font-weight:500;}
+.joinInput{width:580px; height:40px; margin-top:10px; border:none; border-bottom:1px solid black; 
+		   border-bottom-color:#d5d5d5; font-size:15px; color:#777777;}
+.joinValue{position:relative; padding-left:120px; min-height:40px; margin:0px 20px 0px 20px;}
+.joinValue:nth-child(1){margin-top:40px;}
+.joinValue > label{position:absolute; top:0; left:0;}
+#default_address{width:460px;}
+.joinInput_addr{border:1px solid black; background-color:white; color:black; width:115px; height:35px; border-radius:100px; cursor:pointer;}
+.gender_input > input{ margin-top:25px;}
+.gender_input > label{font-size:17px; color:#666666; font-weight:300;}
+.join_bottom{margin-top:80px; border-bottom:1px solid #b5b5b5;}
+.btn_join{width:170px; height:45px; margin:60px 0px 30px 300px; background-color:black; border:1px solid black; 
+		  color:white; font-family:"Noto Sans KR"; font-weight:400; font-size:15px; border-radius:100px; cursor:pointer;}
+.point{color:red; margin-right:10px;}
+/* join form */
+
+/* login form */
+#login_text{text-align:center; color:#000; position:relative; top:160px; font-size:35px; font-weight:500;}
+#login_text p:nth-child(2){text-align:center; margin-top:30px; font-size:15px; font-weight:400;}
+.login_containers{margin:220px 355px 0px 355px;}
+.loginValue{width:370px; height:40px; margin-top:25px; border:none; border-bottom:1px solid black; 
+		    border-bottom-color:#d5d5d5; font-size:15px; color:#777777; position:relative; padding-left:120px; 
+		    min-height:40px;}
+.loginValue > label{position:absolute; top:0; left:0; margin-top:10px;}
+.loginInput{width:400px; height:40px; border:none; font-size:15px; color:#777777;}
+.btn_login{width:500px; height:45px; margin-top:40px; background-color:black; border:1px solid black;
+		   color:white; font-family:"Noto Sans KR"; font-weight:400; font-size:15px; border-radius:100px; cursor:pointer;}
+.login_form_title{font-size:15px; color:#333333; font-weight:500;}
+.login_form_text{text-align:center; }
+.login_form_text > p{margin:20px 0px 5px 0px; font-size:14px; color:#777777;}
+.login_form_text > a{font-size:12px; color:black; margin-top:20px;}
+/* login form */
+
+/* newplancal form */
+.cal_container{margin-top:80px;}
+#cal_title{font-size:32px; color:black; text-align:center;}
+#cal_title b{margin-right:20px;}
+.content_title{width:400px; height:40px; margin:70px 0px 0px 400px; border:none; border-bottom:1px solid black; 
+		   	   border-bottom-color:#d5d5d5; font-size:15px; color:#777777; position:relative; 
+		   	   min-height:40px; text-align:center;}
+.cal_name_day{margin:50px 0px -20px 185px; font-size:20px; color:black;}
+.cal_day_check{display: inline-block; font-weight:300; width:230px; height:30px; color:black;
+			   border-radius:100px; padding:5px; text-align:center; line-height:30px; border:1px solid black;}
+.cal_name_day p:nth-child(2){margin-left:340px;}
+.btn_next_1{width:170px; height:45px; margin:40px 0px 0px 1015px; background-color:black; border:1px solid black; 
+		    color:white; font-family:"Noto Sans KR"; font-weight:400; font-size:15px; border-radius:100px; cursor:pointer;}
+/* newplancal form */
+
+/* newplanmap form */
+.map_wrap{margin-top:-40px; margin-bottom:-50px;} /* 지도 위, 아래 값 조정 */
+.cal_map_container{margin-top:80px;}
+.cal_day_top{text-align:center;margin-top:80px;}
+.btn_cal_1{background-color:white; color:black; border:1px solid #dbdbdb; border-radius:100px; width:100px; 
+		   height:40px; font-size:15px; cursor:pointer;}
+#day_check{color:black; font-size:20px; font-weight:400; margin:0px 30px 0px 30px;}
+.plan_time{border:none; width:200px; height:35px; text-align:center; color:#777777;}
+.plan_content{border:none; width:550px; height:35px; text-align:center; color:#777777; margin-left:10px;}
+.plan_del{margin-left:10px; border:1px solid #dbdbdb; background-color:white; width:70px; height:40px;
+		  cursor:pointer; font-size:15px;}
+.plan_add{border:none; background-color:white; cursor:pointer; width:1150px; font-size:15px;
+		  font-weight:500;}
+.cal_open_text{text-align:center; margin-top:50px; font-size:15px; color:black;}
+.cal_open_text > p{font-weight:500; font-size:20px; margin-bottom:15px;}
+.cal_open_check{text-align:center; margin-top:20px; font-size:15px; color:black;}
+.btn_move_1{width:170px; height:45px; margin:40px 850px 0px 0px; background-color:black; border:1px solid black; display:inline-block;
+		    color:white; font-family:"Noto Sans KR"; font-weight:400; font-size:15px; border-radius:100px; cursor:pointer;}
+.btn_next_2{width:170px; height:45px; background-color:black; border:1px solid black; color:white;
+			font-family:"Noto Sans KR"; font-weight:400; font-size:15px; border-radius:100px; cursor:pointer;}
+/* newplanmap form */
