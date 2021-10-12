@@ -1,0 +1,213 @@
+<%@page import="plan.PlanDto"%>
+<%@page import="plan.PlanDao"%>
+<%@page import="java.util.List"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>GOING</title>
+<script type="text/javascript">
+$(function () {
+	$("select.selpln").change(function () {
+	    var s=$(this).val();
+	   	//alert(s);
+		if(s=="rec"){
+			$(".tb").hide();
+			$("#t1").show();	
+		  }else if(s=="chu"){
+			 $(".tb").hide();
+			 $("#t2").show();
+		}else if(s=="jo"){
+			 $(".tb").hide();
+			 $("#t3").show();
+		}
+	});
+});
+</script>
+</head>
+<%
+	String userId=(String)session.getAttribute("userId");
+
+	String root=request.getContextPath();
+	PlanDao dao=new PlanDao();
+	//페이징
+	int perPage=9;//한페이지에 보여질 글의 개수
+	int totalCount;//총 글의 수
+	int totalPage;//총 페이지수
+	int currentPage;//현재 페이지 번호
+	int perBlock=3;//몇개의 페이지번호씩 표현할지
+	int start;//각 페이지에서 불러올 db의 시작번호
+	int startPage;//각 블럭에 표시할 시작페이지
+	int endPage;//각 블럭에 표시할 마지막페이지
+	
+	//총 갯수
+	totalCount=dao.getTotalCount();
+	//현재 페이지 번호 읽기(단 null일 경우는 1페이지로 설정)
+	if(request.getParameter("currentPage")==null)
+	  currentPage=1;
+	else
+	  currentPage=Integer.parseInt(request.getParameter("currentPage"));
+	//총 페이지 갯수 구하기
+	totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);
+	//각 블럭 시작페이지
+	startPage=(currentPage-1)/perBlock*perBlock+1;
+	//끝 페이지
+	endPage=startPage+perBlock-1;
+	if(endPage>totalPage)
+	  endPage=totalPage;
+	//각 페이지에서 불러올 시작번호
+	start=(currentPage-1)*perPage;
+	//각 페이지에서 필요한 게시글 가져오기
+	
+	//시간순 나열
+	List<PlanDto> list=dao.getPlan(start, perPage);
+	//추천순 나열
+	List<PlanDto> list2=dao.getPlan2(start, perPage);
+	//좋아요순 나열
+	List<PlanDto> list3=dao.getPlan3(start, perPage);
+	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+	
+	//현재 페이지의 list가 더이상 없을경우 이전페이지로 이동
+	/* if(list.size()==0 && totalCount>0)
+	{ */
+	%>
+	 <%--  <script type="text/javascript">
+	  	location.href="index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=currentPage-1%>";
+	  </script> --%>
+	<%
+	/* } */
+	//각 페이지에 출력할 시작번호
+	int no=totalCount-(currentPage-1)*perPage;
+%>
+<body>
+	<!-- sub -->
+	<div id="sub_image" class="margin_wrap">
+		<div id="sub_text">
+			<p>New Plan</p>
+		</div>
+	</div>
+	<!-- sub -->
+	
+	<!-- view -->
+	<div class="container">
+		<!-- 셀렉트 박스 -->
+		<select name="sel" class="selpln">
+			<option value="rec" id="rec">최신순</option>
+			<option value="jo" id="jo">좋아요순</option>
+			<option value="chu" id="chu">추천순</option>
+		</select>
+	
+		<!-- 모든계획 나열표 -->
+		<!-- 시간순 나열 -->
+		<div id="t1" class="tb">
+			<ul class="clearfix">
+				<% 
+				for(PlanDto dto:list){
+				%>
+				<li>
+					<a href="#">
+						<span class="list_box_1">
+							<h3><%=dto.getPlantitle()%></h3>
+							<p><%=dto.getPlanDate()%></p>
+							<p>작성자:<%=userId%></p>
+						</span>
+					</a>
+				</li>
+				<%} 
+				%>
+			</ul>
+		</div>
+	
+		<!-- 추천순 나열 -->
+		<%-- <div id="t2" class="tb">
+			<ul class="clearfix">
+				<% 
+				for(PlanDto dto:list){
+				%>
+				<li>
+					<a href="#">
+						<span class="con_1_box">
+							<h3><%=dto.getTitle() %></h3>
+							<p><%=dto.getDays() %></p>
+							<p>작성자:<%=dto.getName() %></p>
+						</span>
+					</a>
+				</li>
+				<%} 
+				%>
+			</ul>
+		</div> --%>
+		
+		<!-- 좋아요순 나열 -->
+		<%-- <div id="t3" class="tb">
+			<ul class="clearfix">
+				<% 
+				for(PlanDto dto:list){
+				%>
+				<li>
+					<a href="#">
+						<span class="con_1_box">
+							<h3><%=dto.getTitle() %></h3>
+							<p><%=dto.getDays() %></p>
+							<p>작성자:<%=dto.getName() %></p>
+						</span>
+					</a>
+				</li>
+				<%} 
+				%>
+			</ul>
+		</div> --%>
+		
+		<!-- 페이징 -->
+		<div style="margin-left:340px; width:800px; text-align: center;">
+			<ul class="pagination">
+			<%
+				//이전
+				if(startPage>1)
+				{%>
+				  <li>
+				  	<a href="index.jsp?main=plan/allplanlist.jsp?currentPage=<%=startPage-1 %>">이전</a>
+				  </li>
+				<%}
+			%>
+			<%
+				for(int pp=startPage;pp<=endPage;pp++)
+				{
+				  if(pp==currentPage)//현재페이지일때 활성
+				  {%>
+				    <li class="active">
+				    	<a href="index.jsp?main=plan/allplanlist.jsp?currentPage=<%=pp %>"><%=pp %></a>
+				    </li>
+				  <%}else{%>
+				    <li>	
+				      	<a href="index.jsp?main=plan/allplanlist.jsp?currentPage=<%=pp %>"><%=pp %></a>
+				    </li>
+				  <%}
+				}
+				//다음
+				if(endPage<totalPage)
+				{%>
+				  <li>
+				  	<a href="index.jsp?main=plan/allplanlist.jsp?currentPage=<%=endPage+1 %>">다음</a>
+				  </li>
+				<%}
+				
+			%>
+			</ul>		
+		</div>
+		<script type="text/javascript">
+		var selectedp = [[${selectedp}]]; 
+		if(selectedp == rec){
+		    $('#rec').attr('selected','selected');
+		} else if(selectedp == jo){
+		    $('#jo').attr('selected','selected');
+		} else{
+		    $('#chu').attr('selected','selected');
+		}
+		</script>
+	</div>
+</body>
+</html>
