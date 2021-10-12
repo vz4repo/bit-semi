@@ -18,14 +18,29 @@
     String userPassword = request.getParameter("userPassword");
     // String isSaved = request.getParameter("isSaved");
     UserDAO userDAO = new UserDAO();
+//    HttpSession session = request.getSession();
 
+    // 세션 체크
+    if(session.getAttribute("userSessionID") != null){
+        userID = (String)session.getAttribute("userSessionID");
+        System.out.println(userID + ":session check");
+    }
+    // 세션에 ID가 담겼으면 로그인 불가
+    if(userID != null){
+        System.out.println(userID + (":session not null"));
+        PrintWriter script = response.getWriter();
+        script.println("<script>");
+        script.println("alert("+ userID +"', 로그인 중')");
+        script.println("location.href = '../index.jsp'");
+        script.println("</script>");
+    }
 
     int result = userDAO.login(userID, userPassword);
     if (result == 1) {
-        session.setAttribute("userID", userID);
+        session.setAttribute("userSessionID", userID);  // 세션ID 부여
         PrintWriter script = response.getWriter();
         script.println("<script>");
-        script.println("alert('로그인 성공')");
+        script.println("alert("+ userID+"', 로그인 성공')");
         script.println("location.href = '../index.jsp'");
         script.println("</script>");
     } else if (result == 0) {
