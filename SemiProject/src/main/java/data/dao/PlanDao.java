@@ -74,7 +74,7 @@ public class PlanDao {
       pstmt.setInt(1, start);
       pstmt.setInt(2, perpage);
       rs = pstmt.executeQuery();
-      System.out.println("최신순 sql 실행");
+
       while (rs.next()) {
         PlanDto dto = new PlanDto();
         dto.setNum(rs.getString("num"));
@@ -109,7 +109,7 @@ public class PlanDao {
       pstmt.setInt(1, start);
       pstmt.setInt(2, perpage);
       rs = pstmt.executeQuery();
-      System.out.println("추천순 sql 실행");
+
 
       while (rs.next()) {
         PlanDto dto = new PlanDto();
@@ -144,7 +144,6 @@ public class PlanDao {
       pstmt.setInt(1, start);
       pstmt.setInt(2, perpage);
       rs = pstmt.executeQuery();
-      System.out.println("좋아요 sql 실행");
 
       while (rs.next()) {
         PlanDto dto = new PlanDto();
@@ -165,5 +164,8 @@ public class PlanDao {
     }
     return list;
   }
+
+
+
 }
 

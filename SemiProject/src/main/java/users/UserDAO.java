@@ -6,12 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
-import connection.DBConnect;
 import connection.DBConnectAWS;
 
 public class UserDAO {
 
-  DBConnect dbConnect = new DBConnect();
+  DBConnectAWS dbConnect = new DBConnectAWS();
 
   private Connection con;
   private ResultSet rs;

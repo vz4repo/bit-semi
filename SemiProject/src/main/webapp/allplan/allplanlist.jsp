@@ -23,20 +23,24 @@
 	}
 	
 </style>
-<script type="text/javascript">
+ <script type="text/javascript">
 $(function () {
 	$("select.selpln").change(function () {
-	    var s=$(this).val();
+	    //var sel=$(".selpln option:selected").val();
+		var s=$(this).val();
 	   	//alert(s);
 		if(s=="rec"){
 			$(".tb").hide();
-			$("#t1").show();	
+			$("#t1").show();
+			
 		  }else if(s=="chu"){
 			 $(".tb").hide();
 			 $("#t2").show();
+			 
 		}else if(s=="jo"){
 			 $(".tb").hide();
 			 $("#t3").show();
+			
 		}
 		});
 	$(document).ready(function () {
@@ -45,6 +49,7 @@ $(function () {
 		});
 	
 	});
+
 
     
 </script>
@@ -58,6 +63,8 @@ $(function () {
 	int currentPage;//현재 페이지 번호
 	int perBlock=3;//몇개의 페이지번호씩 표현할지
 	int start;//각 페이지에서 불러올 db의 시작번호
+	int jo;
+	int chu;
 	int startPage;//각 블럭에 표시할 시작페이지
 	int endPage;//각 블럭에 표시할 마지막페이지
 	
@@ -68,6 +75,8 @@ $(function () {
 	  currentPage=1;
 	else
 	  currentPage=Integer.parseInt(request.getParameter("currentPage"));
+	
+	
 	//총 페이지 갯수 구하기
 	totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);
 	//각 블럭 시작페이지
@@ -95,6 +104,18 @@ $(function () {
 	  	location.href="index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=currentPage-1%>";
 	  </script>
 	<%}
+	if(list2.size()==0 && totalCount>0)
+	{%>
+	  <script type="text/javascript">
+	  	location.href="index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=currentPage-1%>";
+	  </script>
+	<%}
+	if(list3.size()==0 && totalCount>0)
+	{%>
+	  <script type="text/javascript">
+	  	location.href="index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=currentPage-1%>";
+	  </script>
+	<%}
 	//각 페이지에 출력할 시작번호
 	int no=totalCount-(currentPage-1)*perPage;
 %>
@@ -110,7 +131,6 @@ $(function () {
 	<option value="jo">좋아요순</option>
 	<option value="chu">추천순</option>
 </select>
-
 
 <!-- 모든계획 나열표 -->
 <!-- 시간순 나열 -->
@@ -190,7 +210,7 @@ style="display:none;  width:1100px; height:740px; border: 10px solid black; marg
 		  if(pp==currentPage)//현재페이지일때 활성
 		  {%>
 		    <li class="active">
-		    	<a href="index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=pp %>"><%=pp %></a>
+		    	<a href="index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=pp%>"><%=pp %></a>
 		    </li>
 		  <%}else{%>
 		    <li>	
@@ -209,16 +229,5 @@ style="display:none;  width:1100px; height:740px; border: 10px solid black; marg
 	%>
 	</ul>		
 </div>
-<script type="text/javascript">
-/*var selectedp = [[${selectedp}]]; 
-if(selectedp == rec){
-    $('#rec').attr('selected','selected');
-} else if(selectedp == jo){
-    $('#jo').attr('selected','selected');
-} else{
-    $('#chu').attr('selected','selected');
-}
-*/
-</script>
 </body>
 </html>
