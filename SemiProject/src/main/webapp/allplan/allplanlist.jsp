@@ -1,14 +1,14 @@
-<%@page import="java.util.List"%>
-<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="data.dto.PlanDto"%>
 <%@page import="data.dao.PlanDao"%>
+<%@page import="java.util.List"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>GOING</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style type="text/css">
 	.tt{
@@ -21,7 +21,7 @@
 		margin:50px 55px 30px;
 	    background-position:center;
 	}
-	
+
 </style>
  <script type="text/javascript">
 $(function () {
@@ -32,29 +32,31 @@ $(function () {
 		if(s=="rec"){
 			$(".tb").hide();
 			$("#t1").show();
-			
+
 		  }else if(s=="chu"){
 			 $(".tb").hide();
 			 $("#t2").show();
-			 
+
 		}else if(s=="jo"){
 			 $(".tb").hide();
 			 $("#t3").show();
-			
+
 		}
 		});
 	$(document).ready(function () {
 		  selbox = $("select.selpln").attr("data-type");
 		  $("select.selpln option[value='" + selbox + "']").attr("selected", "selected");
 		});
-	
+
 	});
 
 
-    
+
 </script>
 </head>
 <%
+	String userID = (String)session.getAttribute("userSessionID");
+
 	PlanDao dao=new PlanDao();
 	//페이징
 	int perPage=9;//한페이지에 보여질 글의 개수
@@ -75,8 +77,8 @@ $(function () {
 	  currentPage=1;
 	else
 	  currentPage=Integer.parseInt(request.getParameter("currentPage"));
-	
-	
+
+
 	//총 페이지 갯수 구하기
 	totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);
 	//각 블럭 시작페이지
@@ -138,9 +140,9 @@ $(function () {
 style="width:1250px; height:740px; border: 10px solid black; margin-top: 80px;margin-left: 200px; max-width: 1100px;">
 	<table>
 	  <tr >
-			<% 
+			<%
 			for(PlanDto dto:list)
-			{	
+			{
 			%>
 			<td class="tt">
 			번호.<%=no--%>번<br>작성자:<%=dto.getName() %><br>내용:<%=dto.getContent() %><br>
@@ -149,7 +151,7 @@ style="width:1250px; height:740px; border: 10px solid black; margin-top: 80px;ma
 		   <%
 	       }
 	       %>
-	  </tr>	             
+	  </tr>
 	</table>
 </div>
 
@@ -158,9 +160,9 @@ style="width:1250px; height:740px; border: 10px solid black; margin-top: 80px;ma
 style="display:none;  width:1100px; height:740px; border: 10px solid black; margin-top: 80px;margin-left: 200px; max-width: 1100px;">
 	<table>
 	  <tr >
-			<% 
+			<%
 			for(PlanDto dto:list2)
-			{	
+			{
 			%>
 			<td class="tt">
 			번호.<%=dto.getNum()%>번<br>작성자:<%=dto.getName() %><br>내용:<%=dto.getContent() %><br>
@@ -169,7 +171,7 @@ style="display:none;  width:1100px; height:740px; border: 10px solid black; marg
 		   <%
 	       }
 	       %>
-	  </tr>	             
+	  </tr>
 	</table>
 </div>
 
@@ -178,9 +180,9 @@ style="display:none;  width:1100px; height:740px; border: 10px solid black; marg
 style="display:none;  width:1100px; height:740px; border: 10px solid black; margin-top: 80px;margin-left: 200px; max-width: 1100px;">
 	<table>
 	  <tr >
-			<% 
+			<%
 			for(PlanDto dto:list3)
-			{	
+			{
 			%>
 			<td class="tt">
 			번호.<%=dto.getNum()%>번<br>작성자:<%=dto.getName() %><br>내용:<%=dto.getContent() %><br>
@@ -189,7 +191,7 @@ style="display:none;  width:1100px; height:740px; border: 10px solid black; marg
 		   <%
 	       }
 	       %>
-	  </tr>	             
+	  </tr>
 	</table>
 </div>
 <!-- 페이징 -->
@@ -213,7 +215,7 @@ style="display:none;  width:1100px; height:740px; border: 10px solid black; marg
 		    	<a href="index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=pp%>"><%=pp %></a>
 		    </li>
 		  <%}else{%>
-		    <li>	
+		    <li>
 		      	<a href="index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=pp %>"><%=pp %></a>
 		    </li>
 		  <%}
@@ -225,9 +227,19 @@ style="display:none;  width:1100px; height:740px; border: 10px solid black; marg
 		  	<a href="index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=endPage+1 %>">다음</a>
 		  </li>
 		<%}
-		
+
 	%>
-	</ul>		
+	</ul>
 </div>
+<script type="text/javascript">
+	var selectedp = [[${selectedp}]];
+	if(selectedp == rec){
+		$('#rec').attr('selected','selected');
+	} else if(selectedp == jo){
+		$('#jo').attr('selected','selected');
+	} else{
+		$('#chu').attr('selected','selected');
+	}
+</script>
 </body>
 </html>

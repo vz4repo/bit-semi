@@ -7,6 +7,9 @@
 
 	<!--main-->
 	<div id="main_wrap">
+		<%-- <div id="main_img">
+			<img alt="" src="<%=root%>/image/main.jpg">
+		</div> --%>
 		<div id="main_text">
 			<p>여러분들이 떠나고 싶은</p>
 			<p>여행지로 계획 세워서 떠나세요!</p>

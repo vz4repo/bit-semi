@@ -4,6 +4,21 @@
 <%
     String root = request.getContextPath();
 %>
+<script type="text/javascript">
+	/* 상단 메뉴바 스크롤시 이벤트! */
+	$(document).ready(function(){
+		$(window).scroll(function(){
+			var scroll = $(window).scrollTop();
+			if (scroll > 1) {
+				$("header").css("background" , "#4c6ef5");
+			}
+			else{
+				$("header").css("background" , "");
+			}
+		});
+	});
+</script>
+
 
 <header>
     <div id="wrapper">
@@ -15,6 +30,7 @@
             <ul class="clearfix">
                 <li><a href="index.jsp?main=allplan/allplanlist.jsp">All Plan</a></li>
                 <li><a href="index.jsp?main=allplan/newplanform.jsp">New Plan</a></li>
+                <li><a href="index.jsp?main=newplan_test/newplanadd.jsp">New Plan(Test)</a></li>
                 <li><a href="index.jsp?main=notice/noticeview.jsp">Review</a></li>
                 <li><a href="index.jsp?main=notice/noticeboard.jsp">Notice</a></li>
             </ul>

@@ -49,6 +49,8 @@
 </head>
 <%
 	String root=request.getContextPath();
+	/* 로그인 값 가져오기 */
+	String loginok=(String)session.getAttribute("loginok");
 %>
 <body onload="initTmap()">
 	<!-- sub -->
@@ -111,23 +113,31 @@
 		<!-- 별점, 목록 버튼 -->
 		
 		<!-- 댓글폼 -->
-		<div class="v_comment">
-			<table class="com_all">
-				<!-- <tr>
-					<td>
-						<input type="text" id="v_com_name" placeholder="이름을 입력해주세요.">
-					</td>
-				</tr> -->
-				<tr>
-					<td>
-						<textarea id="com_box" name="content" required="required" placeholder="댓글을 입력해주세요."></textarea>
-					</td>
-					<td>
-						<button type="submit" id="v_com_check">확인</button>
-					</td>
-				</tr>
-			</table>
-		</div>
+		<%
+		if(loginok!=null){ //로그인중일때만 입력폼이 보이도록 함!
+		%>
+		<form action="allplan/commentaction.jsp" method="post" enctype="multipart/form-data">
+			<div class="v_comment">
+				<table class="com_all">
+					<!-- <tr>
+						<td>
+							<input type="text" id="v_com_name" placeholder="이름을 입력해주세요.">
+						</td>
+					</tr> -->
+					<tr>
+						<td>
+							<textarea id="com_box" name="content" required="required" placeholder="댓글을 입력해주세요."></textarea>
+						</td>
+						<td>
+							<button type="submit" id="v_com_check">확인</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</form>
+		<%}else{ %>
+			<p class="loginok_comment_text">로그인 후 댓글을 입력하실 수 있습니다.</p>
+		<% }%>
 		<!-- 댓글폼 -->
 		
 		<!-- 댓글 리스트 -->
