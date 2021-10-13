@@ -2,6 +2,6 @@
 <%
     String userID = (String) session.getAttribute("userSessionID");
 %>
-<div class="user_info">
-    <h2><span id="info"><%=userID%></span> 님의 info.jsp 입니다.</h2>
+<div class="user_info" style="position: absolute">
+    <h1><span id="info"><%=userID%></span> 님의 info 입니다.</h1>
 </div>
