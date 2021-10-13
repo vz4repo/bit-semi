@@ -4,6 +4,7 @@
 <%
     String root = request.getContextPath();
 %>
+
 <header>
     <div id="wrapper">
         <div id="logo">
@@ -12,13 +13,12 @@
 
         <nav class="clearfix">
             <ul class="clearfix">
-                <li><a href="index.jsp?main=allplan/allplanview.jsp">All Plan</a></li>
-                <li><a href="#">New Plan</a></li>
-                <li><a href="#">Review</a></li>
-                <li><a href="#">Notice</a></li>
+                <li><a href="index.jsp?main=allplan/allplanlist.jsp">All Plan</a></li>
+                <li><a href="index.jsp?main=allplan/newplanform.jsp">New Plan</a></li>
+                <li><a href="index.jsp?main=notice/noticeview.jsp">Review</a></li>
+                <li><a href="index.jsp?main=notice/noticeboard.jsp">Notice</a></li>
             </ul>
         </nav>
-
         <div id="member">
             <%
                 // 세션에 ID가 있을 경우

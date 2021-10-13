@@ -186,7 +186,7 @@
 	transition: opacity .3s ease, transform .3s ease, left 0s .3s;
 	transition: opacity .3s ease, transform .3s ease, left 0s .3s,
 		-webkit-transform .3s ease;
-	z-index: 100
+	z-index: 100;
 }
 
 .datepicker.-from-top- {
@@ -227,7 +227,7 @@
 	right: auto;
 	opacity: 1;
 	-webkit-transform: none;
-	transform: none
+	transform: none;
 }
 
 .datepicker--content {

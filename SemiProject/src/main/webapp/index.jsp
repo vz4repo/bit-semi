@@ -21,15 +21,15 @@ System.out.println("> index.jsp");
 <body>
 	<!-- 헤더 (로고,메뉴들까지 불러옴) -->
 	<div>
-		<%@ include file="layout/header.jsp"%>
+		<jsp:include page="layout/header.jsp"/>
 	</div>
 	<!-- 메인 레이아웃 불러옴 -->
-	<div class="layout main">		
+	<div class="layout main">
 		<jsp:include page="<%=mainpage %>"/>
 	</div>
 	<!-- 푸터 -->
 	<div>
-		<%@ include file="layout/footer.jsp"%>
+		<jsp:include page="layout/footer.jsp"/>
 	</div>
 </body>
 </html>
