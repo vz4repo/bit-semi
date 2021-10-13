@@ -15,18 +15,18 @@ public class  DBConnect {
   //  private static final String DB_USER = "admin";
   //  private static final String DB_PWD = "1234qwer";
 
-  // MARIA_BIT_AWS: 클라우드에서 쓰일 설정
-  private static final String DB_DRIVER = "org.mariadb.jdbc.Driver";
-  private static final String DB_URL =
-      "jdbc:mariadb://maria-bit.cy2ifmxzl5mi.ap-northeast-2.rds.amazonaws.com:3306";
-  private static final String DB_USER = "guest";
-  private static final String DB_PWD = "1234qwer";
+//  // MARIA_BIT_AWS: 클라우드에서 쓰일 설정
+//  private static final String DB_DRIVER = "org.mariadb.jdbc.Driver";
+//  private static final String DB_URL =
+//      "jdbc:mariadb://maria-bit.cy2ifmxzl5mi.ap-northeast-2.rds.amazonaws.com:3306";
+//  private static final String DB_USER = "guest";
+//  private static final String DB_PWD = "1234qwer";
 
-  // MYSQL_LOCAL: 로컬에서 쓰일 설정
-  //  private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
-  //  private static final String DB_URL = "jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul";
-  //  private static final String DB_USER = "root";
-  //  private static final String DB_PWD = "1234";
+   // MYSQL_LOCAL: 로컬에서 쓰일 설정
+    private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul";
+    private static final String DB_USER = "root";
+    private static final String DB_PWD = "1234";
 
   // DBConnect test
   public static void main(String[] args) {

@@ -1,19 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: rk
-  Date: 2021/10/12
-  Time: 8:28 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>user info</title>
-</head>
-<body>
-<script>
-    document.getElementById("info").innerText=sessionStorage.getItem("userSessionID");
-</script>
-<h2><span id="info"></span>user info 입니다.</h2>
-</body>
-</html>
+<%
+String userID = (String)session.getAttribute("userSessionID");
+%>
+<div class="user_info" style="position: absolute">
+<h1><span id="info"><%=userID%></span> ,user info 입니다.</h1>
+</div>
