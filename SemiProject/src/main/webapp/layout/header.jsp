@@ -30,8 +30,8 @@
                 // 세션에 ID가 없을 경우
             } else {
             %>
-            <button onclick="location='users/login.jsp'">Login</button>
-            <button onclick="location='users/join.jsp'">Join</button>
+            <button onclick="location='index.jsp?main=users/login.jsp'">Login</button>
+            <button onclick="location='index.jsp?main=users/join.jsp'">Join</button>
             <%
 
                 }

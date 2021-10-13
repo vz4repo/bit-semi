@@ -27,17 +27,26 @@
     <!-- sub -->
 
     <!-- get session attr-->
+    <%
+        if (session.getAttribute("userSessionID") == null) {
+
+        }
+    %>
+
     <div class="login_containers">
-        <form method="post" action="./login_action.jsp">
+        <form method="post" action="${pageContext.request.contextPath}/users/login_action.jsp">
             <div class="loginID loginValue">
                 <label class="login_form_title">아이디</label>
-                <input type="text" class="loginInput" placeholder="아이디를 입력해주세요." name="userID"
-                       maxlength="20">
+                <label>
+                    <input type="text" class="loginInput" placeholder="아이디를 입력해주세요." name="userID" maxlength="20">
+                </label>
             </div>
             <div class="loginPassword loginValue">
                 <label class="login_form_title">비밀번호</label>
-                <input type="password" class="loginInput" placeholder="비밀번호를 입력해주세요."
-                       name="userPassword" maxlength="40">
+                <label>
+                    <input type="password" class="loginInput" placeholder="비밀번호를 입력해주세요."
+                           name="userPassword" maxlength="40">
+                </label>
             </div>
             <input type="submit" class="btn_login" value="로그인">
             <div class="login_form_text">

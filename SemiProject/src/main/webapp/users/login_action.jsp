@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="users.UserDAO" %>
-<%@ page import="users.UserDTO" %>
 <%@ page import="java.io.PrintWriter" %>
 <%
     request.setCharacterEncoding("UTF-8");
@@ -13,36 +12,37 @@
 </head>
 <body>
 <%
-    System.out.println("REDIRECT:login_action.jsp");
+    // login_action.jsp 시작
+    System.out.println("> login_action.jsp");
+
     String userID = request.getParameter("userID");
     String userPassword = request.getParameter("userPassword");
     // String isSaved = request.getParameter("isSaved");
     UserDAO userDAO = new UserDAO();
-//    HttpSession session = request.getSession();
 
-    // 세션 체크
-    if(session.getAttribute("userSessionID") != null){
-        userID = (String)session.getAttribute("userSessionID");
-        System.out.println(userID + ":session check");
-    }
-    // 세션에 ID가 담겼으면 로그인 불가
-    if(userID != null){
+        // 세션 체크
+    if (session.getAttribute("userSessionID") != null) {
         System.out.println(userID + (":session not null"));
         PrintWriter script = response.getWriter();
         script.println("<script>");
-        script.println("alert("+ userID +"', 로그인 중')");
+        script.println("alert('..로그인 중')");
         script.println("location.href = '../index.jsp'");
         script.println("</script>");
+        userID = (String) session.getAttribute("userSessionID");
     }
 
     int result = userDAO.login(userID, userPassword);
     if (result == 1) {
-        session.setAttribute("userSessionID", userID);  // 세션ID 부여
+        //session.setAttribute("userSessionName", userName);  // 세션ID 부여
         PrintWriter script = response.getWriter();
         script.println("<script>");
-        script.println("alert("+ userID+"', 로그인 성공')");
-        script.println("location.href = '../index.jsp'");
+        script.println("alert('로그인 성공')");
         script.println("</script>");
+        System.out.println("1:userID: "+userID);
+        session.setAttribute("userLoginStatus", true);  // 로그인 상태 부여
+        session.setAttribute("userSessionID", userID);  // 세션ID 부여
+        System.out.println(session.getAttribute("userSessionID" + ":"+"userLoginStatus"));
+        response.sendRedirect("../index.jsp");
     } else if (result == 0) {
         PrintWriter script = response.getWriter();
         script.println("<script>");
