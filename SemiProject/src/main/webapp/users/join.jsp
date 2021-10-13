@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+         	<%@ page import="java.io.PrintWriter" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,20 @@
 
     <title>GOING</title>
 </head>
-
+<%
+    String root=request.getContextPath();
+//login.jsp 시작
+System.out.println("> join.jsp");
+// 세션 체크
+if (session.getAttribute("userSessionID") != null) {
+  System.out.println("session not null");
+  PrintWriter script = response.getWriter();
+  script.println("<script>");
+  script.println("alert('이미 로그인 중')");
+  script.println("history.back()");
+  script.println("</script>");
+}
+%>
 <body>
 <div class="container">
     <!-- sub -->
@@ -26,7 +40,7 @@
 
     <div class="join_container">
         <p id="join_info">회원 정보</p>
-        <form method="post" action="./join_action.jsp">
+        <form method="post" action="${pageContext.request.contextPath}/users/join_action.jsp">
             <div class="joinName joinValue">
                 <label class="id_form_title"><b class="point">*</b>이름</label>
                 <input type="text" class="joinInput" id="name_input" placeholder="이름을 입력해주세요."
@@ -91,6 +105,6 @@
 <script defer src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script defer src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script defer src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a540d38cece314fa1d5f094089df4bd&libraries=services"></script>
-<script defer src="../js/join_script.js"></script>
+<script defer src="/js/join_script.js"></script>
 </body>
 </html>

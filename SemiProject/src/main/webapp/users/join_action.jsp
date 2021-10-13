@@ -38,11 +38,10 @@ request.setCharacterEncoding("UTF-8");
 
 	System.out.println(userID +":"+ userPassword +":"+ userName +":"+ userPhone +":"+ userMail +":"+ userAddr +":"+ userGender +":"+ userDate);
 	// -1: 서버 오류 / 0: 이미존재하는 아이디 / 1: 성공
-	if (userID == null || userPassword == null || userName == null || userGender == null
-	    || userDate == null) {
+	if (userID == null || userPassword == null || userName == null ) {
 	  PrintWriter script = response.getWriter();
 	  script.println("<script>");
-	  script.println("alert('빈칸을 확인해 주세요')");
+	  script.println("alert('빈칸(ID,PW,NAME)을 확인해 주세요')");
 	  script.println("history.back()");
 	  script.println("</script>");
 	} else {

@@ -22,10 +22,10 @@
         <div id="member">
             <%
                 // 세션에 ID가 있을 경우
-                if (session.getAttribute("uesrSessionID") != null) {
+                if (session.getAttribute("userSessionID") != null) {
             %>
-            <button onclick="location='users/info.jsp'">info</button>
-            <button onclick="location='users/logout_action.jsp.jsp'">Log Out</button>
+            <button onclick="location='index.jsp?main=users/info.jsp'">info</button>
+            <button onclick="location='index.jsp?main=users/logout_action.jsp'">Log Out</button>
             <%
                 // 세션에 ID가 없을 경우
             } else {
@@ -33,7 +33,6 @@
             <button onclick="location='index.jsp?main=users/login.jsp'">Login</button>
             <button onclick="location='index.jsp?main=users/join.jsp'">Join</button>
             <%
-
                 }
             %>
         </div>

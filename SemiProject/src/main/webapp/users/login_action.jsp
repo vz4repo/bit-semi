@@ -10,6 +10,9 @@
     <meta charset="UTF-8">
     <title>login action</title>
 </head>
+<%
+    String root=request.getContextPath();
+%>
 <body>
 <%
     // login_action.jsp 시작
@@ -29,6 +32,7 @@
         script.println("location.href = '../index.jsp'");
         script.println("</script>");
         userID = (String) session.getAttribute("userSessionID");
+        return;
     }
 
     int result = userDAO.login(userID, userPassword);
@@ -43,11 +47,12 @@
         session.setAttribute("userSessionID", userID);  // 세션ID 부여
         System.out.println(session.getAttribute("userSessionID" + ":"+"userLoginStatus"));
         response.sendRedirect("../index.jsp");
+        return;
     } else if (result == 0) {
         PrintWriter script = response.getWriter();
         script.println("<script>");
         script.println("alert('비밀번호 오류')");
-        script.println("location.href = './login.jsp'");
+        script.println("history.back()");
         script.println("</script>");
     } else if (result == -1) {
         PrintWriter script = response.getWriter();
@@ -59,7 +64,7 @@
         PrintWriter script = response.getWriter();
         script.println("<script>");
         script.println("alert('DB 오류')");
-        script.println("location.href = './login.jsp'");
+        script.println("history.back()");
         script.println("</script>");
     }
 %>
