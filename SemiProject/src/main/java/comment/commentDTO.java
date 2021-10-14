@@ -1,10 +1,21 @@
 package comment;
 
+import java.sql.Timestamp;
+
 public class commentDTO {
+  private String idx;
   private String num;
-  private String name;
+  private String userId;
   private String contents;
-  private String writeday;
+  private Timestamp writeday;
+
+  public String getIdx() {
+    return idx;
+  }
+
+  public void setIdx(String idx) {
+    this.idx = idx;
+  }
 
   public String getNum() {
     return num;
@@ -14,12 +25,12 @@ public class commentDTO {
     this.num = num;
   }
 
-  public String getName() {
-    return name;
+  public String getUserId() {
+    return userId;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setUserId(String userId) {
+    this.userId = userId;
   }
 
   public String getContents() {
@@ -30,12 +41,14 @@ public class commentDTO {
     this.contents = contents;
   }
 
-  public String getWriteday() {
+  public Timestamp getWriteday() {
     return writeday;
   }
 
-  public void setWriteday(String writeday) {
+  public void setWriteday(Timestamp writeday) {
     this.writeday = writeday;
   }
+
+
 
 }

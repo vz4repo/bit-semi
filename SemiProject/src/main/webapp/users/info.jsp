@@ -4,7 +4,7 @@
     //login.jsp 시작
     System.out.println("> info.jsp");
 
-    String userID = (String) session.getAttribute("userSessionID");
+    String userID = (String) session.getAttribute("myid");
 
     // 빈 세션 체크
     if (userID == null) {

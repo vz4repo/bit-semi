@@ -24,8 +24,8 @@ request.setCharacterEncoding("UTF-8");
 	String userDate = request.getParameter("userDate");
 
 		// 세션 체크
-		if(session.getAttribute("userSessionID") != null){
-			userID = (String)session.getAttribute("userSessionID");
+		if(session.getAttribute("myid") != null){
+			userID = (String)session.getAttribute("myid");
 		}
 		// 세션에 ID가 담겼으면 로그인 불가
 		if(userID != null){

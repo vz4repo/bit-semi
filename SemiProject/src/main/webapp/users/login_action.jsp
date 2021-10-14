@@ -24,14 +24,14 @@
     UserDAO userDAO = new UserDAO();
 
         // 세션 체크
-    if (session.getAttribute("userSessionID") != null) {
+    if (session.getAttribute("myid") != null) {
         System.out.println(userID + (":session not null"));
         PrintWriter script = response.getWriter();
         script.println("<script>");
         script.println("alert('..로그인 중')");
         script.println("location.href = '../index.jsp'");
         script.println("</script>");
-        userID = (String) session.getAttribute("userSessionID");
+        userID = (String) session.getAttribute("myid");
         return;
     }
 
@@ -43,9 +43,9 @@
         script.println("alert('로그인 성공')");
         script.println("</script>");
         System.out.println("1:userID: "+userID);
-        session.setAttribute("userLoginStatus", true);  // 로그인 상태 부여
-        session.setAttribute("userSessionID", userID);  // 세션ID 부여
-        System.out.println(session.getAttribute("userSessionID" + ":"+"userLoginStatus"));
+        session.setAttribute("loginok", true);  // 로그인 상태 부여
+        session.setAttribute("myid", userID);  // 세션ID 부여
+        System.out.println(session.getAttribute("myid" + ":"+"loginok"));
         response.sendRedirect("../index.jsp");
         return;
     } else if (result == 0) {

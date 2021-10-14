@@ -35,7 +35,7 @@ String root = request.getContextPath();
 		// login.jsp 시작
 	    System.out.println("> login.jsp");
 		// 세션 체크
-		if (session.getAttribute("userSessionID") != null) {
+		if (session.getAttribute("myid") != null) {
 		  System.out.println("session not null");
 		  PrintWriter script = response.getWriter();
 		  script.println("<script>");

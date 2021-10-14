@@ -16,7 +16,7 @@ System.out.println("> index.jsp");
 	if(request.getParameter("main")!=null){
 		mainpage=request.getParameter("main");
 }
-	System.out.println("sessionID: " + session.getAttribute("userSessionID"));
+	System.out.println("myid: " + session.getAttribute("myid"));
 %>
 <body>
 	<!-- 헤더 (로고,메뉴들까지 불러옴) -->
