@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a540d38cece314fa1d5f094089df4bd&libraries=services"></script>
-    <script src="../js/join_script.js"></script>
+    <script src="js/join_script.js"></script>
     <title>GOING</title>
 </head>
 <%
@@ -63,6 +63,7 @@
 	     	 <label class="id_form_title"><b class="point">*</b>주소</label>
 	         <input type="text" id="default_address" class="joinInput" placeholder="주소를 입력해주세요."
 	          name="addr" title="주소" maxlength="120">
+	          <input type="button" onclick="addr_execDaumPostcode()" class="joinInput_addr" value="주소 검색">
 	      </div>
 	      <div class="joinGender joinValue">
 	      	<label class="id_form_title"><b class="point">*</b>성별</label>

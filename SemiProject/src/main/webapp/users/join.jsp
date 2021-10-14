@@ -15,13 +15,13 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a540d38cece314fa1d5f094089df4bd&libraries=services"></script>
-    <script src="../js/join_script.js"></script>
+    <script src="js/join_script.js"></script>
     <title>GOING</title>
 </head>
 <%
     String root=request.getContextPath();
 %>
-<body>
+<body>ㅋ
 	<div class="container">
 	<!-- sub -->
 	<div class="margin_wrap">

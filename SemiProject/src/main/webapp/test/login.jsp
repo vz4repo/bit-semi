@@ -12,11 +12,16 @@
 <!-- script 선언 -->
 <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="../js/script.js"></script>
+<script src="js/script.js"></script>
 <title>login.jsp</title>
 </head>
 <%
+	//세션값 얻기
+	String saveok=(String)session.getAttribute("saveok");
 	String myid="";
+	if(saveok!=null){
+		myid=(String)session.getAttribute("myid");
+	}
 %>
 <body>
 	<div class="container">

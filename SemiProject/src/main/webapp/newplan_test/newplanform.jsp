@@ -8,7 +8,7 @@
 </head>
 <%
 	String loginok=(String)session.getAttribute("loginok");
-	String userId=(String)session.getAttribute("sessionId");
+	String myid=(String)session.getAttribute("myid");
 %>
 <body>
 	<%
@@ -17,6 +17,10 @@
 	<form action="newplan_test/newplanadd.jsp" method="post" class="form-inline" name="planfrm">
 		<table class="table table-bordered" style="width:500px; margin-top: 300px;">
 			<caption><b>새 여행 계획</b></caption>
+			<tr>
+				<th width="100" bgcolor="#aaa">작성자</th>
+				<td><%=myid%></td>
+			</tr>
 			<tr>
 				<th width="100" bgcolor="#aaa">제목</th>
 				<td>

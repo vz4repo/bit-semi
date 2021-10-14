@@ -33,9 +33,9 @@ $(document).ready(function(){
 			<nav class="clearfix">
 				<ul class="clearfix">
 					<li><a href="index.jsp?main=allplan/allplanlist.jsp">All Plan</a></li>
-					<li><a href="index.jsp?main=newplan_test/newplanadd.jsp">New Plan</a></li>
+					<li><a href="index.jsp?main=newPlan/NewPlanCal.jsp">New Plan</a></li>
 					<li><a href="#">Review</a></li>
-					<li><a href="#">Notice</a></li>
+					<li><a href="index.jsp?main=notice/noticeview.jsp">Notice</a></li>
 				</ul>
 			</nav>
 			

@@ -61,24 +61,24 @@ $(function () {
 	//각 페이지에서 불러올 시작번호
 	start=(currentPage-1)*perPage;
 	//각 페이지에서 필요한 게시글 가져오기
-	
 	//시간순 나열
 	List<PlanDto> list=dao.getPlan(start, perPage);
 	//추천순 나열
-	List<PlanDto> list2=dao.getPlan2(start, perPage);
+	/* List<PlanDto> list2=dao.getPlan2(start, perPage); */
 	//좋아요순 나열
-	List<PlanDto> list3=dao.getPlan3(start, perPage);
+	/* List<PlanDto> list3=dao.getPlan3(start, perPage); */
+	
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	
 	//현재 페이지의 list가 더이상 없을경우 이전페이지로 이동
-	/* if(list.size()==0 && totalCount>0)
-	{ */
+	if(list.size()==0 && totalCount>0)
+	{ 
 	%>
-	 <%--  <script type="text/javascript">
+	<script type="text/javascript">
 	  	location.href="index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=currentPage-1%>";
-	  </script> --%>
+	  </script>
 	<%
-	/* } */
+	} 
 	//각 페이지에 출력할 시작번호
 	int no=totalCount-(currentPage-1)*perPage;
 %>
@@ -93,13 +93,17 @@ $(function () {
 	
 	<!-- view -->
 	<div class="container">
-		<!-- 셀렉트 박스 -->
-		<select name="sel" class="selpln">
-			<option value="rec" id="rec">최신순</option>
-			<option value="jo" id="jo">좋아요순</option>
-			<option value="chu" id="chu">추천순</option>
-		</select>
-	
+		<p id="all_plan_list_title">다양한 여행 계획을 참고해보세요!</p>
+		<div class="all_plan_list_container">
+			<!-- 게시글 수 -->
+			<p id="all_plan_list_cnt">총 <%=totalCount%>개</p>
+			<!-- 셀렉트 박스 -->
+			<select name="sel" class="selpln">
+				<option selected="selected" value="rec" id="rec">최신순</option>
+				<option value="jo" id="jo">좋아요순</option>
+				<option value="chu" id="chu">조회순</option>
+			</select>
+		</div>
 		<!-- 모든계획 나열표 -->
 		<!-- 시간순 나열 -->
 		<div id="t1" class="tb">
@@ -108,11 +112,11 @@ $(function () {
 				for(PlanDto dto:list){
 				%>
 				<li>
-					<a href="#">
+					<a href="index.jsp?main=allplan/allplanview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list">
 						<span class="list_box_1">
 							<h3><%=dto.getPlantitle()%></h3>
 							<p><%=dto.getPlanDate()%></p>
-							<p>작성자:<%=userId%></p>
+							<p>작성자:<%=dto.getUserId()%></p>
 						</span>
 					</a>
 				</li>
@@ -162,42 +166,38 @@ $(function () {
 		</div> --%>
 		
 		<!-- 페이징 -->
-		<div style="margin-left:340px; width:800px; text-align: center;">
-			<ul class="pagination">
-			<%
-				//이전
-				if(startPage>1)
-				{%>
-				  <li>
-				  	<a href="index.jsp?main=plan/allplanlist.jsp?currentPage=<%=startPage-1 %>">이전</a>
-				  </li>
-				<%}
-			%>
-			<%
-				for(int pp=startPage;pp<=endPage;pp++)
-				{
-				  if(pp==currentPage)//현재페이지일때 활성
-				  {%>
-				    <li class="active">
-				    	<a href="index.jsp?main=plan/allplanlist.jsp?currentPage=<%=pp %>"><%=pp %></a>
-				    </li>
-				  <%}else{%>
-				    <li>	
-				      	<a href="index.jsp?main=plan/allplanlist.jsp?currentPage=<%=pp %>"><%=pp %></a>
-				    </li>
-				  <%}
-				}
-				//다음
-				if(endPage<totalPage)
-				{%>
-				  <li>
-				  	<a href="index.jsp?main=plan/allplanlist.jsp?currentPage=<%=endPage+1 %>">다음</a>
-				  </li>
-				<%}
-				
-			%>
-			</ul>		
-		</div>
+		<div class="paging">
+		<%
+		//이전
+		if (startPage > 1) {
+		%>
+		<a
+			href="index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=startPage - 1%>">이전</a>
+		<%
+		}
+
+		for (int pp = startPage; pp <= endPage; pp++) {
+		if (pp == currentPage) {
+		%>
+		<a class="select"
+			href="index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=pp%>"><%=pp%></a>
+		<%
+		} else {
+		%>
+		<a href="index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=pp%>"><%=pp%></a>
+		<%
+		}
+		}
+
+		//다음
+		if (endPage < totalPage) {
+		%>
+		<a
+			href="index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=endPage + 1%>">다음</a>
+		<%
+		}
+		%>
+	</div>
 		<script type="text/javascript">
 		var selectedp = [[${selectedp}]]; 
 		if(selectedp == rec){
