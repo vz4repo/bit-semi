@@ -81,6 +81,4 @@ public class DbConnect {
     } catch (SQLException e) {
     }
   }
-
-
 }

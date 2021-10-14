@@ -11,7 +11,6 @@
 <%
 // index.jsp 시작
 System.out.println("> index.jsp");
-
 	String mainpage="layout/main.jsp";
 	if(request.getParameter("main")!=null){
 		mainpage=request.getParameter("main");

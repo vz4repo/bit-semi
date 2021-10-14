@@ -31,7 +31,7 @@
                 <li><a href="index.jsp?main=allplan/allplanlist.jsp">All Plan</a></li>
                 <li><a href="index.jsp?main=allplan/newplanform.jsp">New Plan</a></li>
                 <li><a href="index.jsp?main=newplan_test/newplanadd.jsp">New Plan(Test)</a></li>
-                <li><a href="index.jsp?main=notice/noticeview.jsp">Review</a></li>
+                <li><a href="index.jsp?main=review/reviewlist.jsp">Review</a></li>
                 <li><a href="index.jsp?main=notice/noticeboard.jsp">Notice</a></li>
             </ul>
         </nav>
