@@ -1,28 +1,32 @@
+
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>simpleMap</title>
-		<script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-		<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=발급받은 Appkey"></script>
-		<script type="text/javascript">
-			var map, marker;
-			var markerArr = [], labelArr = [];
-			
-			function initTmap() {
-				// 1. 지도 띄우기
-				map = new Tmapv2.Map("map_div", {
-					center : new Tmapv2.LatLng(37.570028, 126.986072),
-					width : "70%",
-					height : "400px",
-					zoom : 15,
-					zoomControl : true,
-					scrollwheel : true
-				});
-		
-				// 2. POI 통합 검색 API 요청
-				$("#btn_select").click(
-					function() {
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>simpleMap</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script
+	src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx27cfab8a671c49dea1ee85d2351dfef7"></script>
+<script type="text/javascript">
+
+var map, marker;
+var markerArr = [];
+function initTmap(){
+ 	// 1. 지도 띄우기
+	map = new Tmapv2.Map("map_div", {
+		center: new Tmapv2.LatLng(37.570028, 126.986072),
+		width : "70%",
+		height : "400px",
+		zoom : 15,
+		zoomControl : true,
+		scrollwheel : true
+	});
+	map.setOptions({ zoomControl: false }); // 줌컨트롤 표출 비활성화
+
+	// 2. POI 통합 검색 API 요청
+    $("#btn_select").keydown(
+					function(e) {
+                        if(e.keyCode==13){
 						var searchKeyword = $('#searchKeyword').val(); // 검색 키워드
 						$.ajax({
 							method : "GET", // 요청 방식
@@ -99,9 +103,9 @@
 									// 결과창에 나타날 검색 결과 html
 									innerHtml += "<li><div><img src='http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_" + k + ".png' style='vertical-align:middle;'/><span>"
 											+ name
-											+ "</span>  <button type='button' name='sendBtn' onClick='poiDetail("
+											+ "</span>  <button type='button' name='sendBtn' onClick='poiDetail("
 											+ id
-											+ ");'>상세보기</button></div></li>";
+											+ ");'>선택</button></div></li>";
 									
 									// 마커들을 담을 배열에 마커 저장
 									markerArr.push(marker);
@@ -120,76 +124,17 @@
 										+ "\n" + "error:" + error);
 							}
 						});
-					});
-			}
-		
-			// 4. POI 상세 정보 API
-			function poiDetail(poiId) {
-				console.log(poiId);
-		
-				$.ajax({
-					method : "GET", // 요청 방식
-					url : "https://apis.openapi.sk.com/tmap/pois/"
-							+ poiId // 상세보기를 누른 아이템의 POI ID
-							+ "?version=1&resCoordType=EPSG3857&format=json&callback=result&appKey="
-							+ "발급AppKey", // 발급받은 Appkey
-					async : false, // 동기 설정
-					success : function(response) {
-						console.log(response);
-			
-						// 응답받은 POI 정보
-						var detailInfo = response.poiDetailInfo;
-						var name = detailInfo.name;
-						var address = detailInfo.address;
-			
-						var noorLat = Number(detailInfo.frontLat);
-						var noorLon = Number(detailInfo.frontLon);
-			
-						var pointCng = new Tmapv2.Point(noorLon, noorLat);
-						var projectionCng = new Tmapv2.Projection.convertEPSG3857ToWGS84GEO(
-								pointCng);
-			
-						var lat = projectionCng._lat;
-						var lon = projectionCng._lng;
-			
-						var labelPosition = new Tmapv2.LatLng(lat, lon);
-			
-						// 상세보기 클릭 시 지도에 표출할 popup창
-						var content = "<div style=' border-radius:10px 10px 10px 10px;background-color:#2f4f4f; position: relative;"
-								+ "line-height: 15px; padding: 5 5px 2px 4; right:65px;'>"
-								+ "<div style='font-size: 11px; font-weight: bold ; line-height: 15px; color : white'>"
-								+ "name : "
-								+ name
-								+ "</br>"
-								+ "address : "
-								+ address + "</div>" + "</div>";
-					
-						var labelInfo = new Tmapv2.Label({
-							position : labelPosition,
-							content : content,
-							map : map
-						});
-						//popup 생성
-			
-						// popup들을 담을 배열에 팝업 저장
-						labelArr.push(labelInfo);
-					},
-					error : function(request, status, error) {
-						console.log("code:" + request.status + "\n"
-								+ "message:" + request.responseText + "\n"
-								+ "error:" + error);
-					}
-				});
+					}});
 			}
 
 </script>
 <body onload="initTmap();">
 	<div>
-		<input type="text" class="text_custom" id="searchKeyword" name="searchKeyword" value="서울시">	
-		<button id="btn_select">적용하기</button>
+		<input type="text" id="searchKeyword" name="searchKeyword" value="서울시">	
+		
 	</div>
 	<div>
-		<div style="width: 30%; float:left;">
+		<div style="width: 30%; float:left; display:block">
 			<div class="title"><strong>Search</strong> Results</div>
 			<div class="rst_wrap">
 				<div class="rst mCustomScrollbar">
