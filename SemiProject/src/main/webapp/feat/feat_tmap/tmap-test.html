@@ -159,8 +159,10 @@
 			
 						var labelPosition = new Tmapv2.LatLng(lat, lon);
 						var innerHtml = "";
-                        innerHtml += "<li><div>"+name+"</div><div>"+lat+","+lon+"</div></li>";
-						$("#selectResult").html(innerHtml);
+                        innerHtml += "<div><span>"+name+"</span><span>"+lat+","+lon+"</span>" +
+						"<button class ='btn_abort' onclick='$(this).parent().remove()'>취소</button></div>";
+						//$("#selectResult").html(innerHtml);
+						$("#selectResult").append(innerHtml);
                       	
                         // 선택 후, 기존 마커 제거
 								if (markerArr.length > 0) {
