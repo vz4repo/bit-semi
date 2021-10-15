@@ -157,7 +157,7 @@ footer{width:100%; height:60px; background-color:black; text-align:center; margi
 /* 댓글 폼 */
 
 /* 댓글 리스트 */
-.v_comment_list_num{margin-bottom:10px; font-size:15px; color:black;}
+.v_comment_list_num{margin-top:30px; margin-bottom:10px; font-size:15px; color:black;}
 .v_comment_list_num b{margin-left:5px; color:red;}
 .v_comment_list{padding:0px 20px 0px 20px; background:#f8f8f8; margin-bottom:100px;}
 .v_comment_list ul li{padding:25px 0 25px 0; border-top:1px solid #dbdbdb;}

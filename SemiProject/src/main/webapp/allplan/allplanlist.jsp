@@ -86,7 +86,7 @@ $(function () {
 	<!-- sub -->
 	<div id="sub_image" class="margin_wrap">
 		<div id="sub_text">
-			<p>New Plan</p>
+			<p>All Plan</p>
 		</div>
 	</div>
 	<!-- sub -->
@@ -115,6 +115,7 @@ $(function () {
 					<a href="index.jsp?main=allplan/allplanview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list">
 						<span class="list_box_1">
 							<h3><%=dto.getPlantitle()%></h3>
+							<%-- <%System.out.println(dto.getNum()); %> --%>
 							<p><%=dto.getPlanDate()%></p>
 							<p>작성자:<%=dto.getUserId()%></p>
 						</span>

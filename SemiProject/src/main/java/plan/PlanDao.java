@@ -85,9 +85,7 @@ public class PlanDao {
         dto.setContent(rs.getString("content"));
         dto.setReadCNT(rs.getInt("readCNT"));
         dto.setWriteday(rs.getTimestamp("writeday"));
-
       }
-
     } catch (SQLException e) {
       e.printStackTrace();
     } finally {
@@ -253,4 +251,3 @@ public class PlanDao {
     return list;
   }
 }
-

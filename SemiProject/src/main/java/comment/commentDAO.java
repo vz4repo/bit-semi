@@ -60,8 +60,45 @@ public class commentDAO {
     return n;
   }
 
+  // 전체 댓글 출력
+  public List<commentDTO> getAllAnswer(String num) {
+    List<commentDTO> list = new Vector<commentDTO>();
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    String sql = "select * from comment where num=? order by idx";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+      // 바인딩
+      pstmt.setString(1, num);
+
+      // 실행
+      rs = pstmt.executeQuery();
+
+      while (rs.next()) {
+        commentDTO dto = new commentDTO();
+        dto.setIdx(rs.getString("idx"));
+        dto.setNum(rs.getString("num"));
+        dto.setUserId(rs.getString("userId"));
+        dto.setContents(rs.getString("contents"));
+        dto.setWriteday(rs.getTimestamp("writeday"));
+
+        // list 추가
+        list.add(dto);
+      }
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      db.dbClose(rs, pstmt, conn);
+    }
+    return list;
+  }
+
   // 페이지에서 필요한 만큼만 리턴
-  public List<commentDTO> getList(int start, int perpage) {
+  public List<commentDTO> getcommentList(int start, int perpage) {
     List<commentDTO> list = new Vector<commentDTO>();
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
@@ -96,5 +133,27 @@ public class commentDAO {
       db.dbClose(rs, pstmt, conn);
     }
     return list;
+  }
+
+  // 삭제
+  public void deleteAnswer(String idx) {
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    String sql = "delete from comment where idx=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+      // 바인딩
+      pstmt.setString(1, idx);
+
+      // 실행
+      pstmt.execute();
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      db.dbClose(pstmt, conn);
+    }
   }
 }
