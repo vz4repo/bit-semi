@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<%@page import="mysql.db.DbConnect"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="connection.DBConnect"%>
 <%@page import="comment.commentDTO"%>
 <%@page import="users.UserDAO"%>
 <%@page import="comment.commentDAO"%>
@@ -8,8 +13,9 @@
     pageEncoding="UTF-8"%>
 <data>
 <%
+	System.out.println("> commentxml.jsp");
 	String num=request.getParameter("num");
-System.out.println(num);
+	//System.out.println(num);
 	commentDAO adao=new commentDAO();
 	UserDAO mdao=new UserDAO();
 	List<commentDTO> list=adao.getAllAnswer(num);
@@ -22,6 +28,8 @@ System.out.println(num);
 	 		<contents><%=dto.getContents()%></contents>
 	 		<writeday><%=sdf.format(dto.getWriteday())%></writeday>
 	 	</answer>
-	<%}
+	<%
+	System.out.println(list.toString());
+	}
 %>
 </data>

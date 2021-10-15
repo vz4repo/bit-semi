@@ -7,13 +7,10 @@
 <title>Insert title here</title>
 </head>
 <%
-	String loginok=(String)session.getAttribute("loginok");
 	String myid=(String)session.getAttribute("myid");
 %>
 <body>
-	<%
-	if(loginok!=null){ //로그인중일때만 입력폼이 보이도록 함!
-	%>
+	
 	<form action="newplan_test/newplanadd.jsp" method="post" class="form-inline" name="planfrm">
 		<table class="table table-bordered" style="width:500px; margin-top: 300px;">
 			<caption><b>새 여행 계획</b></caption>
@@ -53,8 +50,6 @@
 			</tr>
 		</table>
 	</form>
-	<%}else{ %>
-				<p class="loginok_newplanform_text">로그인 후 여행 계획을 만드실 수 있습니다.</p>
-			<% }%>
+	
 </body>
 </html>

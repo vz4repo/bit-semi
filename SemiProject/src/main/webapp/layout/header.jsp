@@ -33,7 +33,8 @@ $(document).ready(function(){
 			<nav class="clearfix">
 				<ul class="clearfix">
 					<li><a href="index.jsp?main=allplan/allplanlist.jsp">All Plan</a></li>
-					<li><a href="index.jsp?main=newPlan/NewPlanCal.jsp">New Plan</a></li>
+					<li><a href="index.jsp?main=newplan_test/newplanform.jsp">New Plan</a></li>
+					<!-- <li><a href="index.jsp?main=newPlan/NewPlanCal.jsp">New Plan</a></li> -->
 					<li><a href="#">Review</a></li>
 					<li><a href="index.jsp?main=notice/noticeview.jsp">Notice</a></li>
 				</ul>
@@ -43,7 +44,7 @@ $(document).ready(function(){
 			<%
 				String myid=(String)session.getAttribute("myid");
 				
-				if(session.getAttribute("loginok")==null){%>
+				if(session.getAttribute("loginok")==null || (boolean)session.getAttribute("loginok") == false){%>
 				<button onclick="location='index.jsp?main=users/login.jsp'">Login</button>
 				<button onclick="location='index.jsp?main=users/join.jsp'">Join</button>
 			<%}else{%>

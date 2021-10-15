@@ -15,7 +15,7 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <%
 	//로그인한 상태인지 확인
-	String loginok=(String)session.getAttribute("loginok");
+	String loginok= session.getAttribute("loginok").toString();
 %>
 <script type="text/javascript">
 	/* 맵 임시! */
@@ -31,7 +31,7 @@
 	//댓글 출력하는 함수
 	function list()
 	{
-		console.log(1);
+		//console.log(1);
 		var num=$("#num").val();
 		var myid=$("#myid").val();
 		$.ajax({
@@ -59,17 +59,19 @@
 					s+="<p class='com_list_1_contents'>"+contents+"</p>";
 					s+="<p class='com_list_1_day'>"+writeday+"</p>";
 					
-					var login="<%=loginok%>";
+					<%-- var login="<%=loginok%>";
 					console.log(login);
 					if(login!="null"){
 						s+="<button type='button' id='v_com_btn_1'>댓글</button>";
-					}
+					} --%>
+					
+					var login="<%=loginok%>";
 					var logid=$("#myid").val();
 					console.log("1"+login+","+myid);
-					if(login=='yes' && logid==myid){
+					if(login=="true" && logid==myid){
 						s+="<button type='button' id='v_com_btn_1'>수정</button>";
 						s+="<button type='button' class='adel' id='v_com_btn_1' idx='"+idx+"'>삭제</button>";
-					}
+					} 
 					s+="</span>";
 					s+="</li>";
 				});
@@ -87,7 +89,7 @@
 		
 		//댓글추가 이벤트
 		$("#v_com_check").click(function(){
-			console.log("call");
+			//console.log("call");
 			var num=$("#num").val();
 			var myid=$("#myid").val();
 			var acontent=$("#com_box").val();
@@ -115,7 +117,7 @@
 		$("span.v_likes").click(function(){
 			var num=$(this).attr("num");
 			var tag=$(this);
-			console.log(num); //확인됨
+			//console.log(num); //확인됨
 			$.ajax({
 				type:"get",
 				dataType:"json",
@@ -140,9 +142,9 @@
 		});
 		
 		/* 댓글 삭제 버튼 클릭시 이벤트! */
-		$("button.adel").click(function(){
+		$("#v_com_btn_1").on("click", function(){
 			var idx=$(this).attr("idx");
-			//alert(idx); //삭제 아이콘 클릭하면 번호 나오는지 확인 완료!
+			console.log(idx); //삭제 아이콘 클릭하면 번호 나오는지 확인 완료!
 			$.ajax({
 				type:"get",
 				dataType:"html",
@@ -154,6 +156,7 @@
 				}
 			});
 		});
+
 	});
 </script>
 </head>
@@ -254,25 +257,24 @@
 		
 		<div class="v_comment" id="test">
 			<%-- <%System.out.println(dto.getNum());%> --%>
-				<input type="hidden" name="num"  id="num" value="<%=num%>">
-				<input type="hidden" name="myid" id="myid" value="<%=myid%>">
-				<input type="hidden" name="currentPage" value="<%=currentPage%>">
+			<input type="hidden" name="num"  id="num" value="<%=num%>">
+			<input type="hidden" name="myid" id="myid" value="<%=myid%>">
+			<input type="hidden" name="currentPage" value="<%=currentPage%>">
 		<%
-		if(loginok!=null){ //로그인중일때만 입력폼이 보이도록 함!
+		if(loginok!=null && loginok=="true"){ //로그인중일때만 입력폼이 보이도록 함!
 		%>
-					<table class="com_all">
-						<tr>
-							<td>
-								<textarea id="com_box" name="content" required="required" placeholder="댓글을 입력해주세요."></textarea>
-							</td>
-							<td>
-								<button type="button" id="v_com_check">확인</button>
-							</td>
-						</tr>
-					</table>
-			<%}else{ %>
+			<table class="com_all">
+				<tr>
+					<td>
+						<textarea id="com_box" name="content" required="required" placeholder="댓글을 입력해주세요."></textarea>
+					</td>
+					<td>
+						<button type="button" id="v_com_check">확인</button>
+					</td>
+				</tr>
+			</table>
+		<%}else{ %>
 		</div>
-		
 			<p class="loginok_comment_text">로그인 후 댓글을 입력하실 수 있습니다.</p>
 		<% }%>
 		<!-- 댓글폼 -->
