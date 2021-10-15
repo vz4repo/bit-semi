@@ -12,7 +12,7 @@ public class UserDAO {
 
   private DBConnect dbConnect = new DBConnect();
 
-  private Connection conn = dbConnect.getConnectionCloud();
+  private Connection conn = dbConnect.getConnection();
   private PreparedStatement pstmt;
   private ResultSet rs;
 
@@ -42,7 +42,7 @@ public class UserDAO {
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
-      dbConnect.resourceClose(rs, pstmt, conn);
+      dbConnect.dbClose(rs, pstmt, conn);
     }
     return -2; // -2: 서버오류
   }
@@ -62,7 +62,7 @@ public class UserDAO {
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
-      dbConnect.resourceClose(rs, pstmt, conn);
+      dbConnect.dbClose(rs, pstmt, conn);
     }
     return -2; // -2: 서버 오류
   }
@@ -73,7 +73,7 @@ public class UserDAO {
     // 회원가입여부 체크, 없으면 콘솔에 0 출력
     if (hasID(dto.getUserID()) == 0) {
 
-      Connection conn = dbConnect.getConnectionCloud();
+      Connection conn = dbConnect.getConnection();
       PreparedStatement pstmt = null;
       ResultSet rs = null;
 
@@ -99,7 +99,7 @@ public class UserDAO {
         e.printStackTrace();
         System.out.println(dto.getUserName() + ": FAIL");
       } finally {
-        dbConnect.resourceClose(pstmt, conn);
+        dbConnect.dbClose(pstmt, conn);
       }
       // TODO 가입 실패 경우도 체크
     }

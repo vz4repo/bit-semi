@@ -7,7 +7,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
 
-String path = request.getSession().getServletContext().getRealPath("/imagesave"); // 이미지가 저장될 주소
+//String path = request.getSession().getServletContext().getRealPath("/imagesave"); // 이미지가 저장될 주소
+String path = getServletContext().getRealPath("/imagesave"); // 이미지가 저장될 주소
 String filename = "";
 
 if(request.getContentLength() > 10*1024*1024 ){

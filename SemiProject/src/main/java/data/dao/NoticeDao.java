@@ -7,16 +7,16 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 import data.dto.NoticeDto;
-import mysql.db.DbConnect;
+import connection.DBConnect;
 
 public class NoticeDao {
-  DbConnect db = new DbConnect();
+  DBConnect db = new DBConnect();
 
   // insert
   public void insertNotice(NoticeDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "insert into notice (title,content,writeday) values (?,?,now())";
+    String sql = "insert into maria_study.notice (title,content) values (?,?)";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -41,7 +41,7 @@ public class NoticeDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select count(*) from notice";
+    String sql = "select count(*) from maria_study.notice";
 
 
     try {
@@ -64,7 +64,7 @@ public class NoticeDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from notice order by num desc limit ?,?";
+    String sql = "select * from maria_study.notice order by num desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -97,7 +97,7 @@ public class NoticeDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from notice where num=?";
+    String sql = "select * from maria_study.notice where num=?";
 
     try {
       pstmt = conn.prepareStatement(sql);

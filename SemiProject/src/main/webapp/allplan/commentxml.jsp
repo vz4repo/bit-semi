@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<%@page import="mysql.db.DbConnect"%>
+<%@page import="connection.DBConnect"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="connection.DBConnect"%>
 <%@page import="comment.commentDTO"%>
 <%@page import="users.UserDAO"%>
 <%@page import="comment.commentDAO"%>

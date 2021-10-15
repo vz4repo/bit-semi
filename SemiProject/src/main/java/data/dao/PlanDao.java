@@ -7,16 +7,16 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 import data.dto.PlanDto;
-import mysql.db.DbConnect;
+import connection.DBConnect;
 
 public class PlanDao {
-  DbConnect db = new DbConnect();
+  DBConnect db = new DBConnect();
 
   // insert
   public void insertPlan(PlanDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "insert into test (name,content,chu,jo,writeday) values (?,?,?,?,now())";
+    String sql = "insert into maria_study.test_postinfo2 (name,content,chu,jo) values (?,?,?,?)";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select count(*) from test";
+    String sql = "select count(*) from maria_study.test_postinfo2";
 
 
     try {
@@ -67,7 +67,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from test order by num desc limit ?,?";
+    String sql = "select * from maria_study.test_postinfo2 order by num desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -102,7 +102,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from test order by chu desc limit ?,?";
+    String sql = "select * from maria_study.test_postinfo2 order by chu desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -137,7 +137,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from test order by jo desc limit ?,?";
+    String sql = "select * from maria_study.test_postinfo2 order by jo desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -170,7 +170,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from test where num=?";
+    String sql = "select * from maria_study.test_postinfo2 where num=?";
 
     try {
       pstmt = conn.prepareStatement(sql);

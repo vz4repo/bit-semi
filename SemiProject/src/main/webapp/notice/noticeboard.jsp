@@ -59,8 +59,8 @@
 <body>
 <% 
 	
-	String uls=(String)session.getAttribute("userLoginStatus");
-	String userid=(String)session.getAttribute("userSessionID");
+	String uls=session.getAttribute("loginok").toString();
+	String userid=(String)session.getAttribute("myid");
 	NoticeDao dao=new NoticeDao();
 	
     

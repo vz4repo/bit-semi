@@ -32,7 +32,7 @@ public class DBConnect {
   // DBConnect test
   public static void main(String[] args) {
     DBConnect conn = new DBConnect();
-    conn.getConnectionCloud();
+    conn.getConnection();
   }
 
   public DBConnect() {
@@ -53,7 +53,7 @@ public class DBConnect {
     }
   }
 
-  public Connection getConnectionCloud() {
+  public Connection getConnection() {
     Connection conn = null;
     try {
       conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
@@ -70,7 +70,7 @@ public class DBConnect {
 
 
   // 3개 close(), 각각+디폴트>오버로딩 4개
-  public void resourceClose(ResultSet rs, Statement stmt, Connection conn) {
+  public void dbClose(ResultSet rs, Statement stmt, Connection conn) {
     try {
       if (rs != null)
         rs.close();
@@ -79,38 +79,35 @@ public class DBConnect {
       if (conn != null)
         conn.close();
     } catch (Exception e) {
-      e.printStackTrace();
     }
   }
 
-  public void resourceClose(ResultSet rs, PreparedStatement ps, Connection conn) {
+  public void dbClose(ResultSet rs, PreparedStatement pstmt, Connection conn) {
     try {
       if (rs != null)
         rs.close();
-      if (ps != null)
-        ps.close();
+      if (pstmt != null)
+        pstmt.close();
       if (conn != null)
         conn.close();
     } catch (Exception e) {
-      e.printStackTrace();
     }
   }
 
-  public void resourceClose(Statement ps, Connection conn) {
+  public void dbClose(Statement stmt, Connection conn) {
     try {
-      if (ps != null)
-        ps.close();
+      if (stmt != null)
+        stmt.close();
       if (conn != null)
         conn.close();
     } catch (Exception e) {
-      e.printStackTrace();
     }
   }
 
-  public void resourceClose(PreparedStatement ps, Connection conn) {
+  public void dbClose(PreparedStatement pstmt, Connection conn) {
     try {
-      if (ps != null)
-        ps.close();
+      if (pstmt != null)
+        pstmt.close();
       if (conn != null)
         conn.close();
     } catch (Exception e) {

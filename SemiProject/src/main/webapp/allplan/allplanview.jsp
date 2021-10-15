@@ -197,6 +197,7 @@
 			<p class="v_day"><%=dto.getPlanDate()%></p>
 			<div class="v_func">
 				<p>Writer&nbsp;&nbsp;<%=dto.getUserId()%><span>|</span></p>
+<%--				TODO at line 200--%>
 				<p>Date&nbsp;&nbsp;<%=sdf.format(dto.getWriteday())%></p>
 				<!-- 아래 찜하기 버튼 임시 보류 -->
 				<!-- <span class="v_likes">찜하기</span> -->
