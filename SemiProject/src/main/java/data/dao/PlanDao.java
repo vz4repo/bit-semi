@@ -165,6 +165,35 @@ public class PlanDao {
     return list;
   }
 
+  public PlanDto getData(String num) {
+    PlanDto dto = new PlanDto();
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    String sql = "select * from test where num=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+      pstmt.setString(1, num);
+      rs = pstmt.executeQuery();
+      if (rs.next()) {
+        dto.setNum(rs.getString("num"));
+        dto.setName(rs.getString("name"));
+        dto.setContent(rs.getString("content"));
+        dto.setChu(rs.getInt("chu"));
+        dto.setJo(rs.getInt("jo"));
+        dto.setWriteday(rs.getTimestamp("writeday"));
+
+      }
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } finally {
+      db.dbClose(rs, pstmt, conn);
+    }
+    return dto;
+  }
 
 
 }

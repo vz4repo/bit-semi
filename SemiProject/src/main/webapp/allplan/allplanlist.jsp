@@ -43,11 +43,6 @@ $(function () {
 			
 		}
 		});
-	$(document).ready(function () {
-		  selbox = $("select.selpln").attr("data-type");
-		  $("select.selpln option[value='" + selbox + "']").attr("selected", "selected");
-		});
-	
 	});
 
 
