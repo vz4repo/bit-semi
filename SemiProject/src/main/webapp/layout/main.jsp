@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
 <%
 	String root=request.getContextPath();
 %>
-
+<body>
 	<!--main-->
 	<div id="main_wrap">
 		<%-- <div id="main_img">
@@ -141,3 +146,5 @@
 		</div> 
 		<!--content_3-->
 	</div>
+</body>
+</html>

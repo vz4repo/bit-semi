@@ -1,3 +1,9 @@
+<%@page import="java.util.List"%>
+<%@page import="comment.commentDTO"%>
+<%@page import="comment.commentDAO"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="plan.PlanDto"%>
+<%@page import="plan.PlanDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -51,6 +57,76 @@
 	String root=request.getContextPath();
 	/* 로그인 값 가져오기 */
 	String loginok=(String)session.getAttribute("loginok");
+	
+	/* 게시글 출력 관련! */
+	String num=request.getParameter("num");
+	String currentPage=request.getParameter("currentPage");
+	if(currentPage==null)
+		currentPage="1";
+	//key는 목록에서만 값이 넘어오고 그 외에는 null rkqt
+	String key=request.getParameter("key");
+	PlanDao dao=new PlanDao();
+	//목록에서 올 경우에만 조회수 1증가함
+	if(key!=null)
+		dao.updateReadcount(num);
+	//num에 해당하는 dto 얻기
+	PlanDto dto=dao.getData(num);
+	/* ------------------------------------------------- */
+	
+	/* 댓글 관련! */
+	commentDAO cdao=new commentDAO();
+	//페이징 처리에 필요한 변수선언
+	int perPage=10; //한 페이지에 보여질 글의 갯수
+	int totalCount; //총 글의 수
+	int totalPage; //총 페이지수
+	int currentPagenow; //현재 페이지번호
+	int start; //각 페이지에서 불러올 db의 시작번호
+	int perBlock=5; //몇개의 페이지 번호씩 표현할 것인가
+	int startPage; //각 블럭에 표시할 시작페이지
+	int endPage; //각 블럭에 표시할 마지막페이지
+	
+	//총 갯수
+	totalCount=cdao.getTotalCount();
+	
+	//현재 페이지번호 읽기(단 null 일 경우는 1페이지로 설정)
+	if(request.getParameter("currentPagenow")==null){
+	  currentPagenow=1;
+	}else{
+	  currentPagenow=Integer.parseInt(request.getParameter("currentPagenow"));
+	}
+	
+	//총 페이지 갯수 구하기
+	//totalCOunt를 perPage로 나눈 값이 0이면 0을 더하고, 그렇지 않으면 1을 더해야함
+	totalPage=totalCount/perPage+(totalCount%perPage==0?0:1);
+	
+	//각 블럭의 시작페이지
+	//현재 페이지가 3일 경우 (3-1)/5*5+1
+	//현재 페이지가 11일 경우 (11-1)/5*5+1
+	startPage=(currentPagenow-1)/perBlock*perBlock+1;
+	endPage=startPage+perBlock-1;
+	
+	if(endPage>totalPage){
+		endPage=totalPage;
+	}
+	//각 페이지에서 불러올 시작번호
+	//1페이지:0,2페이지:3,3페이지:6
+	start=(currentPagenow-1)*perPage;
+	//각 페이지에서 필요한 게시글 가져오기
+	List<commentDTO> list=cdao.getList(start, perPage);
+	
+	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	
+	//현재 페이지의 list가 더이상 없을경우 이전페이지로 이동
+		if(list.size()==0 && totalCount>0)
+		{ 
+		%>
+		<script type="text/javascript">
+		  	location.href="index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=currentPagenow-1%>";
+		  </script>
+		<%
+		} 
+		//각 페이지에 출력할 시작번호
+		int no=totalCount-(currentPagenow-1)*perPage;
 %>
 <body onload="initTmap()">
 	<!-- sub -->
@@ -65,12 +141,19 @@
 	<div class="container">
 		<!-- 상단 -->
 		<div class="view_top">
-			<p class="v_title">고잉 웹사이트 오픈!</p>
-			<p class="v_day">2021.10.07~2021.10.10</p>
+			<p class="v_title"><%=dto.getPlantitle()%></p>
+			<p class="v_day"><%=dto.getPlanDate()%></p>
 			<div class="v_func">
-				<p>홍길동<button type="button">팔로우</button>|</p>
-				<p>136 Views</p>
-				<span class="v_likes">찜하기</span>
+				<!-- 아래 팔로우 버튼 임시 보류! -->
+				<p>Writer&nbsp;&nbsp;<%=dto.getUserId()%><!-- <button type="button">팔로우</button> --><span>|</span></p>
+				<%-- <p><%=dto.getReadCNT()%> Views<span>|</span></p> --%>
+				<p>Date&nbsp;&nbsp;<%=sdf.format(dto.getWriteday())%></p>
+				<!-- 아래 찜하기 버튼 임시 보류 -->
+				<!-- <span class="v_likes">찜하기</span> -->
+			</div>
+			<div class="v_func_2">
+				<p>View</p>
+				<p><%=dto.getReadCNT()%></p>
 			</div>
 		</div>
 		<!-- 상단 -->
@@ -103,11 +186,14 @@
 		
 		<!-- 별점, 목록 버튼 -->
 		<div class="btn">
+			<!-- 아래 별점 일단 보류! -->
+			<%-- <div class="v_btn">
+				<button type="button"
+				onclick="location.href='index.jsp?main=board/boardlist.jsp?currentPage=<%=currentPage%>'">별점주기</button>
+			</div> --%>
 			<div class="v_btn">
-				<a href="#" class="btnstar">별점주기</a>
-			</div>
-			<div class="v_btn">
-				<a href="#" class="btnlist">목록</a>
+				<button type="button"
+				onclick="location.href='index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=currentPage%>'">목록</button>
 			</div>
 		</div>
 		<!-- 별점, 목록 버튼 -->
@@ -142,34 +228,29 @@
 		
 		<!-- 댓글 리스트 -->
 		<div class="v_comment_list_num">
-			<span class="v_comment_num">총 댓글<b>0</b></span>
+			<span class="v_comment_num">총 댓글<b><%=list.size() %></b></span>
 		</div>
 		<div class="v_comment_list">
+		<%
+		String myid=(String)session.getAttribute("myid");
+		for(commentDTO cdto:list){
+		%>
 			<ul class="com_list_all">
 				<li>
 					<span class="com_list_1">
-						<p class="com_list_1_name">홍길동</p>
-						<p class="com_list_1_contents">저도 이 여행 계획을 참고해봐야겠어요!</p>
-						<p class="com_list_1_day">2021.10.07</p>
-						<button type="button" id="v_com_btn_1">댓글</button>
-						<button type="button" id="v_com_btn_1">수정</button>
-						<button type="button" id="v_com_btn_1">삭제</button>
-					</span>
-				</li>
-				<li>
-					<span class="com_list_1">
-						<p class="com_list_1_name">홍길동</p>
-						<p class="com_list_1_contents">저도 이 여행 계획을 참고해봐야겠어요!</p>
-						<p class="com_list_1_day">2021.10.07</p>
+						<p class="com_list_1_name"><%=myid%></p>
+						<p class="com_list_1_contents"><%=cdto.getContents()%></p>
+						<p class="com_list_1_day"><%=sdf.format(cdto.getWriteday())%></p>
 						<button type="button" id="v_com_btn_1">댓글</button>
 						<button type="button" id="v_com_btn_1">수정</button>
 						<button type="button" id="v_com_btn_1">삭제</button>
 					</span>
 				</li>
 			</ul>
+		<%}
+		%>
 		</div>
 		<!-- 댓글 리스트 -->
-		
 	</div>
 	<!--view -->
 </body>

@@ -1,14 +1,13 @@
+<%@page import="users.UserDTO"%>
+<%@page import="review.ReviewDao"%>
+<%@page import="review.ReviewDto"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
-<%@page import="data.dao.ReviewDao"%>
-<%@page import="data.dto.ReviewDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 //세션으로 부터 db에 저장 할 아이디 얻기
-String myid = (String)session.getAttribute("myid");
-String myname = (String)session.getAttribute("userName");
-String mygender = (String)session.getAttribute("userGender");
+String myid = (String)session.getAttribute("userSessionID");
 //이미지가 업로드 될 실제 경로 구하기
 String realPath = getServletContext().getRealPath("/imagesave");
 System.out.println(realPath);
@@ -21,14 +20,16 @@ try {
   String subject = multi.getParameter("subject");
   String content = multi.getParameter("content");
   String thumbnail = multi.getFilesystemName("thumbnail");
+  String userName = multi.getParameter("userName");
+  String userGender = multi.getParameter("userGender");
 
   ReviewDto dto = new ReviewDto();
   dto.setUserID(myid);
-  dto.setUserName(myname);
-  dto.setUserGender(mygender);
   dto.setSubject(subject);
   dto.setContent(content);
   dto.setThumbnail(thumbnail);
+  dto.setUserName(userName);
+  dto.setUserGender(userGender);
 
   ReviewDao dao = new ReviewDao();
   dao.insertReview(dto);

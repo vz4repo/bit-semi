@@ -1,4 +1,4 @@
-package data.dto;
+package review;
 
 import java.sql.Timestamp;
 

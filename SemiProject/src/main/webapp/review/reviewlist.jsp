@@ -1,7 +1,10 @@
+다 <%@page import="java.io.Console"%>
+<%@page import="users.UserDAO"%>
+<%@page import="users.UserDTO"%>
+<%@page import="review.ReviewDto"%>
+<%@page import="review.ReviewDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="data.dto.ReviewDto"%>
 <%@page import="java.util.List"%>
-<%@page import="data.dao.ReviewDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,6 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/style.css">
 <style type="text/css">
 .alist {
 	text-decoration: none;
@@ -19,7 +23,7 @@
 	overflow: hidden;
 	float: left;
 	width: 240px;
-	height: 310px;
+	height: 320px;
 	margin: 20px 10px 20px 20px;
 	background-position: center;
 	box-shadow: 2px 2px 13px 3px rgba(0, 0, 0, 0.2);
@@ -153,7 +157,7 @@ label:after {
 </head>
 <%
 ReviewDao dao = new ReviewDao();
-int perPage = 12;// 한 페이지에 보여질 글의 갯수
+int perPage = 1;// 한 페이지에 보여질 글의 갯수
 int totalCount;//총 글의 수
 int currentPage;//현재 페이지 번호
 int totalPage;//총 페이지 수
@@ -194,7 +198,27 @@ if (list1.size() == 0 && totalCount > 0) {
 </script>
 <%
 }
+if (list2.size() == 0 && totalCount > 0) {
+%>
+<script type="text/javascript">
+			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>
+	";
+</script>
+<%
+}
+if (list3.size() == 0 && totalCount > 0) {
+%>
+<script type="text/javascript">
+			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>
+	";
+</script>
+<%
+}
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+ReviewDto dto = new ReviewDto();
+UserDAO udao = new UserDAO();
+String userLoginStatus = (String)session.getAttribute("userLoginStatus");
+String myid = (String)session.getAttribute("userSessionID");
 %>
 <body>
 	<div id="main_wrap" style="height: 320px;">
@@ -230,7 +254,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				<td><input value="F" name="gender" type="radio" id="F"><label
 					for="F">여성</label></td>
 				<td id="btnop" rowspan="2" width="130" style="text-align: right;"><button
-						class="btnop" type="button" onclick="">적용하기</button>
+						class="btnop" type="button" onclick="location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>";">적용하기</button>
 						</td>
 			</tr>
 		</table>
@@ -248,21 +272,21 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			<tr>
 				<%
 				for (int row = 0; row < list1.size(); row++) {
-				  ReviewDto dto = list1.get(row);
+				  dto = list1.get(row);
 				%>
 				<td class="listview"><a class="alist"
-					href="index.jsp?main=review/reviewdetail.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list">
+					href="index.jsp?main=review/reviewview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list">
 						<%
 						if (dto.getThumbnail() != null) {
 						%> <img alt="" src="imagesave/<%=dto.getThumbnail()%>"
 						class="thumbnail" /> <%
  						}else{%> <img class="thumbnail" /> <%}
- %> <br> <br>
+ %> <br><br>
 						<ul>
 							<li class="subject"><%=dto.getSubject()%></li>
 							<br>
 							<br>
-							<li class="name">작성자 : 누구누구누구누구구누구누국누구누</li>
+							<li class="name">작성자 : <%=dto.getUserID()%></li>
 							<br>
 							<li class="gandb"><span class="good">좋아요 <%=dto.getGood()%></span>
 							<br>
@@ -278,8 +302,13 @@ SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	</div>
 	<div align="right"
 		style="width: 1250px; margin-top: 10px; margin-left: 200px; max-width: 1100px;">
-		<button class="btnreviewform" type="button"
+		<%
+		if(userLoginStatus!=null){%>
+			<button class="btnreviewform" type="button"
 			onclick="location.href='index.jsp?main=review/reviewform.jsp'">등록하기</button>
+		<%
+		}
+		%>
 	</div>
 	<div class="paging"
 		style="width: 1250px; margin-left: 200px; max-width: 1100px;">

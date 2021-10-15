@@ -19,12 +19,12 @@
 	font-size: 25px;
 }
 
-.joinID, .joinPassword, .joinName, .joinDate, .joinGender {
+.joinValue {
 	margin-top: 20px;
 	margin-bottom: 30px;
 }
 
-.input {
+.joinInput {
 	padding: 5px;
 	width: 300px;
 	line-height: 30px;

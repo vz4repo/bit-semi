@@ -78,7 +78,6 @@ public class  DBConnect {
       if (conn != null)
         conn.close();
     } catch (Exception e) {
-      e.printStackTrace();
     }
   }
 
@@ -91,7 +90,6 @@ public class  DBConnect {
       if (conn != null)
         conn.close();
     } catch (Exception e) {
-      e.printStackTrace();
     }
   }
 
@@ -102,7 +100,6 @@ public class  DBConnect {
       if (conn != null)
         conn.close();
     } catch (Exception e) {
-      e.printStackTrace();
     }
   }
 

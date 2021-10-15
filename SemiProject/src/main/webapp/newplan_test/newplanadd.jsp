@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <%
 request.setCharacterEncoding("UTF-8");
-String userId = (String)session.getAttribute("sessionId");
+String myid = (String)session.getAttribute("myid");
 // num,userId,plantitle,planDate,content,readCNT,good,writeday
 String plantitle=request.getParameter("plantitle");
 String planDate=request.getParameter("planDate");
@@ -13,7 +13,7 @@ String content=request.getParameter("content");
 
 //데이터 읽어서 dto에 넣기
 PlanDto dto=new PlanDto();
-dto.setUserId(userId);
+dto.setUserId(myid);
 dto.setPlantitle(plantitle);
 dto.setPlanDate(planDate);
 dto.setContent(content);

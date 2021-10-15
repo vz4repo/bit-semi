@@ -1,20 +1,14 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="plan.PlanDto"%>
+<%@page import="plan.PlanDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ page import="java.text.DateFormat"%>
-<%@ page import="java.util.Date" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
 </head>
-<%
-String userID=	(String)session.getAttribute("userSessionID");
-
-DateFormat date = DateFormat.getDateInstance(DateFormat.LONG);
-String currentDate = date.format(new Date());
-%>
-
 <body>
 	<!-- sub -->
 	<div id="sub_image" class="margin_wrap">
@@ -25,14 +19,13 @@ String currentDate = date.format(new Date());
 	<!-- sub -->
 	
 	<!-- view -->
-	
 	<div class="container">
 		<!-- 상단 -->
 		<div class="view_top">
 			<p class="v_title">제목</p>
 			<div class="v_func">
-				<p>Writer<span>:<%=userID%>:</span>&nbsp;&nbsp;작성자 아이디만 출력<span>|</span></p>
-				<p>Date<span>:<%=currentDate%>:</span>&nbsp;&nbsp;작성일 출력</p>
+				<p>Writer&nbsp;&nbsp;작성자 아이디만 출력<span>|</span></p>
+				<p>Date&nbsp;&nbsp;작성일 출력</p>
 			</div>
 			<div class="v_func_2">
 				<p>View</p>

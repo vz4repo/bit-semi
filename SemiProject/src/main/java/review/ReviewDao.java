@@ -1,4 +1,4 @@
-package data.dao;
+package review;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
-import data.dto.ReviewDto;
 import mysql.db.DbConnect;
 
 public class ReviewDao {
@@ -178,10 +177,12 @@ public class ReviewDao {
       rs = pstmt.executeQuery();
       if (rs.next()) {
         dto.setNum(rs.getString("num"));
+        dto.setUserID(rs.getString("userID"));
+        dto.setUserName(rs.getString("userName"));
         dto.setSubject(rs.getString("subject"));
         dto.setContent(rs.getString("content"));
-        dto.setThumbnail(rs.getString("thumbnail"));
         dto.setReadcount(rs.getInt("readcount"));
+        dto.setGood(rs.getInt("good"));
         dto.setWriteday(rs.getTimestamp("writeday"));
       }
     } catch (SQLException e) {
@@ -251,5 +252,22 @@ public class ReviewDao {
       db.dbClose(rs, pstmt, conn);
     }
     return num;
+  }
+
+  // 삭제
+  public void deleteReview(String num) {
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    String sql = "delete from treview where num=?";
+    try {
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, num);
+      pstmt.execute();
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } finally {
+      db.dbClose(pstmt, conn);
+    }
   }
 }

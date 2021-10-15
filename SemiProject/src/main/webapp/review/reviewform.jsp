@@ -39,12 +39,12 @@
 </div>
 <div style="width: 1250px; margin-top: 80px; margin-left: 250px; max-width: 1100px;">
 <form action="review/reviewaction.jsp" method="post" enctype="multipart/form-data">
-	<table style="width: 90%;">
+	<table style="width: 1000px;">
 		<tr>
-			<th bgcolor="black" width="100" height="30" style="color: white; text-align: center;">제  목</th>
+			<th bgcolor="black" width="100" height="40" style="color: white; text-align: center;">제  목</th>
 			<td>
 				<input type="text" name="subject"
-					required="required" style="width: 695px; height: 30px;">
+					required="required" style="width: 890px; height: 30px;">
 			</td>
 		</tr>
 		<tr>
@@ -56,19 +56,19 @@
 			</td>
 		</tr>
 		<tr>
-			<th bgcolor="black" width="100" height="30" style="color: white; text-align: center;">썸네일</th>
+			<th bgcolor="black" width="100" height="40" style="color: white; text-align: center;">썸네일</th>
 			<td style="border: 1px solid gray;">
 				<input type="file" name="thumbnail" id="thumbnail"
 					required="required" onchange="readUrl(this)">
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center" height="20">
+			<td colspan="2" align="center" height="30">
 				<button type="button" class="btncancel"
-					style="width: 120px;"
+					style="width: 120px; margin-top: 10px;"
 					onclick="location.href='index.jsp?main=review/reviewlist.jsp'">취소</button>
 				<button type="button" class="btnregister"
-					style="width: 120px;"
+					style="width: 120px; margin-top: 10px;"
 					onclick="submitContents(this)">등록하기</button>
 			</td>
 		</tr>
