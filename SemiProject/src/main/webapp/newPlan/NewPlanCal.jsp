@@ -38,6 +38,19 @@
 		popup.classList.add('hide');
 		}
 	
+	function showPopup3(hasFilter) {
+		const popup = document.querySelector('#popup3');
+		if (hasFilter) {
+		 popup.classList.add('has-filter');
+		} else {
+		 popup.classList.remove('has-filter');
+		}
+		 popup.classList.remove('hide');
+		}
+	function closePopup3() {
+		const popup = document.querySelector('#popup3');
+		popup.classList.add('hide');
+		}
 	/* 맵 관련 */
 	var map;
 var marker_s, marekr_e;
@@ -218,6 +231,9 @@ function initTmap(){
 		}
 	});
 }	
+
+
+
 </script>
 </head>
 <%
@@ -237,14 +253,22 @@ function initTmap(){
 		<!-- 상단 타이틀 -->
 		<div class="cal_container">
 			<p id="cal_title">여행일정을 계획해보세요!</p>
-			
+			<form action="newPlan/NewPlanCalinsert.jsp" method="post" class="form-inline" name="planForm">
+								
 			<div class="cal_title_text">
 				<div class="cal_date_open_title">
 					<p>여행 제목을 입력해주세요!</p>
 				</div>
 				<div class="cal_date_open_title">
-					<input type="text" class="content_title" placeholder="여행 계획 제목을 입력해주세요.">
+					<input type="text" name="plantitle" class="content_title"
+					 placeholder="여행 계획 제목을 입력해주세요."
+					 onkeyup="eventKeyup(this.value)">
+				
 				</div>
+				
+				
+				
+				
 			</div>
 			
 			<div class="cal_date_open">
@@ -252,10 +276,10 @@ function initTmap(){
 					<p>여행 일정을 선택해주세요!</p>
 				</div>
 				<div class="cal_date_open_title">
-					<button type="button" class="btn_data_open_pop" id="modal_btn" onclick="showPopup(false)">
-						<span>YYYY/MM/DD</span>
-						<span>~</span>
-						<span>YYYY/MM/DD</span>
+					<button type="button" class="btn_data_open_pop" id="modal_btn" onclick="showPopup(false)"
+					name="planStartDay">
+						YYYY/MM/DD~YYYY/MM/DD
+				
 					</button>
 				</div>
 			</div>
@@ -267,12 +291,21 @@ function initTmap(){
 						<iframe src="feat_calendar/calendar.html" style="width:1200px; height:400px; border:none;"></iframe>
 					</div>
 					<div class="cal_popup_1">
-						<button type="button" class="btn_submit_1">확인</button>
-						<button onclick="closePopup()" class="btn_close_1">닫기</button>
+						<button type="button" id="btn_submit_1" onclick="closePopup()">확인</button>
+						<button onclick="closePopup()" type="button" class="btn_close_1">닫기</button>
 					</div>
 				</div>
 			</div>
-			
+			<div class="cal_open_text">
+					<p>해당 여행 계획을 공개하시겠습니까?</p>
+					<span>만약 공개를 선택하시면 All Plan에 올라가며 모든 사람들이 확인할 수 있습니다.</span>
+				</div>
+				<div class="cal_open_check" name="openPlan">
+					<input type="radio" checked="checked" name="openPlan" value="true"><label>공개</label>
+					<input type="radio" name="openPlan" value="false"><label>비공개</label>
+				</div>
+				
+			</form>
 			<div class="newplan_step_1">
 			<div id="map_div"></div>
 				<table class="newplan_info">
@@ -281,21 +314,31 @@ function initTmap(){
 						<th>일자</th>
 						<th>상세 계획 짜기</th>
 					</tr>
+					
+					
+					
 					<tr>
 						<td>1</td>
-						<td>2021/10/13</td><!--onclick="showPopup2(false)"  -->
+						<td id="daysCall_1">날짜</td><!--onclick="showPopup2(false)"  -->
 						<td><button type="button" class="btn_travel_1" onclick="showPopup2(false)">계획짜기</button></td>
 					</tr>
+				 <tr>
+						<td>2</td>
+						<td id="daysCall_1">날짜</td><!--onclick="showPopup2(false)"  -->
+						<td><button type="button" class="btn_travel_1" onclick="showPopup3(false)">계획짜기</button></td>
+					</tr>
+				 
+				 
+				 
 				</table>
 			</div>
-			
 			<div id="popup2" class="hide">
 				<div class="content" id="plan_detail_popup">
 					<div class="cal_popup_1_big_text">
 						<p class="cal_popup_1_title">상세 계획 짜기</p>
 					</div>
 					<div class="cal_popup_1_big_text">
-						<button onclick="closePopup2()" class="btn_close_2">닫기</button>
+						<button onclick="closePopup2()" type="button" class="btn_close_2">닫기</button>
 					</div>
 					
 					<!-- 경유 자동차 지도 넣어봄 - 희수 (갑자기 안나옴 ㅠㅠ)-->
@@ -309,70 +352,37 @@ function initTmap(){
 								<th>시간</th>
 								<th>여행지</th>
 								<th>비고</th>
-							</tr>
+							</tr>			
+							<form action="newPlan/NewPlanMapinsert.jsp" method="post" class="form-inline" name="planForm">
+							
 							<tr name="add_plan">
-								<td><input type="text" class="plan_time" value="원하는 시간을 입력해주세요."></td>
-								<td>해운대</td>
+								<input type="hidden" id="hd_title" name="plantitle">
+								<input type="hidden" id="hd_day" name="planday">
+								
+								<td><input type="text" name="planTime" class="plan_time" value="원하는 시간을 입력해주세요."></td>
+								<td><input type="text" name="mapPlan" class="plan_map" value="원하는 장소를 입력해주세요"></td>
 								<td>
-								<input type="text" class="plan_content" value="해당 일정에 대한 내용을 입력해주세요.">
-								<button	name="del_plan" class="plan_del">삭제</button>
+								<input type="text" name="contentPlan" class="plan_content" value="해당 일정에 대한 내용을 입력해주세요.">
+								<button type="submit">추가</button>
 								</td>
 							</tr><!-- 변경점 존재 -->
-							<tr name="add_plan">
-								<td><input type="text" class="plan_time" value="원하는 시간을 입력해주세요."></td>
-								<td>해운대</td>
-								<td>
-								<input type="text" class="plan_content" value="해당 일정에 대한 내용을 입력해주세요.">
-								<button	name="del_plan" class="plan_del">삭제</button>
-								</td>
-							</tr>
-							<tr name="add_plan">
-								<td><input type="text" class="plan_time" value="원하는 시간을 입력해주세요."></td>
-								<td>해운대</td>
-								<td>
-								<input type="text" class="plan_content" value="해당 일정에 대한 내용을 입력해주세요.">
-								<button	name="del_plan" class="plan_del">삭제</button>
-								</td>
-							</tr>
-							<tr name="add_plan">
-								<td><input type="text" class="plan_time" value="원하는 시간을 입력해주세요."></td>
-								<td>해운대</td>
-								<td>
-								<input type="text" class="plan_content" value="해당 일정에 대한 내용을 입력해주세요.">
-								<button	name="del_plan" class="plan_del">삭제</button>
-								</td>
-							</tr>
-							<tr name="add_plan">
-								<td><input type="text" class="plan_time" value="원하는 시간을 입력해주세요."></td>
-								<td>해운대</td>
-								<td>
-								<input type="text" class="plan_content" value="해당 일정에 대한 내용을 입력해주세요.">
-								<button	name="del_plan" class="plan_del">삭제</button>
-								</td>
-							</tr>
-							<tr>
+							</form>
+							
+							<!-- <tr>
 								<td colspan='3'>
 									<button name="add_btn" class="plan_add">추가하기</button>
 								</td>
-							</tr>
+							</tr> -->
 						</table>
 					</div>
 					<div class="cal_popup_1">
 						<button type="button" class="btn_submit_2">확인</button>
-						<button onclick="closePopup2()" class="btn_close_3">닫기</button>
+						<button  type="button" onclick="closePopup2()" class="btn_close_3">닫기</button>
 					</div>
 				</div>
 			</div>
 			
 			<!-- 공개여부 -->
-				<div class="cal_open_text">
-					<p>해당 여행 계획을 공개하시겠습니까?</p>
-					<span>만약 공개를 선택하시면 All Plan에 올라가며 모든 사람들이 확인할 수 있습니다.</span>
-				</div>
-				<div class="cal_open_check">
-					<input type="radio" checked="checked" name="opne_check"><label>공개</label>
-					<input type="radio" name="opne_check" ><label>비공개</label>
-				</div>
 				
 				<!-- 확인 버튼 -->
 				<div class="btn_newplan_1">
@@ -382,42 +392,24 @@ function initTmap(){
 		</div>
 	</div>
 	<script type="text/javascript">
-	//추가 버튼
-	$(document).on("click","button[name=add_btn]",function(){
-	    var addPlan = '<tr name="add_plan">'+
-	        '    <td>'+
-	        '        <input type="text" class="plan_time" value="원하는 시간을 입력해주세요.">'+
-	        '	</td>'+
-	        '        <td>해운대</td>'+
-	        '        <td>'+
-	        '       <input type="text" class="plan_content" value="해당 일정에 대한 내용을 입력해주세요.">'+
-	        '	<button	name="del_plan" class="plan_del">삭제</button>'+
-	        '    </td>'+
-	        '</tr>';
-	    var trHtml = $("tr[name=add_plan]:last"); //last를 사용하여 trStaff라는 명을 가진 마지막 태그 호출
-	    trHtml.after(addPlan); //마지막 trStaff명 뒤에 붙인다.
-	});
+	function eventKeyup(str){
+		$("#hd_title").val(str); 
+	}
+	var as = $("form[name='cal']").serialize();
+
+		
+	$("#btn_submit_1").click(function() {
+		var planStartDay =  localStorage.getItem("startDay");
+		var arr = planStartDay.split(" ");
+		var days = arr[1]+"/"+arr[2];
+		$("#modal_btn").html(days);
+		
+		$("#daysCall_1").html(days);
 	
-	/* 위에랑 중복? 되는 것 같아서 잠시 주석(희수) */
-	/* $(document).on("click","button[name=add_btn]",function(){
-	    var addPlan = '<tr name="add_plan">'+
-	        '    <td>'+
-	        '        <input type="text" class="plan_time">'+
-	        '	</td>'+
-	        '        <td>해운대</td>'+
-	        '        <td>'+
-	        '       <input type="text" class="plan_content">'+
-	        '	<button	name="del_plan">삭제</button>'+
-	        '    </td>'+
-	        '</tr>';
-	    var trHtml = $("tr[name=add_plan]:last"); //last를 사용하여 trStaff라는 명을 가진 마지막 태그 호출
-	    trHtml.after(addPlan); //마지막 trStaff명 뒤에 붙인다.
-	}); */
+		
+		
+		});
 	
-	$(document).on("click","button[name=del_plan]",function(){
-	    var trHtml = $(this).parent().parent();
-	    trHtml.remove(); //tr 테그 삭제
-	});
 	</script>
 </body>
 </html>

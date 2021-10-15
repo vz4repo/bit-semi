@@ -4,22 +4,25 @@
   <meta charset="UTF-8">
   <!-- Air datepicker object -->
   <link href="air-datepicker.css" rel="stylesheet" type="text/css" media="all">
-  <script src="air-datepicker.js"></script>  
+  <script src="air-datepicker.js"></script>
   <title>feature|calendar</title>
 </head>
 <body>
+<form name = "cal">
 <div>
+ 
   <div class="calendar" style="display: flex;">
     <div>
-      <p class="cal_day_check">가는날</p>
+	    <p class="cal_day_check">가는날</p>
 	    <input id="test01" class="input_el" type="text" placeholder="YYYY/MM/DD">
     </div>
     <div>
-      <p class="cal_day_check">오는날</p>
+	    <p class="cal_day_check">오는날</p>
 	    <input id="test02" class="input_e1" type="text" placeholder="YYYY/MM/DD">
     </div>
   </div>
 </div>
+</form>
 
 <p class="cal_day_check"><button onclick="date_select()">확인</button></p>
 <div class="container_output">
@@ -34,12 +37,12 @@
     function date_select(){
       document.getElementById('selected_begin').textContent = test01.$el.value;
       document.getElementById('selected_end').textContent = test02.$el.value;
-      
+
       sessionStorage.setItem('day_begin', test01.$el.value);
       sessionStorage.setItem('day_end', test01.$el.value);
         }
 
-  
+
   const localeKR = {
     days: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
     daysShort: ['일', '월', '화', '수', '목', '금', '토'],
@@ -60,14 +63,19 @@
   test01 = new AirDatepicker('#test01', {
     inline: true,
     locale: localeKR,
+
     // range: true,
     // multipleDatesSeparator: ' ~ ',
     onSelect({date}) {
+    	var sday = date;
       test02.update({
         minDate: date
       })
+      localStorage.setItem('startDay', sday);
+
     }
   });
+
   test02 = new AirDatepicker('#test02', {
     inline: true,
     locale: localeKR,
@@ -79,7 +87,7 @@
       })
     }
   });
-  
+
   $(test01.formatDate(today, 'dd MMMM yyyy'));
 </script>
 </html>
