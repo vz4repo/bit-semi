@@ -8,6 +8,7 @@
   <title>feature|calendar</title>
 </head>
 <body>
+<form name = "cal">
 <div>
  
   <div class="calendar" style="display: flex;">
@@ -21,6 +22,7 @@
     </div>
   </div>
 </div>
+</form>
 </body>
 
 <script>
@@ -44,14 +46,19 @@
   test01 = new AirDatepicker('#test01', {
     inline: true,
     locale: localeKR,
+    
     // range: true,
     // multipleDatesSeparator: ' ~ ',
     onSelect({date}) {
+    	var sday = date;
       test02.update({
         minDate: date
       })
+      localStorage.setItem('startDay', sday);
+    
     }
   });
+ 
   test02 = new AirDatepicker('#test02', {
     inline: true,
     locale: localeKR,
@@ -63,5 +70,6 @@
       })
     }
   });
+ 
 </script>
 </html>
