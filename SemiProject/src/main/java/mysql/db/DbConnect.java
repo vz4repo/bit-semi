@@ -10,13 +10,16 @@ import java.sql.Statement;
 public class DbConnect {
   static final String MYSQLDRIVER = "com.mysql.jdbc.Driver";
 
-  static final String MYSQL_URL = "jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul";
+  static final String MYSQL_URL = "jdbc:mysql://localhost:3306/test";
 
+  // 생성자
   public DbConnect() {
+    // TODO Auto-generated constructor stub
     try {
       Class.forName(MYSQLDRIVER);
     } catch (ClassNotFoundException e) {
-      System.out.println("Mysql ����̹� ����:" + e.getMessage());
+      // TODO Auto-generated catch block
+      System.out.println("Mysql 드라이버 실패:" + e.getMessage());
     }
   }
 
@@ -24,15 +27,17 @@ public class DbConnect {
     Connection conn = null;
     try {
       conn = DriverManager.getConnection(MYSQL_URL, "root", "1234");
-
+      // System.out.println("성공");
 
     } catch (SQLException e) {
-      System.out.println("Mysql ���� ����:" + e.getMessage());
+      // TODO Auto-generated catch block
+      System.out.println("Mysql 연결 실패 : " + e.getMessage());
     }
     return conn;
+
   }
 
-  // close �޼���� �� 4��, �����ε� �޼���
+  // close 메서드는 총 4개, 오버로딩 메서드
   public void dbClose(ResultSet rs, Statement stmt, Connection conn) {
     try {
       if (rs != null)
@@ -76,4 +81,6 @@ public class DbConnect {
     } catch (SQLException e) {
     }
   }
+
+
 }

@@ -41,15 +41,14 @@ $(document).ready(function(){
 			
 			<div id="member">
 			<%
-				String loginok=(String)session.getAttribute("loginok");
 				String myid=(String)session.getAttribute("myid");
 				
-				if(loginok==null){%>
-				<button onclick="location='index.jsp?main=test/login.jsp'">Login</button>
-				<button onclick="location='index.jsp?main=test/join.jsp'">Join</button>
+				if(session.getAttribute("loginok")==null){%>
+				<button onclick="location='index.jsp?main=users/login.jsp'">Login</button>
+				<button onclick="location='index.jsp?main=users/join.jsp'">Join</button>
 			<%}else{%>
-				<button onclick="location.href='test/logoutaction.jsp'">Logout</button>
-				<button onclick="#">MyPage</button>
+				<button onclick="location='index.jsp?main=users/logout_action.jsp'">Logout</button>
+				<button onclick="location.href='#'">MyPage</button>
 			<%}
 			%>
 			<!-- 아래 기존! -->

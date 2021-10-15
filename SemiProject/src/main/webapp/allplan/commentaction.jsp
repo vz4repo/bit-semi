@@ -24,4 +24,5 @@
 	index.jsp?main=allplan/allplanview.jsp?num=6&currentPage=1&key=list
 	response.sendRedirect(path); */
 	/* response.sendRedirect("../index.jsp"); */
+
 %>

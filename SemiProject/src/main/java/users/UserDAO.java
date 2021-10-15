@@ -10,70 +10,77 @@ import connection.DBConnect;
 
 public class UserDAO {
 
-  DBConnect dbConnect = new DBConnect();
+  private DBConnect dbConnect = new DBConnect();
 
-  private Connection con;
+  private Connection conn = dbConnect.getConnectionCloud();
+  private PreparedStatement pstmt;
   private ResultSet rs;
 
+  public static void main(String []args){
+    UserDAO dao = new UserDAO();
 
-  // TODO refactoring:-2:아이디없음 -1:서버오류 0:비밀번호 틀림 1:성공
-  public int login(UserDTO dto) {
+//    System.out.println(dao.login("test01", "1234"));
+    System.out.println(dao.hasID("test02"));
+  }
+
+  // 1:성공 0:비밀번호 틀림 1:ID없음 -2:서버 오류 -
+  public int login(String userID, String userPassword) {
+    String sql = "select userPassword from maria_study.tuser where userID = ?";
     try {
-      PreparedStatement pstmt =
-          con.prepareStatement("SELECT userPassword FROM user WHERE userID = ?");
-      pstmt.setString(1, dto.getUserID());
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, userID);
       rs = pstmt.executeQuery();
-      if (rs.next()) {
-        return rs.getString(1).equals(dto.getUserPassword()) ? 1 : 0;
-      } else {
-        return -2;
+      System.out.println(sql);
+      if (rs.next()) { // rs 로 받은 id가 있으면 true
+        if (rs.getString(1).equals(userPassword)) {
+          return 1; // 1:성공
+        } else {
+          return 0; // 0: 비밀번호 틀림
+        }
       }
+      return -1; // -1: ID 없음
     } catch (Exception e) {
       e.printStackTrace();
-      return -1;
+    } finally {
+      dbConnect.resourceClose(rs, pstmt, conn);
     }
+    return -2; // -2: 서버오류
   }
 
 
-  // 중복여부 확인:ID_Check:다른 방법 찾아보기
-  public boolean hasID(String userID) {
-    boolean hasID = false;
-    Connection conn = dbConnect.getConnectionCloud();
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    String sql = "SELECT * FROM tuser WHERE userID = ?";
-    // For aws cloud db
-    // String sql = "SELECT * FROM maria_study.tuser WHERE userID = ?";
+  // 중복여부 확인: 1: 있다  0: 없다  -2: DB오류
+  public int hasID(String userID) {
+    String sql = "SELECT count(*) FROM maria_study.tuser WHERE userID = ?";
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, userID);
       rs = pstmt.executeQuery();
       if (rs.next()) {
-        return true;
+        System.out.println(rs.getInt(1));
+        return (rs.getInt(1) == 1) ? 1 : 0; // 1: 있다 | 0: 없다
       }
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
       dbConnect.resourceClose(rs, pstmt, conn);
     }
-    return hasID;
+    return -2; // -2: 서버 오류
   }
 
 
   // 회원가입
   public void join(UserDTO dto) {
-    // 회원가입여부 체크
-    if (!hasID(dto.getUserID())) {
-      con = dbConnect.getConnectionCloud();
+    // 회원가입여부 체크, 없으면 콘솔에 0 출력
+    if (hasID(dto.getUserID()) == 0) {
+
+      Connection conn = dbConnect.getConnectionCloud();
       PreparedStatement pstmt = null;
+      ResultSet rs = null;
+
       String sql =
-          "insert into tuser (userID,userPassword,userName,userPhone,userMail,userAddr,userGender,userDate) values (?,?,?,?,?,?,?,?)";
-      // For aws cloud DB
-      // "insert into maria_study.tuser
-      // (userID,userPassword,userName,userPhone,userMail,userAddr,userGender,userDate) values
-      // (?,?,?,?,?,?,?,?)";
+          "insert into maria_study.tuser (userID,userPassword,userName,userPhone,userMail,userAddr,userGender,userDate) values (?,?,?,?,?,?,?,?)";
       try {
-        pstmt = con.prepareStatement(sql);
+        pstmt = conn.prepareStatement(sql);
 
         pstmt.setString(1, dto.getUserID());
         pstmt.setString(2, dto.getUserPassword());
@@ -84,22 +91,26 @@ public class UserDAO {
         pstmt.setString(7, dto.getUserGender());
         pstmt.setString(8, dto.getUserDate());
 
+        System.out.println(sql);
+
         pstmt.execute();
         System.out.println("user inserted");
       } catch (SQLException e) {
         e.printStackTrace();
         System.out.println(dto.getUserName() + ": FAIL");
       } finally {
-        dbConnect.resourceClose(pstmt, con);
+        dbConnect.resourceClose(pstmt, conn);
       }
       // TODO 가입 실패 경우도 체크
     }
   }
 
+
   // TODO refactoring: 유저 데이터 가져오기
   public UserDAO getUser(String userID) {
     try {
-      PreparedStatement pstmt = con.prepareStatement("SELECT * FROM user WHERE userID = ?");
+      PreparedStatement pstmt =
+          conn.prepareStatement("SELECT * FROM maria_study.tuser WHERE userID = ?");
       pstmt.setString(1, userID);
       rs = pstmt.executeQuery();
       List<UserDTO> list = new Vector<>();
@@ -108,8 +119,11 @@ public class UserDAO {
         dto.setUserID(rs.getString(1));
         dto.setUserPassword(rs.getString(2));
         dto.setUserName(rs.getString(3));
-        dto.setUserGender(rs.getString(4));
-        dto.setUserDate(rs.getString(5));
+        dto.setUserPhone(rs.getString(4));
+        dto.setUserMail(rs.getString(5));
+        dto.setUserAddr(rs.getString(6));
+        dto.setUserGender(rs.getString(7));
+        dto.setUserDate(rs.getString(8));
 
         list.add(dto);
       }
@@ -118,6 +132,4 @@ public class UserDAO {
     }
     return null;
   }
-
-
 }

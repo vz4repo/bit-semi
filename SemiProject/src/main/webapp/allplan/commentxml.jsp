@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <%@page import="comment.commentDTO"%>
-<%@page import="member_test.memberDAO"%>
+<%@page import="users.UserDAO"%>
 <%@page import="comment.commentDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
@@ -11,7 +11,7 @@
 	String num=request.getParameter("num");
 System.out.println(num);
 	commentDAO adao=new commentDAO();
-	memberDAO mdao=new memberDAO();
+	UserDAO mdao=new UserDAO();
 	List<commentDTO> list=adao.getAllAnswer(num);
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	for(commentDTO dto:list)

@@ -96,7 +96,7 @@ local.properties
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
-
+/classes/*
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
@@ -189,3 +189,4 @@ modules.xml
 hs_err_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,intellij+all,java
+/build/
