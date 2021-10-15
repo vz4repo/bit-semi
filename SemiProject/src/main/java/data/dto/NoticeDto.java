@@ -2,15 +2,12 @@ package data.dto;
 
 import java.sql.Timestamp;
 
-public class PlanDto {
+public class NoticeDto {
   private String num;
   private String name;
+  private String title;
   private String content;
-  private int chu;
-  private int jo;
   private Timestamp writeday;
-
-
 
   public String getNum() {
     return num;
@@ -28,28 +25,20 @@ public class PlanDto {
     this.name = name;
   }
 
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
   public String getContent() {
     return content;
   }
 
   public void setContent(String content) {
     this.content = content;
-  }
-
-  public int getChu() {
-    return chu;
-  }
-
-  public void setChu(int chu) {
-    this.chu = chu;
-  }
-
-  public int getJo() {
-    return jo;
-  }
-
-  public void setJo(int jo) {
-    this.jo = jo;
   }
 
   public Timestamp getWriteday() {
@@ -59,5 +48,6 @@ public class PlanDto {
   public void setWriteday(Timestamp writeday) {
     this.writeday = writeday;
   }
+
 
 }

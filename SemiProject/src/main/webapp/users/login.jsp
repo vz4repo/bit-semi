@@ -9,11 +9,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- link 선언 -->
 <link rel="stylesheet" href="../css/style.css">
-
+<link rel="stylesheet" href="../css/style_login.css">
 <!-- script 선언 -->
 <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="js/join_script.js"></script>
+<script src="../js/join_script.js"></script>
 <title>login.jsp</title>
 </head>
 <%
@@ -21,6 +21,7 @@ String root = request.getContextPath();
 %>
 <body>
 	<div class="container">
+<<<<<<<<< Temporary merge branch 1
 		<!-- sub -->
 		<div class="margin_wrap">
 			<div id="login_text">
