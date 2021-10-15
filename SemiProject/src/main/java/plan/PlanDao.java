@@ -6,17 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
-import mysql.db.DbConnect;
+import connection.DBConnect;
 
 public class PlanDao {
-  DbConnect db = new DbConnect();
+  DBConnect db = new DBConnect();
 
   // insert
   public void insertPlan(PlanDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     String sql =
-        "insert into test (userId,plantitle,planDate,content,writeday) values (?,?,?,?,now())";
+        "insert into maria_study.test_postinfo (userId,plantitle,planDate,content) values (?,?,?,?)";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select count(*) from test";
+    String sql = "select count(*) from maria_study.test_postinfo";
 
 
     try {
@@ -60,6 +60,91 @@ public class PlanDao {
     return n;
   }
 
+  // num에 해당하는 dto 반환
+  public PlanDto getData(String num) {
+    PlanDto dto = new PlanDto();
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    String sql = "select * from maria_study.test_postinfo where num=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+      // 바인딩
+      pstmt.setString(1, num);
+
+      // 실행
+      rs = pstmt.executeQuery();
+
+      if (rs.next()) {
+        dto.setNum(rs.getString("num"));
+        dto.setUserId(rs.getString("userId"));
+        dto.setPlantitle(rs.getString("plantitle"));
+        dto.setPlanDate(rs.getString("planDate"));
+        dto.setContent(rs.getString("content"));
+        dto.setReadCNT(rs.getInt("readCNT"));
+        dto.setWriteday(rs.getTimestamp("writeday"));
+
+      }
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      db.dbClose(rs, pstmt, conn);
+    }
+    return dto;
+  }
+
+  // 조회수 증가
+  public void updateReadcount(String num) {
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    String sql = "update maria_study.test_postinfo set readCNT=readCNT+1 where num=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+      // 바인딩
+      pstmt.setString(1, num);
+
+      // 실행
+      pstmt.execute();
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      db.dbClose(pstmt, conn);
+    }
+  }
+
+  // 방금 추가된 최종 시퀀스 num 값 리턴
+  public String getMaxNum() {
+    PlanDto dto = new PlanDto();
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    String sql = "select max(num) from maria_study.test_postinfo";
+    String num = "";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+      // 실행
+      rs = pstmt.executeQuery();
+
+      if (rs.next()) {
+        num = rs.getString(1);
+      }
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      db.dbClose(rs, pstmt, conn);
+    }
+    return num;
+  }
+
   // 게시판,페이징 처리
   // 최신순
   public List<PlanDto> getPlan(int start, int perpage) {
@@ -67,7 +152,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from test order by num desc limit ?,?";
+    String sql = "select * from maria_study.test_postinfo order by num desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -104,7 +189,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from test order by good desc limit ?,?";
+    String sql = "select * from maria_study.test_postinfo order by good desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -139,7 +224,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from test order by readCNT desc limit ?,?";
+    String sql = "select * from maria_study.test_postinfo order by readCNT desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -168,4 +253,3 @@ public class PlanDao {
     return list;
   }
 }
-

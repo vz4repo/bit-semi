@@ -11,7 +11,8 @@
     script.println("location.href='"+ request.getContextPath() +"/index.jsp'");
     script.println("</script>");
 
-    session.invalidate();   // 모든 세션 정보 삭제
-    //  session.removeAttribute("userSessionID");   // 해당 세션만 삭제
+    //session.invalidate();   // 모든 세션 정보 삭제
+    session.removeAttribute("myid");   // 해당 세션만 삭제
+    session.setAttribute("loginok", false);	// default : false
     return;
 %>

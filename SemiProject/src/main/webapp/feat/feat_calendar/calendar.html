@@ -8,6 +8,7 @@
   <title>feature|calendar</title>
 </head>
 <body>
+<form name = "cal">
 <div>
  
   <div class="calendar" style="display: flex;">
@@ -21,9 +22,27 @@
     </div>
   </div>
 </div>
+</form>
+
+<p class="cal_day_check"><button onclick="date_select()">확인</button></p>
+<div class="container_output">
+  <span class ="output" id="selected_begin">시작 날짜</span>
+  <span class =output" id="selected_end">종료 날짜</span>
+</div>
+
 </body>
 
 <script>
+  // 값 출력
+    function date_select(){
+      document.getElementById('selected_begin').textContent = test01.$el.value;
+      document.getElementById('selected_end').textContent = test02.$el.value;
+
+      sessionStorage.setItem('day_begin', test01.$el.value);
+      sessionStorage.setItem('day_end', test01.$el.value);
+        }
+
+
   const localeKR = {
     days: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
     daysShort: ['일', '월', '화', '수', '목', '금', '토'],
@@ -44,14 +63,18 @@
   test01 = new AirDatepicker('#test01', {
     inline: true,
     locale: localeKR,
+
     // range: true,
     // multipleDatesSeparator: ' ~ ',
     onSelect({date}) {
+    	var sday = date;
       test02.update({
         minDate: date
       })
+      localStorage.setItem('startDay', sday);
     }
   });
+
   test02 = new AirDatepicker('#test02', {
     inline: true,
     locale: localeKR,
@@ -63,5 +86,7 @@
       })
     }
   });
+
+  $(test01.formatDate(today, 'dd MMMM yyyy'));
 </script>
 </html>

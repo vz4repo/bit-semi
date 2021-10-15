@@ -1,0 +1,86 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- meta 선언 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link 선언 -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- 아래 style 잠시 주석처리함(희수) -->
+    <!-- <link rel="stylesheet" href="../css/style_join.css"> -->
+    <!-- script 선언 -->
+    <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a540d38cece314fa1d5f094089df4bd&libraries=services"></script>
+    <script src="js/join_script.js"></script>
+    <title>GOING</title>
+</head>
+<%
+    String root=request.getContextPath();
+%>
+<body>
+	<div class="container">
+	<!-- sub -->
+	<div class="margin_wrap">
+		<div id="join_text">
+			<p>GOING 온라인 회원가입 테스트</p>
+		</div>
+	</div>
+	<!-- sub -->
+	
+	  <div class="join_container">
+	  <p id="join_info">회원 정보</p>
+	    <form method="post" action="test/joinaction.jsp">
+	     <div class="joinName joinValue">
+	     	 <label class="id_form_title"><b class="point">*</b>이름</label>
+	         <input type="text" class="joinInput" id="name_input" placeholder="이름을 입력해주세요."
+	          name="name" title="이름" maxlength="20">
+	      </div>
+	      <div class="joinID joinValue">
+		      <label class="id_form_title"><b class="point">*</b>아이디</label>
+		      <input type="text" class="joinInput" id="id_input" style="ime-mode: disabled;"
+		       placeholder="아이디를 입력해주세요" name="id" title="아이디" maxlength="20">
+	      </div>
+	      <div class="joinPassword joinValue">
+	      	 <label class="id_form_title"><b class="point">*</b>비밀번호</label>
+	         <input type="password" class="joinInput" id="pw_input" placeholder="비밀번호를 입력해주세요."
+	          name="pw" title="비밀번호" maxlength="40">
+	      </div>
+	      <div class="joinPhone joinValue">
+	      	<label class="id_form_title"><b class="point">*</b>전화번호</label>
+	        <input type="tel" class="joinInput" id="hp_input" placeholder="휴대폰 번호를 '-' 없이 입력해주세요."
+	          name="hp" title="전화번호" maxlength="11">
+	      </div>
+	      <div class="joinMail joinValue">
+	     	 <label class="id_form_title"><b class="point">*</b>이메일</label>
+	         <input type="email" class="joinInput" id="email_input" placeholder="이메일 주소를 입력해주세요."
+	          name="email" title="이메일" maxlength="60">
+	      </div>
+	      <div class="joinMail joinValue">
+	     	 <label class="id_form_title"><b class="point">*</b>주소</label>
+	         <input type="text" id="default_address" class="joinInput" placeholder="주소를 입력해주세요."
+	          name="addr" title="주소" maxlength="120">
+	          <input type="button" onclick="addr_execDaumPostcode()" class="joinInput_addr" value="주소 검색">
+	      </div>
+	      <div class="joinGender joinValue">
+	      	<label class="id_form_title"><b class="point">*</b>성별</label>
+	      	<div class="gender_input">
+		        <input type="radio" name="gender" value="M" title="성별"><label id="rd_gender">남자</label>
+		        <input type="radio" name="gender" value="F" title="성별"><label id="rd_gender">여자</label>
+	        </div>
+	      </div>
+	      <div class="joinDate joinValue">
+	        <label class="id_form_title"><b class="point">*</b>생년월일</label>
+	        <input type="date" class="joinInput" id="birth_input" placeholder="생년월일"
+	          name="birth">
+	      </div>
+	      <div class="join_bottom"></div>
+	      <input type="submit" class="btn_join" value="회원가입">
+	    </form>
+	  </div>
+	</div>
+</body>
+</html>

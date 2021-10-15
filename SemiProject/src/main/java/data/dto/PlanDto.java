@@ -10,6 +10,8 @@ public class PlanDto {
   private int jo;
   private Timestamp writeday;
 
+
+
   public String getNum() {
     return num;
   }

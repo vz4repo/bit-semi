@@ -9,13 +9,14 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 </head>
 <%
-// index.jsp 시작
-System.out.println("> index.jsp");
+	// index.jsp 시작
+	System.out.println("> index.jsp");
 	String mainpage="layout/main.jsp";
 	if(request.getParameter("main")!=null){
 		mainpage=request.getParameter("main");
 }
-	System.out.println("sessionID: " + session.getAttribute("userSessionID"));
+	System.out.println("myid: " + session.getAttribute("myid"));
+	System.out.println("loginok? : " + session.getAttribute("loginok"));
 %>
 <body>
 	<!-- 헤더 (로고,메뉴들까지 불러옴) -->
