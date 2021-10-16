@@ -4,7 +4,6 @@
 <%
 	String root=request.getContextPath();
 %>
-
 	<!--main-->
 	<div id="main_wrap">
 		<%-- <div id="main_img">
@@ -29,7 +28,7 @@
 						<span class="con_1_box">
 							<h3>부산여행</h3>
 							<p>기간:2021-03-10~2021-03-12</p>
-							<p>작성자:홍길동</p>
+							<p>홍길동</p>
 						</span>
 					</a>
 				</li>
@@ -39,7 +38,7 @@
 						<span class="con_1_box">
 							<h3>제주여행</h3>
 							<p>기간:2021-03-10~2021-03-12</p>
-							<p>작성자:홍길동</p>
+							<p>홍길동</p>
 						</span>
 					</a>
 				</li>
@@ -49,7 +48,7 @@
 						<span class="con_1_box">
 							<h3>시원한 바다여행</h3>
 							<p>기간:2021-03-10~2021-03-12</p>
-							<p>작성자:홍길동</p>
+							<p>홍길동</p>
 						</span>
 					</a>
 				</li>
@@ -59,7 +58,7 @@
 						<span class="con_1_box">
 							<h3>을왕리 코스</h3>
 							<p>기간:2021-03-10~2021-03-12</p>
-							<p>작성자:홍길동</p>
+							<p>홍길동</p>
 						</span>
 					</a>
 				</li>
@@ -69,7 +68,7 @@
 						<span class="con_1_box">
 							<h3>파주탐방</h3>
 							<p>기간:2021-03-10~2021-03-12</p>
-							<p>작성자:홍길동</p>
+							<p>홍길동</p>
 						</span>
 					</a>
 				</li>
@@ -79,7 +78,7 @@
 						<span class="con_1_box">
 							<h3>속초 맛집 여행</h3>
 							<p>기간:2021-03-10~2021-03-12</p>
-							<p>작성자:홍길동</p>
+							<p>홍길동</p>
 						</span>
 					</a>
 				</li>
@@ -89,7 +88,11 @@
 	</div>
 	
 	<!--content_2-->
-	<div id="content_2" class="margin_wrap"></div>
+	<div id="content_2" class="margin_wrap">
+		<div id="main_sub_text">
+			<p>TRAVLE</p>
+		</div>
+	</div>
 	<!--content_2-->
 		
 	<div class="container">	

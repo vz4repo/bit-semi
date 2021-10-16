@@ -20,6 +20,14 @@
 String root = request.getContextPath();
 %>
 <body>
+	<!-- sub -->
+	<div id="sub_image" class="margin_wrap">
+		<div id="sub_text">
+			<p>Login</p>
+		</div>
+	</div>
+	<!-- sub -->
+
 	<div class="container">
 		<!-- sub -->
 		<div class="margin_wrap">

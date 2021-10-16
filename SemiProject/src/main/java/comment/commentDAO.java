@@ -60,13 +60,47 @@ public class commentDAO {
     return n;
   }
 
+  // idx에 해당하는 dto 반환
+  public commentDTO getData(String idx) {
+    commentDTO dto = new commentDTO();
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    String sql = "select * from comment where idx=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+      // 바인딩
+      pstmt.setString(1, idx);
+
+      // 실행
+      rs = pstmt.executeQuery();
+
+      if (rs.next()) {
+        dto.setIdx(rs.getString("idx"));
+        dto.setNum(rs.getString("num"));
+        dto.setUserId(rs.getString("userId"));
+        dto.setContents(rs.getString("contents"));
+        dto.setWriteday(rs.getTimestamp("writeday"));
+
+      }
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      db.dbClose(rs, pstmt, conn);
+    }
+    return dto;
+  }
+
   // 전체 댓글 출력
   public List<commentDTO> getAllAnswer(String num) {
     List<commentDTO> list = new Vector<commentDTO>();
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from comment where num=? order by idx";
+    String sql = "select * from comment where num=? order by idx DESC";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -146,6 +180,29 @@ public class commentDAO {
 
       // 바인딩
       pstmt.setString(1, idx);
+
+      // 실행
+      pstmt.execute();
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      db.dbClose(pstmt, conn);
+    }
+  }
+
+  // 수정
+  public void updateComment(commentDTO dto) {
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    String sql = "update comment set contents=? where idx=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+      // 바인딩
+      pstmt.setString(1, dto.getContents());
+      pstmt.setString(2, dto.getIdx());
 
       // 실행
       pstmt.execute();

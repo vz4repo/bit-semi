@@ -27,13 +27,13 @@ $(document).ready(function(){
 	<header>
 		<div id="wrapper">
 			<div id="logo">
-				<a href="index.jsp"><%-- <img src="<%=root%>/image/s10.JPG"> --%>LOGO</a>
+				<a href="index.jsp"><img src="<%=root%>/image/logo.png"></a>
 			</div>
 		
 			<nav class="clearfix">
 				<ul class="clearfix">
 					<li><a href="index.jsp?main=allplan/allplanlist.jsp">All Plan</a></li>
-					<li><a href="index.jsp?main=newplan_test/newplanform.jsp">New Plan</a></li>
+					<li><a href="index.jsp?main=newPlan/NewPlanCal.jsp">New Plan</a></li>
 					<!-- <li><a href="index.jsp?main=newPlan/NewPlanCal.jsp">New Plan</a></li> -->
 					<li><a href="#">Review</a></li>
 					<li><a href="index.jsp?main=notice/noticeview.jsp">Notice</a></li>
@@ -49,7 +49,7 @@ $(document).ready(function(){
 				<button onclick="location='index.jsp?main=users/join.jsp'">Join</button>
 			<%}else{%>
 				<button onclick="location='index.jsp?main=users/logout_action.jsp'">Logout</button>
-				<button onclick="location.href='#'">MyPage</button>
+				<button onclick="location.href='index.jsp?main=users/mypage.jsp'">MyPage</button>
 			<%}
 			%>
 			<!-- 아래 기존! -->
