@@ -191,7 +191,7 @@
 		/* 댓글 팝업 수정 버튼 클릭시 이벤트! */
 		$(document).on("click", ".btn_submit_1", function(){
 			var idx=$(".aup").attr("idx");
-			console.log(idx); //삭제 아이콘 클릭하면 번호 나오는지 확인 완료!
+			console.log(idx); //수정 아이콘 클릭하면 번호 나오는지 확인 완료!
 			$.ajax({
 				type:"get",
 				dataType:"html",
@@ -343,7 +343,7 @@
 				<div class="content">
 					<p class="cal_popup_1_title">수정하기</p>
 						<textarea id="com_box_2" class="update_comment_form" name="content" 
-						required="required">
+						required="required"><%=cdto.getContents()%>
 						</textarea>
 						<div class="cal_popup_1">
 							<button type="submit" class="btn_submit_1">수정</button>
