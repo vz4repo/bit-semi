@@ -119,21 +119,19 @@
           alert("login first");
           location.href = 'index.jsp?main=users/login.jsp';
           <%} else {%>
-
+          var num = $("#num").val();
+          var myid = $("#myid").val();
+          var acontent = $("#com_box").val();
           if (acontent.length == 0) {
             alert("댓글내용을 입력후 확인을 눌러주세요");
             return;
           }
 
           $.ajax({
-            url: "allplan/commentaction.jsp",
             type: "post",
             dataType: "html",
-            data: {
-              "num": $("#num").val(),
-              "myid": $("#myid").val(),
-              "content": $("#com_box").val()
-            },
+            url: "allplan/commentaction.jsp",
+            data: {"num": num, "myid": myid, "content": acontent},
             success: function (d) {
               alert("댓글이 등록되었습니다!");
               //목록 다시 출력
@@ -176,7 +174,7 @@
         /* 댓글 삭제 버튼 클릭시 이벤트! */
         $(document).on("click", ".adel", function () {
           var idx = $(this).attr("idx");
-          console.log("del-idx"+idx); //삭제 아이콘 클릭하면 번호 나오는지 확인 완료!
+          console.log("del-idx" + idx); //삭제 아이콘 클릭하면 번호 나오는지 확인 완료!
           $.ajax({
             type: "get",
             dataType: "html",
@@ -330,12 +328,12 @@
             </table>
             <% }%>
 
-                <%
+            <%
                 // TODO : 댓글 기능 (임시!)
                 commentDAO test_dao = new commentDAO();
                 List<commentDTO> list = test_dao.getAllAnswer(request.getParameter("num"));
 
-                %>
+            %>
             <div class="comment-count">
                 <h2> comments count <%=list.size()%>
                 </h2>
@@ -350,7 +348,8 @@
               <p class='com_list_1_contents comm_idx_<%=list.get(i).getIdx()%>'> <%=list.get(i).getContents()%></p>
               <p class='com_list_1_day'> <%=list.get(i).getWriteday()%></p>
                         <% if (myid != null && myid.equals(list.get(i).getUserId())) { %>
-              <button type='button' class='aup v_com_btn_1' id='btn_modify' idx='<%=list.get(i).getIdx()%>' onclick='showPopup(false, <%=list.get(i).getIdx()%>)'>수정</button>
+              <button type='button' class='aup v_com_btn_1' id='btn_modify' idx='<%=list.get(i).getIdx()%>'
+                      onclick='showPopup(false, <%=list.get(i).getIdx()%>)'>수정</button>
               <button type='button' class='adel v_com_btn_1' id='btn_del' idx='<%=list.get(i).getIdx()%>'>삭제</button>
                         <%}%>
                     </span>
