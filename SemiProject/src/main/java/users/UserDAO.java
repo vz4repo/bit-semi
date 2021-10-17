@@ -12,7 +12,7 @@ public class UserDAO {
 
   private DBConnect dbConnect = new DBConnect();
 
-  private Connection conn = dbConnect.getConnectionCloud();
+  private Connection conn = dbConnect.getConnection();
   private PreparedStatement pstmt;
   private ResultSet rs;
 
@@ -25,7 +25,7 @@ public class UserDAO {
 
   // 1:성공 0:비밀번호 틀림 1:ID없음 -2:서버 오류 -
   public int login(String userID, String userPassword) {
-    String sql = "select userPassword from tuser where userID = ?";
+    String sql = "select userPassword from maria_study.tuser where userID = ?";
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, userID);
@@ -42,7 +42,7 @@ public class UserDAO {
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
-      dbConnect.resourceClose(rs, pstmt, conn);
+      dbConnect.dbClose(rs, pstmt, conn);
     }
     return -2; // -2: 서버오류
   }
@@ -50,7 +50,7 @@ public class UserDAO {
 
   // 중복여부 확인: 1: 있다 0: 없다 -2: DB오류
   public int hasID(String userID) {
-    String sql = "SELECT count(*) FROM tuser WHERE userID = ?";
+    String sql = "SELECT count(*) FROM maria_study.tuser WHERE userID = ?";
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, userID);
@@ -62,7 +62,7 @@ public class UserDAO {
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
-      dbConnect.resourceClose(rs, pstmt, conn);
+      dbConnect.dbClose(rs, pstmt, conn);
     }
     return -2; // -2: 서버 오류
   }
@@ -73,12 +73,12 @@ public class UserDAO {
     // 회원가입여부 체크, 없으면 콘솔에 0 출력
     if (hasID(dto.getUserID()) == 0) {
 
-      Connection conn = dbConnect.getConnectionCloud();
+      Connection conn = dbConnect.getConnection();
       PreparedStatement pstmt = null;
       ResultSet rs = null;
 
       String sql =
-          "insert into tuser (userID,userPassword,userName,userPhone,userMail,userAddr,userGender,userDate) values (?,?,?,?,?,?,?,?)";
+          "insert into maria_study.tuser (userID,userPassword,userName,userPhone,userMail,userAddr,userGender,userDate) values (?,?,?,?,?,?,?,?)";
       try {
         pstmt = conn.prepareStatement(sql);
 
@@ -99,7 +99,7 @@ public class UserDAO {
         e.printStackTrace();
         System.out.println(dto.getUserName() + ": FAIL");
       } finally {
-        dbConnect.resourceClose(pstmt, conn);
+        dbConnect.dbClose(pstmt, conn);
       }
       // TODO 가입 실패 경우도 체크
     }
@@ -109,7 +109,7 @@ public class UserDAO {
   // TODO refactoring: 유저 데이터 가져오기
   public UserDAO getUser(String userID) {
     try {
-      PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM tuser WHERE userID = ?");
+      PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM maria_study.tuser WHERE userID = ?");
       pstmt.setString(1, userID);
       rs = pstmt.executeQuery();
       List<UserDTO> list = new Vector<>();

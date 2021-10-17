@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="plan/newplanadd.jsp" method="post" class="form-inline" name="planfrm">
+<form action="allplan/newplanadd.jsp" method="post" class="form-inline" name="planfrm">
 <table class="table table-bordered" style="width:500px; margin-top: 300px;">
 	<caption><b>새 여행 계획</b></caption>
 	<tr>

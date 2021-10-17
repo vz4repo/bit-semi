@@ -6,16 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
-import mysql.db.DbConnect;
+import connection.DBConnect;
 
 public class commentDAO {
-  DbConnect db = new DbConnect();
+  DBConnect db = new DBConnect();
 
   // 댓글 추가
   public void commentInsert(commentDTO dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "insert into comment (num,userId,contents,writeday) values (?,?,?,now())";
+
+    String sql = "insert into maria_study.comment (num,userId,contents) values (?,?,?)";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -42,7 +43,7 @@ public class commentDAO {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select count(*) from comment";
+    String sql = "select count(*) from maria_study.comment";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -66,7 +67,7 @@ public class commentDAO {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from comment where idx=?";
+    String sql = "select * from maria_study.comment where idx=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -100,7 +101,7 @@ public class commentDAO {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from comment where num=? order by idx DESC";
+    String sql = "select * from maria_study.comment where num=? order by idx";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -137,7 +138,7 @@ public class commentDAO {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from comment order by num desc limit ?,?";
+    String sql = "select * from maria_study.comment order by num desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -173,7 +174,7 @@ public class commentDAO {
   public void deleteAnswer(String idx) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "delete from comment where idx=?";
+    String sql = "delete from maria_study.comment where idx=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -195,7 +196,7 @@ public class commentDAO {
   public void updateComment(commentDTO dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "update comment set contents=? where idx=?";
+    String sql = "update maria_study.comment set contents=? where idx=?";
 
     try {
       pstmt = conn.prepareStatement(sql);

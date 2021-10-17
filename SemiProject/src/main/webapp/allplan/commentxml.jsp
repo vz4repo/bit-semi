@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<%@page import="mysql.db.DbConnect"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
