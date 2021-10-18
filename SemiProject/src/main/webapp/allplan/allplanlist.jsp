@@ -98,11 +98,11 @@ $(function () {
 			<!-- 게시글 수 -->
 			<p id="all_plan_list_cnt">총 <%=totalCount%>개</p>
 			<!-- 셀렉트 박스 -->
-			<select name="sel" class="selpln">
+			<!-- <select name="sel" class="selpln">
 				<option selected="selected" value="rec" id="rec">최신순</option>
 				<option value="jo" id="jo">좋아요순</option>
 				<option value="chu" id="chu">조회순</option>
-			</select>
+			</select> -->
 		</div>
 		<!-- 모든계획 나열표 -->
 		<!-- 시간순 나열 -->
@@ -117,7 +117,7 @@ $(function () {
 							<h3><%=dto.getPlantitle()%></h3>
 							<%-- <%System.out.println(dto.getNum()); %> --%>
 							<p><%=dto.getPlanDate()%></p>
-							<p>작성자:<%=dto.getUserId()%></p>
+							<p><%=dto.getUserId()%></p>
 						</span>
 					</a>
 				</li>

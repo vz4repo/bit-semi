@@ -1,12 +1,12 @@
 package plan;
 
+import connection.DBConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
-import connection.DBConnect;
 
 public class PlanDao {
   DBConnect db = new DBConnect();
@@ -15,8 +15,7 @@ public class PlanDao {
   public void insertPlan(PlanDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql =
-        "insert into maria_study.test_postinfo (userId,plantitle,planDate,content) values (?,?,?,?)";
+    String sql = "insert into maria_study.test_postinfo (userId,plantitle,planDate,content) values (?,?,?,?)";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -85,9 +84,7 @@ public class PlanDao {
         dto.setContent(rs.getString("content"));
         dto.setReadCNT(rs.getInt("readCNT"));
         dto.setWriteday(rs.getTimestamp("writeday"));
-
       }
-
     } catch (SQLException e) {
       e.printStackTrace();
     } finally {

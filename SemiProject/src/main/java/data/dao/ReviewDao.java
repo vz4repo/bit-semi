@@ -72,6 +72,7 @@ public class ReviewDao {
       while (rs.next()) {
         ReviewDto dto = new ReviewDto();
         dto.setNum(rs.getString("num"));
+        dto.setUserName(rs.getString("userName"));
         dto.setUserID(rs.getString("userID"));
         dto.setSubject(rs.getString("subject"));
         dto.setContent(rs.getString("content"));
@@ -107,6 +108,7 @@ public class ReviewDao {
       while (rs.next()) {
         ReviewDto dto = new ReviewDto();
         dto.setNum(rs.getString("num"));
+        dto.setUserName(rs.getString("userName"));
         dto.setUserID(rs.getString("userID"));
         dto.setSubject(rs.getString("subject"));
         dto.setContent(rs.getString("content"));
@@ -141,6 +143,7 @@ public class ReviewDao {
       while (rs.next()) {
         ReviewDto dto = new ReviewDto();
         dto.setNum(rs.getString("num"));
+        dto.setUserName(rs.getString("userName"));
         dto.setUserID(rs.getString("userID"));
         dto.setSubject(rs.getString("subject"));
         dto.setContent(rs.getString("content"));

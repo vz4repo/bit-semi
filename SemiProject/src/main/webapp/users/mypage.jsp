@@ -1,38 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
          	<%@ page import="java.io.PrintWriter" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- meta 선언 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link 선언 -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- 아래 style 잠시 주석처리함(희수) -->
+    <!-- <link rel="stylesheet" href="../css/style_join.css"> -->
+
+    <title>GOING</title>
+</head>
 <%
     String root=request.getContextPath();
 //login.jsp 시작
 System.out.println("> join.jsp");
 // 세션 체크
-if (session.getAttribute("myid") != null) {
+/* if (session.getAttribute("myid") != null) {
   System.out.println("session not null");
   PrintWriter script = response.getWriter();
   script.println("<script>");
   script.println("alert('이미 로그인 중')");
   script.println("history.back()");
   script.println("</script>");
-}
+} */
 %>
 <body>
 	<!-- sub -->
 	<div id="sub_image" class="margin_wrap">
 		<div id="sub_text">
-			<p>Join</p>
+			<p>My Page</p>
 		</div>
 	</div>
 	<!-- sub -->
-
+	
 	<div class="container">
 	    <!-- sub contents -->
 	    <div class="margin_wrap">
 	        <div id="join_text">
-	            <p>GOING 온라인 회원가입</p>
+	            <p>내 정보 수정하기</p>
 	        </div>
 	    </div>
 	    <!-- sub contents -->
-
+	
 	    <div class="join_container">
 	        <p id="join_info">회원 정보</p>
 	        <form method="post" action="${pageContext.request.contextPath}/users/join_action.jsp">
@@ -55,7 +68,7 @@ if (session.getAttribute("myid") != null) {
 	                <input type="password" class="joinInput" id="pw_input2" placeholder="비밀번호를 확인해주세요."
 	                       title="비밀번호확인" maxlength="40">
 	            </div>
-
+	
 	            <div class="joinPhone joinValue">
 	                <label class="id_form_title"><b class="point">*</b>전화번호</label>
 	                <input type="tel" class="joinInput" id="hp_input"
@@ -91,7 +104,7 @@ if (session.getAttribute("myid") != null) {
 	                       name="userDate">
 	            </div>
 	            <div class="join_bottom"></div>
-	            <input type="submit" class="btn_join" value="회원가입">
+	            <input type="submit" class="btn_join" value="수정하기">
 	        </form>
 	    </div>
 	</div>
@@ -102,3 +115,4 @@ if (session.getAttribute("myid") != null) {
 <script defer src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a540d38cece314fa1d5f094089df4bd&libraries=services"></script>
 <script defer src="js/join_script.js"></script>
 </body>
+</html>
