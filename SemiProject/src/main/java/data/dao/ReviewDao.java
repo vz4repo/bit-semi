@@ -1,6 +1,5 @@
 package data.dao;
 
-import connection.DBConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 import data.dto.ReviewDto;
+import connection.DBConnect;
 
 public class ReviewDao {
   DBConnect db = new DBConnect();
@@ -17,16 +17,14 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     String sql =
-        "insert into maria_study.treview (userID,userName,userGender,subject,content,thumbnail,writeday) values (?,?,?,?,?,?,now())";
+        "insert into maria_study.treview (userID,subject,content,thumbnail) values (?,?,?,?)";
 
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, dto.getUserID());
-      pstmt.setString(2, dto.getUserName());
-      pstmt.setString(3, dto.getUserGender());
-      pstmt.setString(4, dto.getSubject());
-      pstmt.setString(5, dto.getContent());
-      pstmt.setString(6, dto.getThumbnail());
+      pstmt.setString(2, dto.getSubject());
+      pstmt.setString(3, dto.getContent());
+      pstmt.setString(4, dto.getThumbnail());
       pstmt.execute();
     } catch (SQLException e) {
       // TODO Auto-generated catch block

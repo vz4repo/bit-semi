@@ -15,8 +15,7 @@ public class PlanDao {
   public void insertPlan(PlanDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql =
-        "insert into maria_study.test_postinfo (userId,plantitle,planDate,content,writeday) values (?,?,?,?,now())";
+    String sql = "insert into maria_study.test_postinfo (userId,plantitle,planDate,content) values (?,?,?,?)";
 
     try {
       pstmt = conn.prepareStatement(sql);

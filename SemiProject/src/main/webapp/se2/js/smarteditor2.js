@@ -11002,7 +11002,6 @@ nhn.husky.SE_WYSIWYGStyleGetter = jindo.$Class({
 					} else if(attribute.command){
 						oStyle[styleName] = this.oDocument.queryCommandState(attribute.command);
 					} else {
-						// todo
 					}
 				}catch(e){}
 			}else{
@@ -11015,7 +11014,6 @@ nhn.husky.SE_WYSIWYGStyleGetter = jindo.$Class({
 						}
 					}catch(e){}
 				}else{
-					// todo
 				}
 			}
 		}

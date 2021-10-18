@@ -15,8 +15,8 @@ public class commentDAO {
   public void commentInsert(commentDTO dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-
     String sql = "insert into maria_study.comment (num,userId,contents) values (?,?,?)";
+
 
     try {
       pstmt = conn.prepareStatement(sql);
