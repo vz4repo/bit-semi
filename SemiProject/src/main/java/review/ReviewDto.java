@@ -5,8 +5,6 @@ import java.sql.Timestamp;
 public class ReviewDto {
   private String num;
   private String userID;
-  private String userName;
-  private String userGender;
   private String subject;
   private String content;
   private String thumbnail;
@@ -28,22 +26,6 @@ public class ReviewDto {
 
   public void setUserID(String userID) {
     this.userID = userID;
-  }
-
-  public String getUserName() {
-    return userName;
-  }
-
-  public void setUserName(String userName) {
-    this.userName = userName;
-  }
-
-  public String getUserGender() {
-    return userGender;
-  }
-
-  public void setUserGender(String userGender) {
-    this.userGender = userGender;
   }
 
   public String getSubject() {
