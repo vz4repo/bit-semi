@@ -1,8 +1,14 @@
+<%@page import="plan.PlanDto"%>
+<%@page import="java.util.List"%>
+<%@page import="plan.PlanDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 
 <%
 	String root=request.getContextPath();
+
+	PlanDao dao=new PlanDao();
+	List<PlanDto> list=dao.getMainPlan();
 %>
 	<!--main-->
 	<div id="main_wrap">
@@ -12,7 +18,7 @@
 		<div id="main_text">
 			<p>여러분들이 떠나고 싶은</p>
 			<p>여행지로 계획 세워서 떠나세요!</p>
-			<button type="button">START</button>
+			<button type="button" onclick="location='index.jsp?main=allplan/allplanlist.jsp'">START</button>
 		</div>
 	</div>
 	<!--main-->
@@ -23,65 +29,21 @@
 			<h2 id="title_1">BEST PLAN</h2>
 			<p id="title_2">인기 많은 여행 계획을 참고해보세요!</p>
 			<ul class="clearfix">
+				<% 
+				for(PlanDto dto:list){
+				%>
 				<li>
-					<a href="#">
+					<a href="index.jsp?main=allplan/allplanview.jsp?num=<%=dto.getNum()%>&key=list">
 						<span class="con_1_box">
-							<h3>부산여행</h3>
-							<p>기간:2021-03-10~2021-03-12</p>
-							<p>홍길동</p>
+							<h3><%=dto.getPlantitle()%></h3>
+							<%-- <%System.out.println(dto.getNum()); %> --%>
+							<p><%=dto.getPlanDate()%></p>
+							<p><%=dto.getUserId()%></p>
 						</span>
 					</a>
 				</li>
-	
-				<li>
-					<a href="#">
-						<span class="con_1_box">
-							<h3>제주여행</h3>
-							<p>기간:2021-03-10~2021-03-12</p>
-							<p>홍길동</p>
-						</span>
-					</a>
-				</li>
-	
-				<li>
-					<a href="#">
-						<span class="con_1_box">
-							<h3>시원한 바다여행</h3>
-							<p>기간:2021-03-10~2021-03-12</p>
-							<p>홍길동</p>
-						</span>
-					</a>
-				</li>
-	
-				<li>
-					<a href="#">
-						<span class="con_1_box">
-							<h3>을왕리 코스</h3>
-							<p>기간:2021-03-10~2021-03-12</p>
-							<p>홍길동</p>
-						</span>
-					</a>
-				</li>
-					
-				<li>
-					<a href="#">
-						<span class="con_1_box">
-							<h3>파주탐방</h3>
-							<p>기간:2021-03-10~2021-03-12</p>
-							<p>홍길동</p>
-						</span>
-					</a>
-				</li>
-					
-				<li>
-					<a href="#">
-						<span class="con_1_box">
-							<h3>속초 맛집 여행</h3>
-							<p>기간:2021-03-10~2021-03-12</p>
-							<p>홍길동</p>
-						</span>
-					</a>
-				</li>
+				<%} 
+				%>
 			</ul>
 		</div>
 		<!--content_1-->

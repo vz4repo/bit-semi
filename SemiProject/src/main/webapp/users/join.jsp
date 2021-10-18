@@ -65,8 +65,6 @@ if (session.getAttribute("myid") != null) {
 	                <label for="pw_input1" class="id_form_title"><b class="point">*</b>비밀번호</label>
 	                <input type="password" class="joinInput" id="pw_input1" placeholder="비밀번호를 입력해주세요."
 	                       name=userPassword title="비밀번호" maxlength="40">
-	                <input type="password" class="joinInput" id="pw_input2" placeholder="비밀번호를 확인해주세요."
-	                       title="비밀번호확인" maxlength="40">
 	            </div>
 	
 	            <div class="joinPhone joinValue">

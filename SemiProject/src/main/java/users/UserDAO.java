@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Vector;
 import connection.DBConnect;
 
 public class UserDAO {
@@ -105,16 +103,39 @@ public class UserDAO {
     }
   }
 
+  // 회원 dto 반환
+  /*
+   * public UserDTO getMember(String num) {
+   * 
+   * UserDTO dto = new UserDTO(); Connection conn = dbConnect.getConnectionCloud();
+   * PreparedStatement pstmt = null; ResultSet rs = null;
+   * 
+   * String sql = "select * from tuser where num=?";
+   * 
+   * try { pstmt = conn.prepareStatement(sql); // 바인딩 pstmt.setString(1, num); // 실행 rs =
+   * pstmt.executeQuery();
+   * 
+   * if (rs.next()) { dto.setNum(rs.getString("num")); dto.setUserID(rs.getString("userID"));
+   * dto.setUserPassword(rs.getString("userPassword")); dto.setUserName(rs.getString("userName"));
+   * dto.setUserPhone(rs.getString("userPhone")); dto.setUserMail(rs.getString("userMail"));
+   * dto.setUserAddr(rs.getString("userAddr")); dto.setUserGender(rs.getString("userGender"));
+   * dto.setUserDate(rs.getString("userDate")); }
+   * 
+   * } catch (SQLException e) { e.printStackTrace(); } finally { dbConnect.resourceClose(pstmt,
+   * conn); }
+   * 
+   * return dto; }
+   */
 
   // TODO refactoring: 유저 데이터 가져오기
-  public UserDAO getUser(String userID) {
+  public UserDTO getUser(String userID) {
+    UserDTO dto = new UserDTO();
+    Connection conn = dbConnect.getConnectionCloud();
     try {
       PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM tuser WHERE userID = ?");
       pstmt.setString(1, userID);
       rs = pstmt.executeQuery();
-      List<UserDTO> list = new Vector<>();
       if (rs.next()) {
-        UserDTO dto = new UserDTO();
         dto.setUserID(rs.getString(1));
         dto.setUserPassword(rs.getString(2));
         dto.setUserName(rs.getString(3));
@@ -124,11 +145,10 @@ public class UserDAO {
         dto.setUserGender(rs.getString(7));
         dto.setUserDate(rs.getString(8));
 
-        list.add(dto);
       }
     } catch (Exception e) {
       e.printStackTrace();
     }
-    return null;
+    return dto;
   }
 }

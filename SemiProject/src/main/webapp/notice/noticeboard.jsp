@@ -1,7 +1,8 @@
+<%@page import="users.UserDTO"%>
+<%@page import="data.dto.NoticeDto"%>
+<%@page import="data.dao.NoticeDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="data.dto.PlanDto"%>
 <%@page import="java.util.List"%>
-<%@page import="data.dao.PlanDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,16 +10,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-	td{
-		height:50px;
-		font-size: 20pt;
-	}
-</style>
 </head>
 <body>
-<%
-	PlanDao dao=new PlanDao();
+<% 
+	/* String uls=(String)session.getAttribute("loginok");
+	String userid=(String)session.getAttribute("myid"); */
+	//로그인한 상태인지 확인
+    
+	String loginok = "";
+    String myid = "";
+    if (session.getAttribute("loginok") != null) {
+        loginok = session.getAttribute("loginok").toString();
+        myid = (String) session.getAttribute("myid");
+    }
+    
+	NoticeDao dao=new NoticeDao();
+    
 	//페이징
 	int perPage=5;//한페이지에 보여질 글의 개수
 	int totalCount;//총 글의 수
@@ -52,50 +59,94 @@
 	start=(currentPage-1)*perPage;
 	//각 페이지에서 필요한 게시글 가져오기
 	
-	//시간순 나열
-	List<PlanDto> list=dao.getPlan(start, perPage);
+
+	List<NoticeDto> list=dao.getNotice(start, perPage);
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	
 	//현재 페이지의 list가 더이상 없을경우 이전페이지로 이동
 	if(list.size()==0 && totalCount>0)
 	{%>
 	  <script type="text/javascript">
-	  	location.href="index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=currentPage-1%>";
+	  	location.href="index.jsp?main=notice/noticeboard.jsp?currentPage=<%=currentPage-1%>";
 	  </script>
 	<%}
 	//각 페이지에 출력할 시작번호
 	int no=totalCount-(currentPage-1)*perPage;
 %>
-<div id="sub_image" class="margin_wrap">
+	<!-- 이미지 -->
+	<div id="sub_image" class="margin_wrap">
 		<div id="sub_text">
 			<p>Notice</p>
 		</div>
 	</div>
-	<!-- notice게시판 왕제목 -->
-	<div style="font-size: 30pt; margin-top: 50px; margin-left: 250px;" >
-		<b>공지사항</b>
-	</div>
-	<br><br>
-	
-	<!-- 글쓰기 버튼 -->
-	<button type="button" style="margin-left: 1200px;">글쓰기</button>
-	<br><br><br>
-	
+
+<div class="container">
+	<p id="all_plan_list_title">GOING의 공지사항을 확인해주세요!</p>
 	<!-- 테이블 -->
-	<div style="margin-left: 250px;">
-			<table style="width: 1200px;">
+	<div>
+			<table class="notice_list">
 				<%
-					for(PlanDto dto:list)
+					for(NoticeDto dto:list)
 					{%>
-					<tr>
-						<td>공지</td>
-						<td><%=dto.getContent() %></td>
-						<td>운영자</td>
+					<tr class="tb1">
+						<td><p class="notice_point">공지</p></td>
+						<td>
+							<a href="index.jsp?main=notice/noticeview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list" class="notice_title">
+		  					&nbsp;&nbsp;&nbsp;<%=dto.getTitle() %>
+		  					</a>
+						</td>
+						<td class="notice_admin">관리자</td>
 					</tr>
-					  
 					<%}
 				%>
 			</table>
 	</div>
+	
+	<!-- 글쓰기 버튼 -->
+	<%
+	if(loginok=="true" && myid.equals("admin"))
+	{%>
+	  
+	<div>
+	<button type="button" class="btn1"
+	onclick="location.href='index.jsp?main=notice/noticeform.jsp'"><span>글쓰기</span></button>
+	<%}
+	%>
+	</div>
+	
+	<!-- 페이징 -->
+		<div class="paging">
+		<%
+		//이전
+		if (startPage > 1) {
+		%>
+		<a
+			href="index.jsp?main=notice/noticeboard.jsp?currentPage=<%=startPage - 1%>">이전</a>
+		<%
+		}
+
+		for (int pp = startPage; pp <= endPage; pp++) {
+		if (pp == currentPage) {
+		%>
+		<a class="select"
+			href="index.jsp?main=notice/noticeboard.jsp?currentPage=<%=pp%>"><%=pp%></a>
+		<%
+		} else {
+		%>
+		<a href="index.jsp?main=notice/noticeboard.jsp?currentPage=<%=pp%>"><%=pp%></a>
+		<%
+		}
+		}
+
+		//다음
+		if (endPage < totalPage) {
+		%>
+		<a
+			href="index.jsp?main=notice/noticeboard.jsp?currentPage=<%=endPage + 1%>">다음</a>
+		<%
+		}
+		%>
+		</div>
+</div>
 </body>
 </html>

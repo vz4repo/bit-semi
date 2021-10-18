@@ -11,7 +11,6 @@
 	//데이터 읽어서 DTO에 넣기!
 	commentDTO dto=new commentDTO();
 	dto.setIdx(request.getParameter("idx"));
-	dto.setUserId(request.getParameter("myid"));
 	dto.setContents(request.getParameter("content")); //내가 입력한것!!
 	
 	//페이지번호 읽기 (어느 글에 달렸는지 알 수 있음)

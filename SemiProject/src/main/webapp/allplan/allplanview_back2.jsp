@@ -43,6 +43,11 @@
 		popup.classList.add('hide');
 		}
 	
+	function commentNum(idx){
+		//수정 클릭하면 해당 댓글 넘버를 팝업으로 넘겨야함!
+		
+	}
+	
 	//댓글 출력하는 함수
 	function list()
 	{
@@ -83,9 +88,9 @@
 					var login="<%=loginok%>";
 					var logid=$("#myid").val();
 					console.log("1"+login+","+myid);
-					if(login=="true" && logid==myid){
-						s+="<button type='button' class='aup' id='v_com_btn_1' onclick='showPopup(false)'>수정</button>";
-						s+="<button type='button' class='adel' id='v_com_btn_1' idx='"+idx+"'>삭제</button>";
+					if(login=="true" && logid==myid){/* onclick='showPopup(false)' */
+						s+="<button type='button' class='aup' id='v_com_btn_1'  onclick='showPopup(false)' idx='"+idx+"'>수정</button>";
+						s+="<button type='button' class='adel' id='v_com_btn_2' idx='"+idx+"'>삭제</button>";
 					} 
 					s+="</span>";
 					s+="</li>";
@@ -110,7 +115,7 @@
 	}
 	
 	$(function(){
-		/* $("li.update_commtent_form_all").hide(); */ //수정폼 전부 숨기기!
+		//$(".update_commtent_form_all").hide(); //수정폼 전부 숨기기!
 		list(); //처음부터 댓글 리스트 출력!!
 		
 		//댓글추가 이벤트
@@ -191,7 +196,7 @@
 		/* 댓글 팝업 수정 버튼 클릭시 이벤트! */
 		$(document).on("click", ".btn_submit_1", function(){
 			var idx=$(".aup").attr("idx");
-			console.log(idx); //삭제 아이콘 클릭하면 번호 나오는지 확인 완료!
+			console.log(idx); //수정 아이콘 클릭하면 번호 나오는지 확인 완료!
 			$.ajax({
 				type:"get",
 				dataType:"html",
@@ -204,6 +209,23 @@
 				}
 			});
 		});
+		
+		/* 댓글 리스트 폼에 추가 이벤트 */
+		/* $(document).on("click", ".aup", function(){
+			var idx=$(".aup").attr("idx");
+			$(this).parent().parent().find("li.update_commtent_form_all").append();
+			$.ajax({
+				type:"get",
+				dataType:"html",
+				url:"allplan/comment_update.jsp",
+				data:{"idx":idx},
+				success:function(){
+					alert("댓글이 수정되었습니다!");
+					//새로고침
+					location.reload();
+				}
+			});
+		}); */
 	});
 </script>
 </head>
@@ -257,7 +279,7 @@
 		
 		<!-- 컨텐츠 -->
 		<div class="v_contents">
-			<div id="map_div"></div>
+			<!-- <div id="map_div"></div> -->
 			<table class="planinfo">
 				<tr>
 					<th>일자</th>
@@ -331,29 +353,42 @@
 				<span class="v_comment_num">총 댓글<b class="su"><%-- <%=clist.size() %> --%>0</b></span>
 			</div>
 			<div class="v_comment_list">
+				<!-- 수정폼 -->
+				<!-- <li class='update_commtent_form_all'>
+					<table class='com_all'>
+						<tr>
+							<td>
+							<textarea id='com_box_2' class='update_comment_form' name='content' required='required' placeholder='수정할 댓글을 입력해주세요.'></textarea>
+							<button type='submit' id='v_com_check_2' class='update_comment_form'>확인</button>
+							</td>
+						</tr>
+					</table>
+				</li> -->
+				<!-- 수정폼 -->
 			</div>
 			<!-- 댓글 리스트 -->
 			
-			<!-- 댓글 팝업 -->
+			<!-- 수정하기 팝업! -->
 			<%
-			String idx=request.getParameter("idx");
-			//db에서 num에 해당하는 dto 얻기
+			String idx=(String)request.getAttribute("idx");
 			commentDAO cdao=new commentDAO();
 			commentDTO cdto=cdao.getData(idx);
 			%>
 			<div id="popup_update"  class="hide">
+				<input type="hidden" name="idx"  id="idx" value="<%=cdto.getIdx()%>">
 				<div class="content">
 					<p class="cal_popup_1_title">수정하기</p>
 						<textarea id="com_box_2" class="update_comment_form" name="content" 
-						required="required" placeholder="">
-						<%=cdto.getContents()%></textarea>
+						required="required"><%=cdto.getContents()%>
+						</textarea>
 						<div class="cal_popup_1">
 							<button type="submit" class="btn_submit_1">수정</button>
 							<button onclick="closePopup()" class="btn_close_1">닫기</button>
 						</div>
 				</div>
 			</div>
-			<!-- 댓글 팝업 -->
+			<!-- 수정하기 팝업! -->
+			
 		</div>
 	</div>
 	<!--view -->

@@ -191,7 +191,24 @@ public class commentDAO {
     }
   }
 
-  // 수정
+  // 수정(검색해서)
+  public int update(int num, int idx, String comments) {
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    String sql = "update comment set Contents=? where num=? and idx=?";
+    try {
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, comments);// 물음표의 순서
+      pstmt.setInt(2, num);
+      pstmt.setInt(3, idx);
+      return pstmt.executeUpdate();// insert,delete,update
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return -1;// 데이터베이스 오류
+  }
+
+  // 수정 (우선 이걸로 사용하기!)
   public void updateComment(commentDTO dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
