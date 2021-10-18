@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Insert title here</title>
+  <link
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+      rel="stylesheet"
+      type="text/css"
+  />
+  <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-3.5.1.min.js"
+  ></script>
+  <script
+      type="text/javascript"
+      src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+  ></script>
+</head>
+<style>
+  ul li {
+    list-style: none;
+    width: 200px;
+    height: 30px;
+    font-size: 20px;
+  }
+
+  li:hover {
+    cursor: pointer;
+  }
+
+  .itemBoxHighlight {
+    border: solid 1px black;
+    width: 200px;
+    height: 30px;
+    background-color: yellow;
+  }
+</style>
+<body>
+<h1>mine-it-record</h1>
+<ul id="sortable">
+  <li class="ui-state-default">
+    <span class="inner">mine 1</span>
+  </li>
+  <li class="ui-state-default">
+    <span class="inner">mine 2</span>
+  </li>
+  <li class="ui-state-default">
+    <span class="inner">mine 3</span>
+  </li>
+  <li class="ui-state-default">
+    <span class="inner">mine 4</span>
+  </li>
+  <li class="ui-state-default">
+    <span class="inner">mine 5</span>
+  </li>
+</ul>
+</body>
+<script>
+  //$("#sortable").sortable();
+  //$("#sortable").disableSelection();
+  // 아이템 내부의 글자를 드래그 해서 선택하지 못하도록 하는 기능
+  $("#sortable").sortable({
+    animation: 150,
+
+    start: function (e, ui) {
+      // 드래그 시작 시 호출
+    },
+    stop: function (e, ui) {
+      // 드래그 종료 시 호출
+      reorder();
+    },
+  }); /* 번호 재입력(내부적으로) */
+  function reorder() {
+    $("#sortable li").each(function (i, box) {
+      $(box).attr("idx", i + 1);
+    });
+  }
+</script>
+</html>

@@ -1,0 +1,18 @@
+#selectResult li:hover {
+  cursor: pointer;
+  list-style: none;
+}
+
+.rst_wrap {
+  width: 30%;
+  float: left;
+  display: flex;
+  overflow: hidden;
+}
+
+.map_wrap {
+  display: flex;
+  float: left;
+  width: 65%;
+  height: 80%;
+}
