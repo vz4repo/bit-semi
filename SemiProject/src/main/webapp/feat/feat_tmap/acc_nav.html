@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="acc_nav.css" />
+    <title>Document</title>
+  </head>
+  <div class="acc-nav"></div>
+<div id="acc-nav-button">토글</div>
+  </body>
+  <!-- TODO jquery 토글로 바꾸기 -->
+  <script>
+  $(document).ready(function()
+    {
+      $('#acc-nav-button').click(function() {
+        if($(this).css("margin-left") == "400px")
+        {
+            $('.acc-nav').animate({"margin-left": '-=400'});
+            $('#acc-nav-button').animate({"margin-left": '-=400'});
+            $('#acc-nav-button').text('>>');
+        }
+        else
+        {
+            $('.acc-nav').animate({"margin-left": '+=400'});
+            $('#acc-nav-button').animate({"margin-left": '+=400'});
+            $('#acc-nav-button').text('<<');
+        }
+      });
+     });         
+  </script>
+</html>
