@@ -1,5 +1,3 @@
-
-				
 <!DOCTYPE html>
 <html>
 	<head>
@@ -106,9 +104,9 @@
 									// 결과창에 나타날 검색 결과 html
 									innerHtml += "<li><div><img src='http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_"
 											 + k 
-											 + ".png' style='vertical-align:middle;'/><span>"
+											 + ".png' style='vertical-align:middle;'/><div onclick='selectMarker("+lat+","+lon+")'>"
 											+ name
-											+ "</span>  <button type='button' name='sendBtn' onClick='poiDetail("
+											+ "</div>  <button type='button' name='sendBtn' onClick='poiDetail("
 											+ id
 											+ ");'>선택</button></div></li>";
 									
@@ -132,10 +130,17 @@
 					}});
 					
 			}
+
+	// 4.A 리스트 이름 클릭시 맵 이동
+	function selectMarker(lat, lon){
+               let newPosition = new Tmapv2.LatLng(lat,lon);
+              map.setCenter(newPosition);
+              map.setZoom(17);
+            }
 		
 			// 4. POI 상세 정보 API
 			function poiDetail(poiId) {
-				console.log(poiId);
+				console.log("poiId: " + poiId);
 		
 				$.ajax({
 					method : "GET", // 요청 방식
@@ -145,11 +150,11 @@
 							+ "l7xx27cfab8a671c49dea1ee85d2351dfef7", // 발급받은 Appkey
 					async : false, // 동기 설정
 					success : function(response) {
-						console.log(response);
+						console.log("response: "+response);
 			
 						// 응답받은 POI 정보
 						var detailInfo = response.poiDetailInfo;
-						console.log(detailInfo);
+						console.log("detailInfo: "+detailInfo);
 						var name = detailInfo.name;
 						var address = detailInfo.address;
 			
