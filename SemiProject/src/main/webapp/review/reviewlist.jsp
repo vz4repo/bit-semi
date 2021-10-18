@@ -1,4 +1,3 @@
-다 <%@page import="java.io.Console"%>
 <%@page import="users.UserDAO"%>
 <%@page import="users.UserDTO"%>
 <%@page import="review.ReviewDto"%>
@@ -22,15 +21,14 @@
 .listview {
 	overflow: hidden;
 	float: left;
-	width: 240px;
-	height: 320px;
-	margin: 20px 10px 20px 20px;
-	background-position: center;
-	box-shadow: 2px 2px 13px 3px rgba(0, 0, 0, 0.2);
+	width:250px;
+	height:330px;
+	margin:20px 10px 20px 30px;
+	border:1px solid rgba(0,0,0,0.1);
 }
 
 .thumbnail {
-	width: 240px;
+	width: 250px;
 	height: 200px;
 	object-fit: cover;
 	background-color: black;
@@ -39,24 +37,39 @@
 .subject {
 	color: black;
 	font-weight: bold;
-	font-size: 15pt;
+	font-size: 15px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: inline-block;
-	width: 240px;
+	width: 220px;
 	text-indent: 5px;
+	margin-left: 15px;
 }
 
 .name, .gandb, .wandr {
-	color: gray;
-	font-size: 10pt;
+	color:#456824;
+	font-size: 12px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	display: inline-block;
-	width: 240px;
+	width: 220px;
 	text-indent: 5px;
+	margin-left: 15px;
+}
+
+.btnreviewform {
+	width: 200px;
+	height: 50px;
+	margin-right: 20px;
+	outline: none;
+	cursor: pointer;
+	font-size: 20px;
+	border: 1px solid #000;
+	background-color: black;
+	color: white;
+	border-radius: 100px;
 }
 
 .paging {
@@ -77,87 +90,60 @@
 	background-color: black;
 	color: #fff;
 }
-
-.btnreviewform {
+#btn_group button{
 	width: 150px;
-	height: 32px;
-	margin-right: 20px;
-	outline: none;
-	cursor: pointer;
-	font-size: 12px;
-	border: 1px solid #000;
-	background-color: black;
-	color: white;
-	border-radius: 100px;
-}
-
-#latest, #readcount, #good, #all, #M, #F {
-	display: none;
-}
-
-label {
-	width: 40px;
-	height: 20px;
-	border-radius: 10px;
-	background: gray;
-	display: inline-block;
-	text-indent: -9999em;
-	position: relative;
-	transition: 0.3s;
-}
-
-label:after {
-	content: '';
-	width: 15px;
-	height: 15px;
-	position: absolute;
-	background: white;
-	border-radius: 50%;
-	left: 2.5px;
-	top: 2.5px;
-	transition: 0.3s;
-}
-
-#latest:checked+label, #readcount:checked+label, #good:checked+label,
-	#all:checked+label, #M:checked+label, #F:checked+label {
-	background: black;
-}
-
-#latest:checked+label:after, #readcount:checked+label:after, #good:checked+label:after,
-	#all:checked+label:after, #M:checked+label:after, #F:checked+label:after
-	{
-	left: 23px;
-	background: white;
-}
-
-.toption {
-	font-size: 11pt;
+	height: 30px;
+	border: 1px solid black;
+	background-color: rgba(0,0,0,0);
 	color: black;
-}
-
-.r {
-	text-align: right;
-	width: 65px;
-}
-
-.btnop {
-	width: 100px;
-	height: 25px;
-	margin-bottom: 1px;
-	outline: none;
 	cursor: pointer;
-	font-size: 12px;
-	border: 1px solid #000;
-	background-color: white;
-	color: black;
-	border-radius: 100px;
-	font-weight: bold;
+}
+
+#latest{
+	border-top-left-radius: 10px;
+	margin-right: -3px;
+}
+
+#good{
+	border-top-right-radius: 10px;
+	margin-left: -3px;
 }
 </style>
+<script type="text/javascript">
+$(function () {
+	$("select.selpln").change(function() {
+		var s = $(this).val();
+		if(s=="latest"){
+			$(".tb").hide();
+	    	$("#t1").show();
+	    	localStorage.tt="t1";
+		}else if(s=="good"){
+			$(".tb").hide();
+	    	$("#t2").show();
+	    	localStorage.tt="t2";
+		}else if(s=="readcount"){
+			$(".tb").hide();
+	    	$("#t3").show();
+	    	localStorage.tt="t3";
+		}
+	});
+	var tt = localStorage.tt;
+	if(tt=="t1"){
+		$(".tb").hide();
+		$("#t1").show();
+	}else if(tt=="t2"){
+		$(".tb").hide();
+		$("#t2").show();
+	}else{
+		$(".tb").hide();
+		$("#t3").show();
+	}
+});
+</script>
 </head>
 <%
 ReviewDao dao = new ReviewDao();
-int perPage = 1;// 한 페이지에 보여질 글의 갯수
+int perPage = 12;// 한 페이지에 보여질 글의 갯수
 int totalCount;//총 글의 수
 int currentPage;//현재 페이지 번호
 int totalPage;//총 페이지 수
@@ -185,10 +171,6 @@ start = (currentPage - 1) * perPage;
 
 //최신순 나열
 List<ReviewDto> list1 = dao.getLatestList(start, perPage);
-//좋아요순 나열
-List<ReviewDto> list2 = dao.getGoodList(start, perPage);
-//조회순 나열
-List<ReviewDto> list3 = dao.getWatchedList(start, perPage);
 
 if (list1.size() == 0 && totalCount > 0) {
 %>
@@ -198,6 +180,9 @@ if (list1.size() == 0 && totalCount > 0) {
 </script>
 <%
 }
+//좋아요순 나열
+List<ReviewDto> list2 = dao.getGoodList(start, perPage);
+
 if (list2.size() == 0 && totalCount > 0) {
 %>
 <script type="text/javascript">
@@ -206,6 +191,9 @@ if (list2.size() == 0 && totalCount > 0) {
 </script>
 <%
 }
+//조회순 나열
+List<ReviewDto> list3 = dao.getWatchedList(start, perPage);
+
 if (list3.size() == 0 && totalCount > 0) {
 %>
 <script type="text/javascript">
@@ -214,68 +202,47 @@ if (list3.size() == 0 && totalCount > 0) {
 </script>
 <%
 }
+String loginok = "";
+String myid = "";
+if (session.getAttribute("loginok") != null) {
+    loginok = session.getAttribute("loginok").toString();
+    myid = (String) session.getAttribute("myid");
+} // 로그인 안해도 보여줄건가??
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 ReviewDto dto = new ReviewDto();
 UserDAO udao = new UserDAO();
-String userLoginStatus = (String)session.getAttribute("userLoginStatus");
-String myid = (String)session.getAttribute("userSessionID");
 %>
 <body>
-	<div id="main_wrap" style="height: 320px;">
-		<div id="main_text" style="top: 180px;">
-			<p>Review</p>
-		</div>
+<div id="sub_image" class="margin_wrap">
+	<div id="sub_text">
+		<p>Review</p>
 	</div>
-	<div style="height: 10px;"></div>
-	<div
-		style="width: 1250px; margin-top: 80px; margin-left: 200px; max-width: 1100px;">
-		<table class="toption">
-			<tr>
-				<th width="40" style="font-size: 11pt;">정렬 |</th>
-				<td class="r">최신순</td>
-				<td><input checked="checked" value="list1" name="listarray"
-					type="radio" id="latest"><label for="latest">최신순</label></td>
-				<td class="r">조회순</td>
-				<td><input value="list2" name="listarray" type="radio"
-					id="readcount"><label for="readcount">최신순</label></td>
-				<td class="r">좋아요순</td>
-				<td><input value="list3" name="listarray" type="radio" id="good"><label
-					for="good">최신순</label></td>
-			</tr>
-			<tr>
-				<th style="font-size: 11pt;">성별 |</th>
-				<td class="r">전체</td>
-				<td><input checked="checked" value="all" name="gender"
-					type="radio" id="all"><label for="all">전체</label></td>
-				<td class="r">남성</td>
-				<td><input value="M" name="gender" type="radio" id="M"><label
-					for="M">남성</label></td>
-				<td class="r">여성</td>
-				<td><input value="F" name="gender" type="radio" id="F"><label
-					for="F">여성</label></td>
-				<td id="btnop" rowspan="2" width="130" style="text-align: right;"><button
-						class="btnop" type="button" onclick="location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>";">적용하기</button>
-						</td>
-			</tr>
-		</table>
+</div>
+<!-- view -->
+<div class="container">
+	<p id="all_plan_list_title">당신의 여행 일정을 공유해보세요!</p>
+	<div class="all_plan_list_container">
+		<!-- 게시글 수 -->
+		<p id="all_plan_list_cnt">총 <%=totalCount%>개</p>
+		<!-- 셀렉트 박스 -->
+		<select name="listsel" id="sel_group" class="selpln">
+			<option disabled="disabled" selected="selected">선택해주세요</option>
+			<option value="latest">최신순</option>
+			<option value="readcount">조회순</option>
+			<option value="good">좋아요순</option>
+		</select>
 	</div>
-	<script type="text/javascript">
-	function changeList() {
-		$("input[name='listarray']:checked").
-		
-	};
-	</script>
-	<!-- 최신순 -->
-	<div id="listview" class=""
-		style="width: 1250px; border-top: 3px solid black; border-bottom: 3px solid black; margin-top: 10px; margin-left: 200px; max-width: 1100px;">
-		<table>
+</div>
+<!-- 최신순 -->
+	<div id="t1" class="tb" style="border-top: 2px solid black; border-bottom: 2px solid black; width:1200px; margin: 0 auto;">
+		<table >
 			<tr>
 				<%
 				for (int row = 0; row < list1.size(); row++) {
 				  dto = list1.get(row);
 				%>
 				<td class="listview"><a class="alist"
-					href="index.jsp?main=review/reviewview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list">
+					href="index.jsp?main=review/reviewview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list1">
 						<%
 						if (dto.getThumbnail() != null) {
 						%> <img alt="" src="imagesave/<%=dto.getThumbnail()%>"
@@ -300,10 +267,78 @@ String myid = (String)session.getAttribute("userSessionID");
 			</tr>
 		</table>
 	</div>
-	<div align="right"
-		style="width: 1250px; margin-top: 10px; margin-left: 200px; max-width: 1100px;">
+	<!-- 좋아요순 -->
+	<div id="t2" class="tb" style="border-top: 2px solid black; border-bottom: 2px solid black; width:1200px; margin: 0 auto;">
+		<table>
+			<tr>
+				<%
+				for (int row = 0; row < list2.size(); row++) {
+				  dto = list2.get(row);
+				%>
+				<td class="listview"><a class="alist"
+					href="index.jsp?main=review/reviewview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list1">
+						<%
+						if (dto.getThumbnail() != null) {
+						%> <img alt="" src="imagesave/<%=dto.getThumbnail()%>"
+						class="thumbnail" /> <%
+ 						}else{%> <img class="thumbnail" /> <%}
+ %> <br><br>
+						<ul>
+							<li class="subject"><%=dto.getSubject()%></li>
+							<br>
+							<br>
+							<li class="name">작성자 : <%=dto.getUserID()%></li>
+							<br>
+							<li class="gandb"><span class="good">좋아요 <%=dto.getGood()%></span>
+							<br>
+							<li class="wandr"><span class="writeday"><%=sdf.format(dto.getWriteday())%></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+								<span class="readcount">조회수&nbsp;<%=dto.getReadcount()%></span></li>
+						</ul>
+				</a></td>
+				<%
+				}
+				%>
+			</tr>
+		</table>
+	</div>
+	<!-- 조회순 -->
+	<div id="t3" class="tb" style="border-top: 2px solid black; border-bottom: 2px solid black; width:1200px; margin: 0 auto;">
+		<table>
+			<tr>
+				<%
+				for (int row = 0; row < list3.size(); row++) {
+				  dto = list3.get(row);
+				%>
+				<td class="listview"><a class="alist"
+					href="index.jsp?main=review/reviewview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list1">
+						<%
+						if (dto.getThumbnail() != null) {
+						%> <img alt="" src="imagesave/<%=dto.getThumbnail()%>"
+						class="thumbnail" /> <%
+ 						}else{%> <img class="thumbnail" /> <%}
+ %> <br><br>
+						<ul>
+							<li class="subject"><%=dto.getSubject()%></li>
+							<br>
+							<br>
+							<li class="name">작성자 : <%=dto.getUserID()%></li>
+							<br>
+							<li class="gandb"><span class="good">좋아요 <%=dto.getGood()%></span>
+							<br>
+							<li class="wandr"><span class="writeday"><%=sdf.format(dto.getWriteday())%></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+								<span class="readcount">조회수&nbsp;<%=dto.getReadcount()%></span></li>
+						</ul>
+				</a></td>
+				<%
+				}
+				%>
+			</tr>
+		</table>
+	</div>
+		<div align="right"
+		style="width:1200px; margin: 0 auto; margin-top: 10px;">
 		<%
-		if(userLoginStatus!=null){%>
+		if(myid!=null){%>
 			<button class="btnreviewform" type="button"
 			onclick="location.href='index.jsp?main=review/reviewform.jsp'">등록하기</button>
 		<%
@@ -311,7 +346,7 @@ String myid = (String)session.getAttribute("userSessionID");
 		%>
 	</div>
 	<div class="paging"
-		style="width: 1250px; margin-left: 200px; max-width: 1100px;">
+		style="width:1200px; margin: 0 auto;">
 		<%
 		//이전
 		if (startPage > 1) {
@@ -343,14 +378,5 @@ String myid = (String)session.getAttribute("userSessionID");
 		}
 		%>
 	</div>
-	<div style="height: 100px;"></div>
 </body>
 </html>
-
-
-
-
-
-
-
-
