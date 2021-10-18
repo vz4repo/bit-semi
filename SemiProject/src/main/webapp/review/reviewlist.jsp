@@ -1,11 +1,13 @@
 
-다 <%@page import="java.io.Console"%>
+<%@page import="java.io.Console"%>
 <%@page import="users.UserDAO"%>
 <%@page import="users.UserDTO"%>
 <%@page import="review.ReviewDto"%>
 <%@page import="review.ReviewDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
+<%@page import="data.dto.ReviewDto"%>
 <%@page import="java.util.List"%>
+<%@page import="data.dao.ReviewDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -198,24 +200,21 @@ if (list1.size() == 0 && totalCount > 0) {
 %>
 <script type="text/javascript">
 
-			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>
-	";
+			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>	";
 </script>
 <%
 }
 if (list2.size() == 0 && totalCount > 0) {
 %>
 <script type="text/javascript">
-			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>
-	";
+			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>	";
 </script>
 <%
 }
 if (list3.size() == 0 && totalCount > 0) {
 %>
 <script type="text/javascript">
-			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>
-	";
+			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>	";
 </script>
 <%
 }
@@ -259,9 +258,8 @@ String myid = (String)session.getAttribute("myid");
 				<td class="r">여성</td>
 				<td><input value="F" name="gender" type="radio" id="F"><label
 					for="F">여성</label></td>
-				<td id="btnop" rowspan="2" width="130" style="text-align: right;"><button
-
-						class="btnop" type="button" onclick="location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>";">적용하기</button>
+				<td id="btnop" rowspan="2" width="130" style="text-align: right;">
+					<button	class="btnop" type="button" onclick="location.href ='#' "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>";">적용하기</button>
 						</td>
 			</tr>
 		</table>

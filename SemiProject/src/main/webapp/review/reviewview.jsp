@@ -1,6 +1,8 @@
 <%@page import="review.ReviewDto"%>
 <%@page import="review.ReviewDao"%>
 <%@page import="java.text.SimpleDateFormat"%>
+<%@page import="plan.PlanDto"%>
+<%@page import="plan.PlanDao"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -18,7 +20,7 @@ a{
 <%
 	String loginok = session.getAttribute("loginok").toString();
 	String myid = (String)session.getAttribute("myid");
-	
+
 	String num = request.getParameter("num");
 	String currentPage = request.getParameter("currentPage");
 	if(currentPage==null){
@@ -72,10 +74,10 @@ a{
 				if (loginok!=null && dto.getUserID().equals(myid)){%>
 					<a>수정</a>
 					<a href="review/reviewdelete.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>">삭제</a>
-				<%  
+				<%
 				}
 				%>
-				
+
 				<a class="good" num="<%=dto.getNum()%>">추천하기</a>
 				<a href="index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage%>" class="">목록</a>
 			</div>

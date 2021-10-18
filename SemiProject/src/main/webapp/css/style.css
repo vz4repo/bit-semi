@@ -14,8 +14,8 @@ form, fieldset, p {margin:0;padding:0;border:0;}
 img {border:0;vertical-align:middle;outline:none;}
 
 a,a:link,a:visited,a:active{/* color:black;  */letter-spacing:normal;text-decoration:none;letter-spacing:-0.8px;}
-a:hover{color:orange;text-decoration:none;}
-
+a:hover{color:black; text-decoration:none;}
+img{margin:0; padding:0;}
 *{line-height:20px;}
 
 .clearfix::after{content:""; display:block; clear:both;}
@@ -25,29 +25,30 @@ body{scrollbar-face-color:#E8E7E3; scrollbar-highlight-color:#999999; scrollbar-
 	 scrollbar-shadow-color:#999999; scrollbar-darkshadow-color:#E8E7E3; scrollbar-track-color:#E8E7E3;}
 
 /* header */
-header{width:100%; height:75px; background-color:black; position:fixed; top:0; left:0; z-index:1;}
-#logo{float:left; font-size:20px; line-height:75px;}
-#logo a{color:white;}
+header{width:100%; height:85px; /* background-color:black;  */position:fixed; top:0; left:0; z-index:1; font-size:0;}
+#logo{width:90px; height:69px;}
+#logo img{display: block; margin-top:4px;}
+#logo,nav li{float:left;}
+/* #logo a{color:white;} */
 nav{position:absolute; left:50%; transform: translateX(-50%);}
 nav li{font-size:20px; line-height:75px; display: inline-block; padding:0 15px;}
 nav li a {color:white;}
 #member{float:right; line-height:75px;}
-#wrapper{width:1200px; margin:0 auto; position:relative;justify-content: space-between;}
+#wrapper{width:1200px; height:80px; margin:5px auto 0px auto; position:relative;justify-content: space-between;}
 #member button{margin-top:20px; width:100px; height:35px; border-radius:100px;outline:none; cursor:pointer; font-size:15px;
 			   background:transparent; border:1px solid white; transition:0.5s; color:white; margin-left:10px;
 			   font-family:"Roboto";}
-#member button:hover{background-color:white; color:black;}
+#member button:hover{background-color:white; color:#ff7b27;}
 /* header */
 
 /* main */
 /* main image*/
-#main_wrap{width:100%; height:600px; background:url("../image/main.jpg") fixed center; background-repeat:no-repeat;}
-#main_text{text-align:center; color:#000; position: absolute; top: 50%; left: 50%; transform: translate( -50%, -50% );}
+#main_wrap{width:100%; height:600px; background:url("../image/mainnew.jpg") center; background-repeat:no-repeat;}
+#main_text{text-align:center; color:white; position: absolute; top: 50%; left: 50%; transform: translate( -50%, -50% );}
 #main_text p{font-size:40px; line-height:60px;}
-#main_text p:nth-child(2){font-weight:bold;}
-#main_text button{margin-top:70px; width:300px; height:50px; outline:none; cursor:pointer; font-size:15px;
-				  background:transparent; border:1px solid #000; transition:0.5s; border-radius:100px;}
-#main_text button:hover{background-color:#000; color:#fff;}
+#main_text button{margin-top:30px; width:300px; height:50px; outline:none; cursor:pointer; font-size:18px; font-family:"Roboto";
+				  background:transparent; border:1px solid white; transition:0.5s; border-radius:100px; color:white;}
+#main_text button:hover{background-color:white; color:#ff7b27;}
 /* main image*/
 
 /* content_1 */
@@ -62,8 +63,9 @@ nav li a {color:white;}
 /* content_1 */
 
 /* content_2 */
-#content_2{width:100%; height:200px; background:url("../image/main.jpg") fixed center; background-repeat:no-repeat;}
+#content_2{width:100%; height:250px; background:url("../image/sub.jpg") center; background-repeat:no-repeat;}
 #content_2{margin-top:80px;}
+#main_sub_text{text-align:center; color:white; position:relative; top:130px; font-size:150px;}
 /* content_2 */
 
 /* content_3 */
@@ -90,7 +92,7 @@ footer{width:100%; height:60px; background-color:black; text-align:center; margi
 .selpln{margin:0px 0px 0px 955px; border:1px solid black; width:150px; height:30px; text-align:center; border-radius:100px;}
 .list_box_1{display:block; float:left; margin:10px 12px 15px 12px; width:320px; height:130px;
 		    padding:50px 25px 25px 25px; border:2px solid #d5d5d5; border-radius:10px;}
-.list_box_1:hover{border:2px solid #4c6ef5; transition: all 0.5s;}
+.list_box_1:hover{border:2px solid #2522b3; transition: all 0.5s;}
 .list_box_1 h3{font-size:25px; font-weight:400; line-height:30px; color:#000; text-overflow: ellipsis; white-space: nowrap; overflow: hidden;}
 .list_box_1 p{font-size:15px; font-weight:400; color:#456824; margin-top:30px;}
 .list_box_1 p:nth-child(3){margin-top:15px;}
@@ -107,8 +109,8 @@ footer{width:100%; height:60px; background-color:black; text-align:center; margi
 
 /* allplanview */
 /* sub image */
-#sub_image{width:100%; height:250px; background:url("../image/main.jpg") fixed center;}
-#sub_text{text-align:center; color:#000; position:relative; top:160px; font-size:35px;}
+#sub_image{width:100%; height:250px; background:url("../image/subnew.jpg") center;}
+#sub_text{text-align:center; color:white; position:relative; top:130px; font-size:35px;}
 /* sub image */
 
 /* 상단 */
@@ -121,7 +123,7 @@ footer{width:100%; height:60px; background-color:black; text-align:center; margi
 .v_func span{margin:0px 20px 0px 20px;}
 .v_likes{cursor:pointer;}
 .v_func_2{float:right; margin:-90px 20px 0px 0px; font-size:40px; font-weight:500; color:black;}
-.v_func_2 p:nth-child(1){margin-bottom:20px; font-size:25px; font-weight:500;}
+.v_func_2 p:nth-child(1){margin-bottom:20px; font-size:25px; font-weight:500; margin-top:25px;}
 /* 상단 */
 
 /* 컨텐츠 */
@@ -156,18 +158,26 @@ footer{width:100%; height:60px; background-color:black; text-align:center; margi
 .loginok_comment_text{font-size:17px; margin-bottom:30px; font-weight:500;}
 /* 댓글 폼 */
 
+/* 댓글 수정 폼 */
+#com_box_2{width:1000px; height:100px; border:1px solid #5b5b5b; padding:10px;}
+#v_com_check_2{width:122px; height:120px; border:1px solid black; background-color:black; color:white;
+		   text-align:center; font-size:18px; cursor:pointer; margin-left:10px; font-family:"Noto Sans KR"; 
+		   font-weight:400; border-radius:5px;}
+.update_comment_form{margin-top:30px; margin-bottom:20px;}
+/* 댓글 수정 폼 */
+
 /* 댓글 리스트 */
 .v_comment_list_num{margin-top:30px; margin-bottom:10px; font-size:15px; color:black;}
 .v_comment_list_num b{margin-left:5px; color:red;}
-.v_comment_list{padding:0px 20px 0px 20px; background:#f8f8f8; margin-bottom:100px;}
+.v_comment_list{padding:0px 20px 0px 20px; background:#f8f8f8; /* margin-bottom:100px; */}
 .v_comment_list ul li{padding:25px 0 25px 0; border-top:1px solid #dbdbdb;}
 .v_comment_list ul li:first-child{border-top:1px solid #dbdbdb;}
 .com_list_1_name{font-size:15px; color:black;}
 .com_list_1_contents{font-size:14px; color:#666666; margin:25px 0px 10px 0px;}
 .com_list_1_day{font-size:12px; color:#666666; margin-bottom:10px;}
-#v_com_btn_1{border:1px solid #dbdbdb; border-radius:100px; width:50px; height:25px; background-color:white; cursor:pointer;
+.v_com_btn_1{border:1px solid #dbdbdb; border-radius:100px; width:50px; height:25px; background-color:white; cursor:pointer;
 			 text-align:center; font-family:"Noto Sans KR"; font-weight:400; margin-left:5px;}
-#v_com_btn_1:nth-child(1){margin-left:-5px;}
+.v_com_btn_1:nth-child(1){margin-left:-5px;}
 /* 댓글 리스트 */
 /* allplanview */
 
@@ -176,8 +186,8 @@ footer{width:100%; height:60px; background-color:black; text-align:center; margi
 /* newplanform */
 
 /* join form */
-.join_container{margin:220px 230px 0px 230px; text-align:left;}
-#join_text{text-align:center; color:#000; position:relative; top:160px; font-size:35px; font-weight:500;}
+.join_container{margin:130px 230px 0px 230px; text-align:left;}
+#join_text{text-align:center; color:#000; position:relative; top:80px; font-size:35px; font-weight:500;}
 #join_info{font-size:23px; color:#000; font-weight:500; margin-bottom:20px; border-bottom:2px solid black; padding-bottom:15px;}
 .id_form_title{margin-top:22px;font-size:15px; color:#333333; font-weight:500;}
 .joinInput{width:580px; height:40px; margin-top:10px; border:none; border-bottom:1px solid black; 
@@ -196,9 +206,9 @@ footer{width:100%; height:60px; background-color:black; text-align:center; margi
 /* join form */
 
 /* login form */
-#login_text{text-align:center; color:#000; position:relative; top:160px; font-size:35px; font-weight:500;}
+#login_text{text-align:center; color:#000; position:relative; top:80px; font-size:35px; font-weight:500;}
 #login_text p:nth-child(2){text-align:center; margin-top:30px; font-size:15px; font-weight:400;}
-.login_containers{margin:220px 355px 0px 355px;}
+.login_containers{margin:130px 355px 0px 355px;}
 .loginValue{width:370px; height:40px; margin-top:25px; border:none; border-bottom:1px solid black; 
 		    border-bottom-color:#d5d5d5; font-size:15px; color:#777777; position:relative; padding-left:120px; 
 		    min-height:40px;}
@@ -298,8 +308,68 @@ footer{width:100%; height:60px; background-color:black; text-align:center; margi
 .btn_close_3{background-color:white; border:1px solid black; color:black; width:100px; height:40px; border-radius:100px;
 			 text-align:center; cursor:pointer;}
 .cal_popup_1_big_text{display: inline-block;}
-.content{overflow-y: scroll; height:500px;}
+#popup2 .content{overflow-y: scroll; height:500px;}
 /* detail popup */
 
+/* cal popup */
+#popup_update {display: flex; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; width: 100%;
+		height: 100%; background: rgba(0, 0, 0, .7); z-index: 1; overflow: auto;}
+#popup_update.hide {display: none;}
+#popup_update.has-filter {backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);}
+#popup_update .content {padding: 20px; background: #fff; border-radius: 5px; box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);}
+#popup_update.content{height:400px;}
+/* cal popup */
+
+/* newplan 비회원 popup */
+#popup_newplan {display: flex; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; width: 100%;
+				height: 100%; background: rgba(0, 0, 0, .7); z-index: 1; overflow: auto;}
+#popup_newplan.hide {display: none;}
+#popup_newplan.has-filter {backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);}
+#popup_newplan .content {padding: 20px; background: #fff; border-radius: 5px; box-shadow: 1px 1px 3px rgba(0, 0, 0, .3);}
+#popup_newplan.content{height:400px;}
+/* newplan 비회원 popup */
+
+/* newplan popup */
+.cal_popup_login_title{margin:30px 0px 0px 10px; font-size:25px; color:black; font-weight:500; text-align:center;}
+.cal_popup_login_text{margin:20px 0px 10px 10px; font-size:17px; color:black; font-weight:500; text-align:center;}
+/* .loginValue_np{width:370px; height:40px; margin-top:25px; border:none; border-bottom:1px solid black; 
+		    border-bottom-color:#d5d5d5; font-size:15px; color:#777777; position:relative; padding-left:120px; 
+		    min-height:40px;} */
+.loginInput_np{width:400px; height:40px; margin-top:15px; border:none; border:1px solid #d5d5d5;
+		    font-size:15px; color:#777777; position:relative;  text-align:center; border-radius:100px;
+		    min-height:40px;}
+.btn_login_np{width:400px; height:45px; margin-top:30px; background-color:black; border:1px solid black;
+		  	 color:white; font-family:"Noto Sans KR"; font-weight:400; font-size:15px; border-radius:100px; cursor:pointer;}
+#popup_del_newplan{width:30px; height:auto; float:right;}
+/* newplan popup */
+
+/* notice list*/
+.notice_list{margin-top:80px; border-collapse:collapse; width:1200px;}
+.tb1{border-bottom:1px solid #d5d5d5; color:black;}
+.notice_list .tb1{height:120px;}
+.notice_point{font-size:20px; border:1px solid black; width:100px; text-align:center; background-color:black; color:white;
+			  border-radius:100px; height:35px; line-height:35px; margin:0px -5px 0px 30px;}
+.notice_title{font-size:23px; color:black;}
+.notice_admin{margin-left:200px; font-size:18px;}
+.btn1{text-align:center; border:1px solid black; width:130px; height:40px; background-color:white; margin-left:1050px;
+	  font-size:17px; border-radius:100px; line-height:35px; display:inline-block; cursor:pointer; margin-top:50px;}
+.v_func_3{float:right; margin:-90px 20px 0px 0px; font-size:40px; font-weight:500; color:black; }
+.v_func_3 p:nth-child(1){margin-bottom:20px; font-size:25px; font-weight:500; margin-top:25px;}
+.v_btn {display:inline-block;}
+.btn div:nth-child(2){margin-right:20px;}
+.tb1:hover{background-color: #f9b341; border-bottom:2px solid white;}
+.tb1 a:hover{display: block;}
+/* notice list*/
+
+/* notice form */
+.notice_form_table{border:1px solid black; border-collapse:collapse; width:750px; margin-top:50px; margin-top:50px;}
+.notice_text_1{font-size:20px; text-align:center; background-color:black; color:white; border:1px solid white;}
+.notice_text_1:nth-child(1){height:60px;}
+.btn1_notice_success{text-align:center; border:1px solid black; width:130px; height:40px; background-color:white; margin-left:300px;
+				     font-size:17px; border-radius:100px; line-height:35px; display:inline-block; cursor:pointer; margin-top:50px;}
+.notice_text_2{border:1px solid black; margin-left:20px;}
+.notice_text_2 input{width:90%; height:40px; border:none; margin-left:10px; font-size:15px;}
+.notice_text_2 textarea{width:90%; height:40px; border:none; margin-left:10px; font-size:15px; margin-top:10px;}
+/* notice form */
 
 

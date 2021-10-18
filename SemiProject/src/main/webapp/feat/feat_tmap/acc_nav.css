@@ -1,0 +1,21 @@
+* {
+  marin: 0px;
+  padding: 0px;
+}
+
+.acc-nav {
+  position: fixed;
+  height: 100%;
+  background: rgba(224, 73, 156, 0.829);
+  width: 400px;
+  left: 0px;
+  margin-left: -400px;
+}
+#acc-nav-button {
+  position: fixed;
+  width: 30px;
+  height: 70px;
+  left: 0px;
+  background: rgb(88, 175, 88);
+  top: 300px;
+}

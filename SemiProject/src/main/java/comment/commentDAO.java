@@ -17,6 +17,7 @@ public class commentDAO {
     PreparedStatement pstmt = null;
     String sql = "insert into maria_study.comment (num,userId,contents) values (?,?,?)";
 
+
     try {
       pstmt = conn.prepareStatement(sql);
 
@@ -60,13 +61,47 @@ public class commentDAO {
     return n;
   }
 
+  // idx에 해당하는 dto 반환
+  public commentDTO getData(String idx) {
+    commentDTO dto = new commentDTO();
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    String sql = "select * from maria_study.comment where idx=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+      // 바인딩
+      pstmt.setString(1, idx);
+
+      // 실행
+      rs = pstmt.executeQuery();
+
+      if (rs.next()) {
+        dto.setIdx(rs.getString("idx"));
+        dto.setNum(rs.getString("num"));
+        dto.setUserId(rs.getString("userId"));
+        dto.setContents(rs.getString("contents"));
+        dto.setWriteday(rs.getTimestamp("writeday"));
+
+      }
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      db.dbClose(rs, pstmt, conn);
+    }
+    return dto;
+  }
+
   // 전체 댓글 출력
   public List<commentDTO> getAllAnswer(String num) {
     List<commentDTO> list = new Vector<commentDTO>();
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.comment where num=? order by idx";
+    String sql = "select * from maria_study.comment where num=? order by idx DESC";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -146,6 +181,46 @@ public class commentDAO {
 
       // 바인딩
       pstmt.setString(1, idx);
+
+      // 실행
+      pstmt.execute();
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      db.dbClose(pstmt, conn);
+    }
+  }
+
+  // 수정(검색해서)
+  public int update(int num, int idx, String comments) {
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    String sql = "update comment set Contents=? where num=? and idx=?";
+    try {
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, comments);// 물음표의 순서
+      pstmt.setInt(2, num);
+      pstmt.setInt(3, idx);
+      return pstmt.executeUpdate();// insert,delete,update
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return -1;// 데이터베이스 오류
+  }
+
+  // 수정 (우선 이걸로 사용하기!)
+  public void updateComment(commentDTO dto) {
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    String sql = "update comment set contents=? where idx=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+      // 바인딩
+      pstmt.setString(1, dto.getContents());
+      pstmt.setString(2, dto.getIdx());
 
       // 실행
       pstmt.execute();

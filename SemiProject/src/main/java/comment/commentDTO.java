@@ -49,4 +49,6 @@ public class commentDTO {
     this.writeday = writeday;
   }
 
+
+
 }
