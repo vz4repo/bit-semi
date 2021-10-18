@@ -1,5 +1,6 @@
 package data.dao;
 
+import connection.DBConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 import data.dto.NoticeDto;
-import connection.DBConnect;
+
 
 public class NoticeDao {
   DBConnect db = new DBConnect();
@@ -16,7 +17,7 @@ public class NoticeDao {
   public void insertNotice(NoticeDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "insert into maria_study.notice (title,content) values (?,?)";
+    String sql = "insert into notice (title,content,writeday) values (?,?,now())";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -41,7 +42,7 @@ public class NoticeDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select count(*) from maria_study.notice";
+    String sql = "select count(*) from notice";
 
 
     try {
@@ -64,7 +65,7 @@ public class NoticeDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.notice order by num desc limit ?,?";
+    String sql = "select * from notice order by num asc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -78,6 +79,7 @@ public class NoticeDao {
         dto.setName(rs.getString("name"));
         dto.setTitle(rs.getString("title"));
         dto.setContent(rs.getString("content"));
+        dto.setReadcount(rs.getInt("readcount"));
         dto.setWriteday(rs.getTimestamp("writeday"));
 
         list.add(dto);
@@ -97,7 +99,7 @@ public class NoticeDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.notice where num=?";
+    String sql = "select * from notice where num=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -109,6 +111,7 @@ public class NoticeDao {
         dto.setName(rs.getString("name"));
         dto.setTitle(rs.getString("title"));
         dto.setContent(rs.getString("content"));
+        dto.setReadcount(rs.getInt("readcount"));
         dto.setWriteday(rs.getTimestamp("writeday"));
 
       }
@@ -119,5 +122,69 @@ public class NoticeDao {
       db.dbClose(rs, pstmt, conn);
     }
     return dto;
+  }
+
+  public void updateNotice(NoticeDto dto) {
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    String sql = "update notice set title=?,content=? where num=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+      pstmt.setString(1, dto.getTitle());
+      pstmt.setString(2, dto.getContent());
+      pstmt.setString(3, dto.getNum());
+
+      pstmt.execute();
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } finally {
+      db.dbClose(pstmt, conn);
+    }
+
+  }
+
+  public void deleteNotice(String num) {
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    String sql = "delete from notice where num=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+
+      pstmt.setString(1, num);
+
+      pstmt.execute();
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } finally {
+      db.dbClose(pstmt, conn);
+    }
+
+  }
+
+  public void updateReadCount(String num) {
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    String sql = "update notice set readcount=readcount+1 where num=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+
+      pstmt.setString(1, num);
+
+      pstmt.execute();
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } finally {
+      db.dbClose(pstmt, conn);
+    }
+
   }
 }

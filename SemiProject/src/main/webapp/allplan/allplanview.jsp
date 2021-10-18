@@ -25,13 +25,13 @@
         } // 로그인 안해도 보여줄건가??
     %>
     <script>
-      /* 팝업 띄우기 위한 script (날짜 선택 팝업!) */
+    
+      /* 수정하기 위한 팝업! */
       function showPopup(hasFilter, idx) {
         const popup = document.querySelector('#popup_update');
         popup.setAttribute("idx", idx);     // idx="idx" attr 추가
         let target = '.comm_idx_' + idx;  // 수정 댓글 경로 만들기
         $('#com_box_2').val($(target).text()); // 수정 댓글 text 넣기
-
         if (hasFilter) {
           popup.classList.add('has-filter');
         } else {
@@ -39,15 +39,13 @@
         }
         popup.classList.remove('hide');
       }
-
       function closePopup() {
         const popup = document.querySelector('#popup_update');
         popup.classList.add('hide');
       }
-
+      
       //댓글 출력하는 함수
       function list() {
-
         var num = $("#num").val();
         var myid = $("#myid").val();
         $.ajax({
@@ -56,10 +54,8 @@
           url: "allplan/commentxml.jsp",
           data: {"num": num},
           success: function (data) {
-
             var su = $(data).find("answer").length;
             $("b.su").text(su);
-
             var s = "";
             s += "<ul class='com_list_all'>";
             $(data).find("answer").each(function (i, element) {
@@ -73,19 +69,17 @@
               s += "<p class='com_list_1_name'>" + userid + "</p>";
               s += "<p class='com_list_1_contents'>" + contents + "</p>";
               s += "<p class='com_list_1_day'>" + writeday + "</p>";
-
               <%-- var login="<%=loginok%>";
               console.log(login);
               if(login!="null"){
                   s+="<button type='button' id='v_com_btn_1'>댓글</button>";
               } --%>
-
               var login = "<%=loginok%>";
               var logid = $("#myid").val();
               console.log("1" + login + "," + myid);
               if (login == "true" && logid == myid) {
-                s += "<button type='button' class='aup' id='v_com_btn_1' onclick='showPopup(false)' idx='" + idx + "'>수정</button>";
-                s += "<button type='button' class='adel' id='v_com_btn_1' idx='" + idx + "'>삭제</button>";
+                s += "<button type='button' class='aup v_com_btn_1' onclick='showPopup(false)' idx='" + idx + "'>수정</button>";
+                s += "<button type='button' class='adel v_com_btn_1' idx='" + idx + "'>삭제</button>";
               }
               s += "</span>";
               s += "</li>";
@@ -102,17 +96,14 @@
               s += "</div>";
             });
             s += "</ul>";
-
             $(".v_comment_list").html(s);
-
           }
         });
       }
-
       $(function () {
         /* $("li.update_commtent_form_all").hide(); */ //수정폼 전부 숨기기!
-        list(); //처음부터 댓글 리스트 출력!!
-
+       // list(); //처음부터 댓글 리스트 출력!!
+        
         //댓글추가 이벤트
         $("#v_com_check").click(function () {
           <% if (myid == null) { %>
@@ -126,7 +117,6 @@
             alert("댓글내용을 입력후 확인을 눌러주세요");
             return;
           }
-
           $.ajax({
             type: "post",
             dataType: "html",
@@ -135,16 +125,17 @@
             success: function (d) {
               alert("댓글이 등록되었습니다!");
               //목록 다시 출력
-              list();
+              //list();
+              location.reload();
               //입력값 지우기
               $("#com_box").val("");
             }
           });
           <% } %>
         });
-
+        
         //추천을 클릭했을 때의 이벤트
-        $("span.v_likes").click(function () {
+        /* $("span.v_likes").click(function () {
           var num = $(this).attr("num");
           var tag = $(this);
           //console.log(num); //확인됨
@@ -161,8 +152,8 @@
               });
             }
           });
-        });
-
+        }); */
+        
         /* 댓글 폼 안에 이벤트! */
         $("#com_box").click(function () {
           $(this).text("");
@@ -170,7 +161,7 @@
         $("#com_box").mouseout(function () {
           $(this).text("댓글을 입력해주세요.");
         });
-
+        
         /* 댓글 삭제 버튼 클릭시 이벤트! */
         $(document).on("click", ".adel", function () {
           var idx = $(this).attr("idx");
@@ -187,11 +178,11 @@
             }
           });
         });
-
+        
         $("#com_box").click(function () {
           $(this).text("");
         });
-
+        
         /* 댓글 팝업 수정 버튼 클릭시 이벤트! */
         $(".btn_submit_1").click(function () {
           let idx = $('#popup_update').attr("idx");
@@ -227,7 +218,6 @@
     }
     //num에 해당하는 dto 얻기
     PlanDto dto = dao.getData(num);
-
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     /* ------------------------------------------------- */
 %>
@@ -332,28 +322,32 @@
                 // TODO : 댓글 기능 (임시!)
                 commentDAO test_dao = new commentDAO();
                 List<commentDTO> list = test_dao.getAllAnswer(request.getParameter("num"));
-
             %>
-            <div class="comment-count">
+            <%-- <div class="comment-count">
                 <h2> comments count <%=list.size()%>
                 </h2>
-            </div>
+            </div> --%>
+            <div class="v_comment_list_num">
+          	  <span class="v_comment_num">총 댓글<b class="su"><%=list.size()%></b></span>
+       	 	</div>
             <ul>
                 <% for (int i = 0; i < list.size(); i++) { %>
 
-                <div class="comm-content<%=i%>">
-                    <li class='v_comment_1'>
-                    <span class='com_list_1'>
-              <p class='com_list_1_name'> <%=list.get(i).getUserId()%> </p>
-              <p class='com_list_1_contents comm_idx_<%=list.get(i).getIdx()%>'> <%=list.get(i).getContents()%></p>
-              <p class='com_list_1_day'> <%=list.get(i).getWriteday()%></p>
-                        <% if (myid != null && myid.equals(list.get(i).getUserId())) { %>
-              <button type='button' class='aup v_com_btn_1' id='btn_modify' idx='<%=list.get(i).getIdx()%>'
-                      onclick='showPopup(false, <%=list.get(i).getIdx()%>)'>수정</button>
-              <button type='button' class='adel v_com_btn_1' id='btn_del' idx='<%=list.get(i).getIdx()%>'>삭제</button>
-                        <%}%>
-                    </span>
-                    </li>
+                <div class=" v_comment_list">
+                	<ul class='com_list_all'>
+	                    <li class='v_comment_1'>
+	                    <span class='com_list_1'>
+			              <p class='com_list_1_name'> <%=list.get(i).getUserId()%> </p>
+			              <p class='com_list_1_contents comm_idx_<%=list.get(i).getIdx()%>'> <%=list.get(i).getContents()%></p>
+			              <p class='com_list_1_day'> <%=list.get(i).getWriteday()%></p>
+			                        <% if (myid != null && myid.equals(list.get(i).getUserId())) { %>
+			              <button type='button' class='aup v_com_btn_1' id='btn_modify' idx='<%=list.get(i).getIdx()%>'
+			                      onclick='showPopup(false, <%=list.get(i).getIdx()%>)'>수정</button>
+			              <button type='button' class='adel v_com_btn_1' id='btn_del' idx='<%=list.get(i).getIdx()%>'>삭제</button>
+			                        <%}%>
+	                    </span>
+	                    </li>
+                    </ul>
                 </div>
                 <%}%>
             </ul>
@@ -361,20 +355,22 @@
         <!-- 댓글폼 -->
 
         <!-- 댓글 리스트 -->
-        <div class="v_comment_list_num">
-            <span class="v_comment_num">총 댓글<b class="su"><%-- <%=clist.size() %> --%>0</b></span>
-        </div>
-        <div class="v_comment_list">
-        </div>
+        <!-- <div class="v_comment_list_num">
+            <span class="v_comment_num">총 댓글<b class="su">0</b></span>
+        </div> -->
+        <!-- <div class="v_comment_list">
+        </div> -->
         <!-- 댓글 리스트 -->
+        
         <%
             String idx = request.getParameter("idx");
             System.out.println("idx? :" + idx);
             commentDAO cdao = new commentDAO();
             commentDTO cdto = cdao.getData(idx);
-
             System.out.println("idx?? : " + cdto.getContents());
         %>
+        
+        <!-- 수정 팝업 내용 -->
         <div id="popup_update" class="hide">
             <div class="content">
                 <p class="cal_popup_1_title">수정하기</p>

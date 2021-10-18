@@ -131,7 +131,7 @@ public class PlanDao {
     return list;
   }
 
-  // 좋아요순
+  // 조회순
   public List<PlanDto> getPlan3(int start, int perpage) {
     List<PlanDto> list = new Vector<PlanDto>();
     Connection conn = db.getConnection();
