@@ -177,7 +177,40 @@ public class PlanDao {
       db.dbClose(rs, pstmt, conn);
     }
     return list;
+  }
 
+  // 메인 화면에 6개 게시판 출력!
+  public List<PlanDto> getMainPlan() {
+    List<PlanDto> list = new Vector<PlanDto>();
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    String sql = "select * from maria_study.test_postinfo order by num desc limit 6";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+      rs = pstmt.executeQuery();
+      while (rs.next()) {
+        PlanDto dto = new PlanDto();
+        // num,userId,plantitle,planDate,content,readCNT,good,writeday
+        dto.setNum(rs.getString("num"));
+        dto.setUserId(rs.getString("userId"));
+        dto.setPlantitle(rs.getString("plantitle"));
+        dto.setPlanDate(rs.getString("planDate"));
+        dto.setContent(rs.getString("content"));
+        dto.setReadCNT(rs.getInt("readCNT"));
+        dto.setGood(rs.getInt("good"));
+        dto.setWriteday(rs.getTimestamp("writeday"));
+
+        list.add(dto);
+      }
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } finally {
+      db.dbClose(rs, pstmt, conn);
+    }
+    return list;
   }
 
   // 추천순

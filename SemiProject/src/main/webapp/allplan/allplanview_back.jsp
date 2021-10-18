@@ -333,6 +333,8 @@
 			<div class="v_comment_list">
 			</div>
 			<!-- 댓글 리스트 -->
+			
+			<!-- 댓글 팝업 -->
 			<%
 			String idx=request.getParameter("idx");
 			//db에서 num에 해당하는 dto 얻기
@@ -351,6 +353,7 @@
 						</div>
 				</div>
 			</div>
+			<!-- 댓글 팝업 -->
 		</div>
 	</div>
 	<!--view -->

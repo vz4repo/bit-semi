@@ -12,19 +12,40 @@
 <script type="text/javascript">
 $(function () {
 	$("select.selpln").change(function () {
-	    var s=$(this).val();
-	   	//alert(s);
-		if(s=="rec"){
-			$(".tb").hide();
-			$("#t1").show();	
-		  }else if(s=="chu"){
-			 $(".tb").hide();
-			 $("#t2").show();
-		}else if(s=="jo"){
-			 $(".tb").hide();
-			 $("#t3").show();
-		}
-	});
+	       //var sel=$(".selpln option:selected").val();
+	      var s=$(this).val();
+	         //alert(s);
+	      if(s=="rec"){
+	         $(".tb").hide();
+	         $("#t1").show();
+	         localStorage.tt="t1";
+	         
+	        }/* else if(s=="chu"){
+	          $(".tb").hide();
+	          $("#t2").show();
+	          localStorage.tt="t2";
+	          
+	      } */else if(s=="jo"){
+	          $(".tb").hide();
+	          $("#t3").show();
+	          localStorage.tt="t3";
+	      }
+	      
+	      });
+	   
+	   var tt=localStorage.tt;
+	   
+	   if(tt=="t1"){
+	      $(".tb").hide();
+	      $("#t1").show();   
+	   }/* else if(tt=="t2"){
+	      $(".tb").hide();
+	      $("#t2").show();
+	   } */else{
+	      $(".tb").hide();
+	      $("#t3").show();
+	   }
+
 });
 </script>
 </head>
@@ -65,8 +86,8 @@ $(function () {
 	List<PlanDto> list=dao.getPlan(start, perPage);
 	//추천순 나열
 	/* List<PlanDto> list2=dao.getPlan2(start, perPage); */
-	//좋아요순 나열
-	/* List<PlanDto> list3=dao.getPlan3(start, perPage); */
+	//조회순 나열
+	List<PlanDto> list3=dao.getPlan3(start, perPage);
 	
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	
@@ -98,11 +119,11 @@ $(function () {
 			<!-- 게시글 수 -->
 			<p id="all_plan_list_cnt">총 <%=totalCount%>개</p>
 			<!-- 셀렉트 박스 -->
-			<!-- <select name="sel" class="selpln">
+			<select name="sel" class="selpln">
 				<option selected="selected" value="rec" id="rec">최신순</option>
-				<option value="jo" id="jo">좋아요순</option>
-				<option value="chu" id="chu">조회순</option>
-			</select> -->
+				<!-- <option value="jo" id="jo">좋아요순</option> -->
+				<option value="jo" id="jo">조회순</option>
+			</select>
 		</div>
 		<!-- 모든계획 나열표 -->
 		<!-- 시간순 나열 -->
@@ -146,25 +167,26 @@ $(function () {
 			</ul>
 		</div> --%>
 		
-		<!-- 좋아요순 나열 -->
-		<%-- <div id="t3" class="tb">
+		<!-- 조회순순 나열 -->
+		<div id="t3" class="tb" style="display:none;">
 			<ul class="clearfix">
 				<% 
-				for(PlanDto dto:list){
+				for(PlanDto dto:list3){
 				%>
 				<li>
-					<a href="#">
-						<span class="con_1_box">
-							<h3><%=dto.getTitle() %></h3>
-							<p><%=dto.getDays() %></p>
-							<p>작성자:<%=dto.getName() %></p>
+					<a href="index.jsp?main=allplan/allplanview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list">
+						<span class="list_box_1">
+							<h3><%=dto.getPlantitle()%></h3>
+							<%System.out.println(dto.getNum()); %>
+							<p><%=dto.getPlanDate()%></p>
+							<p><%=dto.getUserId()%></p>
 						</span>
 					</a>
 				</li>
 				<%} 
 				%>
 			</ul>
-		</div> --%>
+		</div>
 		
 		<!-- 페이징 -->
 		<div class="paging">
@@ -198,8 +220,8 @@ $(function () {
 		<%
 		}
 		%>
-	</div>
-		<script type="text/javascript">
+		</div>
+		<!-- <script type="text/javascript">
 		var selectedp = [[${selectedp}]]; 
 		if(selectedp == rec){
 		    $('#rec').attr('selected','selected');
@@ -208,7 +230,7 @@ $(function () {
 		} else{
 		    $('#chu').attr('selected','selected');
 		}
-		</script>
+		</script> -->
 	</div>
 </body>
 </html>

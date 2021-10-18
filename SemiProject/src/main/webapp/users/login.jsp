@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<%@ page import="java.io.PrintWriter" %>
+	pageEncoding="UTF-8"%>
+	<%@ page import="java.io.PrintWriter" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,15 +28,15 @@
 	</div>
 	<!-- sub -->
 
-<div class="container">
-    <!-- sub -->
-    <div class="margin_wrap">
-        <div id="login_text">
-            <p>GOING 로그인</p>
-            <p>GOING에서 다양한 여행계획 정보를 얻어가세요.</p>
-        </div>
-    </div>
-    <!-- sub -->
+	<div class="container">
+		<!-- sub -->
+		<div class="margin_wrap">
+			<div id="login_text">
+				<p>GOING 로그인</p>
+				<p>GOING에서 다양한 여행계획 정보를 얻어가세요.</p>
+			</div>
+		</div>
+		<!-- sub -->
 
     <!-- get session attr-->
     <%

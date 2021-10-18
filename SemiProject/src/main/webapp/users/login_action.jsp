@@ -3,14 +3,6 @@
 <%@ page import="java.io.PrintWriter" %>
 <%
     request.setCharacterEncoding("UTF-8");
-%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>login action</title>
-</head>
-<%
     String root=request.getContextPath();
 %>
 <body>
@@ -67,6 +59,10 @@
         script.println("history.back()");
         script.println("</script>");
     }
+
+    PrintWriter script = response.getWriter();
+	  script.println("<script> alert('로그인 성공!') ");
+	  script.println("location.href = '../index.jsp' </script>");
 %>
 </body>
-</html>
+
