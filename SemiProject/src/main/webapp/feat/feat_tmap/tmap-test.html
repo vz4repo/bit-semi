@@ -19,10 +19,11 @@
 					width : "70%",
 					height : "700px",
 					zoom : 15,
-					zoomControl : true,
+					zoomControl : false,
 					scrollwheel : true
 				});
-				map.setOptions({ zoomControl: false }); // 줌컨트롤 표출 비활성화
+				// map.setOptions({ zoomControl: false }); // 줌컨트롤 표출 비활성화				
+				
 
 				// 2. POI 통합 검색 API 요청
 				$("#searchKeyword").keyup(
@@ -43,7 +44,7 @@
 							success : function(response) {
 								var resultpoisData = response.searchPoiInfo.pois.poi;
 		
-								// 2. 기존 마커, 팝업 제거
+								// 2. 기존 마커, 팝업(라벨) 제거
 								if (markerArr.length > 0) {
 									for(var i in markerArr) {
 										markerArr[i].setMap(null);
@@ -96,13 +97,16 @@
 													+ k
 													+ ".png", // 아이콘 등록
 											iconSize : new Tmapv2.Size(
-													24, 38), // 아이콘 크기 설정
-											title : name, // 마커 타이틀
+													24, 38), // 아이콘 크기 설정													
+													title : name, // 마커 타이틀
+													label: name,
 											map : map // 마커가 등록될 지도 객체
 										});
 		
 									// 결과창에 나타날 검색 결과 html
-									innerHtml += "<li><div><img src='http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_" + k + ".png' style='vertical-align:middle;'/><span>"
+									innerHtml += "<li><div><img src='http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_"
+											 + k 
+											 + ".png' style='vertical-align:middle;'/><span>"
 											+ name
 											+ "</span>  <button type='button' name='sendBtn' onClick='poiDetail("
 											+ id
@@ -126,6 +130,7 @@
 							}
 						});
 					}});
+					
 			}
 		
 			// 4. POI 상세 정보 API
@@ -144,6 +149,7 @@
 			
 						// 응답받은 POI 정보
 						var detailInfo = response.poiDetailInfo;
+						console.log(detailInfo);
 						var name = detailInfo.name;
 						var address = detailInfo.address;
 			
@@ -163,7 +169,9 @@
 						"<button class ='btn_abort' onclick='$(this).parent().remove()'>취소</button></div>";
 						//$("#selectResult").html(innerHtml);
 						$("#selectResult").append(innerHtml);
-                      	
+						map.setCenter(labelPosition);	//	맵 중심 이동
+                      	// map.panTo(labelPosition);	//	맵 중심 이동
+						map.setZoom(19);
                         // 선택 후, 기존 마커 제거
 								if (markerArr.length > 0) {
 									for(var i in markerArr) {
