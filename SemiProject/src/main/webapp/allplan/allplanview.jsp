@@ -22,8 +22,9 @@
         if (session.getAttribute("loginok") != null) {
             loginok = session.getAttribute("loginok").toString();
             myid = (String) session.getAttribute("myid");
-        } // 로그인 안해도 보여줄건가??
+        }
     %>
+ 
     <script>
     
       /* 수정하기 위한 팝업! */
@@ -44,7 +45,7 @@
         popup.classList.add('hide');
       }
       
-      //댓글 출력하는 함수
+      //댓글 출력하는 함수(현재 사용안함..)
       function list() {
         var num = $("#num").val();
         var myid = $("#myid").val();
@@ -133,27 +134,7 @@
           });
           <% } %>
         });
-        
-        //추천을 클릭했을 때의 이벤트
-        /* $("span.v_likes").click(function () {
-          var num = $(this).attr("num");
-          var tag = $(this);
-          //console.log(num); //확인됨
-          $.ajax({
-            type: "get",
-            dataType: "json",
-            url: "guest/ajaxlikechu.jsp",
-            data: {"num": num},
-            success: function (data) {
-              tag.next().text(data.chu);
-              tag.next().next().animate({"font-size": "30px"}, 1000, function () {
-                //애니메이션이 끝난 후 다시 글꼴 크기를 0px로 변경
-                $(this).css("font-size", "0px");
-              });
-            }
-          });
-        }); */
-        
+       
         /* 댓글 폼 안에 이벤트! */
         $("#com_box").click(function () {
           $(this).text("");
@@ -250,6 +231,10 @@
             <p><%=dto.getReadCNT()%>
             </p>
         </div>
+        <div class="v_func_2_chu">
+			<p>Like</p>
+			<p class="chu"><%=dto.getGood()%></p>
+		</div>
     </div>
     <!-- 상단 -->
 
@@ -282,10 +267,30 @@
     <!-- 별점, 목록 버튼 -->
     <div class="btn">
         <!-- 아래 별점 일단 보류! -->
-        <%-- <div class="v_btn">
-            <button type="button"
-            onclick="location.href='index.jsp?main=board/boardlist.jsp?currentPage=<%=currentPage%>'">별점주기</button>
-        </div> --%>
+        <div class="v_btn">
+            <button type="button" class="good" num="<%=dto.getNum()%>">
+            <span class="heart">추천하기</span></button>
+        </div>
+        
+        <script type="text/javascript">
+	      //추천 클릭시 이벤트!
+	     $("button.good").click(function() {
+	    	var num = $("button.good").attr("num");
+	    	var tag = $("p.chu");
+	    	console.log(num);
+	    	$.ajax({
+	    		type: "get",
+	    		dataType: "json",
+	    		url: "allplan/chuaction.jsp",
+	    		data: {"num":num},
+	    		success: function(data) {
+	    			alert("추천!");
+	    			tag.text(data.good);
+	    		}
+	    	});
+	    });
+        </script>
+        
         <div class="v_btn">
             <button type="button"
                     onclick="location.href='index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=currentPage%>'">목록
@@ -354,6 +359,7 @@
         </div>
         <!-- 댓글폼 -->
 
+		<!-- 아래 ajax list 출력 안하기 때문에 주석! -->
         <!-- 댓글 리스트 -->
         <!-- <div class="v_comment_list_num">
             <span class="v_comment_num">총 댓글<b class="su">0</b></span>

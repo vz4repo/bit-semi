@@ -33,13 +33,12 @@
 </div>
 
 <div class="container">
-	<div class="join_container">
 	<p id="all_plan_list_title">수정사항을 입력해주세요!</p>
 	
 	<form action="notice/noticeupdateaction.jsp" method="post">
 		<input type="hidden" name="num" value="<%=num%>">
 		<input type="hidden" name="currentPage" value="<%=currentPage%>">
-		<table class="notice_form_table" style="width:750px;">
+		<table class="notice_form_table" style="width:1200px;">
 				<tr>
 					<td class="notice_text_1">제목</td>
 					<td class="notice_text_2">
@@ -102,6 +101,5 @@ function pasteHTML(filepath){
 }
 </script>
 	</div>
-</div>
 </body>
 </html>
