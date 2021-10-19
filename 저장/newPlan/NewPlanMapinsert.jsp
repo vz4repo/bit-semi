@@ -1,4 +1,5 @@
 
+<%@page import="org.json.simple.JSONObject"%>
 <%@page import="date.dto.myAllPlanDto"%>
 <%@page import="date.dto.myPlanDto"%>
 <%@page import="date.dao.myPlanDao"%>
@@ -7,18 +8,17 @@
 <%
 request.setCharacterEncoding("utf-8");
 
+
 	myPlanDao dao = new myPlanDao();
 	myPlanDto dto = new myPlanDto();
 
-	myAllPlanDto cdto = new myAllPlanDto();
-
-
+	
 	String plantitle   = request.getParameter("plantitle");
 	String planDate  = request.getParameter("planDate");
-	String planTime = request.getParameter("planTime");
-	String mapPlan = request.getParameter("mapPlan");
-	String contentPlan = request.getParameter("contentPlan");
-	
+	String planTime = request.getParameter("time");
+	String mapPlan = request.getParameter("map");
+	String contentPlan = request.getParameter("content");
+
 	
 
 	dto.setPlantitle(plantitle);
@@ -32,6 +32,5 @@ request.setCharacterEncoding("utf-8");
 	
 	
 	
-%>
-
-    
+	
+%> 

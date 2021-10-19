@@ -14,13 +14,8 @@ request.setCharacterEncoding("utf-8");
 	
 	dto.setPlanStartDay(request.getParameter("planStartDay"));
 	dto.setPlanEndDay(request.getParameter("planEndDay"));
-
-	String sday = request.getParameter("planStartDay");
-	String eday = request.getParameter("planEndDay");
-	
-
 	dto.setPlantitle(request.getParameter("plantitle"));
-	dto.setOpenPlan((request.getParameter("openPlan")=="true")?true:false);
+	dto.setOpenPlan((request.getParameter("openPlan").equals("true"))?true:false);
 
 	dao.insertPlan(dto);
 
