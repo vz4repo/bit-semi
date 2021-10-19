@@ -16,16 +16,14 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     String sql =
-        "insert into maria_study.treview (userID,userName,userGender,subject,content,thumbnail) values (?,?,?,?,?,?)";
+        "insert into maria_study.treview (userID,subject,content,thumbnail,writeday) values (?,?,?,?,now())";
 
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, dto.getUserID());
-      pstmt.setString(2, dto.getUserName());
-      pstmt.setString(3, dto.getUserGender());
-      pstmt.setString(4, dto.getSubject());
-      pstmt.setString(5, dto.getContent());
-      pstmt.setString(6, dto.getThumbnail());
+      pstmt.setString(2, dto.getSubject());
+      pstmt.setString(3, dto.getContent());
+      pstmt.setString(4, dto.getThumbnail());
       pstmt.execute();
     } catch (SQLException e) {
       // TODO Auto-generated catch block
@@ -73,7 +71,6 @@ public class ReviewDao {
       while (rs.next()) {
         ReviewDto dto = new ReviewDto();
         dto.setNum(rs.getString("num"));
-        dto.setUserName(rs.getString("userName"));
         dto.setUserID(rs.getString("userID"));
         dto.setSubject(rs.getString("subject"));
         dto.setContent(rs.getString("content"));
@@ -109,7 +106,6 @@ public class ReviewDao {
       while (rs.next()) {
         ReviewDto dto = new ReviewDto();
         dto.setNum(rs.getString("num"));
-        dto.setUserName(rs.getString("userName"));
         dto.setUserID(rs.getString("userID"));
         dto.setSubject(rs.getString("subject"));
         dto.setContent(rs.getString("content"));
@@ -144,7 +140,6 @@ public class ReviewDao {
       while (rs.next()) {
         ReviewDto dto = new ReviewDto();
         dto.setNum(rs.getString("num"));
-        dto.setUserName(rs.getString("userName"));
         dto.setUserID(rs.getString("userID"));
         dto.setSubject(rs.getString("subject"));
         dto.setContent(rs.getString("content"));
@@ -178,7 +173,6 @@ public class ReviewDao {
       if (rs.next()) {
         dto.setNum(rs.getString("num"));
         dto.setUserID(rs.getString("userID"));
-        dto.setUserName(rs.getString("userName"));
         dto.setSubject(rs.getString("subject"));
         dto.setContent(rs.getString("content"));
         dto.setReadcount(rs.getInt("readcount"));
@@ -262,6 +256,27 @@ public class ReviewDao {
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, num);
+      pstmt.execute();
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } finally {
+      db.dbClose(pstmt, conn);
+    }
+  }
+
+  // 수정
+  public void updateReview(ReviewDto dto) {
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    String sql = "update maria_study.treview set subject=?, content=?, thumbnail=? where num=?";
+    try {
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, dto.getSubject());
+      pstmt.setString(2, dto.getContent());
+      pstmt.setString(3, dto.getThumbnail());
+      pstmt.setString(4, dto.getNum());
+
       pstmt.execute();
     } catch (SQLException e) {
       // TODO Auto-generated catch block
