@@ -10,27 +10,43 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <style type="text/css">
-	.btn { display:block; width:100px; height:40px; line-height:40px; border:1px #3399dd solid;; margin:15px auto; background-color:white; text-align:center; cursor: pointer; color:#333; transition:all 0.9s, color 0.3; }
-	.hover1:hover{ box-shadow: 0 80px 0 0 rgba(0,0,0,0.25) inset, 0 -80px 0 0 rgba(0,0,0,0.25) inset; } 
-
-
+	.btn1{
+		width:100px;
+		height:40px;
+		border-radius: 50px;
+		font-size: 13pt;
+		margin-left: 1200px;
+		
+	}
+	.btn1:hover{
+		background-color:#dcdcdc;
+	}
 	td{
 		height:50px;
 		font-size: 20pt;
+		
 	}
+
 	.tb1 a{
 		color: black;
 	}
 	.tb1:hover{
-		background-color: #969696; 
+		background-color: #dcdcdc; 
 		color:black;
+		border-bottom:1px solid black;
+		
+		
+	}
+	.tb1{
+		height: 90px;
+		 
 		
 	}
 	.tb{
 		width: 1000px; 
 		border-collapse:collapse;
+		
 	}
 	a{
 		color:black;
@@ -53,7 +69,7 @@
 	background-color: black;
 	color: #fff;
 }
-	
+
 </style>
 </head>
 <body>
@@ -130,12 +146,13 @@
 	if(uls!=null && userid.equals("admin"))
 	{%>
 	  
-	
-	<button type="button" style="margin-left: 1200px;" class="btn hover1"
-	onclick="location.href='index.jsp?main=notice/noticeform.jsp'">글쓰기</button>
+	<div>
+	<button type="button" class="btn1"
+	onclick="location.href='index.jsp?main=notice/noticeform.jsp'"><span>글쓰기</span></button>
 	<br><br><br>
 	<%}
 	%>
+	</div>
 	
 	<!-- 테이블 -->
 	<div style="margin-left: 250px;">
@@ -147,12 +164,13 @@
 						<td style="text-align: center;">공지</td>
 						<td style="width: 700px;">
 						<a href="index.jsp?main=notice/noticeview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list">
-	  					<%=dto.getTitle() %>
+	  					&nbsp;&nbsp;&nbsp;<%=dto.getTitle() %>
 	  					</a>
 						
 						</td>
 						<td style="text-align: center;">운영자</td>
 					</tr>
+					
 					<%}
 				%>
 			</table>

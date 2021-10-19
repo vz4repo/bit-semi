@@ -24,7 +24,7 @@
 	
 </style>
  <script type="text/javascript">
-$(function () {
+ $(function () {
 	$("select.selpln").change(function () {
 	    //var sel=$(".selpln option:selected").val();
 		var s=$(this).val();
@@ -32,17 +32,36 @@ $(function () {
 		if(s=="rec"){
 			$(".tb").hide();
 			$("#t1").show();
+			localStorage.tt="t1";
 			
 		  }else if(s=="chu"){
 			 $(".tb").hide();
 			 $("#t2").show();
+			 localStorage.tt="t2";
 			 
 		}else if(s=="jo"){
 			 $(".tb").hide();
 			 $("#t3").show();
-			
+			 localStorage.tt="t3";
 		}
+		
 		});
+	
+	var tt=localStorage.tt;
+	
+	if(tt=="t1"){
+		$(".tb").hide();
+		$("#t1").show();
+		
+	}else if(tt=="t2"){
+		$(".tb").hide();
+		$("#t2").show();
+	
+	}else{
+		$(".tb").hide();
+		$("#t3").show();
+		
+	}
 	});
 
 
@@ -50,6 +69,7 @@ $(function () {
 </script>
 </head>
 <%
+	String mom=request.getParameter("selmom");
 	PlanDao dao=new PlanDao();
 	//페이징
 	int perPage=9;//한페이지에 보여질 글의 개수
@@ -64,6 +84,7 @@ $(function () {
 	int endPage;//각 블럭에 표시할 마지막페이지
 	
 	//총 갯수
+	String key=request.getParameter("key");
 	totalCount=dao.getTotalCount();
 	//현재 페이지 번호 읽기(단 null일 경우는 1페이지로 설정)
 	if(request.getParameter("currentPage")==null)
@@ -121,11 +142,14 @@ $(function () {
 <br>이미지 삽입<br>All 플랜</div>
 
 <!-- 셀렉트 박스 -->
-<select name="sel" class="selpln" style="margin-top: 80px; width:70px; height:50px; margin-left: 1200px;">
+
+<select name="sel" class="selpln" id="selpln"
+style="margin-top: 80px; width:70px; height:50px; margin-left: 1200px;">
 	<option value="rec">최신순</option>
 	<option value="jo">좋아요순</option>
 	<option value="chu">추천순</option>
 </select>
+
 
 <!-- 모든계획 나열표 -->
 <!-- 시간순 나열 -->
@@ -224,5 +248,7 @@ style="display:none;  width:1100px; height:740px; border: 10px solid black; marg
 	%>
 	</ul>		
 </div>
+
+
 </body>
 </html>

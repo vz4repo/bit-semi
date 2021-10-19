@@ -78,6 +78,7 @@ public class NoticeDao {
         dto.setName(rs.getString("name"));
         dto.setTitle(rs.getString("title"));
         dto.setContent(rs.getString("content"));
+        dto.setReadcount(rs.getInt("readcount"));
         dto.setWriteday(rs.getTimestamp("writeday"));
 
         list.add(dto);
@@ -109,6 +110,7 @@ public class NoticeDao {
         dto.setName(rs.getString("name"));
         dto.setTitle(rs.getString("title"));
         dto.setContent(rs.getString("content"));
+        dto.setReadcount(rs.getInt("readcount"));
         dto.setWriteday(rs.getTimestamp("writeday"));
 
       }
@@ -120,4 +122,139 @@ public class NoticeDao {
     }
     return dto;
   }
+
+  public void updateNotice(NoticeDto dto) {
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    String sql = "update notice set title=?,content=? where num=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+      pstmt.setString(1, dto.getTitle());
+      pstmt.setString(2, dto.getContent());
+      pstmt.setString(3, dto.getNum());
+
+      pstmt.execute();
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } finally {
+      db.dbClose(pstmt, conn);
+    }
+
+  }
+
+  public void deleteNotice(String num) {
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    String sql = "delete from notice where num=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+
+      pstmt.setString(1, num);
+
+      pstmt.execute();
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } finally {
+      db.dbClose(pstmt, conn);
+    }
+
+  }
+
+  public void updateReadCount(String num) {
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    String sql = "update notice set readcount=readcount+1 where num=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+
+      pstmt.setString(1, num);
+
+      pstmt.execute();
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } finally {
+      db.dbClose(pstmt, conn);
+    }
+
+  }
+
+
+
+  public List<NoticeDto> getNext(String num) {
+    List<NoticeDto> list = new Vector<NoticeDto>();
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    String sql = "SELECT * FROM notice WHERE num > ? ORDER BY num ASC LIMIT 1";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, num);
+
+      rs = pstmt.executeQuery();
+
+      while (rs.next()) {
+        NoticeDto dto = new NoticeDto();
+        dto.setNum(rs.getString("num"));
+        dto.setName(rs.getString("name"));
+        dto.setTitle(rs.getString("title"));
+        dto.setContent(rs.getString("content"));
+        dto.setReadcount(rs.getInt("readcount"));
+        dto.setWriteday(rs.getTimestamp("writeday"));
+
+        list.add(dto);
+      }
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } finally {
+      db.dbClose(rs, pstmt, conn);
+    }
+    return list;
+
+  }
+
+  public List<NoticeDto> getPrev(String num) {
+    List<NoticeDto> list = new Vector<NoticeDto>();
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    String sql = "SELECT * FROM notice WHERE num < ? ORDER BY num DESC LIMIT 1";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, num);
+
+      rs = pstmt.executeQuery();
+
+      while (rs.next()) {
+        NoticeDto dto = new NoticeDto();
+        dto.setNum(rs.getString("num"));
+        dto.setName(rs.getString("name"));
+        dto.setTitle(rs.getString("title"));
+        dto.setContent(rs.getString("content"));
+        dto.setReadcount(rs.getInt("readcount"));
+        dto.setWriteday(rs.getTimestamp("writeday"));
+
+        list.add(dto);
+      }
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } finally {
+      db.dbClose(rs, pstmt, conn);
+    }
+    return list;
+
+  }
+
 }

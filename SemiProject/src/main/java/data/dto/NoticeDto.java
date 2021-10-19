@@ -7,6 +7,16 @@ public class NoticeDto {
   private String name;
   private String title;
   private String content;
+  private int readcount;
+
+  public int getReadcount() {
+    return readcount;
+  }
+
+  public void setReadcount(int readcount) {
+    this.readcount = readcount;
+  }
+
   private Timestamp writeday;
 
   public String getNum() {
