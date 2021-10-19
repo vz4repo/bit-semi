@@ -1,0 +1,20 @@
+create table mycontent(
+	plantitle varchar(100),
+	num int(10),
+	planDate varchar(100),
+	planTime varchar(100),
+	mapPlan varchar(100),
+	contentPlan varchar(100),
+);
+
+create table myplan(
+	num int(10),
+	userID varchar(100),
+	writeDay DATETIME(20),
+	readCnt int(10),
+	goodCnt varchar(100),
+	planStartDay varchar(100),
+	planEndDay varchar(100),
+	plantitle varchar(100),
+	openPlan boolean not null default 0
+);
