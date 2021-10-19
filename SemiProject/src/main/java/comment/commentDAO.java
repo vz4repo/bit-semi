@@ -196,7 +196,7 @@ public class commentDAO {
   public int update(int num, int idx, String comments) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "update comment set Contents=? where num=? and idx=?";
+    String sql = "update maria_study.comment set Contents=? where num=? and idx=?";
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, comments);// 물음표의 순서
@@ -213,7 +213,7 @@ public class commentDAO {
   public void updateComment(commentDTO dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "update comment set contents=? where idx=?";
+    String sql = "update maria_study.comment set contents=? where idx=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
