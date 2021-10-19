@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>simpleMap</title>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx27cfab8a671c49dea1ee85d2351dfef7"></script>
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+
+  <script src="tmap_test.js"></script>
+  <link rel="stylesheet" href="tmap_test.css">
+
+  <script src="acc_nav.js"></script>
+  <link rel="stylesheet" href="acc_nav.css">
+
+<body onload="initTmap();">
+<div><label for="searchKeyword">검색
+  <input type="text" class="text_custom" id="searchKeyword" name="searchKeyword" value="비트캠프">
+</label>
+<label for="searchPath"><input type="button" id="searchPath" name="searchPath" value="경로탐색" onclick="searchPath()"></label>
+<p id="result"></p>
+
+</div>
+<div class="rst_wrap">
+  <div class="rst mCustomScrollbar">
+    <ul id="searchResult" name="searchResult">
+      <li>검색결과</li>
+    </ul>
+  </div>
+</div>
+<div id="map_div" class="map_wrap"></div>
+<div class="result_wrap">
+  <ul id="selectResult" name="selectResult" style="display:block"></ul>
+</div>
+</body>
+</html>
+				

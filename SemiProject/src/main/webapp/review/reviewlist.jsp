@@ -175,8 +175,12 @@ List<ReviewDto> list1 = dao.getLatestList(start, perPage);
 if (list1.size() == 0 && totalCount > 0) {
 %>
 <script type="text/javascript">
+<<<<<<< HEAD
 			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>
 	";
+=======
+			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>";
+>>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
 </script>
 <%
 }
@@ -186,8 +190,12 @@ List<ReviewDto> list2 = dao.getGoodList(start, perPage);
 if (list2.size() == 0 && totalCount > 0) {
 %>
 <script type="text/javascript">
+<<<<<<< HEAD
 			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>
 	";
+=======
+			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>";
+>>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
 </script>
 <%
 }
@@ -197,8 +205,12 @@ List<ReviewDto> list3 = dao.getWatchedList(start, perPage);
 if (list3.size() == 0 && totalCount > 0) {
 %>
 <script type="text/javascript">
+<<<<<<< HEAD
 			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>
 	";
+=======
+			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>";
+>>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
 </script>
 <%
 }
