@@ -6,13 +6,17 @@ var marker_s, marekr_e, waypoint;
 var drawInfoArr = [];
 var resultInfoArr = [];
 
-
+$(document).ready(function (){
+  initTmap();
+});
+function setVariables(){
+  zoom = 16;  // zoom level입니다.  0~19 레벨을 서비스 하고 있습니다.
+}
 function initTmap() {
-  resultArr = [];
   // 1. 지도 띄우기
   map = new Tmapv2.Map("map_div", {
     center: new Tmapv2.LatLng(37.499501997717935, 127.02895464575377),
-    width: "70%",
+    width: "700px",
     height: "700px",
     zoom: 15,
     zoomControl: false,
@@ -294,63 +298,47 @@ function searchPath(){
   //   console.log(params);
   // }
 
-  let param = JSON.stringify({
-    "startName" : "출발지",
-    "startX" : "127.103259",
-    "startY" : "37.402688",
-    "startTime" : "201708081103",
-    "endName" : "도착지",
-    "endX" : "127.142571",
-    "endY" : "37.414382",
-    "viaPoints" :
-        [
-          {
-            "viaPointId" : "test01",
-            "viaPointName" : "name01",
-            "viaX" : "127.103790" ,
-            "viaY" : "37.399569"
-          },
-          {
-            "viaPointId" : "test02",
-            "viaPointName" : "name02",
-            "viaX" : "127.108913" ,
-            "viaY" : "37.402748"
-          },
-          {
-            "viaPointId" : "test03",
-            "viaPointName" : "name03",
-            "viaX" : "127.113403" ,
-            "viaY" : "37.397153"
-          },
-          {
-            "viaPointId" : "test04",
-            "viaPointName" : "name04",
-            "viaX" : "127.121210" ,
-            "viaY" : "37.410135"
-          },
-          {
-            "viaPointId" : "test05",
-            "viaPointName" : "name05",
-            "viaX" : "127.123296" ,
-            "viaY" : "37.399400"
-          },
-          {
-            "viaPointId" : "test06",
-            "viaPointName" : "name06",
-            "viaX" : "127.130933" ,
-            "viaY" : "37.406327"
-          },
-          {
-            "viaPointId" : "test07",
-            "viaPointName" : "name07",
-            "viaX" : "127.127337" ,
-            "viaY" : "37.413227"
-          }
-        ],
-    "reqCoordType" : "WGS84GEO",
-    "resCoordType" : "EPSG3857",
-    "searchOption": 0
-  });
+  let param = JSON.stringify(
+      {
+        "startName" : "출발지",
+        "startX" : "127.02410199849781",
+        "startY" : "37.50301794750057",
+        "startTime" : "201708081103",
+        "endName" : "도착지",
+        "endX" : "127.01410199849781",
+        "endY" : "37.52301794750057",
+        "viaPoints" :
+            [
+              {
+                "viaPointId" : "test01",
+                "viaPointName" : "name01",
+                "viaX" : "127.02921274180768" ,
+                "viaY" : "37.49957399469941"
+              },
+              {
+                "viaPointId" : "test02",
+                "viaPointName" : "name02",
+                "viaX" : "127.02921274180768" ,
+                "viaY" : "37.49957399469941"
+              },
+              {
+                "viaPointId" : "test03",
+                "viaPointName" : "name03",
+                "viaX" : "127.02790747862767" ,
+                "viaY" : "37.49343579506673"
+              },
+              {
+                "viaPointId" : "test04",
+                "viaPointName" : "name04",
+                "viaX" : "127.03690645140334" ,
+                "viaY" : "37.50079621316615"
+              }
+            ],
+        "reqCoordType" : "WGS84GEO",
+        "resCoordType" : "EPSG3857",
+        "searchOption": 0
+      }
+  );
   // console.log("params" + params);
   console.log("param" + param);
   // 5.1 경로탐색 API 사용요청

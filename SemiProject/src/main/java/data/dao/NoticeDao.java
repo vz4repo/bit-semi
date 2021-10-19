@@ -65,7 +65,7 @@ public class NoticeDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from notice order by num asc limit ?,?";
+    String sql = "select * from maria_study.notice order by num asc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);

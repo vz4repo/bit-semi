@@ -4,18 +4,18 @@ import connection.DBConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import date.dto.AllPlanDTO;
-import date.dto.PlanDTO;
+import date.dto.AllPlanDto;
+import date.dto.PlanDto;
 
 
 
-public class PlanDAO {
+public class PlanDao {
   DBConnect db = new DBConnect();
 
 
 
-  AllPlanDTO cdto = new AllPlanDTO();
-  public void insertPlan(AllPlanDTO dto) {
+  AllPlanDto cdto = new AllPlanDto();
+  public void insertPlan(AllPlanDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     String sql = "insert into myPlan(userID ,writeDay ,readCnt ,goodCnt ,plantitle,"
@@ -42,7 +42,7 @@ public class PlanDAO {
 
   }
 
-  public void insertPlanContent(PlanDTO dto) {
+  public void insertPlanContent(PlanDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     String sql = "insert into myContent(num ,plantitle ,planDate ,planTime  ,mapPlan ,contentPlan) values(?,?,?,?,?,?)";

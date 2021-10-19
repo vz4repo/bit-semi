@@ -2,7 +2,7 @@ package date.dto;
 
 import java.sql.Timestamp;
 
-public class AllPlanDTO {
+public class AllPlanDto {
 
   private int num;
   private String userId;
