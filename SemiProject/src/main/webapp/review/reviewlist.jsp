@@ -60,36 +60,18 @@
 }
 
 .btnreviewform {
-	width: 200px;
+	width: 150px;
 	height: 50px;
 	margin-right: 20px;
 	outline: none;
 	cursor: pointer;
-	font-size: 20px;
+	font-size: 17px;
 	border: 1px solid #000;
 	background-color: black;
 	color: white;
 	border-radius: 100px;
 }
 
-.paging {
-	text-align: center;
-}
-
-.paging a {
-	display: inline-block;
-	font-weight: bold;
-	text-decoration: none;
-	padding: 5px 8px;
-	border: 1px solid #ccc;
-	background-color: white;
-	color: #000;
-}
-
-.paging a.select {
-	background-color: black;
-	color: #fff;
-}
 #btn_group button{
 	width: 150px;
 	height: 30px;
@@ -175,12 +157,7 @@ List<ReviewDto> list1 = dao.getLatestList(start, perPage);
 if (list1.size() == 0 && totalCount > 0) {
 %>
 <script type="text/javascript">
-<<<<<<< HEAD
-			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>
-	";
-=======
 			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>";
->>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
 </script>
 <%
 }
@@ -190,12 +167,7 @@ List<ReviewDto> list2 = dao.getGoodList(start, perPage);
 if (list2.size() == 0 && totalCount > 0) {
 %>
 <script type="text/javascript">
-<<<<<<< HEAD
-			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>
-	";
-=======
 			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>";
->>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
 </script>
 <%
 }
@@ -205,12 +177,7 @@ List<ReviewDto> list3 = dao.getWatchedList(start, perPage);
 if (list3.size() == 0 && totalCount > 0) {
 %>
 <script type="text/javascript">
-<<<<<<< HEAD
-			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>
-	";
-=======
 			location.href = "index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage - 1%>";
->>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
 </script>
 <%
 }
@@ -246,7 +213,7 @@ UserDAO udao = new UserDAO();
 	</div>
 </div>
 <!-- 최신순 -->
-	<div id="t1" class="tb" style="border-top: 2px solid black; border-bottom: 2px solid black; width:1200px; margin: 0 auto;">
+	<div id="t1" class="tb" style="width:1200px; margin: 0 auto;">
 		<table >
 			<tr>
 				<%
@@ -280,7 +247,7 @@ UserDAO udao = new UserDAO();
 		</table>
 	</div>
 	<!-- 좋아요순 -->
-	<div id="t2" class="tb" style="border-top: 2px solid black; border-bottom: 2px solid black; width:1200px; margin: 0 auto;">
+	<div id="t2" class="tb" style="width:1200px; margin: 0 auto;">
 		<table>
 			<tr>
 				<%
@@ -314,7 +281,7 @@ UserDAO udao = new UserDAO();
 		</table>
 	</div>
 	<!-- 조회순 -->
-	<div id="t3" class="tb" style="border-top: 2px solid black; border-bottom: 2px solid black; width:1200px; margin: 0 auto;">
+	<div id="t3" class="tb" style="width:1200px; margin: 0 auto;">
 		<table>
 			<tr>
 				<%
@@ -357,8 +324,7 @@ UserDAO udao = new UserDAO();
 		}
 		%>
 	</div>
-	<div class="paging"
-		style="width:1200px; margin: 0 auto;">
+	<div class="paging">
 		<%
 		//이전
 		if (startPage > 1) {

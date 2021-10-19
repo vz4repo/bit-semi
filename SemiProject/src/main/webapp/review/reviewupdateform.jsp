@@ -12,23 +12,37 @@
 .notice_text_1{
 	width: 120px;
 }
-#btn1{
-	width: 200px;
-	height: 50px;
-	font-size: 20px;
-	border: 1px solid #000;
-	background-color: black;
-	color: white;
-	border-radius: 100px;
+.btn1_notice_success{
+	text-align:center;
+	border:1px solid black;
+	width:150px; height:50px;
+	background-color:black;
+	color:white;
+    font-size:17px;
+    border-radius:100px;
+    line-height:35px;
+    display:inline-block;
+    cursor:pointer;
+    margin-top:50px;
 }
-#btn2{
-	width: 200px;
-	height: 50px;
-	font-size: 20px;
-	border: 1px solid #000;
-	background-color: white;
-	color: black;
-	border-radius: 100px;
+.btn1_notice_back{
+	text-align:center;
+	border:1px solid black;
+	width:150px;
+	height:50px;
+	background-color:white; 
+    font-size:17px;
+    border-radius:100px;
+    line-height:35px;
+    display:inline-block;
+    cursor:pointer;
+    margin-top:50px;
+}
+.btn_update{
+	text-align:center;
+}
+.btn_update button:nth-child(1){
+	margin-right:10px;
 }
 </style>
 <%
@@ -84,10 +98,12 @@
 			</td>
 		</tr>
 	</table>
-	<button type="button" id="btn1" class="btn1_notice_success"
+	<div class="btn_update">
+	<button type="button" id="btn1" class="btn1_notice_back"
 		onclick="location.href='index.jsp?main=review/reviewlist.jsp'">취소</button>
 	<button type="button" id="btn2" class="btn1_notice_success"
-		onclick="submitContents(this)">수정하기</button> 
+		onclick="submitContents(this)">수정하기</button>
+	</div> 
 </form>
 </div>
 

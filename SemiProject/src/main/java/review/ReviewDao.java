@@ -6,28 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
-<<<<<<< HEAD
-import mysql.db.DbConnect;
-
-public class ReviewDao {
-  DbConnect db = new DbConnect();
-=======
 import connection.DBConnect;
 
 public class ReviewDao {
   DBConnect db = new DBConnect();
->>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
 
   // insert
   public void insertReview(ReviewDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     String sql =
-<<<<<<< HEAD
-        "insert into treview (userID,subject,content,thumbnail,writeday) values (?,?,?,?,now())";
-=======
         "insert into maria_study.treview (userID,subject,content,thumbnail,writeday) values (?,?,?,?,now())";
->>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -50,11 +39,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-<<<<<<< HEAD
-    String sql = "select count(*) from treview";
-=======
     String sql = "select count(*) from maria_study.treview";
->>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -76,11 +61,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-<<<<<<< HEAD
-    String sql = "select * from treview order by writeday desc limit ?,?";
-=======
     String sql = "select * from maria_study.treview order by writeday desc limit ?,?";
->>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -115,11 +96,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-<<<<<<< HEAD
-    String sql = "select * from treview order by readcount desc limit ?,?";
-=======
     String sql = "select * from maria_study.treview order by readcount desc limit ?,?";
->>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -153,11 +130,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-<<<<<<< HEAD
-    String sql = "select * from treview order by good desc limit ?,?";
-=======
     String sql = "select * from maria_study.treview order by good desc limit ?,?";
->>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -191,11 +164,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-<<<<<<< HEAD
-    String sql = "select * from treview where num=?";
-=======
     String sql = "select * from maria_study.treview where num=?";
->>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -223,11 +192,7 @@ public class ReviewDao {
   public void updateReadcount(String num) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-<<<<<<< HEAD
-    String sql = "update treview set readcount=readcount+1 where num=?";
-=======
     String sql = "update maria_study.treview set readcount=readcount+1 where num=?";
->>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -245,11 +210,7 @@ public class ReviewDao {
   public void updateGood(String num) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-<<<<<<< HEAD
-    String sql = "update treview set good=good+1 where num=?";
-=======
     String sql = "update maria_study.treview set good=good+1 where num=?";
->>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -270,11 +231,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-<<<<<<< HEAD
-    String sql = "select max(num) from treview";
-=======
     String sql = "select max(num) from maria_study.treview";
->>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -295,11 +252,7 @@ public class ReviewDao {
   public void deleteReview(String num) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-<<<<<<< HEAD
-    String sql = "delete from treview where num=?";
-=======
     String sql = "delete from maria_study.treview where num=?";
->>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, num);
@@ -316,11 +269,7 @@ public class ReviewDao {
   public void updateReview(ReviewDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-<<<<<<< HEAD
-    String sql = "update treview set subject=?, content=?, thumbnail=? where num=?";
-=======
     String sql = "update maria_study.treview set subject=?, content=?, thumbnail=? where num=?";
->>>>>>> c2e0fab29322c66c883cbb89ad7b2bdef923ea60
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, dto.getSubject());
