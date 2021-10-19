@@ -1,15 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx27cfab8a671c49dea1ee85d2351dfef7"></script>
-
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-
-<script src="../feat/feat_tmap/tmap-test.js"></script>
-
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>GOING</title>
 <script type="text/javascript">
+
 	/* 팝업 띄우기 위한 script (날짜 선택 팝업!) */
 	function showPopup(hasFilter) {
 		const popup = document.querySelector('#popup');
@@ -39,12 +36,12 @@
 		const popup = document.querySelector('#popup2');
 		popup.classList.add('hide');
 		}
-
 </script>
+</head>
 <%
 	String root=request.getContextPath();
 %>
-<body>
+<body onload="initTmap();">
 	<!-- sub -->
 	<div id="sub_image" class="margin_wrap">
 		<div id="sub_text">
@@ -110,14 +107,12 @@
 				
 			</form>
 			<div class="newplan_step_1">
-
 				<table class="newplan_info">
 					<tr>
 						<th>No</th>
 						<th>일자</th>
 						<th>상세 계획 짜기</th>
 					</tr>
-				
 					<tr name="add_plan" class="add_plan"> 
 						<td>1</td>
 						<td id="daysCall_1">날짜</td><!--onclick="showPopup2(false)"  -->
@@ -135,29 +130,14 @@
 					<div class="cal_popup_1_big_text">
 						<p class="cal_popup_1_title">상세 계획 짜기</p>
 					</div>
-					<div class="cal_popup_1_big_text">
-						<button onclick="closePopup2()" type="button" class="btn_close_2">닫기</button>
-					</div>
-<%--여기가 맵 시작--%>
-					<div><label for="searchKeyword">검색
-						<input type="text" class="text_custom" id="searchKeyword" name="searchKeyword" value="비트캠프">
-					</label>
-						<label for="searchPath"><input type="button" id="searchPath" name="searchPath" value="경로탐색" onclick="searchPath()"></label>
-						<label for="saveJson"><input type="button" id="saveJson" name="saveJson" value="저장" onclick="saveJson()"></label>
-						<p id="result"></p>
-					</div>
-					<div class="rst_wrap">
-						<div class="rst mCustomScrollbar">
-							<ul id="searchResult" name="searchResult">
-								<li>검색결과</li>
-							</ul>
-						</div>
-					</div>
-					<div id="map_div" class="map_wrap"></div>
-					<div class="result_wrap">
-						<ul id="selectResult" name="selectResult" style="display:block"></ul>
-					</div>
-<%--맵 끝--%>
+					
+					<!-- 경유 자동차 지도 넣어봄 - 희수 (갑자기 안나옴 ㅠㅠ)-->
+					<div id="map_wrap" class="map_wrap">
+						<div id="map_div"></div>
+					</div> 
+					
+					
+						
 					<div class="cal_popup_1">
 						<table class="planinfo">
 							<tr class="v_contents">
@@ -167,7 +147,7 @@
 							</tr>	
 							<form method="post" class="form-inline">
 							
-							<tr>
+							<tr class="A_plan">
 								<input type="hidden" class="hd_title">
 								<input type="hidden" class="hd_day">
 								
@@ -176,6 +156,34 @@
 								<td>
 								<input type="text" class="plan_content" value="해당 일정에 대한 내용을 입력해주세요.">
 								<button type="button" class="btn_submit_2">확인</button>
+						
+							</td>
+							</tr><!-- 변경점 존재 -->
+							
+							
+							<tr class="A_plan_2">
+								<input type="hidden" class="hd_title">
+								<input type="hidden" class="hd_day">
+								
+								<td><input type="text" class="plan_time_2" value="원하는 시간을 입력해주세요."></td>
+								<td><input type="text" class="plan_map_2" value="원하는 장소를 입력해주세요"></td>
+								<td>
+								<input type="text" class="plan_content_2" value="해당 일정에 대한 내용을 입력해주세요.">
+								<button type="button" class="btn_submit_3">확인</button>
+						
+							</td>
+							</tr><!-- 변경점 존재 -->
+							
+							<tr class="A_plan_3">
+								<input type="hidden" class="hd_title">
+								<input type="hidden" class="hd_day">
+								
+								<td><input type="text" class="plan_time_3" value="원하는 시간을 입력해주세요."></td>
+								<td><input type="text" class="plan_map_3" value="원하는 장소를 입력해주세요"></td>
+								<td>
+								<input type="text" class="plan_content_3" value="해당 일정에 대한 내용을 입력해주세요.">
+								<button type="button" class="btn_submit_4">확인</button>
+						
 							</td>
 							</tr><!-- 변경점 존재 -->
 							</form>
@@ -187,118 +195,186 @@
 				</div>
 			</div>
 			<!-- 공개여부 -->
-				
 				<!-- 확인 버튼 -->
 				<div class="btn_newplan_1">
 					<button type="submit" class="btn_finish_1" 
 					onclick="location.href='index.jsp?main=newPlan/NewPlanCal.jsp'">계획짜기 완료</button>
 				</div>	
 		</div>
-
-		<script type="text/javascript">
-			function eventKeyup(str){
-				$(".hd_title").val(str);
-			}
-
-			$(function() {
-				$("#btn_submit_1").click(function() {
-					var StartDay = localStorage.getItem('startDay');
-					var planEnd = localStorage.getItem('endDay');
-
-					var tDate = new Date(StartDay);
-					var endDate = new Date(planEnd);
-
-					var mon1 = tDate.getMonth()+1;
-					var day1 = tDate.getDate();
-					var days1 = mon1+"월"+day1+"일";
-
-					var cal1 = $("#daysCall_1").html(days1);
-					$("#daysCall_1").attr("value",days1);
-					$("input[name='planday']").attr("value",days1)
-					localStorage.setItem("cal1", cal1);
-
-					var dateDiff = Math.ceil((endDate.getTime()-tDate.getTime())/(1000*3600*24));
-					var daylen = new Array();
-					for(var i = 0; i<dateDiff;i++){
-						daylen[i] = tDate.getDate()+i+1;
-
-					}
-					var days2 = new Array();
-
-					for(var a = 0; a< dateDiff;a++ ){
-						tDate.setDate(daylen[a]);
-
-						var mon2 = tDate.getMonth()+1;
-						var day2 = tDate.getDate();
-
-						days2[a] = mon2+"월"+day2+"일";
-					}
-					var addPlan='';
-					for(var li = 0;li < dateDiff;li++){
-						console.log(days2[li]);
-						addPlan  += '<tr>'+
-								'    <td>'+(li+2)+
-								'	</td>'+
-								'    <td class="daysCall_2">'+days2[li]+'</td>'+
-								'    <td>'+
-								'	<button type="button" class="btn_travel_1" onclick="showPopup2(false)">계획짜기</button>'+
-								'    </td>'+
-								'	</tr>';
-
-
-					}
-
-					$(".add_plan").after(addPlan);
-					var emon = endDate.getMonth()+1;
-					var eday = endDate.getDate();
-
-					var enday = emon+"월"+eday+"일";
-					$("#modal_btn").html(days1+"~"+enday);
-
-					$("input[name=planStartDay]").attr("value",days1);
-					$("input[name=planEndDay]").attr("value",enday);
-
-					var plantitle=$(".content_title").val();
-					var planStartDay=days1;
-					var planEndDay=enday;
-
-					var openPlan = $("input[name='open_Plan']:checked").val();
-
-					$.ajax({
-						type: "get",
-						dataType: "html",
-						url:"newPlan/NewPlanCalinsert.jsp",
-						data:{"plantitle":plantitle,"planStartDay":planStartDay,"planEndDay":planEndDay,"openPlan":openPlan},
-						success: function(data) {
-
-							alert("저장되었습니다");
-						}
-					});
-				});
-
-				$(".btn_submit_2").click(function() {
-
-					var plantitle=$(".hd_title").val();
-					var planDate=$("#daysCall_1").attr("value");
-					var time1=$(".plan_time").val();
-					var content1=$(".plan_content").val();
-					var map1=$(".plan_map").val();
-
-
-					$.ajax({
-						type: "get",
-						dataType: "html",
-						url:"newPlan/NewPlanMapinsert.jsp",
-						data:{"plantitle":plantitle,"planDate":planDate,"time":time1,"content":content1,"map":map1},
-						success: function(data) {
-							alert("완료 저장되었습니다");
-
-						}
-					});
-					$(".btn_submit_2").attr("disabled", true);
-
-				});
-			});
-		</script>
 	</div>
+	<script type="text/javascript">
+
+	function eventKeyup(str){
+		$(".hd_title").val(str); 
+	}
+	
+	$(function() {
+		$("#btn_submit_1").click(function() {
+			var StartDay = localStorage.getItem('startDay');
+			var planEnd = localStorage.getItem('endDay');
+			
+			
+			
+			var tDate = new Date(StartDay);
+			var endDate = new Date(planEnd);
+		
+			
+			
+			var mon1 = tDate.getMonth()+1;
+			var day1 = tDate.getDate();
+			var days1 = mon1+"월"+day1+"일";
+			
+			var cal1 = $("#daysCall_1").html(days1);
+			$("#daysCall_1").attr("value",days1);
+			$("input[name='planday']").attr("value",days1)
+			localStorage.setItem("cal1", cal1);
+			
+			var dateDiff = Math.ceil((endDate.getTime()-tDate.getTime())/(1000*3600*24));
+			var daylen = new Array();
+			for(var i = 0; i<dateDiff;i++){
+				daylen[i] = tDate.getDate()+i+2;
+				
+			}
+			var days2 = new Array();
+			
+			for(var a = 0; a< dateDiff;a++ ){
+			tDate.setDate(daylen[a]);
+			
+			var mon2 = tDate.getMonth()+1;
+			var day2 = tDate.getDate();
+			
+			days2[a] = mon2+"월"+day2+"일";
+			}
+			var addPlan='';
+			for(var li = 0;li < dateDiff;li++){
+				console.log(days2[li]);
+				addPlan  += '<tr>'+
+			     	   '    <td>'+(li+2)+
+			     	   '	</td>'+
+			     	   '    <td class="daysCall_2">'+days2[li]+'</td>'+
+			     	   '    <td>'+
+			     	   '	<button type="button" class="btn_travel_1" onclick="showPopup2(false)">계획짜기</button>'+
+			     	   '    </td>'+
+			      	   '	</tr>';
+			        	
+			  	
+			}
+			
+			 $(".add_plan").after(addPlan);
+			var emon = endDate.getMonth()+1;
+			var eday = endDate.getDate();
+
+			var enday = emon+"월"+eday+"일";
+			$("#modal_btn").html(days1+"~"+enday);
+
+			$("input[name=planStartDay]").attr("value",days1);
+			$("input[name=planEndDay]").attr("value",enday);
+			
+			var plantitle=$(".content_title").val();
+			var planStartDay=days1;
+			var planEndDay=enday;
+			
+		    var openPlan = $("input[name='open_Plan']:checked").val();
+			
+			$.ajax({
+				type: "get",
+				dataType: "html",
+				url:"newPlan/NewPlanCalinsert.jsp",
+				data:{"plantitle":plantitle,"planStartDay":planStartDay,"planEndDay":planEndDay,"openPlan":openPlan},
+				success: function(data) {
+					
+					alert("저장되었습니다");
+				}
+			});
+		});
+		
+		$(".btn_close_2").click(function() {
+			$(".plan_time").val("원하는 시간을 입력해주세요.");
+			$(".plan_map").val("원하는 장소를 입력해주세요.");
+			$(".plan_content").val("해당 일정에 대한 내용을 입력해주세요.");
+
+			$(".btn_submit_2").attr("disabled", false);
+			$(".plan_time_2").val("원하는 시간을 입력해주세요.");
+			$(".plan_map_2").val("원하는 장소를 입력해주세요.");
+			$(".plan_content_2").val("해당 일정에 대한 내용을 입력해주세요.");
+
+			$(".btn_submit_3").attr("disabled", false);
+			$(".plan_time_3").val("원하는 시간을 입력해주세요.");
+			$(".plan_map_3").val("원하는 장소를 입력해주세요.");
+			$(".plan_content_3").val("해당 일정에 대한 내용을 입력해주세요.");
+
+			$(".btn_submit_4").attr("disabled", false);
+		});
+		
+		
+		$(".btn_submit_2").click(function() {
+			
+			var plantitle=$(".hd_title").val();
+			var planDate=$("#daysCall_1").attr("value");
+			var time1=$(".plan_time").val();
+			var content1=$(".plan_content").val();
+			var map1=$(".plan_map").val();
+			
+			
+			$.ajax({
+				type: "get",
+				dataType: "html",
+				url:"newPlan/NewPlanMapinsert.jsp",
+				data:{"plantitle":plantitle,"planDate":planDate,"time":time1,"content":content1,"map":map1},
+				success: function(data) {
+					alert("완료 저장되었습니다");
+					
+				}
+			});
+			$(".btn_submit_2").attr("disabled", true);
+			
+		});
+		
+		$(".btn_submit_3").click(function() {
+			
+			var plantitle=$(".hd_title").val();
+			var planDate=$("#daysCall_1").attr("value");
+			var time1=$(".plan_time_2").val();
+			var content1=$(".plan_content_2").val();
+			var map1=$(".plan_map_2").val();
+			
+			
+			$.ajax({
+				type: "get",
+				dataType: "html",
+				url:"newPlan/NewPlanMapinsert.jsp",
+				data:{"plantitle":plantitle,"planDate":planDate,"time":time1,"content":content1,"map":map1},
+				success: function(data) {
+					alert("완료 저장되었습니다");
+					
+				}
+			});
+			$(".btn_submit_3").attr("disabled", true);
+			
+		});
+		
+	$(".btn_submit_4").click(function() {
+	
+	var plantitle=$(".hd_title").val();
+	var planDate=$("#daysCall_1").attr("value");
+	var time1=$(".plan_time_3").val();
+	var content1=$(".plan_content_3").val();
+	var map1=$(".plan_map_3").val();
+	
+	
+	$.ajax({
+		type: "get",
+		dataType: "html",
+		url:"newPlan/NewPlanMapinsert.jsp",
+		data:{"plantitle":plantitle,"planDate":planDate,"time":time1,"content":content1,"map":map1},
+		success: function(data) {
+			alert("완료 저장되었습니다");
+		}
+	});
+	$(".btn_submit_4").attr("disabled", true);
+});
+	});
+
+	</script>
 </body>
+</html>
