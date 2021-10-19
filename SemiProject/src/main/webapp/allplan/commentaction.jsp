@@ -10,7 +10,7 @@
 	String myid = request.getParameter("myid");
 	String content=request.getParameter("content");
 	String num = request.getParameter("num");
-	
+
 	//dto에 저장
 	commentDTO dto=new commentDTO();
 	dto.setNum(num);

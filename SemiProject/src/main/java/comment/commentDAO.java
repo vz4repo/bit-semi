@@ -15,7 +15,7 @@ public class commentDAO {
   public void commentInsert(commentDTO dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "insert into maria_study.comment (num,userId,contents) values (?,?,?)";
+    String sql = "insert into bit_semi.comment (num,userId,contents) values (?,?,?)";
 
 
     try {
@@ -43,7 +43,7 @@ public class commentDAO {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select count(*) from maria_study.comment";
+    String sql = "select count(*) from bit_semi.comment";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -67,7 +67,7 @@ public class commentDAO {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.comment where idx=?";
+    String sql = "select * from bit_semi.comment where idx=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -101,7 +101,7 @@ public class commentDAO {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.comment where num=? order by idx DESC";
+    String sql = "select * from bit_semi.comment where num=? order by idx DESC";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -138,7 +138,7 @@ public class commentDAO {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.comment order by num desc limit ?,?";
+    String sql = "select * from bit_semi.comment order by num desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -174,7 +174,7 @@ public class commentDAO {
   public void deleteAnswer(String idx) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "delete from maria_study.comment where idx=?";
+    String sql = "delete from bit_semi.comment where idx=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -196,7 +196,7 @@ public class commentDAO {
   public int update(int num, int idx, String comments) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "update comment set Contents=? where num=? and idx=?";
+    String sql = "update bit_semi.comment set Contents=? where num=? and idx=?";
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, comments);// 물음표의 순서
@@ -213,7 +213,7 @@ public class commentDAO {
   public void updateComment(commentDTO dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "update comment set contents=? where idx=?";
+    String sql = "update bit_semi.comment set contents=? where idx=?";
 
     try {
       pstmt = conn.prepareStatement(sql);

@@ -1,6 +1,6 @@
 package date.dto;
 
-public class PlanDTO {
+public class PlanDto {
 
   private int num;
   private String plantitle;
