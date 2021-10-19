@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <%
 	//num읽기 
 	String num=request.getParameter("num");
@@ -26,36 +27,36 @@
 </head>
 
 <body>
-<div id="sub_image" class="margin_wrap">
-		<div id="sub_text">
-			<p>Notice</p>
-		</div>
-</div>
-
-<div class="container">
-	<div class="join_container">
-	<p id="all_plan_list_title">수정사항을 입력해주세요!</p>
-	
-	<form action="notice/noticeupdateaction.jsp" method="post">
-		<input type="hidden" name="num" value="<%=num%>">
-		<input type="hidden" name="currentPage" value="<%=currentPage%>">
-		<table class="notice_form_table" style="width:750px;">
-				<tr>
-					<td class="notice_text_1">제목</td>
-					<td class="notice_text_2">
-						<textarea name="title" required="required"><%=dto.getTitle() %></textarea>
-					</td>
-				</tr>
-				<tr>
-					<td class="notice_text_1">내용</td>
-					<td class="notice_text_2">
-						 <textarea name="content" style="display:none; width:100%; height:300px;" id="content" 
-					 	  required="required"><%=dto.getContent() %></textarea>
-					</td>
-				</tr>
-			</table>
-			<button type="submit" class="btn1_notice_success" onclick="submitContents(this)" >수정</button>
-	</form>
+<div style="margin-left: 350px; margin-top: 300px;">
+<form action="notice/noticeupdateaction.jsp" method="post">
+	<input type="hidden" name="num" value="<%=num%>">
+	<input type="hidden" name="currentPage" value="<%=currentPage%>">
+	<table style="width:750px;">
+			<tr>
+				
+				<td width="500">
+					<textarea  style="width:480px; height:30px;"
+					name="title" required="required"><%=dto.getTitle() %></textarea>
+				</td>
+			</tr>
+			<tr>
+				
+				<td width="500">
+					 <textarea style="width:100%; height:300px; display:none;" id="content"
+					 name="content" required="required"><%=dto.getContent() %></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button type="submit" class="btn1"
+					style="margin-left:190px; width:100px; height:50px;" onclick="submitContents(this)">수정</button>
+				</td>
+				
+				
+			</tr>
+		
+		</table>
+</form>
 <!-- 스마트게시판에 대한 스크립트 코드 넣기 -->
 <script type="text/javascript">
 var oEditors = [];
@@ -101,7 +102,6 @@ function pasteHTML(filepath){
 
 }
 </script>
-	</div>
 </div>
 </body>
 </html>

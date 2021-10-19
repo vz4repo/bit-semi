@@ -36,10 +36,7 @@
 	  popup.classList.add('hide');
 	}
 </script>
-</head>
-<%
-	String root=request.getContextPath();
-%>
+
 <body>
 	<header>
 		<div id="wrapper">

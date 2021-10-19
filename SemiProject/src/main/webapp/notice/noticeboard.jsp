@@ -10,21 +10,76 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	.btn1{
+		width:100px;
+		height:40px;
+		border-radius: 50px;
+		font-size: 13pt;
+		margin-left: 1200px;
+		
+	}
+	.btn1:hover{
+		background-color:#dcdcdc;
+	}
+	td{
+		height:50px;
+		font-size: 20pt;
+		
+	}
+
+	.tb1 a{
+		color: black;
+	}
+	.tb1:hover{
+		background-color: #dcdcdc; 
+		color:black;
+		border-bottom:1px solid black;
+		
+		
+	}
+	.tb1{
+		height: 90px;
+		 
+		
+	}
+	.tb{
+		width: 1000px; 
+		border-collapse:collapse;
+		
+	}
+	a{
+		color:black;
+	}
+	.paging {
+	text-align: center;
+    }
+
+	.paging a {
+	display: inline-block;
+	font-weight: bold;
+	text-decoration: none;
+	padding: 5px 8px;
+	border: 1px solid #ccc;
+	background-color: white;
+	color: #000;
+    }
+
+	.paging a.select {
+	background-color: black;
+	color: #fff;
+}
+
+</style>
 </head>
 <body>
 <% 
-	/* String uls=(String)session.getAttribute("loginok");
-	String userid=(String)session.getAttribute("myid"); */
-	//로그인한 상태인지 확인
-    
-	String loginok = "";
-    String myid = "";
-    if (session.getAttribute("loginok") != null) {
-        loginok = session.getAttribute("loginok").toString();
-        myid = (String) session.getAttribute("myid");
-    }
-    
+	
+	String uls=(String)session.getAttribute("userLoginStatus");
+	String userid=(String)session.getAttribute("userSessionID");
 	NoticeDao dao=new NoticeDao();
+	
+    
     
 	//페이징
 	int perPage=5;//한페이지에 보여질 글의 개수
@@ -79,74 +134,74 @@
 			<p>Notice</p>
 		</div>
 	</div>
-
-<div class="container">
-	<p id="all_plan_list_title">GOING의 공지사항을 확인해주세요!</p>
-	<!-- 테이블 -->
-	<div>
-			<table class="notice_list">
-				<%
-					for(NoticeDto dto:list)
-					{%>
-					<tr class="tb1">
-						<td><p class="notice_point">공지</p></td>
-						<td>
-							<a href="index.jsp?main=notice/noticeview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list" class="notice_title">
-		  					&nbsp;&nbsp;&nbsp;<%=dto.getTitle() %>
-		  					</a>
-						</td>
-						<td class="notice_admin">관리자</td>
-					</tr>
-					<%}
-				%>
-			</table>
+	
+	<!-- notice게시판 왕제목 -->
+	<div style="font-size: 30pt; margin-top: 50px; margin-left: 250px;" >
+		<b>공지사항</b>
 	</div>
+	<br><br>
 	
 	<!-- 글쓰기 버튼 -->
 	<%
-	if(loginok=="true" && myid.equals("admin"))
+	if(uls!=null && userid.equals("admin"))
 	{%>
 	  
 	<div>
 	<button type="button" class="btn1"
 	onclick="location.href='index.jsp?main=notice/noticeform.jsp'"><span>글쓰기</span></button>
+	<br><br><br>
 	<%}
 	%>
 	</div>
 	
+	<!-- 테이블 -->
+	<div style="margin-left: 250px;">
+			<table class="tb">
+				<%
+					for(NoticeDto dto:list)
+					{%>
+					<tr class="tb1">
+						<td style="text-align: center;">공지</td>
+						<td style="width: 700px;">
+						<a href="index.jsp?main=notice/noticeview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list">
+	  					&nbsp;&nbsp;&nbsp;<%=dto.getTitle() %>
+	  					</a>
+						
+						</td>
+						<td style="text-align: center;">운영자</td>
+					</tr>
+					
+					<%}
+				%>
+			</table>
+	</div>
+	
 	<!-- 페이징 -->
-		<div class="paging">
-		<%
+	<div style="margin-left:340px; width:800px; text-align: center;" class="paging">	
+	<%
 		//이전
-		if (startPage > 1) {
-		%>
-		<a
-			href="index.jsp?main=notice/noticeboard.jsp?currentPage=<%=startPage - 1%>">이전</a>
-		<%
+		if(startPage>1)
+		{%>  
+		  	<a href="index.jsp?main=notice/noticeboard.jsp?currentPage=<%=startPage-1 %>">이전</a>  
+		<%}
+	%>
+	<%
+		for(int pp=startPage;pp<=endPage;pp++)
+		{
+		  if(pp==currentPage)//현재페이지일때 활성
+		  {%> 
+		    	<a href="index.jsp?main=notice/noticeboard.jsp?currentPage=<%=pp%>"><%=pp %></a> 
+		  <%}else{%>
+		     	<a href="index.jsp?main=notice/noticeboard.jsp?currentPage=<%=pp %>"><%=pp %></a>
+		  <%}
 		}
-
-		for (int pp = startPage; pp <= endPage; pp++) {
-		if (pp == currentPage) {
-		%>
-		<a class="select"
-			href="index.jsp?main=notice/noticeboard.jsp?currentPage=<%=pp%>"><%=pp%></a>
-		<%
-		} else {
-		%>
-		<a href="index.jsp?main=notice/noticeboard.jsp?currentPage=<%=pp%>"><%=pp%></a>
-		<%
-		}
-		}
-
 		//다음
-		if (endPage < totalPage) {
-		%>
-		<a
-			href="index.jsp?main=notice/noticeboard.jsp?currentPage=<%=endPage + 1%>">다음</a>
-		<%
-		}
-		%>
-		</div>
+		if(endPage<totalPage)
+		{%>
+		  	<a href="index.jsp?main=notice/noticeboard.jsp?currentPage=<%=endPage+1 %>">다음</a>
+		<%}
+		
+	%>	 	
 </div>
 </body>
 </html>

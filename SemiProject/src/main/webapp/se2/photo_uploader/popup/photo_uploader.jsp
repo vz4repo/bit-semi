@@ -2,7 +2,7 @@
 <%@ page import="com.oreilly.servlet.MultipartRequest, com.oreilly.servlet.multipart.DefaultFileRenamePolicy, java.util.*, java.io.*"%>
 
 <style type="text/css">
-/* NHN Web Standard 1Team JJS 120106 */
+/* NHN Web Standard 1Team JJS 120106 */ 
 /* Common */
 body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
 body,input,textarea,select,button,table{font-family:'돋움',Dotum,Helvetica,sans-serif;font-size:12px}
