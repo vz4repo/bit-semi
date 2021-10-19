@@ -11,7 +11,6 @@ String myid = (String)session.getAttribute("myid");
 //이미지가 업로드 될 실제 경로 구하기
 String realPath = getServletContext().getRealPath("/imagesave");
 System.out.println(realPath);
-
 int uploadSize = 1024 * 1024 * 2;
 MultipartRequest multi = null;
 try {
@@ -20,17 +19,11 @@ try {
   String subject = multi.getParameter("subject");
   String content = multi.getParameter("content");
   String thumbnail = multi.getFilesystemName("thumbnail");
-  String userName = multi.getParameter("userName");
-  String userGender = multi.getParameter("userGender");
-
   ReviewDto dto = new ReviewDto();
   dto.setUserID(myid);
   dto.setSubject(subject);
   dto.setContent(content);
   dto.setThumbnail(thumbnail);
-  dto.setUserName(userName);
-  dto.setUserGender(userGender);
-
   ReviewDao dao = new ReviewDao();
   dao.insertReview(dto);
   String path = "../index.jsp?main=review/reviewlist.jsp";

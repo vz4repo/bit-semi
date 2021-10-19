@@ -60,7 +60,7 @@
 						<li><a href="index.jsp?main=newPlan/NewPlanCal.jsp">New Plan</a></li>
 					<%}
 					%>
-					<li><a href="#">Review</a></li>
+					<li><a href="index.jsp?main=review/reviewlist.jsp">Review</a></li>
 					<li><a href="index.jsp?main=notice/noticeboard.jsp">Notice</a></li>
 				</ul>
 			</nav>
