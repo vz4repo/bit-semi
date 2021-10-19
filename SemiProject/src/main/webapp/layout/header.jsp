@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Insert title here</title>
+         pageEncoding="utf-8" %>
+
+<%
+    String root = request.getContextPath();
+%>
 <script type="text/javascript">
 	/* 상단 메뉴바 스크롤시 이벤트! */
 	$(document).ready(function(){
@@ -14,7 +13,7 @@
 	        $("header").css("background" , "#ff7b27");
 	      }
 	      else{
-	        $("header").css("background" , "");   
+	        $("header").css("background" , "");
 	      }
 	    });
 	});
@@ -37,17 +36,14 @@
 	  popup.classList.add('hide');
 	}
 </script>
-</head>
-<%
-	String root=request.getContextPath();
-%>
+
 <body>
 	<header>
 		<div id="wrapper">
 			<div id="logo">
 				<a href="index.jsp"><img src="<%=root%>/image/logo_new2.png"></a>
 			</div>
-		
+
 			<nav class="clearfix">
 				<ul class="clearfix">
 					<li><a href="index.jsp?main=allplan/allplanlist.jsp">All Plan</a></li>
@@ -60,11 +56,11 @@
 						<li><a href="index.jsp?main=newPlan/NewPlanCal.jsp">New Plan</a></li>
 					<%}
 					%>
-					<li><a href="#">Review</a></li>
+					<li><a href="index.jsp?main=review/reviewlist.jsp">Review</a></li>
 					<li><a href="index.jsp?main=notice/noticeboard.jsp">Notice</a></li>
 				</ul>
 			</nav>
-			
+
 			<div id="member">
 			<%	/* 비회원일 경우 LOGIN,JOIN 보이고 회원일 경우 LOGOUT,MYPAGE 보임! */
 				if(session.getAttribute("loginok")==null || (boolean)session.getAttribute("loginok") == false){%>
@@ -76,7 +72,7 @@
 			<%}
 			%>
 			</div>
-			
+
 			<!-- 수정 팝업 내용 -->
 	        <div id="popup_newplan" class="hide">
 	            <div class="content">

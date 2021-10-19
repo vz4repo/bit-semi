@@ -16,12 +16,14 @@
   <script src="acc_nav.js"></script>
   <link rel="stylesheet" href="acc_nav.css">
 
-<body onload="initTmap();">
+<body>
+
 <div><label for="searchKeyword">검색
   <input type="text" class="text_custom" id="searchKeyword" name="searchKeyword" value="비트캠프">
 </label>
-<label for="searchPath"><input type="button" id="searchPath" name="searchPath" value="경로탐색" onclick="searchPath()"></label>
-<p id="result"></p>
+  <label for="searchPath"><input type="button" id="searchPath" name="searchPath" value="경로탐색" onclick="searchPath()"></label>
+  <label for="saveJson"><input type="button" id="saveJson" name="saveJson" value="저장" onclick="saveJson()"></label>
+  <p id="result"></p>
 
 </div>
 <div class="rst_wrap">

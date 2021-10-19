@@ -15,7 +15,7 @@ public class PlanDao {
   public void insertPlan(PlanDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "insert into maria_study.test_postinfo (userId,plantitle,planDate,content) values (?,?,?,?)";
+    String sql = "insert into bit_semi.postinfo (userId,plantitle,planDate,content) values (?,?,?,?)";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -41,7 +41,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select count(*) from maria_study.test_postinfo";
+    String sql = "select count(*) from bit_semi.postinfo";
 
 
     try {
@@ -65,7 +65,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.test_postinfo where num=?";
+    String sql = "select * from bit_semi.postinfo where num=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -97,7 +97,7 @@ public class PlanDao {
   public void updateReadcount(String num) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "update maria_study.test_postinfo set readCNT=readCNT+1 where num=?";
+    String sql = "update bit_semi.postinfo set readCNT=readCNT+1 where num=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -121,7 +121,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select max(num) from maria_study.test_postinfo";
+    String sql = "select max(num) from bit_semi.postinfo";
     String num = "";
 
     try {
@@ -149,7 +149,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.test_postinfo order by num desc limit ?,?";
+    String sql = "select * from bit_semi.postinfo order by num desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -185,7 +185,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.test_postinfo order by num desc limit 6";
+    String sql = "select * from bit_semi.postinfo order by num desc limit 6";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -219,7 +219,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.test_postinfo order by good desc limit ?,?";
+    String sql = "select * from bit_semi.postinfo order by good desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -254,7 +254,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.test_postinfo order by readCNT desc limit ?,?";
+    String sql = "select * from bit_semi.postinfo order by readCNT desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);

@@ -11,16 +11,22 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 <style type="text/css">
-a{
-	cursor: pointer;
-}
+	.v_btn button{
+		margin-left: 5px;
+		margin-right: 5px;
+		font-size: 17px;
+	}
 </style>
 </head>
 <body>
 <%
-	String loginok = session.getAttribute("loginok").toString();
-	String myid = (String)session.getAttribute("myid");
-
+	String loginok = "";
+	String myid = "";
+	if (session.getAttribute("loginok") != null) {
+ 	   loginok = session.getAttribute("loginok").toString();
+	    myid = (String) session.getAttribute("myid");
+	} // 로그인 안해도 보여줄건가??
+	
 	String num = request.getParameter("num");
 	String currentPage = request.getParameter("currentPage");
 	if(currentPage==null){
@@ -62,7 +68,7 @@ a{
 		</div>
 		<!-- 상단 -->
 		<!-- 컨텐츠 -->
-		<div class="v_contents">
+		<div class="v_contents" style="margin-left: 50px; margin-right: 50px; font-size: 1.5em;">
 			<p><%=dto.getContent()%></p>
 		</div>
 		<!-- 컨텐츠 -->	
@@ -71,20 +77,20 @@ a{
 		<div class="btn">
 			<div class="v_btn">
 				<%
-				if (loginok!=null && dto.getUserID().equals(myid)){%>
-					<a>수정</a>
-					<a href="review/reviewdelete.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>">삭제</a>
-				<%
+				if (myid!=null && dto.getUserID().equals(myid)){%>
+					<button style="width: 150px;" type="button" class="btnlist" onclick="location.href='index.jsp?main=review/reviewupdateform.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>'">수정</button>
+					<button style="width: 150px;" type="button" class="btnlist" onclick="location.href='review/reviewdelete.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>'">삭제</button>
+				<%  
 				}
 				%>
-
-				<a class="good" num="<%=dto.getNum()%>">추천하기</a>
-				<a href="index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage%>" class="">목록</a>
+				
+				<button style="width: 150px;" type="button" class="good" num="<%=dto.getNum()%>">추천하기</button>
+				<button style="width: 150px;" type="button" onclick="location.href='index.jsp?main=review/reviewlist.jsp?currentPage=<%=currentPage%>'">목록</button>
 			</div>
 		</div>
 		<script type="text/javascript">
-		$("a.good").click(function() {
-			var num = $("a.good").attr("num");
+		$("button.good").click(function() {
+			var num = $("button.good").attr("num");
 			var tag = $("p.pgood");
 			console.log(num);
 			$.ajax({

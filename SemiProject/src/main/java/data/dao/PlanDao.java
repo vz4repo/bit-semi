@@ -16,7 +16,7 @@ public class PlanDao {
   public void insertPlan(PlanDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "insert into maria_study.test_postinfo2 (name,content,chu,jo) values (?,?,?,?)";
+    String sql = "insert into bit_semi.test_postinfo2 (name,content,chu,jo) values (?,?,?,?)";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select count(*) from maria_study.test_postinfo2";
+    String sql = "select count(*) from bit_semi.test_postinfo2";
 
 
     try {
@@ -67,7 +67,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.test_postinfo2 order by num desc limit ?,?";
+    String sql = "select * from bit_semi.test_postinfo2 order by num desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -102,7 +102,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.test_postinfo2 order by chu desc limit ?,?";
+    String sql = "select * from bit_semi.test_postinfo2 order by chu desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -137,7 +137,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.test_postinfo2 order by jo desc limit ?,?";
+    String sql = "select * from bit_semi.test_postinfo2 order by jo desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -170,7 +170,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.test_postinfo2 where num=?";
+    String sql = "select * from bit_semi.test_postinfo2 where num=?";
 
     try {
       pstmt = conn.prepareStatement(sql);

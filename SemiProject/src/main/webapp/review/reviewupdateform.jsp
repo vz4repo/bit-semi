@@ -9,17 +9,40 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <style type="text/css">
-.btncancel,.btnregister{
-	width: 100px;
-	height: 30px;
-	margin-right: 20px;
-	outline: none;
-	cursor: pointer;
-	font-size: 15px;
-	border: 1px solid #000;
-	background-color: black;
-	color: white;
-	border-radius: 100px;
+.notice_text_1{
+	width: 120px;
+}
+.btn1_notice_success{
+	text-align:center;
+	border:1px solid black;
+	width:150px; height:50px;
+	background-color:black;
+	color:white;
+    font-size:17px;
+    border-radius:100px;
+    line-height:35px;
+    display:inline-block;
+    cursor:pointer;
+    margin-top:50px;
+}
+.btn1_notice_back{
+	text-align:center;
+	border:1px solid black;
+	width:150px;
+	height:50px;
+	background-color:white; 
+    font-size:17px;
+    border-radius:100px;
+    line-height:35px;
+    display:inline-block;
+    cursor:pointer;
+    margin-top:50px;
+}
+.btn_update{
+	text-align:center;
+}
+.btn_update button:nth-child(1){
+	margin-right:10px;
 }
 </style>
 <%
@@ -29,6 +52,7 @@
 	String num=request.getParameter("num");
 	//페이지번호 읽기
 	String currentPage=request.getParameter("currentPage");
+	String key = request.getParameter("key");
 	ReviewDao dao = new ReviewDao();
 	ReviewDto dto = dao.getData(num);
 %>
@@ -40,50 +64,46 @@
 	charset="utf-8"></script>
 </head>
 <body>
-<div id="main_wrap" style="height: 320px;">
-		<div id="main_text" style="top: 180px;">
-			<p>Review 수정</p>
+	<div id="sub_image" class="margin_wrap">
+		<div id="sub_text">
+			<p>Review</p>
 		</div>
-</div>
-<div style="width: 1250px; margin-top: 80px; margin-left: 250px; max-width: 1100px;">
+	</div>
+<div class="container">
+<p id="all_plan_list_title">당신만의 여행 일정을 기록해보세요!</p>
 <form action="review/reviewupdateaction.jsp" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="num" value="<%=num%>">
 	<input type="hidden" name="currentPage" value="<%=currentPage%>">
-	<table style="width: 1000px;">
+	<table class="notice_form_table" style="width:1200px;">
 		<tr>
-			<th bgcolor="black" width="100" height="40" style="color: white; text-align: center;">제  목</th>
-			<td>
+			<td class="notice_text_1">제  목</td>
+			<td class="notice_text_2">
 				<input type="text" name="subject"
-					required="required" style="width: 890px; height: 30px;" value="<%=dto.getSubject()%>">
+					required="required" value="<%=dto.getSubject()%>">
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2">
-				<textarea name="content" id="content"		
-					required="required"			
-					style="width: 100%;height: 500px;display: none;"><%=dto.getContent()%></textarea>		
+			<td class="notice_text_1">내용</td>
+			<td class="notice_text_2">
+				<textarea name="content" id="content" required="required"			
+				style="display:none; width:100%; height:400px;"><%=dto.getContent()%></textarea>		
 			
 			</td>
 		</tr>
 		<tr>
-			<th bgcolor="black" width="100" height="40" style="color: white; text-align: center;">썸네일</th>
-			<td style="border: 1px solid gray;">
+			<td class="notice_text_1">썸네일</td>
+			<td class="notice_text_2">
 				<input type="file" name="thumbnail" id="thumbnail"
-					required="required" onchange="readUrl(this)" value="<%=dto.getThumbnail()%>">
+					onchange="readUrl(this)" required="required">
 			</td>
 		</tr>
-		<tr>
-			<td colspan="2" align="center" height="30">
-				<button type="button" class="btncancel"
-					style="width: 120px; margin-top: 10px;"
-					onclick="location.href='index.jsp?main=review/reviewlist.jsp'">취소</button>
-				<button type="button" class="btnregister"
-					style="width: 120px; margin-top: 10px;"
-					onclick="submitContents(this)">등록하기</button>
-			</td>
-		</tr>
-		
-	</table>   
+	</table>
+	<div class="btn_update">
+	<button type="button" id="btn1" class="btn1_notice_back"
+		onclick="location.href='index.jsp?main=review/reviewlist.jsp'">취소</button>
+	<button type="button" id="btn2" class="btn1_notice_success"
+		onclick="submitContents(this)">수정하기</button>
+	</div> 
 </form>
 </div>
 

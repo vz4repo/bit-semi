@@ -1,7 +1,7 @@
 {
     "startName" : "출발지",
-    "startX" : "127.103259",
-    "startY" : "37.402688",
+    "startX" : "127.02410199849781",
+    "startY" : "37.50301794750057",
     "startTime" : "201708081103",
     "endName" : "도착지",
     "endX" : "127.142571",
@@ -11,26 +11,26 @@
          {
              "viaPointId" : "test01",
              "viaPointName" : "name01",
-             "viaX" : "127.103790" ,
-             "viaY" : "37.399569" 
+             "viaX" : "127.02921274180768" ,
+             "viaY" : "37.49957399469941"
          },
          {
              "viaPointId" : "test02",
              "viaPointName" : "name02",
-             "viaX" : "127.108913" ,
-             "viaY" : "37.402748" 
+             "viaX" : "127.02921274180768" ,
+             "viaY" : "37.49957399469941"
          },
          {
              "viaPointId" : "test03",
              "viaPointName" : "name03",
-             "viaX" : "127.113403" ,
-             "viaY" : "37.397153" 
+             "viaX" : "127.02790747862767" ,
+             "viaY" : "37.49343579506673"
          },
          {
              "viaPointId" : "test04",
              "viaPointName" : "name04",
-             "viaX" : "127.121210" ,
-             "viaY" : "37.410135" 
+             "viaX" : "127.03690645140334" ,
+             "viaY" : "37.50079621316615"
          },
          {
              "viaPointId" : "test05",
