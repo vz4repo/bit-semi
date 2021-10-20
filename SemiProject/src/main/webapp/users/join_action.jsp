@@ -17,6 +17,7 @@ request.setCharacterEncoding("UTF-8");
 	String userGender = request.getParameter("userGender");
 	String userDate = request.getParameter("userDate");
 
+
 		// 세션 체크
 		if(session.getAttribute("myid") != null){
 			userID = (String)session.getAttribute("myid");
@@ -52,11 +53,6 @@ request.setCharacterEncoding("UTF-8");
 
 	  UserDAO dao = new UserDAO();
 	  dao.join(dto);
-
-	  PrintWriter script = response.getWriter();
-	  script.println("<script> alert('join action 일단은 실행. 결과는 모름.') ");	  
-	  script.println("location.href = '../index.jsp' </script>");
 	}
 	%>
 </body>
-</html>

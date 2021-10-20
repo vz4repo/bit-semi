@@ -47,110 +47,44 @@ function addr_execDaumPostcode() {
     }
   }).open();
 }
-
-// id validation
-function validation() {
-  var hobbyCheck = false;
-  var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
-  var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
-  var getName = RegExp(/^[가-힣]+$/);
-
-  //아이디 공백 확인
-  if ($("#tbID").val() == "") {
-    alert("아이디 입력바람");
-    $("#tbID").focus();
-    return false;
-  }
-
-  //이름의 유효성 검사
-  if (!getCheck.test($("#tbID").val())) {
-    alert("형식에 맞게 입력해주세요");
-    $("#tbID").val("");
-    $("#tbID").focus();
-    return false;
-  }
-
-  //비밀번호
-  if (!getCheck.test($("#tbPwd").val())) {
-    alert("형식에 맞춰서 PW를 입력해줘용");
-    $("#tbPwd").val("");
-    $("#tbPwd").focus();
-    return false;
-  }
-
-  //아이디랑 비밀번호랑 같은지
-  if ($("#tbID").val() == ($("#tbPwd").val())) {
-    alert("비밀번호가 ID와 똑같으면 안!대!");
-    $("#tbPwd").val("");
-    $("#tbPwd").focus();
-  }
-
-  //비밀번호 똑같은지
-  if ($("#tbPwd").val() != ($("#cpass").val())) {
-    alert("비밀번호가 틀렸네용.");
-    $("#tbPwd").val("");
-    $("#cpass").val("");
-    $("#tbPwd").focus();
-    return false;
-  }
-
-  //이메일 공백 확인
-  if ($("#mail").val() == "") {
-    alert("이메일을 입력해주세요");
-    $("#mail").focus();
-    return false;
-  }
-
-  //이메일 유효성 검사
-  if (!getMail.test($("#mail").val())) {
-    alert("이메일형식에 맞게 입력해주세요")
-    $("#mail").val("");
-    $("#mail").focus();
-    return false;
-  }
-
-  //이름 유효성
-  if (!getName.test($("#name").val())) {
-    alert("이름 똑띠 쓰세용");
-    $("#name").val("");
-    $("#name").focus();
-    return false;
-  }
-
-  //주민번호
-  if (($("#id_num").val() == "") || ($("#id_num_back").val() == "")) {
-    alert("주민등록번호를 입력해주세요");
-    $("#id_num").focus();
-    return false;
-  }
-
-  if (check_jumin() == false) {
-    return false;
-  }
-
-  //관심분야
-  for (var i = 0; i < $('[name="hobby[]"]').length; i++) {
-    if ($('input:checkbox[name="hobby[]"]').eq(i).is(":checked") == true) {
-      hobbyCheck = true;
-      break;
-    }
-  }
-
-  if (!hobbyCheck) {
-    alert("하나이상 관심분야를 체크해 주세요");
-    return false;
-  }
-  return true;
-}
+//
+// // 카카오 로그인
+// // Kakao.init('5a540d38cece314fa1d5f094089df4bd');
+//
+// function loginKakao() {
+//   //1. 로그인 시도
+//   Kakao.Auth.login({
+//     success: function (authObj) {
+//       //2. 로그인 성공시, API 호출
+//       Kakao.API.request({
+//         url: '/v2/user/me',
+//         success: function (response) {
+//           console.log(response);
+//           let id = response.id;
+//           scope : 'account_email';
+//           console.log("kakao login success")
+//           location.href = "http://13.209.85.24/going/users/login_action.jsp";
+//         }
+//       })
+//       console.log(authObj);
+//       let token = authObj.access_token;
+//     },
+//     fail: function (err) {
+//       alert(JSON.stringify(err));
+//     }
+//   });
+// }
 
 // #id_input validation check
-$("#id_input").blur(function () {
+$(".joinValue").blur(function () {
   checkID("first");
 })
 
 // show Error Message
+let msgTarget ="";
+let msg = "";
 function showErrorMsg(msgTarget, msg) {
-  document.getElementById(msgTarget).textContent = msg;
+  document.getElementById(msgTarget).innerHTML = msg;
   document.getElementById(msgTarget).style.color = "red";
   document.getElementById(msgTarget).style.display = "block";
 }
@@ -164,12 +98,13 @@ function checkID(event) {
 
   if (id == "") {
     showErrorMsg("id_msg", "ID를 입력하세요");
-  }
-  if (!isValidID.test(id)) {
+  } else if (!isValidID.test(id)) {
     showErrorMsg("id_msg", "영문 소문자, 숫자, 특수기호(_, -)만 입력하세요");
+  } else {
+    document.getElementById("id_msg").innerHTML = "";
   }
 
-  // 미구현
+  // TODO 미구현
   $.ajax({
     type: "GET",
     url: "/users/joinAjax?m=checkID&id=" + id,
@@ -188,4 +123,119 @@ function checkID(event) {
   return true;
 }// end:id validation
 
-// #password_input validation check
+  $(function () {
+  //비밀번호 유효성검사
+  $("#pw_input1").on("input", function checkPw() {
+    const regex = /^[A-Za-z\d]{8,20}$/;
+    let result = regex.exec($("#pw").val())
+
+    if (result != null) {
+      $(".joinPassword.errorMsg_box").html("");
+      return true;
+    } else {
+      $(".joinPassword.errorMsg_box").html("대소문자,숫자 8-20자리");
+      $(".joinPassword.errorMsg_box").css("color", "red");
+      return false;
+    }
+    return true;
+  });
+
+  //비밀번호 확인
+  $("#pw_input2").on("keyup", function () {
+    if ($("#pw_input1").val() === $("#pw_input2").val()) {
+      $("#pw_msg").css("color", "green");
+      $("#pw_msg").html("비밀번호가 일치합니다");
+      return true;
+    } else {
+      showErrorMsg('pw_msg', "비밀번호가 일치하지 않습니다");
+      return false;
+    }
+    return true;
+  })
+
+  //이름 유효성검사
+  $("#name_input").on("input", function () {
+    const regex = /[가-힣a-zA-Z]{2,}/;
+    let result = regex.exec($("#name").val());
+
+    if (result != null) {
+      $(".joinName.errorMsg_box").html("");
+      return true;
+    } else {
+      showErrorMsg("name_msg", "올바른 형식이 아닙니다");
+      return false;
+    }
+return true;
+  })
+
+  //전화번호 유효성검사
+  $("#hp_input").on("input", function () {
+    const regex = /^01\d\d{3,4}\d{4}$/;
+    let result = regex.exec($("#hp_input").val());
+
+    if (result != null) {
+      $(".joinPhone.errorMsg_box").html("");
+      return true;
+    } else {
+      showErrorMsg("hp_msg", "올바른 번호가 아닙니다");
+      return false;
+    }
+    return true;
+  })
+
+  //email유효성 검사
+  $("#email_input").on("input", function () {
+    const regex = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+    let result = regex.exec($("#email_input").val());
+
+    if (result != null) {
+      $(".joinMail.errorMsg_box").html("");
+      return true;
+    } else {
+      showErrorMsg("email_msg", "올바른 이메일이 아닙니다");
+      return false;
+    }
+    return true;
+  })
+  //회원가입 버튼 눌렀을 때, 빈칸 있으면 다시 유효성 검사진행
+  $(".btn_join").on("click", function () {
+    var id = $("#id_input").val();
+    var pw = $("#pw_input1").val();
+    var name = $("#name_input").val();
+    var phone = $("#hp_input").val();
+    var email = $("#email_input").val();
+
+    var idregex = /^[a-z][a-z\d]{4,11}$/;
+    var pwregex = /^[A-Za-z\d]{8,12}$/;
+    var nameregex = /[가-힣]{2,}/;
+    var phoneregex = /^01\d\d{3,4}\d{4}$/;
+    var emailregex = /.+@[a-z]+(\.[a-z]+){1,2}$/;
+
+    var idre = idregex.exec(id);
+    if (idre == null) {
+      alert("아이디양식을 다시 확인해주세요");
+      return;
+    }
+    var pwre = pwregex.exec(pw);
+    if (pwre == null) {
+      alert("비밀번호양식을 다시 확인해주세요");
+      retrun;
+    }
+    var namere = nameregex.exec(name);
+    if (namere == null) {
+      alert("이름양식을 다시 확인해주세요");
+      retrun;
+    }
+    var phonere = phoneregex.exec(phone);
+    if (phonere == null) {
+      alert("핸드폰번호양식을 다시 확인해주세요");
+      retrun;
+    }
+    var emailre = emailregex.exec(email);
+    if (emailre == null) {
+      alert("이메일양식을 다시 확인해주세요");
+      retrun;
+    }
+    return false;
+  })
+  })

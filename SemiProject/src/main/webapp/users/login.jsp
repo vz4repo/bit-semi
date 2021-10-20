@@ -14,6 +14,8 @@
     <script src="https://kit.fontawesome.com/e1bd1cb2a5.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="js/join_script.js"></script>
+    <%--카카오--%>
+<%--    <script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>--%>
     <title>login.jsp</title>
 </head>
 <%
@@ -58,13 +60,14 @@
               action="${pageContext.request.contextPath}/users/login_action.jsp">
             <div class="loginID loginValue">
 					<label class="login_form_title" for="userID">아이디</label>
-					<input type="text" class="loginInput" placeholder="아이디를 입력해주세요." name="userID" maxlength="20">
+					<input type="text" id="userID" class="loginInput" placeholder="아이디를 입력해주세요." name="userID" maxlength="20">
             </div>
             <div class="loginPassword loginValue">
 					<label class="login_form_title" for="userPassword">비밀번호</label>
-					<input type="password" class="loginInput" placeholder="비밀번호를 입력해주세요." name="userPassword" maxlength="40">
+					<input type="password" id="userPassword" class="loginInput" placeholder="비밀번호를 입력해주세요." name="userPassword" maxlength="40">
             </div>
             <input type="submit" class="btn_login" value="로그인">
+<%--            <a href="javascript:void(0);" onclick="loginKakao()"><img src="/image/kakao_login_large_narrow.png"></a>--%>
             <div class="login_form_text">
                 <p>아직도 GOING 온라인 회원이 아니신가요?</p>
                 <a href="index.jsp?main=users/join.jsp">회원가입 하러가기</a>
