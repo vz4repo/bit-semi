@@ -233,7 +233,7 @@
         </div>
         <div class="v_func_2_chu">
 			<p>Like</p>
-			<p class="chu"><%=dto.getGood()%></p>
+			<p class="goodsu"><%=dto.getGood()%></p>
 		</div>
     </div>
     <!-- 상단 -->
@@ -249,16 +249,34 @@
                 <th>비고</th>
             </tr>
             <tr>
-                <td>2021.10.09</td>
-                <td>10:00~12:00</td>
-                <td>해운대</td>
-                <td>부산역에 도착하자마자<br>간단하게 브런치 사들고 바다보면서 먹기!</td>
+                <td>2021.10.13</td>
+                <td>10:00~11:00</td>
+                <td>우도 선착장</td>
+                <td>우도 선착장에 가서<br>배 타고 우도로 들어가기!</td>
             </tr>
             <tr>
-                <td>2021.10.09</td>
-                <td>12:00~14:00</td>
-                <td>본전 돼지국밥 / 스타벅스</td>
-                <td>돼지국밥 점심으로 먹고 스벅가서 커피 마시기</td>
+                <td>2021.10.13</td>
+                <td>11:00~12:00</td>
+                <td>섬소나이</td>
+                <td>섬소나이 가서 우도톳면 먹어보기!</td>
+            </tr>
+            <tr>
+                <td>2021.10.13</td>
+                <td>12:00~15:00</td>
+                <td>우도 전기차</td>
+                <td>우도 전기차 빌려서 우도섬 한 바퀴 돌기!</td>
+            </tr>
+            <tr>
+                <td>2021.10.13</td>
+                <td>15:00~16:30</td>
+                <td>블랑로쉐</td>
+                <td>카페가서 땅콩아이스크림 먹기!</td>
+            </tr>
+            <tr>
+                <td>2021.10.13</td>
+                <td>16:30~17:00</td>
+                <td>우도 선착장</td>
+                <td>우도에서 제주도로 넘어가기!</td>
             </tr>
         </table>
     </div>
@@ -268,23 +286,22 @@
     <div class="btn">
         <!-- 아래 별점 일단 보류! -->
         <div class="v_btn">
-            <button type="button" class="good" num="<%=dto.getNum()%>">
-            <span class="heart">추천하기</span></button>
+            <button type="button" class="good" num="<%=dto.getNum()%>">추천하기</button>
         </div>
         
         <script type="text/javascript">
 	      //추천 클릭시 이벤트!
 	     $("button.good").click(function() {
 	    	var num = $("button.good").attr("num");
-	    	var tag = $("p.chu");
-	    	console.log(num);
+	    	var tag = $("p.goodsu");
+	    	//console.log(num); //확인 완료!
 	    	$.ajax({
 	    		type: "get",
 	    		dataType: "json",
 	    		url: "allplan/chuaction.jsp",
 	    		data: {"num":num},
 	    		success: function(data) {
-	    			alert("추천!");
+	    			alert("추천! "); //+data.good 확인할때 개수 찍어보면됨!
 	    			tag.text(data.good);
 	    		}
 	    	});

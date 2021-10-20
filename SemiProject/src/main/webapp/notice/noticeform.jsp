@@ -8,6 +8,7 @@
 <%
 	//프로젝트의 경로
 	String root=request.getContextPath();
+	String currentPage=request.getParameter("currentPage");
 %>
 <script type="text/javascript" src="<%=root%>/se2/js/HuskyEZCreator.js"
 	charset="utf-8"></script>
@@ -40,8 +41,10 @@
 				</td>
 			</tr>
 		</table>
-		<button type="submit" onclick="index.jsp?main=notice/noticeboard.jsp" class="btn1_notice_success">취소</button>
-		<button type="submit" onclick="submitContents(this)" class="btn1_notice_success">등록</button>
+		<div class="btn_update">
+			<button type="submit" onclick="history.back()" class="btn1_notice_back">취소</button>
+			<button type="submit" onclick="submitContents(this)" class="btn1_notice_success">등록</button>
+		</div>
 	</form>
 </div>
 <!-- 스마트게시판에 대한 스크립트 코드 넣기 -->

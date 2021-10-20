@@ -53,7 +53,10 @@
 					</td>
 				</tr>
 			</table>
-			<button type="submit" class="btn1_notice_success" onclick="submitContents(this)" >수정</button>
+			<div class="btn_update">
+				<button type="submit" class="btn1_notice_back" onclick="history.back()">취소</button>
+				<button type="submit" class="btn1_notice_success" onclick="submitContents(this)" >수정</button>
+			</div>
 	</form>
 <!-- 스마트게시판에 대한 스크립트 코드 넣기 -->
 <script type="text/javascript">

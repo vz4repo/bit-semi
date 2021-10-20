@@ -84,6 +84,7 @@ public class PlanDao {
         dto.setPlanDate(rs.getString("planDate"));
         dto.setContent(rs.getString("content"));
         dto.setReadCNT(rs.getInt("readCNT"));
+        dto.setGood(rs.getInt("good"));
         dto.setWriteday(rs.getTimestamp("writeday"));
       }
     } catch (SQLException e) {
@@ -186,7 +187,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from test order by num desc limit 6";
+    String sql = "select * from test order by readCNT desc limit 6";
 
     try {
       pstmt = conn.prepareStatement(sql);

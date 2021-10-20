@@ -20,12 +20,12 @@ $(function () {
 	         $("#t1").show();
 	         localStorage.tt="t1";
 	         
-	        }/* else if(s=="chu"){
+	        }else if(s=="chu"){
 	          $(".tb").hide();
 	          $("#t2").show();
 	          localStorage.tt="t2";
 	          
-	      } */else if(s=="jo"){
+	     	 }else if(s=="jo"){
 	          $(".tb").hide();
 	          $("#t3").show();
 	          localStorage.tt="t3";
@@ -38,10 +38,10 @@ $(function () {
 	   if(tt=="t1"){
 	      $(".tb").hide();
 	      $("#t1").show();   
-	   }/* else if(tt=="t2"){
+	   } else if(tt=="t2"){
 	      $(".tb").hide();
 	      $("#t2").show();
-	   } */else{
+	   }else{
 	      $(".tb").hide();
 	      $("#t3").show();
 	   }
@@ -85,7 +85,7 @@ $(function () {
 	//시간순 나열
 	List<PlanDto> list=dao.getPlan(start, perPage);
 	//추천순 나열
-	/* List<PlanDto> list2=dao.getPlan2(start, perPage); */
+	List<PlanDto> list2=dao.getPlan2(start, perPage);
 	//조회순 나열
 	List<PlanDto> list3=dao.getPlan3(start, perPage);
 	
@@ -121,7 +121,7 @@ $(function () {
 			<!-- 셀렉트 박스 -->
 			<select name="sel" class="selpln">
 				<option selected="selected" value="rec" id="rec">최신순</option>
-				<!-- <option value="jo" id="jo">좋아요순</option> -->
+				<option value="chu" id="chu">추천순</option>
 				<option value="jo" id="jo">조회순</option>
 			</select>
 		</div>
@@ -148,24 +148,25 @@ $(function () {
 		</div>
 	
 		<!-- 추천순 나열 -->
-		<%-- <div id="t2" class="tb">
+		<div id="t2" class="tb" style="display:none;">
 			<ul class="clearfix">
 				<% 
-				for(PlanDto dto:list){
+				for(PlanDto dto:list2){
 				%>
 				<li>
-					<a href="#">
-						<span class="con_1_box">
-							<h3><%=dto.getTitle() %></h3>
-							<p><%=dto.getDays() %></p>
-							<p>작성자:<%=dto.getName() %></p>
+					<a href="index.jsp?main=allplan/allplanview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list">
+						<span class="list_box_1">
+							<h3><%=dto.getPlantitle()%></h3>
+							<%-- <%System.out.println(dto.getNum()); %> --%>
+							<p><%=dto.getPlanDate()%></p>
+							<p><%=dto.getUserId()%></p>
 						</span>
 					</a>
 				</li>
 				<%} 
 				%>
 			</ul>
-		</div> --%>
+		</div>
 		
 		<!-- 조회순순 나열 -->
 		<div id="t3" class="tb" style="display:none;">

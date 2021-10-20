@@ -294,9 +294,6 @@ function initTmap(){
 					<div class="cal_popup_1_big_text">
 						<p class="cal_popup_1_title">상세 계획 짜기</p>
 					</div>
-					<div class="cal_popup_1_big_text">
-						<button onclick="closePopup2()" class="btn_close_2">닫기</button>
-					</div>
 					
 					<!-- 경유 자동차 지도 넣어봄 - 희수 (갑자기 안나옴 ㅠㅠ)-->
 					<div id="map_wrap" class="map_wrap">
@@ -315,7 +312,6 @@ function initTmap(){
 								<td>해운대</td>
 								<td>
 								<input type="text" class="plan_content" value="해당 일정에 대한 내용을 입력해주세요.">
-								<button	name="del_plan" class="plan_del">삭제</button>
 								</td>
 							</tr><!-- 변경점 존재 -->
 							<tr name="add_plan">
@@ -323,7 +319,6 @@ function initTmap(){
 								<td>해운대</td>
 								<td>
 								<input type="text" class="plan_content" value="해당 일정에 대한 내용을 입력해주세요.">
-								<button	name="del_plan" class="plan_del">삭제</button>
 								</td>
 							</tr>
 							<tr name="add_plan">
@@ -331,7 +326,6 @@ function initTmap(){
 								<td>해운대</td>
 								<td>
 								<input type="text" class="plan_content" value="해당 일정에 대한 내용을 입력해주세요.">
-								<button	name="del_plan" class="plan_del">삭제</button>
 								</td>
 							</tr>
 							<tr name="add_plan">
@@ -339,7 +333,6 @@ function initTmap(){
 								<td>해운대</td>
 								<td>
 								<input type="text" class="plan_content" value="해당 일정에 대한 내용을 입력해주세요.">
-								<button	name="del_plan" class="plan_del">삭제</button>
 								</td>
 							</tr>
 							<tr name="add_plan">
@@ -347,12 +340,6 @@ function initTmap(){
 								<td>해운대</td>
 								<td>
 								<input type="text" class="plan_content" value="해당 일정에 대한 내용을 입력해주세요.">
-								<button	name="del_plan" class="plan_del">삭제</button>
-								</td>
-							</tr>
-							<tr>
-								<td colspan='3'>
-									<button name="add_btn" class="plan_add">추가하기</button>
 								</td>
 							</tr>
 						</table>
