@@ -13,7 +13,7 @@
 	
 	dao.deleteReview(num);
 	
-	String realPath = getServletContext().getRealPath("/imagesave");
+	String realPath = request.getServletContext().getRealPath("/imagesave");
 	File file = new File(realPath+"\\"+thumbnail);
 	file.delete();
 	

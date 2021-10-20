@@ -82,6 +82,7 @@ public class PlanDao {
         dto.setPlantitle(rs.getString("plantitle"));
         dto.setPlanDate(rs.getString("planDate"));
         dto.setContent(rs.getString("content"));
+        dto.setGood(rs.getInt("good"));
         dto.setReadCNT(rs.getInt("readCNT"));
         dto.setWriteday(rs.getTimestamp("writeday"));
       }
@@ -185,7 +186,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from bit_semi.postinfo order by num desc limit 6";
+    String sql = "select * from bit_semi.postinfo order by readCNT desc limit 6";
 
     try {
       pstmt = conn.prepareStatement(sql);

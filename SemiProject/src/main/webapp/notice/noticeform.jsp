@@ -5,19 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-.btn1{
-		width:100px;
-		height:40px;
-		border-radius: 50px;
-		font-size: 13pt;
-		margin-left: 1200px;
-		
-	}
-	.btn1:hover{
-		background-color:#dcdcdc;
-	}
-</style>
+<%
+	//프로젝트의 경로
+	String root=request.getContextPath();
+	String currentPage=request.getParameter("currentPage");
+%>
+<script type="text/javascript" src="<%=root%>/se2/js/HuskyEZCreator.js"
+	charset="utf-8"></script>
+
+<script type="text/javascript" src="<%=root%>/se2/photo_uploader/plugin/hp_SE2M_AttachQuickPhoto.js"
+	charset="utf-8"></script>	
 </head>
 <body>
 <div id="sub_image" class="margin_wrap">
@@ -25,35 +22,75 @@
 			<p>Notice</p>
 		</div>
 </div>
-
-<div style="margin-top: 60px; margin-left: 500px;">
+<div class="container">
+	<p id="all_plan_list_title">GOING의 공지사항을 입력해주세요!</p>
+	
 	<form action="notice/noticeaction.jsp" method="post">
-		<table style="width:580px;">
-			<caption style="margin-bottom:30px; margin-right: 80px; font-size: 30pt;"><b>공지사항 작성</b></caption>
-			
+		<table class="notice_form_table" style="width:1200px;">
 			<tr>
-				<td width="500">
-					<input type="text" style="width:480px; height:30px;"
-					name="title" required="required" placeholder="제목을 입력해주세요.">
+				<td class="notice_text_1">제목</td>
+				<td class="notice_text_2">
+					<input type="text" name="title" required="required" placeholder="제목을 입력해주세요.">
 				</td>
 			</tr>
 			<tr>
-				<td width="500">
-					 <textarea style="width:480px; height:300px;" 
-					 name="content" required="required" placeholder="내용을 입력해주세요."></textarea>
+				<td class="notice_text_1">내용</td>
+				<td class="notice_text_2">
+					 <textarea name="content" style="display:none; width:100%; height:400px;" id="content" 
+					 required="required" ></textarea>
 				</td>
 			</tr>
-			<tr>
-				<td>
-					<button type="submit" class="btn1"
-					style="margin-left:190px; width:100px; height:50px;">등록</button>
-				</td>
-				
-				
-			</tr>
-		
 		</table>
+		<div class="btn_update">
+			<button type="submit" onclick="history.back()" class="btn1_notice_back">취소</button>
+			<button type="submit" onclick="submitContents(this)" class="btn1_notice_success">등록</button>
+		</div>
 	</form>
 </div>
+<!-- 스마트게시판에 대한 스크립트 코드 넣기 -->
+<script type="text/javascript">
+var oEditors = [];
+
+nhn.husky.EZCreator.createInIFrame({
+
+    oAppRef: oEditors,
+
+    elPlaceHolder: "content",
+
+    sSkinURI: "<%=request.getContextPath()%>/se2/SmartEditor2Skin.html",
+
+    fCreator: "createSEditor2"
+
+}); 
+
+//‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
+
+function submitContents(elClickedObj) {
+
+    // 에디터의 내용이 textarea에 적용된다.
+
+    oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", [ ]);
+
+ 
+
+    // 에디터의 내용에 대한 값 검증은 이곳에서
+
+    // document.getElementById("textAreaContent").value를 이용해서 처리한다.
+    try {
+        elClickedObj.form.submit();
+    } catch(e) { 
+
+    }
+
+}
+
+// textArea에 이미지 첨부
+
+function pasteHTML(filepath){
+    var sHTML = '<img src="<%=request.getContextPath()%>/save/'+filepath+'">';
+    oEditors.getById["content"].exec("PASTE_HTML", [sHTML]); 
+
+}
+</script>
 </body>
 </html>
