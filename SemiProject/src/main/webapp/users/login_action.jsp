@@ -3,6 +3,14 @@
 <%@ page import="java.io.PrintWriter" %>
 <%
     request.setCharacterEncoding("UTF-8");
+%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>login action</title>
+</head>
+<%
     String root=request.getContextPath();
 %>
 <body>
@@ -65,4 +73,4 @@
 	  script.println("location.href = '../index.jsp' </script>");
 %>
 </body>
-
+</html>

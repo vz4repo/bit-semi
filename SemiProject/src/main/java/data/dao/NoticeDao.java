@@ -1,6 +1,5 @@
 package data.dao;
 
-import connection.DBConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
 import data.dto.NoticeDto;
-
+import connection.DBConnect;
 
 public class NoticeDao {
   DBConnect db = new DBConnect();
@@ -17,7 +16,7 @@ public class NoticeDao {
   public void insertNotice(NoticeDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "insert into notice (title,content,writeday) values (?,?,now())";
+    String sql = "insert into bit_semi.notice (title,content) values (?,?)";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -42,7 +41,7 @@ public class NoticeDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select count(*) from notice";
+    String sql = "select count(*) from bit_semi.notice";
 
 
     try {
@@ -65,7 +64,7 @@ public class NoticeDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.notice order by num asc limit ?,?";
+    String sql = "select * from bit_semi.notice order by num asc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -99,7 +98,7 @@ public class NoticeDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from notice where num=?";
+    String sql = "select * from bit_semi.notice where num=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -127,7 +126,7 @@ public class NoticeDao {
   public void updateNotice(NoticeDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "update notice set title=?,content=? where num=?";
+    String sql = "update bit_semi.notice set title=?,content=? where num=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -149,7 +148,7 @@ public class NoticeDao {
   public void deleteNotice(String num) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "delete from notice where num=?";
+    String sql = "delete from bit_semi.notice where num=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -170,7 +169,7 @@ public class NoticeDao {
   public void updateReadCount(String num) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "update notice set readcount=readcount+1 where num=?";
+    String sql = "update bit_semi.notice set readcount=readcount+1 where num=?";
 
     try {
       pstmt = conn.prepareStatement(sql);

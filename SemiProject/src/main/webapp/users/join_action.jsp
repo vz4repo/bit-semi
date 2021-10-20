@@ -6,6 +6,12 @@
 <%
 request.setCharacterEncoding("UTF-8");
 %>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>join action</title>
+</head>
 <body>
 	<%
 	String userID = request.getParameter("userID");

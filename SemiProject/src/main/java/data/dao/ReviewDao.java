@@ -17,14 +17,16 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     String sql =
-        "insert into maria_study.treview (userID,subject,content,thumbnail) values (?,?,?,?)";
+        "insert into bit_semi.review (userID,userName,userGender,subject,content,thumbnail) values (?,?,?,?,?,?)";
 
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, dto.getUserID());
-      pstmt.setString(2, dto.getSubject());
-      pstmt.setString(3, dto.getContent());
-      pstmt.setString(4, dto.getThumbnail());
+      pstmt.setString(2, dto.getUserName());
+      pstmt.setString(3, dto.getUserGender());
+      pstmt.setString(4, dto.getSubject());
+      pstmt.setString(5, dto.getContent());
+      pstmt.setString(6, dto.getThumbnail());
       pstmt.execute();
     } catch (SQLException e) {
       // TODO Auto-generated catch block
@@ -40,7 +42,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select count(*) from maria_study.treview";
+    String sql = "select count(*) from bit_semi.review";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -62,7 +64,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.treview order by writeday desc limit ?,?";
+    String sql = "select * from bit_semi.review order by writeday desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -98,7 +100,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.treview order by readcount desc limit ?,?";
+    String sql = "select * from bit_semi.review order by readcount desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -133,7 +135,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.treview order by good desc limit ?,?";
+    String sql = "select * from bit_semi.review order by good desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -168,7 +170,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.treview where num=?";
+    String sql = "select * from bit_semi.review where num=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -195,7 +197,7 @@ public class ReviewDao {
   public void updateReadcount(String num) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "update maria_study.treview set readcount=readcount+1 where num=?";
+    String sql = "update bit_semi.review set readcount=readcount+1 where num=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -213,7 +215,7 @@ public class ReviewDao {
   public void updateGood(String num) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "update maria_study.treview set good=good+1 where num=?";
+    String sql = "update bit_semi.review set good=good+1 where num=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -234,7 +236,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select max(num) from maria_study.treview";
+    String sql = "select max(num) from bit_semi.review";
 
     try {
       pstmt = conn.prepareStatement(sql);

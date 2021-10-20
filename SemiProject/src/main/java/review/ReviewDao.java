@@ -15,8 +15,9 @@ public class ReviewDao {
   public void insertReview(ReviewDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
+    // TODO 글num과 리뷰num에 조인을 이어줘야하는데, DB 구조를 바꿔야한다. 일단 num은 nullable 처리
     String sql =
-        "insert into maria_study.treview (userID,subject,content,thumbnail,writeday) values (?,?,?,?,now())";
+        "insert into bit_semi.review (userID,subject,content,thumbnail) values (?,?,?,?)";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -39,7 +40,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select count(*) from maria_study.treview";
+    String sql = "select count(*) from bit_semi.review";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -61,7 +62,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.treview order by writeday desc limit ?,?";
+    String sql = "select * from bit_semi.review order by writeday desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -96,7 +97,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.treview order by readcount desc limit ?,?";
+    String sql = "select * from bit_semi.review order by readcount desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -130,7 +131,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.treview order by good desc limit ?,?";
+    String sql = "select * from bit_semi.review order by good desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -164,7 +165,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from maria_study.treview where num=?";
+    String sql = "select * from bit_semi.review where num=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -192,7 +193,8 @@ public class ReviewDao {
   public void updateReadcount(String num) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "update maria_study.treview set readcount=readcount+1 where num=?";
+    // TODO 여기서 말하는 num은 리뷰의 num인가 plan의 num인가?
+    String sql = "update bit_semi.review set readcount=readcount+1 where num=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -210,7 +212,7 @@ public class ReviewDao {
   public void updateGood(String num) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "update maria_study.treview set good=good+1 where num=?";
+    String sql = "update bit_semi.review set good=good+1 where num=?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -231,7 +233,7 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select max(num) from maria_study.treview";
+    String sql = "select max(num) from bit_semi.review";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -252,7 +254,7 @@ public class ReviewDao {
   public void deleteReview(String num) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "delete from maria_study.treview where num=?";
+    String sql = "delete from bit_semi.review where num=?";
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, num);
@@ -269,7 +271,7 @@ public class ReviewDao {
   public void updateReview(ReviewDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "update maria_study.treview set subject=?, content=?, thumbnail=? where num=?";
+    String sql = "update bit_semi.review set subject=?, content=?, thumbnail=? where num=?";
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, dto.getSubject());

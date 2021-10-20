@@ -208,7 +208,8 @@
 </script>
 </head>
 <%
-
+	String root=request.getContextPath();
+	
 	/* 게시글 출력 관련! */
 	String num=request.getParameter("num");
 	String currentPage=request.getParameter("currentPage");

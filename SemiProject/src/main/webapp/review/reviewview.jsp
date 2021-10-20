@@ -10,6 +10,13 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<style type="text/css">
+	.v_btn button{
+		margin-left: 5px;
+		margin-right: 5px;
+		font-size: 17px;
+	}
+</style>
 </head>
 <body>
 <%

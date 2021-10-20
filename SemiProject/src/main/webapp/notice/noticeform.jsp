@@ -8,6 +8,7 @@
 <%
 	//프로젝트의 경로
 	String root=request.getContextPath();
+	String currentPage=request.getParameter("currentPage");
 %>
 <script type="text/javascript" src="<%=root%>/se2/js/HuskyEZCreator.js"
 	charset="utf-8"></script>
@@ -22,11 +23,10 @@
 		</div>
 </div>
 <div class="container">
-	<div class="join_container">
 	<p id="all_plan_list_title">GOING의 공지사항을 입력해주세요!</p>
 	
 	<form action="notice/noticeaction.jsp" method="post">
-		<table class="notice_form_table" style="width:750px;">
+		<table class="notice_form_table" style="width:1200px;">
 			<tr>
 				<td class="notice_text_1">제목</td>
 				<td class="notice_text_2">
@@ -36,14 +36,16 @@
 			<tr>
 				<td class="notice_text_1">내용</td>
 				<td class="notice_text_2">
-					 <textarea name="content" style="display:none; width:100%; height:300px;" id="content" 
+					 <textarea name="content" style="display:none; width:100%; height:400px;" id="content" 
 					 required="required" ></textarea>
 				</td>
 			</tr>
 		</table>
-		<button type="submit" onclick="submitContents(this)" class="btn1_notice_success">등록</button>
+		<div class="btn_update">
+			<button type="submit" onclick="history.back()" class="btn1_notice_back">취소</button>
+			<button type="submit" onclick="submitContents(this)" class="btn1_notice_success">등록</button>
+		</div>
 	</form>
-	</div>
 </div>
 <!-- 스마트게시판에 대한 스크립트 코드 넣기 -->
 <script type="text/javascript">

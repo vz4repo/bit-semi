@@ -33,13 +33,12 @@
 </div>
 
 <div class="container">
-	<div class="join_container">
 	<p id="all_plan_list_title">수정사항을 입력해주세요!</p>
 	
 	<form action="notice/noticeupdateaction.jsp" method="post">
 		<input type="hidden" name="num" value="<%=num%>">
 		<input type="hidden" name="currentPage" value="<%=currentPage%>">
-		<table class="notice_form_table" style="width:750px;">
+		<table class="notice_form_table" style="width:1200px;">
 				<tr>
 					<td class="notice_text_1">제목</td>
 					<td class="notice_text_2">
@@ -54,7 +53,10 @@
 					</td>
 				</tr>
 			</table>
-			<button type="submit" class="btn1_notice_success" onclick="submitContents(this)" >수정</button>
+			<div class="btn_update">
+				<button type="submit" class="btn1_notice_back" onclick="history.back()">취소</button>
+				<button type="submit" class="btn1_notice_success" onclick="submitContents(this)" >수정</button>
+			</div>
 	</form>
 <!-- 스마트게시판에 대한 스크립트 코드 넣기 -->
 <script type="text/javascript">
@@ -102,6 +104,5 @@ function pasteHTML(filepath){
 }
 </script>
 	</div>
-</div>
 </body>
 </html>

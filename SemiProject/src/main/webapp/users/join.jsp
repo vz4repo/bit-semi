@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
          	<%@ page import="java.io.PrintWriter" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- meta 선언 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- link 선언 -->
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- 아래 style 잠시 주석처리함(희수) -->
+    <!-- <link rel="stylesheet" href="../css/style_join.css"> -->
+
+    <title>GOING</title>
+</head>
 <%
     String root=request.getContextPath();
 //login.jsp 시작
@@ -23,7 +36,7 @@ if (session.getAttribute("myid") != null) {
 		</div>
 	</div>
 	<!-- sub -->
-
+	
 	<div class="container">
 	    <!-- sub contents -->
 	    <div class="margin_wrap">
@@ -32,7 +45,7 @@ if (session.getAttribute("myid") != null) {
 	        </div>
 	    </div>
 	    <!-- sub contents -->
-
+	
 	    <div class="join_container">
 	        <p id="join_info">회원 정보</p>
 	        <form method="post" action="${pageContext.request.contextPath}/users/join_action.jsp">
@@ -53,7 +66,7 @@ if (session.getAttribute("myid") != null) {
 	                <input type="password" class="joinInput" id="pw_input1" placeholder="비밀번호를 입력해주세요."
 	                       name=userPassword title="비밀번호" maxlength="40">
 	            </div>
-
+	
 	            <div class="joinPhone joinValue">
 	                <label class="id_form_title"><b class="point">*</b>전화번호</label>
 	                <input type="tel" class="joinInput" id="hp_input"
@@ -100,3 +113,4 @@ if (session.getAttribute("myid") != null) {
 <script defer src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a540d38cece314fa1d5f094089df4bd&libraries=services"></script>
 <script defer src="js/join_script.js"></script>
 </body>
+</html>
