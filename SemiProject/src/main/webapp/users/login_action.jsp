@@ -59,6 +59,10 @@
         script.println("history.back()");
         script.println("</script>");
     }
+    
+    PrintWriter script = response.getWriter();
+	  script.println("<script> alert('로그인 성공!') ");	  
+	  script.println("location.href = '../index.jsp' </script>");
 %>
 </body>
 

@@ -6,14 +6,13 @@ var marker_s, marekr_e, waypoint;
 var drawInfoArr = [];
 var resultInfoArr = [];
 
-
-function initTmap() {
+$(document).ready(function initTmap() {
   resultArr = [];
   // 1. 지도 띄우기
   map = new Tmapv2.Map("map_div", {
     center: new Tmapv2.LatLng(37.499501997717935, 127.02895464575377),
     width: "50%",
-    height: "100px",
+    height: "300px",
     zoom: 15,
     zoomControl: false,
     scrollwheel: true
@@ -127,7 +126,8 @@ function initTmap() {
         }
       });
 
-}
+})
+
 // 3. 마커 삭제, 우클릭
 // marker.addListener("contextmenu", function(evt) {
 //   console.log('마커삭제');

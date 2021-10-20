@@ -22,8 +22,9 @@
         if (session.getAttribute("loginok") != null) {
             loginok = session.getAttribute("loginok").toString();
             myid = (String) session.getAttribute("myid");
-        } // 로그인 안해도 보여줄건가??
+        }
     %>
+ 
     <script>
     
       /* 수정하기 위한 팝업! */
@@ -44,7 +45,7 @@
         popup.classList.add('hide');
       }
       
-      //댓글 출력하는 함수
+      //댓글 출력하는 함수(현재 사용안함..)
       function list() {
         var num = $("#num").val();
         var myid = $("#myid").val();
@@ -133,27 +134,7 @@
           });
           <% } %>
         });
-        
-        //추천을 클릭했을 때의 이벤트
-        /* $("span.v_likes").click(function () {
-          var num = $(this).attr("num");
-          var tag = $(this);
-          //console.log(num); //확인됨
-          $.ajax({
-            type: "get",
-            dataType: "json",
-            url: "guest/ajaxlikechu.jsp",
-            data: {"num": num},
-            success: function (data) {
-              tag.next().text(data.chu);
-              tag.next().next().animate({"font-size": "30px"}, 1000, function () {
-                //애니메이션이 끝난 후 다시 글꼴 크기를 0px로 변경
-                $(this).css("font-size", "0px");
-              });
-            }
-          });
-        }); */
-        
+       
         /* 댓글 폼 안에 이벤트! */
         $("#com_box").click(function () {
           $(this).text("");
@@ -250,6 +231,10 @@
             <p><%=dto.getReadCNT()%>
             </p>
         </div>
+        <div class="v_func_2_chu">
+			<p>Like</p>
+			<p class="goodsu"><%=dto.getGood()%></p>
+		</div>
     </div>
     <!-- 상단 -->
 
@@ -264,16 +249,34 @@
                 <th>비고</th>
             </tr>
             <tr>
-                <td>2021.10.09</td>
-                <td>10:00~12:00</td>
-                <td>해운대</td>
-                <td>부산역에 도착하자마자<br>간단하게 브런치 사들고 바다보면서 먹기!</td>
+                <td>2021.10.13</td>
+                <td>10:00~11:00</td>
+                <td>우도 선착장</td>
+                <td>우도 선착장에 가서<br>배 타고 우도로 들어가기!</td>
             </tr>
             <tr>
-                <td>2021.10.09</td>
-                <td>12:00~14:00</td>
-                <td>본전 돼지국밥 / 스타벅스</td>
-                <td>돼지국밥 점심으로 먹고 스벅가서 커피 마시기</td>
+                <td>2021.10.13</td>
+                <td>11:00~12:00</td>
+                <td>섬소나이</td>
+                <td>섬소나이 가서 우도톳면 먹어보기!</td>
+            </tr>
+            <tr>
+                <td>2021.10.13</td>
+                <td>12:00~15:00</td>
+                <td>우도 전기차</td>
+                <td>우도 전기차 빌려서 우도섬 한 바퀴 돌기!</td>
+            </tr>
+            <tr>
+                <td>2021.10.13</td>
+                <td>15:00~16:30</td>
+                <td>블랑로쉐</td>
+                <td>카페가서 땅콩아이스크림 먹기!</td>
+            </tr>
+            <tr>
+                <td>2021.10.13</td>
+                <td>16:30~17:00</td>
+                <td>우도 선착장</td>
+                <td>우도에서 제주도로 넘어가기!</td>
             </tr>
         </table>
     </div>
@@ -282,10 +285,29 @@
     <!-- 별점, 목록 버튼 -->
     <div class="btn">
         <!-- 아래 별점 일단 보류! -->
-        <%-- <div class="v_btn">
-            <button type="button"
-            onclick="location.href='index.jsp?main=board/boardlist.jsp?currentPage=<%=currentPage%>'">별점주기</button>
-        </div> --%>
+        <div class="v_btn">
+            <button type="button" class="good" num="<%=dto.getNum()%>">추천하기</button>
+        </div>
+        
+        <script type="text/javascript">
+	      //추천 클릭시 이벤트!
+	     $("button.good").click(function() {
+	    	var num = $("button.good").attr("num");
+	    	var tag = $("p.goodsu");
+	    	//console.log(num); //확인 완료!
+	    	$.ajax({
+	    		type: "get",
+	    		dataType: "json",
+	    		url: "allplan/chuaction.jsp",
+	    		data: {"num":num},
+	    		success: function(data) {
+	    			alert("추천! "); //+data.good 확인할때 개수 찍어보면됨!
+	    			tag.text(data.good);
+	    		}
+	    	});
+	    });
+        </script>
+        
         <div class="v_btn">
             <button type="button"
                     onclick="location.href='index.jsp?main=allplan/allplanlist.jsp?currentPage=<%=currentPage%>'">목록
@@ -354,6 +376,7 @@
         </div>
         <!-- 댓글폼 -->
 
+		<!-- 아래 ajax list 출력 안하기 때문에 주석! -->
         <!-- 댓글 리스트 -->
         <!-- <div class="v_comment_list_num">
             <span class="v_comment_num">총 댓글<b class="su">0</b></span>

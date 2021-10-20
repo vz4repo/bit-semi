@@ -155,4 +155,32 @@ public class UserDAO {
     }
     return dto;
   }
+
+  // 수정
+  public void updateUser(UserDTO dto) {
+    Connection conn = dbConnect.getConnection();
+    PreparedStatement pstmt = null;
+    String sql =
+        "update tuser set userPassword=?, userName=?, userPhone=?, userMail=?, userAddr=?, userDate=? where userID=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+      // 바인딩
+      pstmt.setString(1, dto.getUserPassword());
+      pstmt.setString(2, dto.getUserName());
+      pstmt.setString(3, dto.getUserPhone());
+      pstmt.setString(4, dto.getUserMail());
+      pstmt.setString(5, dto.getUserAddr());
+      pstmt.setString(6, dto.getUserDate());
+      pstmt.setString(7, dto.getUserID());
+
+      // 실행
+      pstmt.execute();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      dbConnect.dbClose(pstmt, conn);
+    }
+  }
 }

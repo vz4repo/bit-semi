@@ -83,6 +83,7 @@ public class PlanDao {
         dto.setPlanDate(rs.getString("planDate"));
         dto.setContent(rs.getString("content"));
         dto.setReadCNT(rs.getInt("readCNT"));
+        dto.setGood(rs.getInt("good"));
         dto.setWriteday(rs.getTimestamp("writeday"));
       }
     } catch (SQLException e) {
@@ -281,5 +282,23 @@ public class PlanDao {
       db.dbClose(rs, pstmt, conn);
     }
     return list;
+  }
+
+  // 추천수 증가
+  public void updateGood(String num) {
+    Connection conn = db.getConnection();
+    PreparedStatement pstmt = null;
+    String sql = "update test set good=good+1 where num=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+      pstmt.setString(1, num);
+      pstmt.execute();
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } finally {
+      db.dbClose(pstmt, conn);
+    }
   }
 }
