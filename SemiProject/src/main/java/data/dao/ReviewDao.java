@@ -17,14 +17,16 @@ public class ReviewDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     String sql =
-        "insert into bit_semi.review (userID,subject,content,thumbnail) values (?,?,?,?)";
+        "insert into bit_semi.review (userID,userName,userGender,subject,content,thumbnail) values (?,?,?,?,?,?)";
 
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, dto.getUserID());
-      pstmt.setString(2, dto.getSubject());
-      pstmt.setString(3, dto.getContent());
-      pstmt.setString(4, dto.getThumbnail());
+      pstmt.setString(2, dto.getUserName());
+      pstmt.setString(3, dto.getUserGender());
+      pstmt.setString(4, dto.getSubject());
+      pstmt.setString(5, dto.getContent());
+      pstmt.setString(6, dto.getThumbnail());
       pstmt.execute();
     } catch (SQLException e) {
       // TODO Auto-generated catch block

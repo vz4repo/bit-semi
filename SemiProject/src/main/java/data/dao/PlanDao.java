@@ -16,7 +16,7 @@ public class PlanDao {
   public void insertPlan(PlanDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
-    String sql = "insert into bit_semi.test_postinfo2 (name,content,chu,jo) values (?,?,?,?)";
+    String sql = "insert into bit_semi.postinfo (name,content,chu,jo) values (?,?,?,?)";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select count(*) from bit_semi.test_postinfo2";
+    String sql = "select count(*) from bit_semi.postinfo";
 
 
     try {
@@ -67,7 +67,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from bit_semi.test_postinfo2 order by num desc limit ?,?";
+    String sql = "select * from bit_semi.postinfo order by num desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -102,7 +102,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from bit_semi.test_postinfo2 order by chu desc limit ?,?";
+    String sql = "select * from bit_semi.postinfo order by chu desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -137,7 +137,7 @@ public class PlanDao {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
-    String sql = "select * from bit_semi.test_postinfo2 order by jo desc limit ?,?";
+    String sql = "select * from bit_semi.postinfo order by jo desc limit ?,?";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -165,35 +165,6 @@ public class PlanDao {
     return list;
   }
 
-  public PlanDto getData(String num) {
-    PlanDto dto = new PlanDto();
-    Connection conn = db.getConnection();
-    PreparedStatement pstmt = null;
-    ResultSet rs = null;
-    String sql = "select * from bit_semi.test_postinfo2 where num=?";
-
-    try {
-      pstmt = conn.prepareStatement(sql);
-
-      pstmt.setString(1, num);
-      rs = pstmt.executeQuery();
-      if (rs.next()) {
-        dto.setNum(rs.getString("num"));
-        dto.setName(rs.getString("name"));
-        dto.setContent(rs.getString("content"));
-        dto.setChu(rs.getInt("chu"));
-        dto.setJo(rs.getInt("jo"));
-        dto.setWriteday(rs.getTimestamp("writeday"));
-
-      }
-    } catch (SQLException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    } finally {
-      db.dbClose(rs, pstmt, conn);
-    }
-    return dto;
-  }
 
 
 }

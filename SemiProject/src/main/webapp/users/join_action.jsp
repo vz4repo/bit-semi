@@ -5,9 +5,7 @@
 <%@ page import="java.io.PrintWriter"%>
 <%
 request.setCharacterEncoding("UTF-8");
-%>
-<body>
-	<%
+
 	String userID = request.getParameter("userID");
 	String userPassword = request.getParameter("userPassword");
 	String userName = request.getParameter("userName");
@@ -55,4 +53,3 @@ request.setCharacterEncoding("UTF-8");
 	  dao.join(dto);
 	}
 	%>
-</body>

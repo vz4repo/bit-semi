@@ -12,11 +12,10 @@ public class commentDAO {
   DBConnect db = new DBConnect();
 
   // 댓글 추가
-  public void commentInsert(comment.commentDTO dto) {
+  public void commentInsert(commentDTO dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
     String sql = "insert into bit_semi.comment (num,userId,contents) values (?,?,?)";
-
 
     try {
       pstmt = conn.prepareStatement(sql);

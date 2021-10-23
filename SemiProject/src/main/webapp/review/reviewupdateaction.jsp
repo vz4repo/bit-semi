@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String realPath = request.getServletContext().getRealPath("/imagesave");
+	String realPath = getServletContext().getRealPath("/imagesave");
 	int uploadSize = 1024*1024*2;//2mb
 	MultipartRequest multi = null;
 	

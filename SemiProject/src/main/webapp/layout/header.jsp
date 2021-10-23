@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Insert title here</title>
+
 <script type="text/javascript">
 	/* 상단 메뉴바 스크롤시 이벤트! */
 	$(document).ready(function(){
@@ -37,7 +33,7 @@
 	  popup.classList.add('hide');
 	}
 </script>
-</head>
+
 <%
 	String root=request.getContextPath();
 %>
@@ -102,4 +98,3 @@
 		</div>
 	</header>
 </body>
-</html>

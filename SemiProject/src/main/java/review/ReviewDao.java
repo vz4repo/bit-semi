@@ -15,8 +15,9 @@ public class ReviewDao {
   public void insertReview(ReviewDto dto) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
+    // TODO 글num과 리뷰num에 조인을 이어줘야하는데, DB 구조를 바꿔야한다. 일단 num은 nullable 처리
     String sql =
-        "insert into bit_semi.review (userID,subject,content,thumbnail,writeday) values (?,?,?,?,now())";
+        "insert into bit_semi.review (userID,subject,content,thumbnail) values (?,?,?,?)";
 
     try {
       pstmt = conn.prepareStatement(sql);
@@ -192,6 +193,7 @@ public class ReviewDao {
   public void updateReadcount(String num) {
     Connection conn = db.getConnection();
     PreparedStatement pstmt = null;
+    // TODO 여기서 말하는 num은 리뷰의 num인가 plan의 num인가?
     String sql = "update bit_semi.review set readcount=readcount+1 where num=?";
 
     try {
