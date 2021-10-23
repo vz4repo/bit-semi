@@ -63,7 +63,7 @@ nav li a {color:white;}
 /* content_1 */
 
 /* content_2 */
-#content_2{width:100%; height:250px; background:url("../image/sub.jpg") center; background-repeat:no-repeat;}
+#content_2{width:100%; height:250px; background:url("../image/deprecated_sub.jpg") center; background-repeat:no-repeat;}
 #content_2{margin-top:80px;}
 #main_sub_text{text-align:center; color:white; position:relative; top:130px; font-size:150px;}
 /* content_2 */
@@ -109,7 +109,7 @@ footer{width:100%; height:60px; background-color:black; text-align:center; margi
 
 /* allplanview */
 /* sub image */
-#sub_image{width:100%; height:250px; background:url("../image/subnew.jpg") center;}
+#sub_image{width:100%; height:250px; background:url("../image/deprecated_subnew.jpg") center;}
 #sub_text{text-align:center; color:white; position:relative; top:130px; font-size:35px;}
 /* sub image */
 
