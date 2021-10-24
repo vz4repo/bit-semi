@@ -175,10 +175,10 @@ if (list3.size() == 0 && totalCount > 0) {
 </script>
 <%
 }
-String loginok = "";
+String loginOK = "";
 String myid = "";
-if (session.getAttribute("loginok") != null) {
-    loginok = session.getAttribute("loginok").toString();
+if (session.getAttribute("loginOK") != null) {
+    loginOK = session.getAttribute("loginOK").toString();
     myid = (String) session.getAttribute("myid");
 } // 로그인 안해도 보여줄건가??
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

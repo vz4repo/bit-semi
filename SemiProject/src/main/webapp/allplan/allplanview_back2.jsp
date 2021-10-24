@@ -15,7 +15,7 @@
 <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <%
 	//로그인한 상태인지 확인
-	String loginok= session.getAttribute("loginok").toString();
+	String loginOK= session.getAttribute("loginOK").toString();
 %>
 <script type="text/javascript">
 	/* 맵 임시! */
@@ -79,13 +79,13 @@
 					s+="<p class='com_list_1_contents'>"+contents+"</p>";
 					s+="<p class='com_list_1_day'>"+writeday+"</p>";
 					
-					<%-- var login="<%=loginok%>";
+					<%-- var login="<%=loginOK%>";
 					console.log(login);
 					if(login!="null"){
 						s+="<button type='button' id='v_com_btn_1'>댓글</button>";
 					} --%>
 					
-					var login="<%=loginok%>";
+					var login="<%=loginOK%>";
 					var logid=$("#myid").val();
 					console.log("1"+login+","+myid);
 					if(login=="true" && logid==myid){/* onclick='showPopup(false)' */
@@ -330,7 +330,7 @@
 				<input type="hidden" name="myid" id="myid" value="<%=myid%>">
 				<input type="hidden" name="currentPage" value="<%=currentPage%>">
 			<%
-			if(loginok!=null && loginok=="true"){ //로그인중일때만 입력폼이 보이도록 함!
+			if(loginOK!=null && loginOK=="true"){ //로그인중일때만 입력폼이 보이도록 함!
 			%>
 				<table class="com_all">
 					<tr>
@@ -344,7 +344,7 @@
 				</table>
 			<%}else{ %>
 			</div>
-				<p class="loginok_comment_text">로그인 후 댓글을 입력하실 수 있습니다.</p>
+				<p class="loginOK_comment_text">로그인 후 댓글을 입력하실 수 있습니다.</p>
 			<% }%>
 			<!-- 댓글폼 -->
 			

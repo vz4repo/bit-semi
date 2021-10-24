@@ -13,6 +13,6 @@
 
     //session.invalidate();   // 모든 세션 정보 삭제
     session.removeAttribute("myid");   // 해당 세션만 삭제
-    session.setAttribute("loginok", false);	// default : false
+    session.setAttribute("loginOK", false);	// default : false
     return;
 %>

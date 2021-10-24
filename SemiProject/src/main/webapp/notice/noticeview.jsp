@@ -8,10 +8,10 @@
 
 <body>
 <%
-	String loginok = "";
+	String loginOK = "";
 	String myid = "";
-	if (session.getAttribute("loginok") != null) {
-	    loginok = session.getAttribute("loginok").toString();
+	if (session.getAttribute("loginOK") != null) {
+	    loginOK = session.getAttribute("loginOK").toString();
 	    myid = (String) session.getAttribute("myid");
 	}	
 
@@ -65,7 +65,7 @@
 		<div class="btn">
 			<div class="v_btn">
 		<%
-		if(loginok=="true" && myid.equals("admin"))
+		if(loginOK=="true" && myid.equals("admin"))
 		{%>
 				<button type="button" onclick="location.href='index.jsp?main=notice/noticeupdateform.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage %>'" class="btn_notice_change">수정</button>
 				<button type="button" onclick="location.href='notice/noticedeleteform.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage %>'" class="btn_notice_del">삭제</button>
