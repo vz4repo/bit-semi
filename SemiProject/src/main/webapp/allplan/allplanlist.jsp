@@ -1,3 +1,5 @@
+<%@page import="date.dao.myPlanDao"%>
+<%@page import="date.dto.myAllPlanDto"%>
 <%@page import="plan.PlanDto"%>
 <%@page import="plan.PlanDao"%>
 <%@page import="java.util.List"%>
@@ -53,7 +55,7 @@ $(function () {
 	String userId=(String)session.getAttribute("userId");
 
 	String root=request.getContextPath();
-	PlanDao dao=new PlanDao();
+	myPlanDao dao=new myPlanDao();
 	//페이징
 	int perPage=9;//한페이지에 보여질 글의 개수
 	int totalCount;//총 글의 수
@@ -83,11 +85,11 @@ $(function () {
 	start=(currentPage-1)*perPage;
 	//각 페이지에서 필요한 게시글 가져오기
 	//시간순 나열
-	List<PlanDto> list=dao.getPlan(start, perPage);
+	List<myAllPlanDto> list=dao.getAllPlan(start, perPage);
 	//추천순 나열
-	List<PlanDto> list2=dao.getPlan2(start, perPage);
+	List<myAllPlanDto> list2=dao.getAllPlan2(start, perPage);
 	//조회순 나열
-	List<PlanDto> list3=dao.getPlan3(start, perPage);
+	List<myAllPlanDto> list3=dao.getAllPlan3(start, perPage);
 	
 	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	
@@ -121,8 +123,8 @@ $(function () {
 			<!-- 셀렉트 박스 -->
 			<select name="sel" class="selpln">
 				<option selected="selected" value="rec" id="rec">최신순</option>
-				<option value="chu" id="chu">추천순</option>
-				<option value="jo" id="jo">조회순</option>
+				<option value="chu" id="chu">조회순</option>
+				<option value="jo" id="jo">추천순</option>
 			</select>
 		</div>
 		<!-- 모든계획 나열표 -->
@@ -130,15 +132,21 @@ $(function () {
 		<div id="t1" class="tb">
 			<ul class="clearfix">
 				<% 
-				for(PlanDto dto:list){
+				myAllPlanDto dto = new myAllPlanDto();
+				for(int row = 0; row < list.size(); row++){
+				  dto = list.get(row);
 				%>
 				<li>
 					<a href="index.jsp?main=allplan/allplanview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list">
 						<span class="list_box_1">
 							<h3><%=dto.getPlantitle()%></h3>
 							<%-- <%System.out.println(dto.getNum()); %> --%>
-							<p><%=dto.getPlanDate()%></p>
+							<p><%=dto.getPlanStartDay()%>~<%=dto.getPlanEndDay()%></p>
 							<p><%=dto.getUserId()%></p>
+							<p><b class="all_list_cnt">조회수<%=dto.getReadCnt()%></b><b>추천수<%=dto.getGoodCnt()%></b></p>
+			
+							
+							
 						</span>
 					</a>
 				</li>
@@ -151,15 +159,20 @@ $(function () {
 		<div id="t2" class="tb" style="display:none;">
 			<ul class="clearfix">
 				<% 
-				for(PlanDto dto:list2){
+				for(int row = 0; row < list2.size(); row++){
+				  dto = list2.get(row);
 				%>
 				<li>
 					<a href="index.jsp?main=allplan/allplanview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list">
 						<span class="list_box_1">
 							<h3><%=dto.getPlantitle()%></h3>
 							<%-- <%System.out.println(dto.getNum()); %> --%>
-							<p><%=dto.getPlanDate()%></p>
+							<p><%=dto.getPlanStartDay()%>~<%=dto.getPlanEndDay()%></p>
 							<p><%=dto.getUserId()%></p>
+							<p><b class="all_list_cnt">조회수<%=dto.getReadCnt()%></b><b>추천수<%=dto.getGoodCnt()%></b></p>
+			
+							
+							
 						</span>
 					</a>
 				</li>
@@ -172,15 +185,20 @@ $(function () {
 		<div id="t3" class="tb" style="display:none;">
 			<ul class="clearfix">
 				<% 
-				for(PlanDto dto:list3){
+				for(int row = 0; row < list3.size(); row++){
+				  dto = list3.get(row);
 				%>
 				<li>
 					<a href="index.jsp?main=allplan/allplanview.jsp?num=<%=dto.getNum()%>&currentPage=<%=currentPage%>&key=list">
 						<span class="list_box_1">
 							<h3><%=dto.getPlantitle()%></h3>
-							<%System.out.println(dto.getNum()); %>
-							<p><%=dto.getPlanDate()%></p>
+							<%-- <%System.out.println(dto.getNum()); %> --%>
+							<p><%=dto.getPlanStartDay()%>~<%=dto.getPlanEndDay()%></p>
 							<p><%=dto.getUserId()%></p>
+							<p><b class="all_list_cnt">조회수<%=dto.getReadCnt()%></b><b>추천수<%=dto.getGoodCnt()%></b></p>
+			
+							
+							
 						</span>
 					</a>
 				</li>

@@ -1,14 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.io.PrintWriter" %>
-<script src = "https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script>
-  if (!Kakao.Auth.getAccessToken()) {
-    console.log('Not logged in.');
-  }
-  Kakao.Auth.logout(function() {
-    console.log(Kakao.Auth.getAccessToken());
-  });
-</script>
+
 <%
     //logout_action.jsp 시작
     System.out.println("> logout_action.jsp");
@@ -21,6 +13,6 @@
 
     //session.invalidate();   // 모든 세션 정보 삭제
     session.removeAttribute("myid");   // 해당 세션만 삭제
-    session.setAttribute("loginok", false);	// default : false
+    session.setAttribute("loginOK", false);	// default : false
     return;
 %>

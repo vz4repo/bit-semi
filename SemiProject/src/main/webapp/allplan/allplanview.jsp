@@ -1,3 +1,5 @@
+<%@page import="date.dao.myPlanDao"%>
+<%@page import="date.dto.myAllPlanDto"%>
 <%@page import="java.util.List" %>
 <%@page import="comment.commentDTO" %>
 <%@page import="comment.commentDAO" %>
@@ -17,10 +19,10 @@
     <%
         String root = request.getContextPath();
         //로그인한 상태인지 확인
-        String loginok = "";
+        String loginOK = "";
         String myid = "";
-        if (session.getAttribute("loginok") != null) {
-            loginok = session.getAttribute("loginok").toString();
+        if (session.getAttribute("loginOK") != null) {
+            loginOK = session.getAttribute("loginOK").toString();
             myid = (String) session.getAttribute("myid");
         }
     %>
@@ -70,12 +72,12 @@
               s += "<p class='com_list_1_name'>" + userid + "</p>";
               s += "<p class='com_list_1_contents'>" + contents + "</p>";
               s += "<p class='com_list_1_day'>" + writeday + "</p>";
-              <%-- var login="<%=loginok%>";
+              <%-- var login="<%=loginOK%>";
               console.log(login);
               if(login!="null"){
                   s+="<button type='button' id='v_com_btn_1'>댓글</button>";
               } --%>
-              var login = "<%=loginok%>";
+              var login = "<%=loginOK%>";
               var logid = $("#myid").val();
               console.log("1" + login + "," + myid);
               if (login == "true" && logid == myid) {
@@ -192,13 +194,13 @@
     }
     //key는 목록에서만 값이 넘어오고 그 외에는 null rkqt
     String key = request.getParameter("key");
-    PlanDao dao = new PlanDao();
+    myPlanDao dao = new myPlanDao();
     //목록에서 올 경우에만 조회수 1증가함
     if (key != null) {
         dao.updateReadcount(num);
     }
     //num에 해당하는 dto 얻기
-    PlanDto dto = dao.getData(num);
+    myAllPlanDto dto = dao.getAll(num);
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     /* ------------------------------------------------- */
 %>
@@ -217,23 +219,23 @@
     <div class="view_top">
         <p class="v_title"><%=dto.getPlantitle()%>
         </p>
-        <p class="v_day"><%=dto.getPlanDate()%>
+        <p class="v_day">
         </p>
         <div class="v_func">
             <p>Writer&nbsp;&nbsp;<%=dto.getUserId()%><span>|</span></p>
-            <p>Date&nbsp;&nbsp;<%=sdf.format(dto.getWriteday())%>
+            <p>Date&nbsp;&nbsp;<%=dto.getWriteDay() %>
             </p>
             <!-- 아래 찜하기 버튼 임시 보류 -->
             <!-- <span class="v_likes">찜하기</span> -->
         </div>
         <div class="v_func_2">
-            <p>View</p>
-            <p><%=dto.getReadCNT()%>
+            <p>View </p>
+            <p><%=dto.getReadCnt() %>
             </p>
         </div>
         <div class="v_func_2_chu">
 			<p>Like</p>
-			<p class="goodsu"><%=dto.getGood()%></p>
+			<p class="goodsu"><%=dto.getGoodCnt() %></p>
 		</div>
     </div>
     <!-- 상단 -->
@@ -249,7 +251,7 @@
                 <th>비고</th>
             </tr>
             <tr>
-                <td>2021.10.13</td>
+                <td><%=dto.getWriteDay() %></td>
                 <td>10:00~11:00</td>
                 <td>우도 선착장</td>
                 <td>우도 선착장에 가서<br>배 타고 우도로 들어가기!</td>
@@ -298,11 +300,11 @@
 	    	$.ajax({
 	    		type: "get",
 	    		dataType: "json",
-	    		url: "allplan/chuaction.jsp",
+	    		url: "newPlan/gooncnt.jsp",
 	    		data: {"num":num},
 	    		success: function(data) {
 	    			alert("추천! "); //+data.good 확인할때 개수 찍어보면됨!
-	    			tag.text(data.good);
+	    			tag.text(data.goodsu);
 	    		}
 	    	});
 	    });
@@ -320,13 +322,13 @@
         <!-- 댓글폼 -->
         <div class="v_comment" id="test">
             <%-- <%System.out.println(dto.getNum());%> --%>
-            <input type="hidden" name="num" id="num" value="<%=num%>">
+            <input type="hidden" name="num" id="num" value="<%=dto.getNum()%>">
             <input type="hidden" name="myid" id="myid" value="<%=myid%>">
             <input type="hidden" name="currentPage" value="<%=currentPage%>">
             <%
-                if (loginok == null || loginok == "false") { //로그인중일때만 입력폼이 보이도록 함!
+                if (loginOK == null || loginOK == "false") { //로그인중일때만 입력폼이 보이도록 함!
             %>
-            <p class="loginok_comment_text">로그인 후 댓글을 입력하실 수 있습니다.</p>
+            <p class="loginOK_comment_text">로그인 후 댓글을 입력하실 수 있습니다.</p>
             <%} else { %>
             <table class="com_all">
                 <tr>

@@ -16,18 +16,19 @@ public class DBConnect {
   // private static final String DB_USER = "admin";
   // private static final String DB_PWD = "1234qwer";
 
-   // MARIA_BIT_AWS: 클라우드에서 쓰일 설정
-   private static final String DB_DRIVER = "org.mariadb.jdbc.Driver";
-   private static final String DB_URL =
-   "jdbc:mariadb://maria-bit.cy2ifmxzl5mi.ap-northeast-2.rds.amazonaws.com:3306";
-   private static final String DB_USER = "guest";
-   private static final String DB_PWD = "1234qwer";
-//
-//  // MYSQL_LOCAL: 로컬에서 쓰일 설정
-//  private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
-//  private static final String DB_URL = "jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul";
-//  private static final String DB_USER = "root";
-//  private static final String DB_PWD = "1234";
+  // MARIA_BIT_AWS: 클라우드에서 쓰일 설정
+  private static final String DB_DRIVER = "org.mariadb.jdbc.Driver";
+  private static final String DB_URL =
+      "jdbc:mariadb://maria-bit.cy2ifmxzl5mi.ap-northeast-2.rds.amazonaws.com:3306";
+  private static final String DB_USER = "guest";
+  private static final String DB_PWD = "1234qwer";
+
+  // // MYSQL_LOCAL: 로컬에서 쓰일 설정
+  // private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
+  // private static final String DB_URL =
+  // "jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Seoul";
+  // private static final String DB_USER = "root";
+  // private static final String DB_PWD = "1234";
 
   // DBConnect test
   public static void main(String[] args) {
@@ -79,35 +80,38 @@ public class DBConnect {
       if (conn != null)
         conn.close();
     } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 
-  public void dbClose(ResultSet rs, PreparedStatement pstmt, Connection conn) {
+  public void dbClose(ResultSet rs, PreparedStatement ps, Connection conn) {
     try {
       if (rs != null)
         rs.close();
-      if (pstmt != null)
-        pstmt.close();
+      if (ps != null)
+        ps.close();
       if (conn != null)
         conn.close();
     } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 
-  public void dbClose(Statement stmt, Connection conn) {
+  public void dbClose(Statement ps, Connection conn) {
     try {
-      if (stmt != null)
-        stmt.close();
+      if (ps != null)
+        ps.close();
       if (conn != null)
         conn.close();
     } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 
-  public void dbClose(PreparedStatement pstmt, Connection conn) {
+  public void dbClose(PreparedStatement ps, Connection conn) {
     try {
-      if (pstmt != null)
-        pstmt.close();
+      if (ps != null)
+        ps.close();
       if (conn != null)
         conn.close();
     } catch (Exception e) {

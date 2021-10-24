@@ -1,17 +1,11 @@
-<%@page import="users.UserDAO"%>
-<%@page import="users.UserDTO"%>
 <%@page import="review.ReviewDto"%>
 <%@page import="review.ReviewDao"%>
+<%@page import="users.UserDAO"%>
+<%@page import="users.UserDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="css/style.css">
 <style type="text/css">
 .alist {
 	text-decoration: none;
@@ -122,7 +116,7 @@ $(function () {
 	}
 });
 </script>
-</head>
+
 <%
 ReviewDao dao = new ReviewDao();
 int perPage = 12;// 한 페이지에 보여질 글의 갯수
@@ -181,10 +175,10 @@ if (list3.size() == 0 && totalCount > 0) {
 </script>
 <%
 }
-String loginok = "";
+String loginOK = "";
 String myid = "";
-if (session.getAttribute("loginok") != null) {
-    loginok = session.getAttribute("loginok").toString();
+if (session.getAttribute("loginOK") != null) {
+    loginOK = session.getAttribute("loginOK").toString();
     myid = (String) session.getAttribute("myid");
 } // 로그인 안해도 보여줄건가??
 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -357,4 +351,3 @@ UserDAO udao = new UserDAO();
 		%>
 	</div>
 </body>
-</html>

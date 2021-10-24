@@ -35,9 +35,9 @@
         script.println("alert('로그인 성공')");
         script.println("</script>");
         System.out.println("1:userID: "+userID);
-        session.setAttribute("loginok", true);  // 로그인 상태 부여
+        session.setAttribute("loginOK", true);  // 로그인 상태 부여
         session.setAttribute("myid", userID);  // 세션ID 부여
-        System.out.println(session.getAttribute("myid" + ":"+"loginok"));
+        System.out.println(session.getAttribute("myid" + ":"+"loginOK"));
         response.sendRedirect("../index.jsp");
         return;
     } else if (result == 0) {

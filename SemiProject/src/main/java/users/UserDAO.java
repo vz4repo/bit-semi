@@ -4,15 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Vector;
 import connection.DBConnect;
 
 public class UserDAO {
 
-  private DBConnect dbConnect = new DBConnect();
+  private DBConnect DBConnect = new DBConnect();
 
-  private Connection conn = dbConnect.getConnection();
+  private Connection conn = DBConnect.getConnection();
   private PreparedStatement pstmt;
   private ResultSet rs;
 
@@ -42,7 +40,7 @@ public class UserDAO {
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
-      dbConnect.dbClose(rs, pstmt, conn);
+      DBConnect.dbClose(rs, pstmt, conn);
     }
     return -2; // -2: 서버오류
   }
@@ -50,7 +48,7 @@ public class UserDAO {
 
   // 중복여부 확인: 1: 있다 0: 없다 -2: DB오류
   public int hasID(String userID) {
-    String sql = "SELECT count(*) FROM bit_semi.user WHERE userID = ?";
+    String sql = "SELECT count(*) from bit_semi.user WHERE userID = ?";
     try {
       pstmt = conn.prepareStatement(sql);
       pstmt.setString(1, userID);
@@ -62,7 +60,7 @@ public class UserDAO {
     } catch (Exception e) {
       e.printStackTrace();
     } finally {
-      dbConnect.dbClose(rs, pstmt, conn);
+      DBConnect.dbClose(rs, pstmt, conn);
     }
     return -2; // -2: 서버 오류
   }
@@ -73,7 +71,7 @@ public class UserDAO {
     // 회원가입여부 체크, 없으면 콘솔에 0 출력
     if (hasID(dto.getUserID()) == 0) {
 
-      Connection conn = dbConnect.getConnection();
+      Connection conn = DBConnect.getConnection();
       PreparedStatement pstmt = null;
       ResultSet rs = null;
 
@@ -99,7 +97,7 @@ public class UserDAO {
         e.printStackTrace();
         System.out.println(dto.getUserName() + ": FAIL");
       } finally {
-        dbConnect.dbClose(pstmt, conn);
+        DBConnect.dbClose(pstmt, conn);
       }
       // TODO 가입 실패 경우도 체크
     }
@@ -108,33 +106,33 @@ public class UserDAO {
   // 회원 dto 반환
   /*
    * public UserDTO getMember(String num) {
-   *
-   * UserDTO dto = new UserDTO(); Connection conn = dbConnect.getConnectionCloud();
+   * 
+   * UserDTO dto = new UserDTO(); Connection conn = DBConnect.getConnection();
    * PreparedStatement pstmt = null; ResultSet rs = null;
-   *
-   * String sql = "select * from tuser where num=?";
-   *
+   * 
+   * String sql = "select * from bit_semi.user where num=?";
+   * 
    * try { pstmt = conn.prepareStatement(sql); // 바인딩 pstmt.setString(1, num); // 실행 rs =
    * pstmt.executeQuery();
-   *
+   * 
    * if (rs.next()) { dto.setNum(rs.getString("num")); dto.setUserID(rs.getString("userID"));
    * dto.setUserPassword(rs.getString("userPassword")); dto.setUserName(rs.getString("userName"));
    * dto.setUserPhone(rs.getString("userPhone")); dto.setUserMail(rs.getString("userMail"));
    * dto.setUserAddr(rs.getString("userAddr")); dto.setUserGender(rs.getString("userGender"));
    * dto.setUserDate(rs.getString("userDate")); }
-   *
-   * } catch (SQLException e) { e.printStackTrace(); } finally { dbConnect.resourceClose(pstmt,
+   * 
+   * } catch (SQLException e) { e.printStackTrace(); } finally { DBConnect.dbClose(pstmt,
    * conn); }
-   *
+   * 
    * return dto; }
    */
 
   // TODO refactoring: 유저 데이터 가져오기
   public UserDTO getUser(String userID) {
     UserDTO dto = new UserDTO();
-    Connection conn = dbConnect.getConnection();
+    Connection conn = DBConnect.getConnection();
     try {
-      PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM bit_semi.user WHERE userID = ?");
+      PreparedStatement pstmt = conn.prepareStatement("SELECT * from bit_semi.user WHERE userID = ?");
       pstmt.setString(1, userID);
       rs = pstmt.executeQuery();
       if (rs.next()) {
@@ -150,9 +148,35 @@ public class UserDAO {
       }
     } catch (Exception e) {
       e.printStackTrace();
-    } finally {
-      dbConnect.dbClose(rs, pstmt, conn);
     }
     return dto;
+  }
+
+  // 수정
+  public void updateUser(UserDTO dto) {
+    Connection conn = DBConnect.getConnection();
+    PreparedStatement pstmt = null;
+    String sql =
+        "update bit_semi.user set userPassword=?, userName=?, userPhone=?, userMail=?, userAddr=?, userDate=? where userID=?";
+
+    try {
+      pstmt = conn.prepareStatement(sql);
+
+      // 바인딩
+      pstmt.setString(1, dto.getUserPassword());
+      pstmt.setString(2, dto.getUserName());
+      pstmt.setString(3, dto.getUserPhone());
+      pstmt.setString(4, dto.getUserMail());
+      pstmt.setString(5, dto.getUserAddr());
+      pstmt.setString(6, dto.getUserDate());
+      pstmt.setString(7, dto.getUserID());
+
+      // 실행
+      pstmt.execute();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    } finally {
+      DBConnect.dbClose(pstmt, conn);
+    }
   }
 }
